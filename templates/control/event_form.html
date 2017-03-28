@@ -1,0 +1,315 @@
+{% extends "control/index.html" %}
+{% load thumbnail i18n assets event_tags control_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+      <a title="Панель управления" href="/control">Панель управления</a> / <a title="Заведения" href="{% url control_event_list %}">События</a> /
+    </div>
+{% endblock %}
+
+{% block content-header %}
+{% if event %}<h1>Редактирование события «{{ event.title }}»</h1>{% else %}<h1>Создание нового события</h1>{% endif %}
+{% endblock %}
+
+{% block content %}
+{{ form.errors }}
+<form action="." method="POST" enctype="multipart/form-data" class="form form_event_edit zf" id="event_form">
+  {% csrf_token %}
+
+  {% if form.non_field_errors %}
+      {{ form.non_field_errors }}
+  {% endif %}
+
+  <fieldset>
+    <legend>Основная информация</legend>
+
+    <p class="field">
+        {{ form.sites.errors }}
+        {{ form.sites.label_tag }}
+	{{ form.sites }}
+    </p>
+
+    <p class="field input_text">
+      {{ form.title.errors }}
+      {{ form.title.label_tag }}
+      {{ form.title }}
+    </p>
+
+    <p class="form__row input_checkbox">
+    {{ form.is_published.label_tag }}
+    {{ form.is_published }}
+    </p>
+
+    <p class="form__row input_checkbox">
+    {{ form.publish_on_main.label_tag }}
+    {{ form.publish_on_main }}
+    </p>
+
+    <p class="field">
+      {{ form.category.errors }}
+      {{ form.category.label_tag }}
+      {{ form.category }}
+    </p>
+
+    <p class="field input_text">
+      {{ form.genre.errors }}
+      {{ form.genre.label_tag }}
+      {{ form.genre }}
+    </p>
+
+    <p class="field input_text">
+      {{ form.start_date.errors }}
+      {{ form.start_date.label_tag }}
+      {{ form.start_date }}
+      (Нужно только что бы показывать дату начала пользователям. В расчёте афишы не учитывается)
+    </p>
+
+    <p class="field input_text">
+      {{ form.start_time.errors }}
+      {{ form.start_time.label_tag }}
+      {{ form.start_time }}
+      (Нужно только что бы показывать время начала пользователям. В расчёте афишы не учитывается)
+    </p>
+  </fieldset>
+  {% if form.instance and form.instance.is_movie %}
+  <fieldset>
+    <legend>Дополнительная информация</legend>
+    <table class="form_vertical" id="movie_info">
+
+      <tr>
+        <td colspan="4" class="form_row input_text">Режисер
+          <p class="field">
+            <input value="{{ form.additional|as_text:'director' }}" name="director" type="text" />
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" class="form_row input_text">В ролях
+          <p class="field">
+            <input value="{{ form.additional|as_text:'actors' }}" name="actors" type="text" />
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="form_row input_text">Страна
+          <p class="field"><input value="{{ form.additional|as_text:'country' }}" name="country" type="text"></p>
+        </td>
+        <td class="form_row input_text">Год
+          <p class="field"><input value="{{ form.additional|as_text:'year' }}" name="year" type="text"></p>
+        </td>
+        <td class="form_row input_text">Бюджет
+          <p class="field"><input value="{{ form.additional|as_text:'budget' }}" name="budget" type="text"></p>
+        </td>
+        <td class="form_row input_text">Длительность
+          <p class="field"><input value="{{ form.additional|as_text:'duration' }}" name="duration" type="text"></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan=4 class="form_row input_text">Трейлер
+          <p class="field input_text">
+            {{ form.trailer.errors }}
+            {{ form.trailer }}
+          </p>
+        </td>
+      </tr>
+    </table>
+    </table>
+    <table class="form_vertical" id="show_info">
+      <tr>
+        <td colspan="4" class="form_row input_text">Режисер
+          <p class="field">
+            <input value="{{ form.additional|as_text:'director' }}" name="director" type="text" />
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" class="form_row input_text">В ролях
+          <p class="field">
+            <input value="{{ form.additional|as_text:'actors' }}" name="actors" type="text" />
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4" class="form_row input_text">Длительность
+          <p class="field">
+            <input value="{{ form.additional|as_text:'duration' }}" name="duration" type="text" />
+          </p>
+        </td>
+      </tr>
+    </table>
+
+
+    <table class="form_vertical" id="any_info">
+      <tr>
+        <td colspan="4" class="form_row input_text">Стоимость билетов
+          <p class="field">
+            <input value="{{ form.additional|as_text:'cost' }}" name="cost" type="text" />
+          </p>
+        </td>
+      </tr>
+    </table>
+
+  </fieldset>
+  {% endif %}
+  <fieldset>
+    <legend>Описание</legend>
+      <p class="field">
+        {% if event %}
+          <img src="{% thumbnail event.image 280x140 crop=",0" %}" alt="{{ event.title }}" />
+        {% endif %}
+        {{ form.image.errors }}
+        {{ form.image.label_tag }}
+        {{ form.image }}
+      </p>
+      <p class="field">
+        {{ form.intro.errors }}
+        {{ form.intro.label_tag }}
+        {{ form.intro }}
+      </p>
+      <p class="field">
+        {{ form.description.errors }}
+        {{ form.description.label_tag }}
+        {{ form.description }}
+      </p>
+  </fieldset>
+
+  <h3>Расписание</h3>
+  {% csrf_token %}
+  {{ formset.management_form }}
+  {% for form in formset %}
+
+  {% for hid in form.hidden_fields %} {{hid}}{% endfor %}
+    <div class="event_shedule__item">
+      <div class="event_shedule__item__place">
+        {{ form.place.errors }}
+        {{ form.place.label_tag }}
+        {{ form.place }}
+      </div>
+      <div class="clearfix event_shedule__item__date">
+        {{ form.start_date.errors }}
+        {{ form.start_date.label_tag }}
+        {{ form.start_date }}
+      </div>
+        <div class="event_shedule__item__time">
+            {{ form.start_times.errors }}
+            {{ form.start_times.label_tag }}
+            {{ form.start_times }}
+        </div>
+
+      <div id="repeat_type">
+        <p>Режим повторения</p>
+
+        <div id="repeat-weekly" class="clearfix">
+          <span class="clearfix repeat_on zf zf-radiobuttongroup">
+            {{ form.repeat_on.errors }}
+            {{ form.repeat_on }}
+          </span>
+
+          <div class="repeat_settings">
+            <div>
+              {{ form.repeat_every.errors }}
+              Интервал в <span id="interval"></span>&nbsp;{{ form.repeat_every }}
+
+              <span class="clearfix weekday_checkbox">
+                {{ form.repeat_weekday.errors }}
+                {{ form.repeat_weekday }}
+              </span>
+            </div>
+            <div class="clearfix">
+              {{ form.end_date.errors }}
+              {{ form.end_date.label_tag }}
+              {{ form.end_date }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+        {{ form.DELETE }} удалить
+    </div>
+
+  {% endfor %}
+  <div id="form-submit" class="field clearfix submit">
+    <p class="submit">
+        <input type="submit" value="Сохранить">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+    <a href="javascript:history.go(-1);">Отмена</a>
+  </div>
+</form>
+
+<div id="elfinder"></div>
+{% endblock %}
+
+{% block scripts %}
+
+    {{ form.media }}
+    {{ formset.media }}
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}elfinder/css/elfinder.css" type="text/css" media="screen" charset="utf-8">
+    <script src="{{ STATIC_URL }}/js/jquery-ui-i18n.js" type="text/javascript"></script>
+    {% assets  "js_ui" %}
+      <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+      </script>
+    {% endassets %}
+
+    {% assets  "control_js" %}
+      <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+      </script>
+    {% endassets %}
+
+<script type="text/javascript">
+    $(function() {
+        $.datepicker.setDefaults(
+            $.extend($.datepicker.regional["ru"])
+        );
+
+        $('.event_shedule__item').formset({
+            addText: 'Добавить расписание',
+            deleteText: 'Удалить расписание',
+            added: function(row) {
+
+                $(row).find("[name$='repeat_every']").attr("value", 1);
+                $(row).find("[id$='repeat_on_0']").click().attr("checked", true);
+                $(".event_shedule__item:first input[checked=checked]").click();
+
+                row.find(".ui-datepicker-trigger").remove();
+                row.find(".hasDatepicker").removeClass("hasDatepicker");
+
+                addDatepicker(row);
+          }
+        });
+
+        function addDatepicker(elem){
+            var settings = {
+                showOn: "button",
+                buttonImageOnly: true,
+                buttonImage: "{{ STATIC_URL}}admin/img/admin/icon_calendar.gif",
+                dateFormat: "yy-mm-dd",
+            };
+
+            if (elem){
+                elem.find(".datepicker").datepicker(settings);
+            } else {
+                $(".datepicker").datepicker(settings);
+            }
+        }
+
+        addDatepicker();
+    });
+</script>
+  <script type="text/javascript">
+    jQuery().ready(function() {
+      jQuery("#id_genre").autocomplete("/taggit_autocomplete/list",
+        { multiple: true }
+      );
+    });
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}zforms/css/ZForms-screen.css" media="Screen" /><!--<![endif]-->
+  <!--[if IE]><link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}zforms/css/ZForms-screen-ie.css" media="Screen" /><![endif]-->
+  <script type="text/javascript" src="{{ STATIC_URL }}zforms/js/ZForms-jquery-3.0.4-min.js" charset="utf-8"></script>
+{% endblock %}

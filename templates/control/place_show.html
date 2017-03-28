@@ -1,0 +1,222 @@
+{% extends "control/index.html" %}
+{% load i18n %}
+{% load comments place_extras rating_tags event_tags thumbnail %}
+{% block content-header %}
+<h1>Панель управления, смотрим на заведение "<i>{{ place }}</i>"</h1>
+{% endblock %}
+
+{% block content %}
+    <h1 class="with-tags editable">
+    {{ place.name }}
+    <span class="editable__buttons">
+    <a href="{% url control_place_edit place.pk %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+    </span>
+    </h1>
+
+    <p class="tags">
+        {% for tag in place.tagging.all %}
+            <a href="{% url place.views.show_places_by_tag tag.slug %}" title="{% if tag.title %}{{ tag.title }}{% else %}{{ tag.name }}{% endif %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    {# -----------Address information------------ #}
+    <div class="placecard clearfix">
+        {% if place.promo_is_up and place.logotype %}
+            <div class="place__logo clearfix"><img src="{{ place.logotype.thumbnail }}" alt="{{ place.name }}{% if logotype_alt %} {{logotype_alt}}{% endif %}"></div>
+        {% endif %}
+        <div class="placecard__info">
+            <dl class="placecard__info__row">
+                <dt class="label">Рейтинг:</dt>
+                <dd class="data">
+                    <div id="rating" class="rating rating_place">
+                        {% ratingform place %}
+                    </div>
+                </dd>
+            </dl>
+            {% if place.main_address %}
+                <dl class="placecard__info__row clearfix">
+                    <dt class="label">Адрес</dt>
+                    <dd id="address_holder" class="data address_holder" data-geopoint="{{ place.get_main_address.geopoint }}" data-address="{{ place.main_address }}">
+                        {% if address_count > 1 %}
+
+                            <ul id="more_addresses" class="dropdown__list addresses__list">
+                                <li id="address_switcher" class="dropdown__visible dropdown"><span id="btntxt" class="pseudo-link">{{ place.main_address }}</span></li>
+                                {% for address in address_list %}
+                                    <li class="dropdown__item addresses__address" data-geopoint="{{ address.geopoint }}" data-index="{{ forloop.counter0 }}">{{ address.address }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            {{ place.main_address }}
+                        {% endif %}
+                    </dd>
+                </dl>
+            {% endif %}
+            <ul id="address_details">
+                {% for addr in address_list %}
+                    <li class="address__details{% if forloop.first %} address__details_visible{% endif %}">
+                        <span class="geopoint hidden">{{ addr.geopoint }}</span>
+
+                        {% if addr.phone %}
+                            <dl class="placecard__info__row">
+                                <dt class="label">Телефон</dt>
+                                <dd class="data">{{ addr.phone }}</dd>
+                            </dl>
+                        {% endif %}
+
+                        {% if addr.get_district_display != 'none' and addr.get_district_display != '0' %}
+                            <dl class="placecard__info__row">
+                                <dt class="label">Район города</dt>
+                                <dd class="data">{% trans addr.get_district_display %}</dd>
+                            </dl>
+                        {% endif %}
+
+                        {% if addr.work_time.count %}
+                            <dl class="placecard__info__row">
+                                <dt class="label">Часы работы</dt>
+                                <dd class="data">{{ addr|work_time }}</dd>
+                            </dl>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% if place.email %}
+                <dl class="placecard__info__row">
+                    <dt class="label">Эл. почта</dt>
+                    <dd class="data">{{ place.email }}</dd>
+                </dl>
+            {% endif %}
+
+            {% if place.url %}
+                <dl class="placecard__info__row">
+                    <dt class="label">Сайт</dt>
+                    <dd class="data">
+                        <a target="_blank" title="{{ place.name }}" href="http://{{ place.get_url }}">{{ place.get_url }}</a>
+                    </dd>
+                </dl>
+            {% endif %}
+        </div>
+    </div>
+
+
+    {# -----------Other information------------ #}
+    <div class="tabbed">
+        <ul class="tabs tabs_type_skewed">
+            {% if place.promo_is_up %}
+                <li class="tabs-item tabs-item_state_current" data-tabname="about">
+                    <span class="pseudo-link">Обзор</span><span class="l"></span><span class="r"></span>
+                </li>
+
+                {% if place.gallery.count_active and place.promo_is_up %}
+                    <li class="tabs-item" data-tabname="photo">
+                        <span class="pseudo-link">Фотографии</span>
+                        <span class="count">{{ place.gallery.count_active }}</span>
+                        <span class="l"></span>
+                        <span class="r"></span>
+                    </li>
+                {% endif %}
+
+                {% if place.flash3d %}
+                  <li class="tabs-item" data-tabname="panorama">
+                    <span class="pseudo-link">Панорама</span>
+                  </li>
+                {% endif %}
+
+            {% endif %}
+
+            {% if place.main_address %}
+                <li class="tabs-item{% if not place.promo_is_up %} current{% endif %}" data-tabname="map">
+                    <span class="pseudo-link">На карте</span><span class="l"></span><span class="r"></span>
+                </li>
+            {% endif %}
+
+            <li class="tabs-item{% if not place.promo_is_up and not place.gallery.count and not place.main_address %} current{% endif %} " data-tabname="comments">
+                <span class="pseudo-link">Отзывы</span>
+                {% if place.num_comments %}<span class="count">{{ place.num_comments }}</span>{% endif %}<span class="l"></span><span class="r"></span>
+            </li>
+
+            {% if datelist %}
+                <li class="tabs-item" data-tabname="schedule">
+                    <span class="pseudo-link">Расписание</span><span class="l"></span><span class="r"></span>
+                </li>
+            {%  endif %}
+
+        </ul>
+
+        {% if place.promo_is_up %}
+            <div class="pane visible">
+                <div class="place__img thumb shadowed">
+                    {% thumbnail place.photo 560x260 crop="center" quality=95 as im %}
+                    {% if im %}<img alt="{{ place.name }}" src="{{ im }}" />{% else %}<span class="no_photo"></span>{% endif %}
+                    <img src="/static/i/shadow.png" alt="" class="shadow" />
+                </div>
+                <div class="place__about">{{ place.description|safe }}</div>
+            </div>
+        {% endif %}
+
+
+        {% if place.gallery.count_active and place.promo_is_up %}
+            <div class="pane place__photos three-columns" id="photos_tab">
+                {% for gallery in place.gallery.all_active %}
+                    {% if gallery.image.thumbnail %}
+                        <ins class="item column {% cycle 'column_first' 'column_middle' 'column_last' %}">
+                            <a title="" rel="fancybox" href="{{ gallery.image.url}}">
+                                <img rel="place" src="{{ gallery.image.thumbnail }}">
+                            </a>
+                            <p>{{ gallery.title }}</p>
+                        </ins>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if place.flash3d and place.promo_is_up %}
+          <div class="pane place__panorama">
+            <embed type="application/x-shockwave-flash" src="{{ place.flash3d }}" width="100%" height="520" quality="high" allowfullscreen="true" allowscriptaccess="always" wmode="opaque">
+          </div>
+        {% endif %}
+
+        {% if place.main_address %}
+            <div class="pane place__map{% if not place.promo_is_up %} visible{% endif %}">
+                <div style="width: 560px; height: 400px;" id="YMapsID"></div>
+            </div>
+        {% endif %}
+
+        <div class="pane {% if not place.main_address %}visible{% endif %}">
+            <div id="comments" class="comments">
+                {% if user.is_authenticated %}
+                    <div class="comments__post clearfix comment_form">
+                        <span class="pseudo-link post__button open_form">Позвольте, я скажу!</span>
+                        <div class="post__form form" style="display: none">{% render_comment_form for place %}</div>
+                    </div>
+                {% else %}
+                    <p>Чтобы оставить отзыв, вам нужно <a href="{% url login %}">авторизоваться</a> или <a href="{% url registration_register %}">зарегистрироваться</a>, если вы этого еще не сделали.</p>
+                {% endif %}
+
+                {% render_comment_list for place %}
+            </div>
+        </div>
+
+        <div class="pane">
+            <div class="days tabbed">
+                <ul class="tabs tabs-days">
+                    {% for day in datelist %}
+                        <li class="tabs__tab">
+                            <a href="#">{{ day|date:"D, d b" }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="schedule_wide days-panes">
+                {% for day in datelist %}
+                    {% shedule_for_place place day %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="http://api-maps.yandex.ru/2.0/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    <script src="/static/js/place_show.js" type="text/javascript"></script>
+{% endblock %}

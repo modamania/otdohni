@@ -1,0 +1,36 @@
+{% if is_paginated %}
+{% load i18n %}
+<div class="pager">
+    <div class="pager__prev-next">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}" class="pager__prev" title="{% if paginator_label %}{{ paginator_label }} - {% endif %}страница {{ page_obj.previous_page_number }}"><span class="arrow">←</span> сюда</a>
+        {% else %}
+            <span class="pager__prev disabled"><span class="arrow">←</span> сюда</span>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}" class="pager__next" title="{% if paginator_label %}{{ paginator_label }} - {% endif %}страница {{ page_obj.next_page_number }}">туда <span class="arrow">→</span></a>
+        {% else %}
+            <span class="pager__next disabled">туда <span class="arrow">→</span></span>
+        {% endif %}
+    </div>
+    <div class="pager__pages">
+        {% if paginator_label %}
+            <h4 class="pagenav-title">{{ paginator_label }}:</h4>
+        {% endif %}
+
+        {% if show_first %}<a href="?page=1" class="pager__page" title="{% if paginator_label %}{{ paginator_label }} - {% endif %}первая страница">←</a>{% endif %}
+        {% for page in pages %}
+
+            {% if page %}
+                <a href="?page={{ page }}{{ getvars }}{{ hashtag }}" class="pager__page" title="{% if paginator_label %}{{ paginator_label }} - {% endif %}страница {{ page }}">{{ page }}</a>
+            {% else %}
+                <span class="current">{{ page_obj.number }}</span>
+            {% endif %}
+
+
+        {% endfor %}
+        {% if show_last %}<a href="?page={{ paginator.num_pages }}" class="pager__page" title="{% if paginator_label %}{{ paginator_label }} - {% endif %}последняя страница">→</a>{% endif %}
+    </div>
+</div>
+{% endif %}

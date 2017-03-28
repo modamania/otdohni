@@ -1,0 +1,11 @@
+<li class="user-comments__item comment box">
+    <span class="meta">
+        {% for c in category %}
+            {{ c|capfirst }}
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    <h4 class="title"><a href="{{ comment.get_content_object_url }}#comments-{{ comment.id }}">{{ obj }}</a></h4>
+    <div class="comment__text">{{ comment.comment }}</div>
+    <div class="meta">{{ comment.submit_date }}</div>
+</li>

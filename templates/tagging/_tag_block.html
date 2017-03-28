@@ -1,0 +1,7 @@
+{% if tags %}
+    <div class="tags">
+        {% for tag in tags %}
+            <a href="{% url news_tag_list tag.slug %}" title="{% if tag.title %}{{ tag.title }}{% else %}{{ tag.name }}{% endif %}">{{ tag.name }}</a>{% if not forloop.last %},&nbsp;{% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

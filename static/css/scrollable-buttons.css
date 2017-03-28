@@ -1,0 +1,113 @@
+
+/* this makes it possible to add next button beside scrollable */
+.scrollable {
+}
+
+/* prev, next, prevPage and nextPage buttons */
+a.browse {
+	background:url(../i/scrollable/arrow/hori_large.png) no-repeat;
+	display:block;
+	width:30px;
+	height:30px;
+	float:left;
+	margin:40px 10px;
+	cursor:pointer;
+	font-size:1px;
+}
+
+/* right */
+a.right 				{ background-position: 0 -30px; clear:right; margin-right: 0px;}
+a.right:hover 		{ background-position:-30px -30px; }
+a.right:active 	{ background-position:-60px -30px; } 
+
+
+/* left */
+a.left				{ margin-left: 0px; } 
+a.left:hover  		{ background-position:-30px 0; }
+a.left:active  	{ background-position:-60px 0; }
+
+/* up and down */
+a.up, a.down		{ 
+	background:url(../i/scrollable/arrow/vert_large.png) no-repeat; 
+	float: none;
+	margin: 10px 60px;
+}
+
+/* up */
+a.up:hover  		{ background-position:-30px 0; }
+a.up:active  		{ background-position:-60px 0; }
+
+/* down */
+a.down 				{ background-position: 0 -30px; }
+a.down:hover  		{ background-position:-30px -30px; }
+a.down:active  	{ background-position:-60px -30px; } 
+
+
+/* disabled navigational button */
+a.disabled {
+	visibility:hidden !important;		
+} 	
+
+.foto-list-row {padding: 1em 0; border-bottom: 1px dotted #ccc; overflow: hidden}
+.foto-list-row .desc{margin-left: 9em}
+.foto-list-row .tags{margin: 0 0 0.167em}
+.foto-list-row h2{margin: 0}
+.foto-list h3{font-weight: normal; margin: 0 0 .2em 0}
+.foto-list-col4 {padding-bottom: 1em}
+.foto-list-row .foto{float: left; margin-right: 1em}
+.foto-list-row img, ul.foto-list li img, .foto-list-col4 img {width: 100px; height: 100px; display: block}
+.foto-list-row img, ul.foto-list li img, .foto-list-col4 img, .foto-middle img {padding: 1px; border: 1px solid #ccc}
+.foto-middle {text-align: center; position: relative; margin-bottom: .462em}
+.foto-middle .foto{position: relative; display: -moz-inline-block; display: inline-block; *display: inline; zoom: 1; z-index: 100}
+.foto-middle .foto .arrow{position: absolute !important; top: 50%; margin-top: -20px; z-index: 110}
+.foto-middle .foto .arrow.left{left: -40px}
+.foto-middle .foto .arrow.right{right: -40px}
+.foto-nav {position: relative}
+.foto-middle .foto .arrow.left, x:-moz-any-link {left: 0}
+.foto-middle .foto .arrow.right, x:-moz-any-link {right: 0}
+.foto-middle .foto .arrow.left, x:-moz-any-link, x:default {left: -40px}
+.foto-middle .foto .arrow.right, x:-moz-any-link, x:default {right: -40px}
+.foto-saving {text-align: center}
+.foto-description {overflow: hidden; margin-bottom: 2em}
+.foto-description dl {clear: left; overflow: hidden; padding: 0.077em 0; border-bottom: 1px dotted #ccc}
+.foto-description dt {float: left; width: 8em; text-align: right; padding: 0.077em 1em 0 0; font-weight: bold; font-size: 0.847em; color: #666}
+.foto-description dd {float: left; width: 20em}
+
+/* Css Arrows */
+
+.arrow {height: 40px; overflow: hidden; position: relative; width: 20px}
+.arrow a, .arrow i {display: block; height: 0; font-size: 0; vertical-align: bottom}
+.arrow a {border-bottom: 20px solid #fff; border-top: 20px solid #fff; position: relative; width: 20px}
+.arrow a i {border-bottom: 10px solid #ccc; border-top: 10px solid #ccc; line-height: 0; position: absolute; width: 0}
+.arrow a:hover i{border-top-color: #333; border-bottom-color: #333; cursor: pointer}
+
+.varrow {width: 40px; overflow: hidden; position: relative; height: 20px; cursor: pointer}
+.varrow span, .varrow i {display: block; height: 0; font-size: 0; vertical-align: bottom}
+.varrow span {border-left: 20px solid #fff; border-right: 20px solid #fff; position: relative; height: 20px}
+.varrow span i {border-left: 10px solid #ccc; border-right: 10px solid #ccc; line-height: 0; position: absolute; height: 0}
+.varrow span.hover i{border-right-color: #333; border-left-color: #333; cursor: pointer}
+
+.varrow.up span {border-bottom: 20px solid #ccc; top: -20px}
+.varrow.up span i {border-bottom: 10px solid #fff; top: 30px; left: -10px}
+.varrow.up span.hover {border-bottom-color: #333}
+.varrow.up span.hover i {border-bottom-color: #fff}
+
+.varrow.down span {border-top: 20px solid #ccc; top: 0}
+.varrow.down span i {border-top: 10px solid #fff; top: -20px; left: -10px}
+.varrow.down span.hover {border-top-color: #333}
+.varrow.down span.hover i {border-top-color: #fff}
+
+.arrow.left a {border-right: 20px solid #ccc; left: -20px}
+.arrow.left a i {border-right: 10px solid #fff; left: 30px; top: -10px}
+.arrow.left a:hover {border-right-color: #333}
+.arrow.left a:hover i {border-right-color: #fff}
+
+.arrow.right a {border-left: 20px solid #ccc; left: 0}
+.arrow.right a i {border-left: 10px solid #fff; left: -20px; top: -10px}
+.arrow.right a:hover {border-left-color: #333}
+.arrow.right a:hover i {border-left-color: #fff}
+
+.varrow.disabled span{display: none}
+.varrow.disabled {cursor: default}
+
+

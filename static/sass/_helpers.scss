@@ -1,0 +1,24 @@
+.clearfix {
+  @include clearfix;
+}
+
+.visible {
+    visibility: visible;
+}
+.invisible {
+    visibility: hidden;
+}
+.disabled {
+    color: #aaa !important;
+    cursor: default !important;
+}
+.hidden {
+    display: none !important;
+}
+.clr {
+    font-size:0;
+    clear: both;
+    overflow: hidden;
+    height: 0;
+    line-height: 0;
+}

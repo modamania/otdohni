@@ -1,0 +1,65 @@
+{% extends "control/index.html" %}
+{% load core_tags i18n thumbnail %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+    </div>
+{% endblock %}
+<style type="text/css">
+    ins {
+        background-color: yellow !important;
+    }
+</style>
+{% block content %}
+    <h1>Обновления заведения "<a href="{{ update.place.get_absolute_url }}" target="_blank">{{ update.place }}</a>"</h1>
+    <p><a href="{{ update.response_url }}" target="_blank">Страница доннор</a></p>
+    <div style="width: 45%; float:left">
+        Было<br />
+        {# <pre> #}
+        {% for operation in diff_operations %}
+            {% ifequal operation.operation "replace" %}
+                <del class="diff modified" style="background-color: #FADADD; text-decoration: none;">{{ operation.deleted|default:""|linebreaksbr }}</del>
+            {% endifequal %}
+            {% ifequal operation.operation "delete" %}
+                <del class="diff" style="background-color: #FADADD; text-decoration: none;">{{ operation.deleted|default:""|linebreaksbr }}</del>
+            {% endifequal %}
+            {% ifequal operation.operation "equal" %}
+                <span>{{ operation.inserted|linebreaksbr }}</span>
+            {% endifequal %}
+        {% endfor %}
+        {# </pre> #}
+    </div>
+
+    <div style="width: 45%; float:right">
+        Стало<br />
+        {# <pre> #}
+        {% for operation in diff_operations %}
+            {% ifequal operation.operation "replace" %}
+                <ins class="diff modified" style="background-color: yellow">{{ operation.inserted|default:""|linebreaksbr }}</ins>
+            {% endifequal %}
+            {% ifequal operation.operation "insert" %}
+                <ins class="diff" style="background-color: yellow">{{ operation.inserted|default:""|linebreaksbr }}</ins>
+            {% endifequal %}
+            {% ifequal operation.operation "equal" %}
+                <span>{{ operation.inserted|linebreaksbr }}</span>
+            {% endifequal %}
+        {% endfor %}
+        {# </pre> #}
+    </div>
+    <div class="clearfix"></div>
+    <br><br>
+    <form action="." method="post">
+        {% csrf_token %}
+        <button name="approve">Применить изменения</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button name="reject">Удалить изменения</button>
+        {% if update.place %}
+            <p style="margin-top: 10px;"><a href="{% url control_place_edit update.place.id %}">Редактировать</a></p>
+        {% endif %}
+    </form>
+
+    {% if now_approve and not approve_complete %}
+        <script type="text/javascript">
+            alert('Не получилось сохранить изменения.\nВам самими нужно внести все нужные изменения.\nПотом удалите эту запись обновлений.');
+        </script>
+    {% endif %}
+{% endblock %}

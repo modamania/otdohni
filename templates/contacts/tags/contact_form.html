@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<div id="contacts">
+
+  <div class="form-container contacts clearfix">
+    {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endif %}
+    <form enctype="multipart/form-data" action="{% url submit_contacts %}" id="form" class="form contacts-form" method="post" validate="">
+      {% for field in form %}
+        <dl>
+          <dt>{{ field.label_tag }}</dt>
+          <dd>{{ field.errors }}{{ field }}</dd>
+        </dl> 
+      {% endfor %}
+      {% csrf_token %}    
+      <div id="form-submit" class="field clearfix submit">
+        <input value="{% trans 'Submit' %}" type="submit">
+      </div>
+    </form>
+  </div>
+
+</div>

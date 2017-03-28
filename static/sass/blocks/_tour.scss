@@ -1,0 +1,85 @@
+.tour {
+  position: relative;
+  padding: 0 3em;
+  
+  &:before,
+  &:after {
+    @include rect(4px, 100%);
+    content: '';
+    position: absolute;
+    z-index: 100;
+    top: -10px;
+  }
+
+  &:before {
+    left: 3em;
+    background: image-url('tour-left.png') 0 0 no-repeat;
+  }
+
+  &:after {
+    right: 3em;
+    background: image-url('tour-right.png') 0 0 no-repeat;
+  }
+
+  p {
+    padding: 0 3em;
+  }
+
+  &-steps__item {
+    // height: 420px;
+  }
+
+  &__caption {
+    font-size: 14px;
+    width: 90%;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  &__img {
+    @include background-size(contain);
+    display: block;
+    width: 90%;
+    height: 320px;
+    margin: 0 auto 2em;
+    border: 1px solid $light-gray;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  .bx-wrapper {
+    height: 410px;
+  }
+
+  .bx-prev {
+    left: -64px;
+  }
+
+  .bx-next {
+    right: -64px;
+  }
+
+  .bx-pager {
+    position: absolute;
+    bottom: -2.25em;
+    width: 100%;
+    text-align: center;
+
+    &-item {
+      display: inline-block;
+    }
+
+    &-link {
+      @include inline-block;
+      @include circle(12px);
+      margin: 0 5px;
+      background: #999;
+      text-indent: -9999px;
+
+      &.active {
+        background: $brand-blue;
+      }
+    }
+  }
+
+}

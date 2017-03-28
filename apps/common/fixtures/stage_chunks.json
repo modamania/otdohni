@@ -1,0 +1,34 @@
+[
+    {
+        "pk": 1, 
+        "model": "chunks.chunk", 
+        "fields": {
+            "content": "agree rules text", 
+            "key": "agree rules text"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "chunks.chunk", 
+        "fields": {
+            "content": "chunk: manage blog", 
+            "key": "chunk: manage blog"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "chunks.chunk", 
+        "fields": {
+            "content": "create blog post tips", 
+            "key": "create blog post tips"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "chunks.chunk", 
+        "fields": {
+            "content": "geen berichten", 
+            "key": "no messages"
+        }
+    }
+]

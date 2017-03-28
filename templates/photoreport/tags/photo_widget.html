@@ -1,0 +1,24 @@
+{% load thumbnail watermark %}
+<!-- "previous page" action -->
+<a class="prev browse up"></a>
+
+<!-- root element for scrollable -->
+<div class="scrollable">   
+    <!-- root element for the items -->
+    <ul id="photo_ribbon" class="items">
+
+    {% for item in photos %}
+        <li class="{% ifequal item.pk photo.pk %}active{% endifequal %}" data-pos="{{ forloop.counter0 }}">
+            {% thumbnail item.image 156x107 crop=",0" as im_small %}
+            <a href="{% url photo_detail photoreport.slug item.id %}" rel="{{im_small}}" title="{{ item.title }}">
+            </a>
+        </li>
+    {% endfor %}
+
+    </ul>
+
+
+</div>
+
+<!-- "next page" action -->
+<a class="next browse down"></a>

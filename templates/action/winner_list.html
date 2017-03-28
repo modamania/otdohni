@@ -1,0 +1,113 @@
+{% extends "index.html" %}
+{% load comments thumbnail %}
+{% load core_tags pagination_tags %}
+
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> /  Конкурсы
+</div>
+{% endblock %}
+
+{% block title %}Конкурсы {{ CITY.genitive }}{% endblock %}
+
+{% block content-header %}
+{% endblock %}
+
+{% block seo-header %}
+{% endblock %}
+
+{% block content %}
+    {% if user.profile.access_to_dasboard or user.is_superuser %}
+        <h1 class="page-title editable">
+        <span class="page-title__title">
+            {% if seo.heading.value %}
+                {{ seo.heading.value }}
+            {% else %}
+                Конкурсы
+            {% endif %}
+        </span>
+        {% if seo.tooltip.value %}
+            <i class="help-icon show-help"></i>
+        {% endif %}
+        <span class="editable__buttons">
+        <a href="{% url control_action_list %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+    </span>
+    {% else %}
+        <h1 class="page-title">
+        <span class="page-title__title">
+            {% if seo.heading.value %}
+                {{ seo.heading.value }}
+            {% else %}
+                Конкурсы
+            {% endif %}
+        </span>
+        {% if seo.tooltip.value %}
+            <i class="help-icon show-help"></i>
+        {% endif %}
+    {% endif %}
+    </h1>
+
+<ul class="tabs">
+    <li class="tabs-item{% ifequal active 'current' %} tabs-item_state_current{% endifequal %} tabs-item_pos_first">
+        <a href="{% url action_list %}">
+        Активные</a>
+    </li>
+    <li class="tabs-item{% ifequal active 'complete' %} tabs-item_state_current{% endifequal %} tabs-item_pos_last">
+        <a href="{% url complete_action_list %}">
+        Завершенные</a>
+    </li>
+    <li class="tabs-item tabs-item_state_current tabs-item_pos_last">
+        <a href="{% url action_winners_list %}">
+        Победители</a>
+    </li>
+</ul>
+
+{% autopaginate action_list 300 %}
+<div class="actions-winners clearfix">
+    
+{% for winner in action_list %}
+    {# {% get_comment_count for winner as comment_count %} #}
+    {% thumbnail winner.photo 180x180 crop quality=95 as im %}
+    
+    <div class="actions-winners__item">
+        <a href="{{ MEDIA_URL }}{{ winner.big_photo }}" class="toggle-winner-info photo-link" >
+            {% if winner.photo %}
+                <span class="thumb actions-winners__thumb" style="background-image: url({{im}})"></span>
+            {% endif %}
+            <span class="winner__name pseudo-link">{{ winner.fio }}</span>
+        </a>
+
+        <a href="{{ winner.action.get_absolute_url }}" class="action-title">{{ winner.action.title }}</a>
+        <div class="date">
+            <span>{{ winner.dt }}</span>
+        </div>
+        {% if winner.description %}
+        <div class="winner__quote">
+            {{ winner.description }}
+        </div>
+        {%  endif %}
+    </div>
+
+{% empty %}
+<p>А никто не выиграл :-P</p>
+{% endfor %}
+</div>
+
+<div class="winner-info hidden">
+    <div class="winner-info__content">
+        <img src="" alt="" class="winner-info__thumb">
+        <h2 class="winner-info__name"></h2>
+        <p>Победитель конкурса «<span class="winner-info__title"></span>»</p>
+        <span class="winner-info__date"></span>
+        <div class="winner-info__quote"></div>
+    </div>
+    <span class="icon icon_close icon_close_thin popup__close"><i></i></span>
+</div>
+
+{% new_paginate %}
+
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

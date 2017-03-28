@@ -1,0 +1,150 @@
+{% load thumbnail comments event_tags %}
+<div class="event__details tabbed">
+
+    <ul class="events__tabs tabs">
+      <li class="tabs-item tabs-item_state_current" data-tabname="review">
+      <span class="pseudo-link">Обзор</span>
+      </li>
+    {% if event.has_movie %}
+      <li class="tabs-item" data-tabname="trailer">
+        <span class="pseudo-link">Трейлер</span>
+      </li>
+    {% endif %}
+    {% if event.has_several_occurrences and not event.has_passed %}
+      <li class="tabs-item" data-tabname="schedule">
+        <span class="pseudo-link">Расписание</span>
+      </li>
+    {% endif %}
+
+    {% if not event.has_passed %}
+      <li class="tabs-item" data-tabname="people"><span class="pseudo-link">Кто идет</span>
+          {% if event.members.all.count %}
+          <span class="count">{{ event.members.all.count }}</span>
+          {% endif %}
+      </li>
+    {% endif %}
+
+      <li class="tabs-item" data-tabname="comments">
+        <span class="pseudo-link">Отзывы</span>
+        {% if event.num_comments %}
+            <span class="count">{{ event.num_comments }}</span>
+        {% endif %}
+      </li>
+    </ul>
+
+    <div class="pane clearfix events_review pane_state_visible" id="event_new">
+        {% if event.image %}
+        {% thumbnail event.image 1120x520 crop=",0" as im  %}
+        <div class="event__shot shadowed">
+            {% if im %}<img alt="{{ event.title }}" src="{{ im }}" />{% else %}<span class="no_photo"></span>{% endif %}
+            <img src="/static/i/shadow.png" alt="" class="shadow" />
+        </div>
+        {% endif %}
+        {% if event.intro %}
+            <p>{{ event.intro|safe }}</p>
+        {% endif %}
+        <p>{{ event.description|safe }}</p>
+        <p>
+            {% if form.additional|as_text:'country' %}
+                <strong>Страна:</strong> {{ form.additional|as_text:'country' }}{% if form.additional|as_text:'year' %}, {{ form.additional|as_text:'year' }} г.{% endif %}
+            {% endif %}
+            {% if form.additional|as_text:'duration' %}
+                <br><strong>Продолжительность:</strong> {{ form.additional|as_text:'duration' }}.
+            {% endif %}
+            {% if form.additional|as_text:'budget' %}
+                <br><strong>Бюджет:</strong> {{ form.additional|as_text:'budget' }}.
+            {% endif %}
+            {% if form.additional|as_text:'director' %}
+                <br><strong>Режиссер:</strong> {{ form.additional|as_text:'director' }}.
+            {% endif %}
+            {% if event.genre.all %}
+                <br><strong>Жанр:</strong>&nbsp;{% for genre in event.genre.all %}<span>{% if forloop.first %}{{ genre|capfirst }}{% else %}{{ genre|lower }}{% endif %}{% if not forloop.last %}, {% endif %}</span>{% endfor %}.
+            {% endif %}
+            {% if form.additional|as_text:'actors' %}
+                <br><strong>В ролях:</strong> {{ form.additional|as_text:'actors' }}.
+            {% endif %}
+        </p>
+    </div>
+
+    {% if event.has_movie %}
+        <div class="pane clearfix event__trailer" id="event_trailer">
+            {{ event.get_embed_video_object|safe }}
+            <img src="/static/i/shadow.png" alt="" class="shadow" />
+        </div>
+    {% endif %}
+
+    {% if event.has_several_occurrences and not event.has_passed %}
+    <div class="pane tabbed clearfix" id="event_schedule">
+            <ul class="event__schedule__tabs tabs-days">
+                {% for day in datelist %}
+                <li class="tabs-item">
+                    <span class="pseudo-link">{{ day|date:"D, j b" }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% comment %}
+                {% calendar_film event %}
+            {% endcomment %}
+        <div class="schedule_wide days-panes">
+        {% for day in datelist %}
+            {% shedule_for_event event day %}
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if not event.has_passed %}
+    <div class="pane clearfix events_people" id="event_people">
+        <ul class="event__visitors">
+        {% for user in event.members.all %}
+            <li class="event__visitor">
+                <a href="{% url profile_show user.id %}" class="userpic userpic_medium"><img src="
+                {% if user.profile.userpic %}
+                    {% if user.profile.get_userpic == "/static/i/no_avatar.png" %}
+                        /static/i/no_avatar_medium.png
+                    {% else %}
+                        {{ user.profile.userpic.extra_thumbnails.medium }}
+                    {% endif %}
+                {% else %}/static/i/no_avatar_medium.png{% endif %}" alt=""></a><br /><a href="{% url profile_show user.id %}">{{ user.username }}</a>
+            </li>
+        {% empty %}
+            <p>Пока никто не идет на событие.</p>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="pane clearfix events_comments" id="event_comments">
+        {# -----------all-comments------------ #}
+        <div class="comments">
+            {% get_comment_count for event as comment_count %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><i>{{ message }}</i></li>
+                    {% endfor %}
+                </ul>
+                <br>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <div class="comments__post clearfix comment_form">
+                    <h3>Отзывы <span class="count">({{ comment_count }})</span></h3>
+                    <span class="pseudo-link post__button open_form">Позвольте, я скажу!</span>
+                    <div class="obj_comment_subscribe">
+                        {% if not is_subscribed %}
+                            <a href="{% url event_comment_subscribe event.category.slug event.id %}">Сообщать о новых комментариях</a>
+                        {% else %}
+                            <a href="{% url event_comment_unsubscribe event.category.slug event.id %}">Не сообщать о новых комментариях</a>
+                        {% endif %}
+                    </div>
+                    <div class="post__form form" style="display: none">{% render_comment_form for event %}</div>
+                </div>
+            {% else %}
+                {% include "comments/_no_access.html" %}
+            {% endif %}
+            {% render_comment_list for event %}
+        </div>
+    </div>
+
+</div>
+

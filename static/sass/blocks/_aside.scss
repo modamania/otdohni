@@ -1,0 +1,78 @@
+.aside {
+  @include transition(all .3s ease-in-out);
+  @include box-shadow(-3px 5px 5px rgba(0,0,0,.15) inset);
+
+  float: left;
+  position: relative;
+  z-index: 10;
+  width: 11.429em;
+  margin: 0 -100% 0 -100%;
+  padding: 5em 1.429em 40px;
+  background: #3f3f44 url('../i/aside-bg.png') 0 0 repeat;
+  color: #fff;
+
+  &-toggler {
+    @include box-shadow(3px 5px 5px rgba(0,0,0,.15));
+
+    display: block;
+    position: fixed;
+    z-index: 15;
+    width: 30px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    background: #3f3f44 url('../i/aside-bg.png');
+
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -12px 0 0 -6px;
+      border-width: 12px 0 12px 12px;
+      border-color: transparent transparent transparent #999;
+      border-style: solid none solid solid;
+    }
+
+    &:after {
+      margin-left: -10px;
+      border-color: transparent transparent transparent #3f3f44;
+    }
+
+    .page_state_pushed & {
+      &:before,
+      &:after {
+        border-width: 12px 12px 12px 0;
+        border-color: transparent #999 transparent transparent;
+        border-style: solid solid solid none;
+      }
+
+      &:after {
+        border-right-color: #3f3f44;
+        margin-left: -2px;
+      }
+    }
+  }
+
+
+  .page_state_pushed & {
+    margin-left: -16.429em;
+  }
+
+  @include breakpoint(1080px) {
+    margin-left: -16.429em;
+
+    &-toggler {
+      display: none;
+      
+      &:before,
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,10 @@
+<div class="three-columns clearfix">
+    <div class="sponsor"><a href="{% url advertising %}" class="sponsor_info"></a></div>
+    {% for place in place_list %}
+        <div class="column{% cycle '' '' ' column_last' %}">
+            <a title="{{ place }}" href="{% url place_show place.id  %}">
+                {% if place.sponsor_logo.thumbnail %}<img alt="{{ place }}" title="{{ place }}" src="{{ place.sponsor_logo.thumbnail }}" />{% else %}<span class="no_photo"></span>{% endif %}
+            </a>
+        </div>
+    {% endfor %}
+</div>

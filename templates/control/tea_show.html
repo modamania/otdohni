@@ -1,0 +1,18 @@
+{% extends "control/index.html" %}
+
+{% block content-header %}
+    <h1>Панель управления, смотрим на интервью"<i>{{ tea }}</i>"</h1>
+    <a href="{% url control.views.tea_form tea.pk %}">Редактировать</a><br />
+{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+        <a title="Чай со звездой" href="{% url control_tea_list %}">Чай со звездой</a> /
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h1> {{ tea }}</h1>
+    {{ tea.full_text|safe }}
+{% endblock %}

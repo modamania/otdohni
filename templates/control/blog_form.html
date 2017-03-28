@@ -1,0 +1,150 @@
+{% extends "control/index.html" %}
+{% load thumbnail i18n assets event_tags control_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> / <a title="Новости" href="{% url control_news_list %}">Блог</a> /
+    </div>
+{% endblock %}
+
+{% block content-header %}
+    {% if news %}<h1>Редактирование поста «{{ news.title }}»</h1>{% else %}<h1>Добавление поста</h1>{% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="." method="POST" enctype="multipart/form-data" class="form form_news_edit zf" id="news_form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            {{ form.non_field_errors }}
+        {% endif %}
+
+        <fieldset>
+            <legend>Основная информация</legend>
+
+            <p class="field">
+                {{ form.user.errors }}
+                {{ form.user.label_tag }}
+                {{ form.user }}
+            </p>
+
+            <p class="field input_text">
+                {{ form.ext_authors.errors }}
+                {{ form.ext_authors.label_tag }}
+                {{ form.ext_authors }}
+            </p>
+
+            <p class="field input_text">
+                {{ form.ext_authors_link.errors }}
+                {{ form.ext_authors_link.label_tag }}
+                {{ form.ext_authors_link }}
+            </p>
+
+            <p class="field">
+                {{ form.is_published.errors }}
+                {{ form.is_published.label_tag }}
+                {{ form.is_published }}
+            </p>
+
+	    <p class="field">
+                {{ form.sites.errors }}
+                {{ form.sites.label_tag }}
+                {{ form.sites }}
+            </p>
+
+            <p class="field input_date">
+                {{ form.pub_date.errors }}
+                {{ form.pub_date.label_tag }}
+                {{ form.pub_date }}
+            </p>
+
+            <p class="form__row input_checkbox">
+                {{ form.is_fixed.label_tag }}
+                {{ form.is_fixed }}
+            </p>
+
+            <p class="field input_text">
+                {{ form.title.errors }}
+                {{ form.title.label_tag }}
+                {{ form.title }}
+            </p>
+
+            <p class="field input_text" {% if not form.slug.value %}style="display:none;"{% endif %}>
+                {{ form.slug.errors }}
+                {{ form.slug.label_tag }}
+                {{ form.slug }}
+            </p>
+
+            <p class="field input_text" {% if not form.num_comments.value %}style="display:none;"{% endif %}>
+                {{ form.num_comments.errors }}
+                {{ form.num_comments.label_tag }}
+                {{ form.num_comments }}
+            </p>
+
+            <p class="field">
+                {{ form.short_text.errors }}
+                {{ form.short_text.label_tag }}
+                {{ form.short_text }}
+            </p>
+
+            <p class="field" style="height:550px;">
+                {{ form.full_text.errors }}
+                {{ form.full_text.label_tag }}
+                {{ form.full_text }}
+            </p>
+
+            <p class="field">
+                {{ form.tags.label_tag }}
+            </p>
+
+            <p class="field">
+                {{ form.tags }}
+            </p>
+        </fieldset>
+
+        <div id="form-submit" class="field clearfix submit">
+            <p class="submit">
+                <input type="submit" value="Сохранить">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:history.go(-1);">Отмена</a>
+            </p>
+        </div>
+    </form>
+
+    <div id="elfinder"></div>
+{% endblock %}
+
+
+{% block scripts %}
+    {{ form.media }}
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}elfinder/css/elfinder.css" type="text/css" media="screen" charset="utf-8">
+
+    {% assets  "js_ui" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+    {% assets  "control_js" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+    <script type="text/javascript">
+
+        $(function(){
+
+            // datepicker
+            $.datepicker.setDefaults(
+                    $.extend($.datepicker.regional["ru"])
+            );
+            $(".input_date input").datepicker({
+                showOn: "button",
+                buttonImageOnly: true,
+                buttonImage: "{{ STATIC_URL}}admin/img/admin/icon_calendar.gif",
+                dateFormat: "yy-mm-dd",
+            });
+        });
+
+    </script>
+
+{% endblock %}

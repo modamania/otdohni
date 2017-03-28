@@ -1,0 +1,142 @@
+{% extends "control/index.html" %}
+{% block pathway %}
+{% endblock %}
+{% block content %}
+<h1>Панель управления</h1>
+<div class="dashboard">
+{% if perms.profile %}
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_user_list %}" class="dashboard__component__link">
+			<i class="dashboard-icon dashboard-icon_type_users"></i>
+			<span>Пользователи</span>
+		</a>
+	</div>
+</ins>
+{% endif %}
+
+{% if perms.place %}
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_place_list %}" class="dashboard__component__link">
+			<i class="dashboard-icon dashboard-icon_type_places"></i>
+			<span>Заведения</span>
+		</a>
+	</div>
+</ins>
+{% endif %}
+
+{% if perms.event %}
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_event_list %}" class="dashboard__component__link">
+			<i class="dashboard-icon dashboard-icon_type_events"></i>
+			<span>События</span>
+		</a>
+	</div>
+</ins>
+{% endif %}
+
+{% if perms.news %}
+<ins class="dashboard__component">
+    <div class="r">
+    	<a href="{% url control_news_list %}" class="dashboard__component__link">
+    		<i class="dashboard-icon dashboard-icon_type_news"></i>
+    		<span>Новости</span>
+    	</a>
+    </div>
+</ins>
+{% endif %}
+<ins class="dashboard__component">
+    <div class="r">
+    	<a href="{% url control_blog_list %}" class="dashboard__component__link">
+    		<i class="dashboard-icon"></i>
+    		<span>Блог</span>
+    	</a>
+    </div>
+</ins>
+
+{% if perms.photoreport %}
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_photoreport_list %}" class="dashboard__component__link">
+			<i class="dashboard-icon dashboard-icon_type_photo"></i>
+			<span>Фото</span>
+		</a>
+	</div>
+</ins>
+{% endif %}
+
+{% if perms.action %}
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_action_list %}" class="dashboard__component__link">
+			<i class="dashboard-icon dashboard-icon_type_contest"></i>
+			<span>Конкурсы</span>
+		</a>
+	</div>
+</ins>
+{% endif %}
+
+{% if perms.sale %}
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_sale_list %}" class="dashboard__component__link">
+			<i class="dashboard-icon dashboard-icon_type_sales"></i>
+			<span>Скидки</span>
+		</a>
+	</div>
+</ins>
+{% endif %}
+
+{% if perms.tea %}
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_tea_list %}" class="dashboard__component__link">
+			<i class="dashboard-icon dashboard-icon_type_tea"></i>
+			<span>Чай со звездой</span>
+		</a>
+	</div>
+</ins>
+{% endif %}
+
+{% if perms.spec %}
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_spec_list %}" class="dashboard__component__link">
+			<i class="dashboard-icon dashboard-icon_type_special"></i>
+			<span>Спецпроекты</span>
+		</a>
+	</div>
+</ins>
+{% endif %}
+
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_graber_dashboard %}" class="dashboard__component__link">
+			<i class="dashboard-icon"></i>
+			<span>Грабер</span>
+		</a>
+	</div>
+</ins>
+
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_core_dashboard %}logo/" class="dashboard__component__link">
+			<i class="dashboard-icon"></i>
+			<span>Лого</span>
+		</a>
+	</div>
+</ins>
+
+<ins class="dashboard__component">
+	<div class="r">
+		<a href="{% url control_core_dashboard %}wolf/" class="dashboard__component__link">
+			<i class="dashboard-icon dashboard-icon_type_wolf"></i>
+			<span>Волк</span>
+		</a>
+	</div>
+</ins>
+
+</div>
+{% endblock %}

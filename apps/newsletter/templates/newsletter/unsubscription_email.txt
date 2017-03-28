@@ -1,0 +1,8 @@
+Уважаемый{% if subscription.name %}, {{ subscription.name }}{% endif %}!
+Вы или кто-то от вашего имени сделал запрос на отказ от подписки нашего
+сайта. Для подтверждения, пройдите по ссылке:
+
+http://{{ site.domain }}{{ subscription.subscribe_activate_url }}
+
+С уважением,
+{{ subscription.sender }}

@@ -1,0 +1,18 @@
+{% load thumbnail %}
+
+{% for work in poll.workbidders.all %}
+    <ins class="nominies__item">
+        <div class="nominies__meta">
+            <h4>{{ work.title }}</h4>
+            {# <!-- {% if work.author_name %}<p class="work__author">{{ work.author_name }}</p>{% endif %}--> #}
+        </div>
+        {% if work.photo %}
+            <div class="nominies__image"><a rel="lightbox" href="{{ MEDIA_URL }}{{ work.photo }}"><img class="hi" src="{% thumbnail work.photo 160x160 crop upscale %}"></a></div>
+        {% endif %}
+        {% if work.text %}<div class="nominies__text">{{ work.text|safe }}</div>{% endif %}
+
+        {% if poll.status != 'NONE' %}
+            {% include 'action/likes.html' with total_likes=work.total_likes %}
+        {% endif %}
+    </ins>
+{% endfor %}

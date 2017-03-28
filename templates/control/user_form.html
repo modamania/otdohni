@@ -1,0 +1,17 @@
+{% extends "control/index.html" %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> / <a title="Пользователи" href="{% url control.views.user_list %}">Пользователи</a> /
+    </div>
+{% endblock %}
+{% block content %}
+<h1>{{ profile.user.first_name }}</h1>
+<form action="." method="POST" enctype="multipart/form-data" class="form form_horizontal">{% csrf_token %}
+{{ form.as_dl }}
+<dl class="row">
+    <dd class="submit">
+        <input type="submit" value="Сохранить" class="btn" /> <a title="Отмена" class="btn" href="{% url control.views.user_list %}">Отмена</a>
+    </dd>
+</dl>
+</form>
+{% endblock %}

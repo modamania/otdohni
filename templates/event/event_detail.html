@@ -1,0 +1,97 @@
+{% extends "event/event_list.html" %}
+{% load thumbnail comments rating_tags event_tags cache %}
+{% block title %}{{ event.title }}{% endblock %}
+{% block content-header %}{% endblock %}
+{% block seo-header %}{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> /
+        <a title="Афиша {{ CITY.genitive }}" href="{% url event_list %}">Афиша {{ CITY.genitive }}</a> /
+        <a title="{{ event.category.title }}" href="{% url event_category_list event.category.slug %}">{{ event.category.title }}</a> /
+        {{ event.title }}
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="event__summary">
+    <div class="event__vote">
+        <div id="rating" class="event__rating rating">
+            {% if not is_voted %}
+                {% ratingform event %}
+            {% else %}
+                {% ratingform event results %}
+            {% endif %}
+        </div>
+    {% if user.is_authenticated and not  event.has_passed %}
+        <div class="event_visit">
+            <a id="event_visit_button" class="btn {{ event_visit_state }}" href="{% url event_visit event.id %}">
+                <span class="btn__text">
+                    {% ifequal event_visit_state 'active' %}
+                        Я не пойду
+                    {% else %}
+                        Я пойду
+                    {% endifequal %}
+                </span>
+            </a>
+        </div>
+    {% endif %}
+    </div>
+{% if user.profile.access_to_dasboard or user.is_superuser %}
+    <h1 class="editable">
+    {% if seo.heading.value %}
+        {{ seo.heading.value }}
+    {% else %}
+        {{ event.title }}
+    {% endif %}
+    {% if seo.tooltip.value %}
+        <i class="help-icon show-help"></i>
+    {% endif %}
+    <span class="editable__buttons">
+    <a href="{% url control_event_edit event.pk %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+    </span>
+{% else %}
+    <h1 class="page-title">
+    <span class="page-title__title">
+        {% if seo.heading.value %}
+            {{ seo.heading.value }}
+        {% else %}
+            {{ event.title }}
+        {% endif %}
+    </span>
+    {% if seo.tooltip.value %}
+        <i class="help-icon show-help"></i>
+    {% endif %}
+{% endif %}
+{% if event.kinohod_id %}
+    <span class="buy_ticket kh_boxoffice" data="{'city':'{{ CITY }}', 'movie':{{ event.kinohod_id }}}"></span>
+{% endif %}
+</h1>
+    {% if event.is_movie %}
+        {% info_movie event %}
+    {% endif %}
+    {% if event.is_exposure %}
+        {% info_exposure event %}
+    {% endif %}
+    {% if event.is_sport %}
+        {% info_sport event %}
+    {% endif %}
+</div>
+
+
+
+{% display_tabs event user is_subscribed messages %}{% endblock %}
+
+{% block sidebar-current %}
+        {% top_events event.category 5 %}
+        {% today_events event.category 5 %}
+        {% soon_events event.category 5 %}
+{% endblock %}
+
+{% block widget-afisha %}
+    {% display_event_categories %}
+{% endblock %}
+
+{% block yandex_share %}
+    {% include "widgets/yashare.html" %}
+{% endblock %}

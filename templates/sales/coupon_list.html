@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% load thumbnail %}
+
+{% block title %}Скидки с ОтдохниОмск.ру{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> / Скидки
+    </div>
+{% endblock %}
+{% block seo-header %}{% endblock %}
+
+{% block content-header %}
+{% endblock %}
+{% block content %}
+{% if user.profile.access_to_dasboard or user.is_superuser %}
+    <h1 class="with-tags editable">
+    {% if seo.heading.value %}
+        {{ seo.heading.value }}
+    {% else %}
+        Скидки с ЗаОтдых.ру
+    {% endif %}
+    {% if seo.tooltip.value %}
+        <i class="help-icon show-help"></i>
+    {% endif %}
+    <span class="editable__buttons">
+    <a href="{% url control_sale_list %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+    </span>
+    {% else %}
+        <h1 class="with-tags">
+        {% if seo.heading.value %}
+            {{ seo.heading.value }}
+        {% else %}
+            Скидки с ЗаОтдых.ру
+        {% endif %}
+        {% if seo.tooltip.value %}
+            <i class="help-icon show-help"></i>
+        {% endif %}
+    {% endif %}
+    </h1>
+    <div class="sales three-columns">
+    {% for coupon in coupons_list %}
+        <div class="column {% if forloop.counter|divisibleby:"3" %}column_last{% endif %}">
+            <p>
+                <a href="" onclick='window.open("{{ coupon.get_absolute_url }}","popup","topmargin=0,toolbar=no,scrollbars=no,status=no,width=370,height=590");  return false;'>
+                    <img title="{{ coupon.title }}" alt="{{ coupon.title }}" src="{% if coupon.small_image %}{% thumbnail coupon.small_image 174x260 quality=95 %}{% else %}{% thumbnail coupon.image 174x260 quality=95 %}{% endif %}" />
+                </a>
+            </p>
+        </div>
+
+    {% empty %}
+        <p><em>Скидок нет.</em></p>
+    {% endfor %}
+    <div class="clr"></div>
+    </div>
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

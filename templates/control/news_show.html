@@ -1,0 +1,40 @@
+{% extends "control/index.html" %}
+{% load thumbnail i18n assets control_tags comments%}
+
+{% block content-header %}
+    <h1>Панель управления, смотрим на новость"<i>{{ news }}</i>"</h1>
+    <a href="{% url control.views.news_form news.pk %}">Редактировать</a><br />
+{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+        <a title="Новости" href="{% url control_news_list %}">Новости</a> /
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h1 class="article">{{ news.title }}</h1>
+    <p class="meta">{{ news.pub_date|date:"d F Y"|lower }}</p>
+    {% if news.image %}
+        <div class="image"><img src="{% thumbnail news.get_image 350x250 %}"></div>
+    {% endif %}
+    <p>{{ news.full_text|safe }}</p>
+
+    {% with news.tags.all as tags %}
+        {% include "tagging/_tag_block.html" %}
+    {% endwith %}
+    <p align="right"><strong>{{ news.author }}</strong></p>
+    <div class="clr"></div>
+    <div id="comments" class="comments">
+        {% if user.is_authenticated %}
+            <div class="comments__post clearfix comment_form">
+                <span class="pseudo_link post__button open_form">Позвольте, я скажу!</span>
+                <div class="post__form form" style="display: none">{% render_comment_form for news %}</div>
+            </div>
+        {% else %}
+            {% include "comments/_no_access.html" %}
+        {% endif %}
+        {% render_comment_list for news %}
+    </div>
+{% endblock %}

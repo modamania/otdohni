@@ -1,0 +1,41 @@
+{% extends "control/index.html" %}
+{% load rating_tags event_tags control_tags core_tags %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+    </div>
+{% endblock %}
+{% block content %}
+    <h1>Список спецпроектов</h1>
+    <div class="cpanel__toolbar clearfix">
+        <div class="filter">
+            <form action="." method="GET">
+                Фильтр: <span class="field"><input type="text" name="q" value="{{ q }}" /></span> <input type="submit" class="btn" value="Отсеять" />
+            </form>
+        </div>
+        <div class="buttons"><a href="{% url control.views.spec_form  %}" class="btn">Новый спецпроект</a></div>
+    </div>
+    <table cellpadding="0" cellspacing="0" class="component__items_list">
+        <thead>
+        <tr>
+            <th class="chkbox"><input type="checkbox" value="" name="" /></th>
+            <th>Заголовок</th>
+            <th>Топ-меню</th>
+            <th>Заголовок в топ-меню</th>
+            <th>Цвет фона</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for spec in specprojects.object_list %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td class="chkbox"><input type="checkbox" value="" name="" /></td>
+                <td><a href="{% url control_spec_edit spec.slug %}">{{ spec.title }}</a></td>
+                <td align="center">{% if spec.is_in_top %} + {% else %} - {% endif %}</td>
+                <td>{{ spec.top_title }}</td>
+                <td><div style="background: {{ spec.color }};">&nbsp;</div></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ specprojects|render_paginator:seo }}
+{% endblock %}

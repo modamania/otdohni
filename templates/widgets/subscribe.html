@@ -1,0 +1,15 @@
+<div class="widget widget__subscribe">
+    <h3 class="widget__title">Рассылка</h3>
+    <form id="subscribe" action="{% url newsletter_subscribe_request %}" method="post">
+      {% csrf_token %}
+        <p>Не пропустите самые интересные события!</p>
+        <input type="email" class="subscribe__input inputbox" name="email_field" id="lm_email" placeholder="Эл. почта" required>
+        <input type="hidden" value="subscribe" id="lm_subscribe" class="inputbox" name="task">
+        <p class="submit">
+            <span class="btn">
+                <span class="btn__text">Подписаться</span>
+                <input type="submit" onclick="return changeTask();" value="Подписаться" class="btn__input" />
+            </span>
+        </p>
+    </form>
+</div>

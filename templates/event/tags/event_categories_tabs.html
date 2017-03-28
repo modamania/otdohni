@@ -1,0 +1,100 @@
+{% load event_tags core_tags humanize %}
+<div class="afisha-filter">
+      <ul class="tabs clearfix">
+        {% url event_list as link %}
+        <li class="tabs-item {% ifstartswith link %}tabs-item_state_current{% endifstartswith %}">
+          <a href="{% ifendswith 'week/$' %}
+                      {{ link|urljoin:"week" }}
+                  {% else %}
+                      {% ifendswith 'soon/$' %}
+                          {{ link|urljoin:"soon" }}
+                          {% else %}
+                              {% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %}
+                                  {% url event_all_on_day 'all', day.year, day.month, day.day %}
+                              {% else %}
+                                  {{ link }}
+                              {% endifendswith %}
+                      {% endifendswith %}
+                  {% endifendswith %}"
+                  title="Все">Все
+          </a>
+        </li>
+        {% for category in categories %}
+        <li class="tabs-item {% ifstartswith category.get_absolute_url %}tabs-item_state_current{% endifstartswith %}">
+          <a href="{% ifendswith 'week/$' %}
+                      {{ category.get_absolute_url|urljoin:"week" }}
+                      {% else %}
+                          {% ifendswith 'soon/$' %}
+                              {{ category.get_absolute_url|urljoin:"soon" }}
+                              {% else %}
+                                  {% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %}
+                                      {% with href=day|date:"Y/m/d" %}
+                                          {{ category.get_absolute_url|urljoin:href }}
+                                      {% endwith %}
+                                  {% else %}
+                                          {{ category.get_absolute_url }}
+                                  {% endifendswith %}
+                          {% endifendswith %}
+                      {% endifendswith %}"
+                  title="{{ category.title|title }} {{ CITY.genitive }}">{{ category.title|title }}
+              <input type='hidden' value='{{ category.get_absolute_url }}'>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+
+    <div class="schedule_types">
+        <span class="schedule__calendar"><span class="icon icon-calendar"></span> <span class="pseudo-link">Календарь</span></span>
+        {% calendar_filter %}
+        <ul class="schedule__list">
+          
+          <li class="schedule_types__type{% ifendswith '/afisha/(\w+)/$' %} schedule_types__type_active{% endifendswith %}
+                                         {% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %}{%if day and day|date:'Y/m/d' == today|date:'Y/m/d'%} schedule_types__type_active{% endif %}{% endifendswith %}">
+          <a href="{% ifendswith 'soon/$' %}
+                        ../
+                    {% else%}
+                        {% ifendswith 'week/$' %}
+                            ../
+                        {% else %}
+                            {% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %}
+                                ../../../
+                            {% else %}
+                                .
+                            {% endifendswith %}
+                        {% endifendswith %}
+                    {% endifendswith %}" class="schedule_types__link">Сегодня, {% now "D j E" %}</a>
+          </li>
+
+          <li class="schedule_types__type{% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %}{%if day and day|date:'Y/m/d' == tomorrow|date:'Y/m/d'%} schedule_types__type_active{% endif %}{% endifendswith %}">
+          <a href="{% ifendswith 'soon/$' %}
+                        ../{{ tomorrow|date:'Y/m/d/' }}
+                    {% else%}
+                        {% ifendswith 'week/$' %}
+                            ../{{ tomorrow|date:'Y/m/d/' }}
+                        {% else %}
+                            {% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %}
+                                ../../../{{ tomorrow|date:'Y/m/d/' }}
+                            {% else %}
+                                {{ tomorrow|date:'Y/m/d/' }}
+                            {% endifendswith %}
+                        {% endifendswith %}
+                    {% endifendswith %}" class="schedule_types__link">Завтра, {{ tomorrow|date:"D, j E" }}</a>
+          </li>
+          
+          {% if day  and day|date:"Y/m/d" != today|date:"Y/m/d" and day|date:"Y/m/d" != tomorrow|date:"Y/m/d" %}
+          <li class="schedule_types__type{% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %} schedule_types__type_active{% endifendswith %}">
+          <input type='hidden' value='{{ date_today|date }}'>
+          <a href="{% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %}{% endifendswith %}" class="schedule_types__link">{{ day|date:"D, j E" }}</a>
+          </li>
+          {% endif %}
+
+          <li class="schedule_types__type{% ifendswith 'week/$' %} schedule_types__type_active{% endifendswith %}">
+            <a href="{% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %}../../../week/{% else %}{% ifendswith 'soon/$' %}../week/{% else%}{% ifendswith 'week/$' %}#{% else %}week/{% endifendswith %}{% endifendswith %}{% endifendswith %}" class="schedule_types__link">На неделю</a>
+          </li>
+          
+          <li class="schedule_types__type{% ifendswith 'soon/$' %} schedule_types__type_active{% endifendswith %}">
+            <a href="{% ifendswith '\d{4}/\d{1,2}/\d{1,2}/$' %}../../../soon/{% else %}{% ifendswith 'week/$' %}../soon/{% else%}{% ifendswith 'soon/$' %}../soon/{% else %}soon/{% endifendswith %}{% endifendswith %}{% endifendswith %}" class="schedule_types__link">Скоро</a>
+          </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{% load i18n thumbnail rating_tags %}
+{% if event_list %}
+    <div class="widget">
+    <h3 class="widget__title">Сегодня</h3>
+    <ul>
+    {% for event in event_list %}
+        <li class="widget__item">
+            {% if forloop.first %}
+                {% thumbnail event.image 160x105 crop as im %}
+                <div class="widget__thumb thumb shadowed">
+                    <a title="{{ event.title }}" href="{{ event.get_absolute_url }}">
+                        {% if im %}<img alt="{{ event.title }}" src="{{ im }}" />{% else %}<span class="no_photo"></span>{% endif %}
+                    </a>
+                    <img src="/static/i/shadow.png" alt="" class="shadow" />
+                </div>
+            {% endif %}
+
+            <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+            {% ratingform event readonly %}
+        </li>
+    {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+

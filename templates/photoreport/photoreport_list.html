@@ -1,0 +1,111 @@
+{% extends "index.html" %}
+{% load comments core_tags thumbnail pagination_tags %}
+
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения {{ CITY.genitive }}" href="/">Главная</a> /
+    <a title="Фото {{ CITY.genitive }}" href="{% url photoreport_list %}">Фото {{ CITY.genitive }}</a>
+    {% if tag %}
+     / <a title="Фото с тегом {{ tag.name }}" href="{% url photoreport_tag_list tag.slug %}">Фото с тегом {{ tag.name }}</a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block title %}Фото {{ CITY.genitive }}
+  {% if tag %}— {{ tag.name }}{% endif %}
+{% endblock %}
+
+{% block seo-header %}{% endblock %}
+
+{% block content-header %}
+<h1 class="page-title">
+    <span class="page-title__title">
+        {% if seo.heading.value %}
+            {{ seo.heading.value }}
+        {% else %}
+            Фото {% if tag %} c тегом &laquo;<span id="tagcloud_popup_trigger" class="pseudo-link">{{ tag.name }}</span>&raquo;{% endif %}
+        {% endif %}
+    </span>
+    {% if seo.tooltip.value %}
+        <i class="help-icon show-help"></i>
+    {% endif %}
+</h1>
+
+{# -----------tagscloud------------ #}
+<div class="tagcloud {% if tag %}tagcloud_popup hidden {% endif %}shadowed">
+    <div class="tagcloud__tags">
+        {% for tag_item in tags %}
+        <ins class="tagcloud__tag {{ tag_item.weight }} {% ifequal tag tag_item %} active{% endifequal %}">
+            <a class="tagcloud__link" title="{% if tag_item.title %}{{ tag_item.title }}{% else %}{{ tag_item.name }}{% endif %}" href="{% url photoreport_tag_list tag_item.slug %}">{{ tag_item.name }}</a>
+        </ins> 
+        {% endfor %}
+    </div>
+    {% if tag %}<span id="tagcloud_close" class="icon icon_close icon_close_thin popup__close"><i></i></span>{% endif %}
+    <img src="/static/i/shadow.png" class="shadow" alt="" />
+</div>
+{% endblock %}
+
+{% block tooltip-content %}
+    Фотоотчеты с самых разных культурных событий {{ CITY.genitive }} на сайте ЗаОтдых.ру: клубы, концерты, выставки, презентации...
+{% endblock %}
+
+{% block content %}
+    {% block content-inner %}
+        {% autopaginate photoreport_list 16 %}
+        <div class="photo_list grid">
+        {% for item in photoreport_list %}
+            <div class="photo_list__item grid__cell grid__cell_size_1-of-3">
+                {% thumbnail item.get_preview.image 360x170 crop=",15"  quality=95 as im %}
+                <a href="{{ item.get_absolute_url }}" class="thumb shadowed" style="background-image: url('{{ im }}');">
+                    {% if im %}{% else %}<span class="no_photo"></span>{% endif %}
+                    <img src="/static/i/shadow.png" alt="" class="shadow" />
+                </a>
+                <h3 class="gallery__title"><a href="{{ item.get_absolute_url }} ">{{ item.title|safe }}</a><span class="count">{{ item.num_photos }}</span></h3>
+                <p class="tags">
+                    {% with item.tags.all as tags %}
+                        {% include "photoreport/_tag_block.html" %}
+                    {% endwith %}
+                </p>
+                <p>
+                {% if item.place %}
+                    <a href="{{ item.place.get_absolute_url }}">{{ item.place|safe }}</a>,
+                {% endif %}
+                {{ item.date_event|date:"j F Y"|lower }}
+                </p>
+            </div>
+        {% empty %}
+            <p>Отчетов нет</p>
+        {% endfor %}
+        </div><!--test-->
+        
+        
+        {% new_paginate %}
+
+    {% endblock content-inner %}
+{% endblock content %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}
+
+{% block sidebar-current %}
+    {% block sidebar-scroll %}{% endblock %}
+    <!--
+    <div class="widget widget_nav">
+        <h3>Фотогалерея</h3>
+        <ul>
+            <li>
+                <a title="Популярные фото Омска" href="/photo/popular/">Популярные фото</a>
+            </li>
+            <li>
+                <a title="Лучшие фото Омска" href="/photo/best/">Лучшие фото</a>
+            </li>
+            <li>
+                <a title="Новые фото Омска" href="/photo/new/">Новые фото</a>
+            </li>
+            <li>
+                <a href="/photo/comments/">Последние комментарии</a>
+            </li>
+        </ul>
+    </div>-->
+{% endblock sidebar-current %}

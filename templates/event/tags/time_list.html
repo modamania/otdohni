@@ -1,0 +1,14 @@
+{% load event_tags %}
+
+{# {% for l in times_list %} #}
+    {% for st in times_list %}
+        {% if st.kh_seance_id and not st.time|lttimekinohod:day %}
+            <span class="schedule__time__item pseudo_link kh_boxoffice" data="{'seance':{{ st.kh_seance_id }}}" title="Купить билеты в кино">
+        {% else %}
+            <span class="schedule__time__item{% if st.time|lttime:day %} disabled{% endif %}">
+        {% endif %}
+            {{ st.time|time:"H:i" }}
+            </span>
+        </span>
+    {% endfor %}
+{# {% endfor %} #}

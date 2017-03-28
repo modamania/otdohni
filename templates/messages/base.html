@@ -1,0 +1,17 @@
+{% extends "profile/base.html" %}
+{% load i18n %}
+{% block content-header %}
+<h1>Сообщения</h1>
+{% include "messages/toolbar.html" %}
+{% endblock %}
+{% block bodyclass %}about{% endblock %}
+{% block content %}
+{% block content-inner %}
+{% endblock %}
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/messages.js"></script>
+{% endblock %}
+
+{% block li_privmes %}<li class="active"><a href="{% url messages_inbox %}">Сообщения{% if COUNT_UNREAD_MESSAGE %} ({{ COUNT_UNREAD_MESSAGE }}){% endif %}</a></li>{% endblock %}

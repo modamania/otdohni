@@ -1,0 +1,41 @@
+.icon i, .btn_icon i {display: block; left: 0; overflow: hidden; position: absolute;}
+
+button.btn_icon i {display: inline-block; left: 0; top: 2px; position: relative; zoom: 1;}
+
+.btn_icon i {height: 16px; width: 16px;}
+
+.icon_settings {padding-left: 22px;} /* Move to .icon later */
+.icon_settings i {background: url('/static/i/sprite.png') 0 -32px no-repeat scroll;}
+.icon_upload i {background: url('/static/i/sprite.png') 0 -48px no-repeat scroll;}
+
+.btn__icon {
+    font-size: 1.5em;
+    position: relative;
+    top: 2px;
+    left: -2px;
+    line-height: 1;
+}
+
+.icon_file {cursor: default; display: inline; display: inline-block; line-height: normal; padding-left: 38px; zoom: 1;}
+.icon_file span {color: #999; text-decoration: none;}
+.icon_file i {background-image: url('/static/i/sprite.png'); height: 32px; top: 0; width: 32px;}
+.icon_file_pdf i {background-position: -80px -32px;}
+.icon_file_doc i {background-position: -112px 0;}
+.icon_file_xls i {background-position: -144px 0;}
+.icon_file_txt i {background-position: -176px 0;}
+
+.icon-calendar {
+    background: url('../i/sprite.png') 0 0;
+}
+
+.icon-star {
+    background: url('../i/icons/star.png');
+}
+
+.icon-comments {
+    background: url('../i/icons/comments.png');
+}
+
+.icon-people {
+    background: url('../i/icons/people.png');
+}

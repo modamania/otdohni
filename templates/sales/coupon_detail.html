@@ -1,0 +1,15 @@
+{% load thumbnail %}
+<html>
+<head>
+    <title>Скидки &mdash; ОтдохниОмск.ру</title>
+</head>
+<body>
+<p align='center'>
+    <img align='middle' src='{% thumbnail object.image 350x525 %}' />
+    <br /><br />
+    <button onclick='window.close();' class='print-button hide-on-print'>Закрыть окно</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button onclick='window.print();' class='print-button hide-on-print'>Распечатать</button>
+</p>
+</body>
+</html>

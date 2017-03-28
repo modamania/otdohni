@@ -1,0 +1,35 @@
+<ul class="tabs">
+    {% for category in queryset_dict.keys %}
+        {% if forloop.first %}
+            <li class="current tabs__tab">
+        {% else %}
+            <li class="tabs__tab">
+        {% endif %}
+            <a href="{% url event_category_list category.slug %}">
+                {{ category.title }}
+            </a>
+            </li>
+    {% endfor %}
+</ul>
+<div id="mod_today" class="afisha__content grid two-columns clearfix">
+{% for queryset in queryset_dict.values %}
+    {% if forloop.first %}
+        <div class="box visible">
+    {% else %}
+         <div class="box">
+    {% endif %}
+        <div class="events__item-list">
+            {% for event in queryset %}
+                    <div class="events__item">
+                        <div class="thumb shadowed">
+                            <a href="{{ event.get_absolute_url }}"><img src="/static/i/kino.jpg" alt="{{ event.title }}"></a>
+                            <img src="/static/i/shadow.png" alt="" class="shadow" />
+                        </div>
+                        <h3><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h3>
+                        <p>{{ event.description|safe|truncatewords_html:"14"}}</p>
+                    </div>
+            {% endfor %}
+        </div>
+        </div>
+{% endfor %}
+</div>

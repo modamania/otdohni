@@ -1,0 +1,22 @@
+.sponsor {
+	float: left;
+	position: relative;
+	left: 0;
+	height: 50px;
+	margin-bottom: 1.616em;
+	padding: 0 0 0 40px;
+	background: url("../i/sponsor-text.gif") no-repeat scroll 0 100%;
+
+	.sponsor_info {
+		position:absolute;
+		bottom: 0;
+		left: 0;
+		width: 22px;
+		height: 46px;
+	}
+
+	img {
+		position: relative;
+		top: 3px;
+	}
+}

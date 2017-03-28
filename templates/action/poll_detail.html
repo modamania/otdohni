@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+{% load i18n comments thumbnail %}
+{% load core_tags pagination_tags %}
+
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> / <a title="Заведения {{ CITY.genitive }}" href="{% url action_list %}">Конкурсы</a> /
+  Голосование &laquo;{{ poll.title }}&raquo;
+</div>
+{% endblock %}
+
+{% block title %}Конкурсы {{ CITY.genitive }}{% endblock %}
+{% block h1 %}<span class="page-title__title">{{ poll.title }}</span>{% endblock %}
+
+{% block content %}
+{% include 'action/poll_status.html' with poll=poll %}
+
+<div class="works_list clearfix">
+    {% for work in poll.workbidders.all %}
+    <ins class="works_item">
+        {% if work.photo %}
+            <div class="work__image"><a rel="lightbox" href="{{ MEDIA_URL }}{{ work.photo }}"><img class="hi" src="{% thumbnail work.photo 250x200 crop="center" %}"></a></div>
+        {% endif %}
+        {% if work.text %}<div class="work__text">{{ work.text|safe }}</div>{% endif %}
+        <div class="work__meta">
+            <h3>{{ work.title }}</h3>
+            <!-- {% if work.author_name %}<p class="work__author">{{ work.author_name }}</p>{% endif %}-->
+        </div>
+
+        {% if poll.status != 'NONE' %}
+            {% include 'action/likes.html' with total_likes=work.total_likes %}
+        {% endif %}
+    </ins>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block yandex_share %}
+    {% include "widgets/yashare.html" %}
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

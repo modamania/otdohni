@@ -1,0 +1,39 @@
+{% extends "control/index.html" %}
+{% load core_tags i18n thumbnail %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+    </div>
+{% endblock %}
+{% block content %}
+    <h1>Список интервью</h1>
+    <div class="cpanel__toolbar clearfix">
+        <div class="filter">
+            <form action="." method="GET">
+                Фильтр: <span class="field"><input type="text" name="q" value="{{ q }}" /></span> <input type="submit" class="btn" value="Отсеять" />
+            </form>
+        </div>
+        <div class="buttons"><a href="{% url control.views.tea_form  %}" class="btn">Новое интервью</a></div>
+    </div>
+    <table cellpadding="0" cellspacing="0" class="component__items_list sales">
+        <thead>
+        <tr>
+            <th>Заголовок</th>
+            <th>Фото</th>
+            <th>Опубликовано</th>
+            <th>Дата публикации</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tea in tea_stars.object_list %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td><a href="{% url control_tea_edit tea.pk %}">{{ tea.title }}</a></td>
+                <td align="center"><img src="{% thumbnail tea.image 50x50 crop="center" %}"></td>
+                <td align="center">{% if tea.is_published %} + {% else %} - {% endif %}</td>
+                <td>{{ tea.pub_date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ tea_stars|render_paginator:seo }}
+{% endblock %}

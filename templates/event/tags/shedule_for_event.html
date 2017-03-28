@@ -1,0 +1,32 @@
+{% load event_tags %}
+
+<table class="event__schedule">
+    <tbody>
+    {% for place in grouped_periods %}
+        <tr class="event_schedule_line {% cycle odd, even %}">
+            <td class="event__schedule__place">
+                <a title="{{ place.grouper.name|safe }}" href="{{ place.grouper.get_absolute_url }}">
+                    {{ place.grouper.name|safe }}
+                </a>
+                <!--
+                {% if place.grouper.kinohod_place_id %}
+                    &nbsp;
+                    <span class="tickets">
+                        <a href="javascript:;" class="kh_boxoffice" data="{'cinema':{{ place.grouper.kinohod_place_id }}}" title="Купить билеты в кино">
+                            Купить билеты
+                        </a>
+                    </span>
+                {% endif %}
+                -->
+            </td>
+            <td class="event__schedule__time">
+                {% if place.list|get_time:day %}
+                    {% display_times_list place  day %}
+                {% else %}
+                    Нет данных
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

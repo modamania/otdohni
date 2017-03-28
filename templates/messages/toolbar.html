@@ -1,0 +1,49 @@
+{% load pytils_numeral i18n %}
+<div class="messages__toolbar" id="messages__toolbar">
+    <div class="messages__selector"><span class="chkbox"><input type="checkbox" value="" name="" /></span><i></i></div>
+    <div class="messages__filter hidden">
+        <ul class="messages__filter__selectors">
+            <li class="messages__filter__selector" data-selector="all">
+                <span class="pseudo_link">Все</span>
+            </li>
+            <li class="messages__filter__selector" data-selector="read">
+                <span class="pseudo_link">Прочитанные</span>
+            </li>
+            <li class="messages__filter__selector" data-selector="unread">
+                <span class="pseudo_link">Непрочитанные</span>
+            </li>
+            <li class="messages__filter__selector" data-selector="none">
+                <span class="pseudo_link">Ни одного</span>
+            </li>
+        </ul>
+    </div>
+    <span class="messages__status">
+        <span class="hidden"></span>
+        {% if undo_count %}
+            <span>Удалено {{ undo_count }} сообщени{{ undo_count|choose_plural:"е,я,ий" }}. <a href="{% url messages_undelete %}" class="pseudo_link">Восстановить</a></span>
+        {% endif %}
+        <span class="hidden"></span>
+    </span>
+
+    <a class="btn btn_theme_blue" href="{% url messages_compose %}">
+        <span class="btn__text">&#9993; Написать</span>
+    </a>
+
+    {% if not in_outbox %}
+
+    <span class="btn btn_state_disabled btn_mark_reader">
+        <span class="btn__text">&#10004; Прочитано</span>
+        <input class="btn__input" disabled="disabled" type="button" value="Прочитано" />
+    </span>
+    
+    <span class="btn btn_state_disabled btn_mark_unreader" style="display: none;">
+        <span class="btn__text">&#10004; Непрочитано</span>
+        <input class="btn__input" disabled="disabled" type="button" value="Непрочитано" />
+    </span>
+    {% endif %}
+
+    <span class="btn btn_state_disabled btn_remove">
+        <span class="btn__text">&#10005; Удалить</span>
+        <input class="btn__input" disabled="disabled" type="button" value="Удалить" />
+    </span>
+</div>

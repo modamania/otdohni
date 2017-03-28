@@ -1,0 +1,50 @@
+{% load thumbnail humanize %}
+{% if new_reports or soon_reports %}
+    <div class="fotoreports tabbed">
+        <h2 class="fotoreports__title"><a href="{% url photoreport_list %}">Фотоотчеты</a></h2>
+
+        {% comment %}
+        <ul class="tabs tabs_type_bar fotoreports__tabs">
+            <li class="tabs-item tabs-item_state_current">
+              <a class="pseudo-link" data-tabname="new" href="{% url photoreport_list %}">Новые</a>
+            </li>
+            {% if soon_reports %}
+                <li class="tabs-item">
+                    <a data-tabname="soon" href="{% url photoreport_list %}" class="pseudo-link">Скоро</a>
+                </li>
+            {% endif %}
+        </ul>
+        {% endcomment %}
+
+        <div class="fotoreports__content fotoreports__new grid" id="fotoreport__new">
+            {% for report in new_reports %}
+                <div class="grid__cell grid__cell_size_1-of-3">
+                    {% thumbnail report.get_preview.image 360x170 crop=",10" as im %}
+                    <a title="{{ report.title }}" href="{{ report.get_absolute_url }}" class="thumb fotoreports__thumb" style="background-image: url('{{ im }}');">
+                        {% if im %}{% else %}<span class="no_photo"></span>{% endif %}
+                    </a>
+                    <h4>
+                        <a href="{{ report.get_absolute_url }}">{{ report.title }}</a>
+                    </h4>
+                    <p class="meta">{% if report.place %}{{ report.place }},{% endif %} {{ report.date_event|date:"j F Y"|lower }}</p>
+                </div>
+            {% empty %}
+                <p>Отчетов нет.</p>
+            {% endfor %}
+        </div>
+
+    	<div class="fotoreports__content three-columns clearfix fotoreports__soon" id="fotoreport__soon" style="display: none;">
+    	    {% for report in soon_reports %}
+    		<div class="column{% if forloop.last %} column_last{% endif %}">
+    		    <h3>
+    			{{ report.title }}
+    		    </h3>
+    		    <p class="meta">{% if report.place_event.name %}{{ report.place_event.name }},{% endif %} {{ report.date_event|date:"j F Y"|lower }}</p>
+    		</div>
+                {% empty %}
+    		<p>Отчетов нет...</p>
+    	    {% endfor %}
+    	</div>
+
+    </div>
+{% endif %}

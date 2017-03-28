@@ -1,0 +1,215 @@
+.menu {
+    position: relative;
+    margin: 0 21.429em 0 230px;
+    padding: 0;
+    list-style: none;
+    line-height: normal;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+.menu__layout {
+    display: inline-block;
+    margin: 0 !important;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+    zoom: 1;
+ }
+
+.menu__item {
+    @include inline-block;
+
+    position: relative;
+    margin: 0;
+    list-style: none;
+    line-height: 40px;
+    white-space: nowrap;
+}
+.menu__link:link,
+.menu__link:visited {
+    font-size: 1.071em;
+    position: relative;
+    padding: 0 .75em 0 .75em;
+}
+
+.menu__layout .menu__link:link,
+.menu__layout .menu__link:visited {
+    color: #fff;
+}
+.menu__layout .menu__link:hover {
+    color: #fff500;
+}
+
+.menu__item_state_current .menu__link {
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    color: #222 !important;
+    text-decoration: none;
+}
+
+.menu__item_state_current:after {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f2f2f2;
+}
+
+
+.menu__item .new_item {
+    @include border-radius(0 4px 4px 0);
+    font-size: 11px;
+    font-style: italic;
+    position: relative;
+    margin: 0 0.25em 0 0.5em; padding: 0 0.4em 0 0.25em;
+    text-shadow: none;
+    top: -8px;
+    background: #f60;
+}
+
+.menu__item .icon {
+    display: inline-block;
+    position: relative;
+    top: -1px;
+    width: 18px;
+    height: 16px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.menu__layout .menu__item_spec_new-year .menu__link:link,
+.menu__layout .menu__item_spec_new-year .menu__link:visited {
+    color: #59eb07;
+}
+
+.menu__layout .menu__item_spec_new-year .menu__link:link:hover,
+.menu__layout .menu__item_spec_new-year .menu__link:visited:hover {
+    color: #fff500;
+}
+
+.icon-new-year {
+    background: url(../i/new-year-icon.png) 0 -16px;
+}
+
+.menu__item_spec_new-year .menu__link:hover .icon-new-year {
+    background-position: 0 -32px;
+}
+
+.menu__item_state_current .icon-new-year,
+.menu__item_state_current .menu__link:hover .icon-new-year {
+    background-position: 0 0;
+}
+.menu__link.m_academia {
+    @include border-radius(10px);
+
+    height: 18px;
+    text-shadow: none;
+    width: auto;
+    text-decoration: none;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+}
+.menu__link.m_academia:hover {
+    text-decoration: none;
+    color: white;
+    text-decoration: underline;
+}
+.menu .m_avto .menu__link {
+    @include border-radius(10px);
+
+    height: 18px;
+    margin-left: 2px;
+    text-shadow: none;
+    width: 63px;
+    background-color: #009966;
+
+    margin-left: 0;
+    margin-top: -1px;
+    text-decoration: none;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.menu .m_avto .menu__link:hover {
+    margin-left: 0;
+    margin-top: -1px;
+    text-decoration: none;
+    color: white;
+    text-decoration: underline;
+}
+
+.menu__more {
+    display: none;
+    height: 40px;
+    padding: 0 .75em;
+    line-height: 40px;
+    color: #fff;
+    vertical-align: top;
+    position: relative;
+
+    .is-cropped & {
+        display: inline-block;
+    }
+}
+
+.menu__more .pseudo-link {
+    color: #fff;
+}
+
+.menu__more:hover,
+.menu__more:hover .pseudo-link {
+    color: #fff500;
+}
+
+.menu__dropdown {
+    @include box-shadow(0 10px 25px -5px rgba(0,0,0,.4));
+
+    display: none;
+    position: absolute;
+    white-space: normal;
+    left: 100%;
+    top: 100%;
+    margin-left: -4em;
+    padding: .5em .75em 1em;
+    background: #fff;
+}
+
+.menu__dropdown.is-visible {
+    display: block;
+}
+
+.menu__dropdown:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 2em;
+    margin-top: -8px;
+    height: 0;
+    line-height: 0;
+    border-color: transparent transparent #fff;
+    border-style: solid;
+    border-width: 0 8px 8px;
+}
+
+.menu__dropdown .menu__item {
+    display: block;
+    line-height: 2;
+
+}
+
+.menu__dropdown :link,
+.menu__dropdown :visited {
+    color: $link-blue;
+}
+
+.menu__dropdown :link:hover,
+.menu__dropdown :visited:hover {
+    color: $link-hover;
+}

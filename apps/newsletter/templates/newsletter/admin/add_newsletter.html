@@ -1,0 +1,29 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% load newsletter_tags %}
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script>
+        var URL_FOR_FILTER = "{% url filter_items %}";
+        var URL_FOR_FILTER_EVENTS = "{% url filter_events %}";
+        var OBJECT_ID = "{{ original.id }}";
+        var PHOTO_APP = "photoreport";
+        var PHOTO_MODEL = "PhotoReport";
+        var ACTION_APP = "action";
+        var ACTION_MODEL = "Action";
+        var NEWS_APP = "news";
+        var NEWS_MODEL = "NewsItem";
+        var DATE_TO = '{% now "d-m-Y"  %}'
+        var DATE_FROM = '{{ 20|days_before|date:"d-m-Y" }}'
+    </script>
+    <link href="{{ STATIC_URL }}css/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.13.custom.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/newsletter_filter.js"></script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+{% endblock %}

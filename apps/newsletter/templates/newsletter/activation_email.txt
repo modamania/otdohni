@@ -1,0 +1,13 @@
+Здравствуйте{% if subscription.name %}, {{ subscription.name }}{% endif %}!
+
+Вы были упешно подписаны на рассылку новостей с сайта
+http://www.otdohniomsk.ru.
+Благодарим вас!
+
+Для подтверждения подписки, пожалуйста, нажмите на ссылку внизу
+или скопируйте её в адресную строку браузера.
+
+http://{{ site.domain }}{{ subscription.subscribe_activate_url }}
+
+С уважением,
+{{ subscription.sender }}

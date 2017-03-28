@@ -1,0 +1,464 @@
+/* line 5, ../sass/afisha.scss */
+.afisha {
+  margin-bottom: 2em;
+}
+/* line 8, ../sass/afisha.scss */
+.afisha__content {
+  margin: 0 0 1.5em;
+}
+/* line 12, ../sass/afisha.scss */
+.afisha .events {
+  margin-bottom: 20px;
+}
+/* line 16, ../sass/afisha.scss */
+.afisha .event-thumb {
+  overflow: hidden;
+  height: 128px;
+  margin: 0 0 0.385em;
+}
+
+/* line 24, ../sass/afisha.scss */
+.afisha_index .thumb {
+  width: 272px;
+  height: 128px;
+  margin-bottom: .75em;
+}
+
+/* line 31, ../sass/afisha.scss */
+.event__title {
+  font-size: 1.385em;
+  font-weight: normal;
+  margin: 0 0 .3em;
+}
+/* line 36, ../sass/afisha.scss */
+.event__title .buy_ticket {
+  margin-left: 1.5em;
+}
+/* line 41, ../sass/afisha.scss */
+.event__extra_info {
+  font-size: 0.924em;
+  margin-bottom: 0.25em;
+  color: #666;
+}
+/* line 47, ../sass/afisha.scss */
+.event__description {
+  margin-bottom: 1.5em;
+}
+/* line 50, ../sass/afisha.scss */
+.event__description p {
+  margin: 0;
+}
+/* line 55, ../sass/afisha.scss */
+.event_date {
+  font-size: 1.25em;
+  margin: 1.5em 0 0;
+  text-align: center;
+  background: url(../i/title-stripe.png) 0 50% repeat-x scroll;
+}
+/* line 61, ../sass/afisha.scss */
+.event_date span {
+  padding: 0 0.75em;
+  background: #f2f2f2;
+}
+
+/* line 69, ../sass/afisha.scss */
+.events_list {
+  margin-bottom: 30px;
+}
+/* line 72, ../sass/afisha.scss */
+.events_list .event {
+  position: relative;
+  padding-left: 144px;
+  margin-bottom: 3em;
+}
+/* line 77, ../sass/afisha.scss */
+.events_list .event .title {
+  font-size: 1.38em;
+  line-height: 1.1;
+}
+/* line 84, ../sass/afisha.scss */
+.events_list .thumb {
+  float: left;
+  position: relative;
+  width: 128px;
+  height: 84px;
+  margin: 4px -100% 0 -144px;
+}
+
+/* line 93, ../sass/afisha.scss */
+.event_list__item {
+  position: relative;
+  padding-left: 144px;
+  margin-bottom: 3em;
+}
+
+/* line 99, ../sass/afisha.scss */
+.no_photo {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white url(../i/photo_icon.png) 50% 50% no-repeat;
+}
+
+/* line 107, ../sass/afisha.scss */
+.afisha-filter {
+  position: relative;
+  margin-bottom: 1em;
+}
+/* line 111, ../sass/afisha.scss */
+.afisha-filter .tabs {
+  margin-bottom: 0;
+}
+/* line 114, ../sass/afisha.scss */
+.afisha-filter .tabs-item_state_current {
+  -moz-border-radius: 2px 2px 0 0;
+  -webkit-border-radius: 2px;
+  border-radius: 2px 2px 0 0;
+}
+/* line 118, ../sass/afisha.scss */
+.afisha-filter .tabs-item_state_current:first-child:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  background: #5a529d;
+}
+/* line 132, ../sass/afisha.scss */
+.afisha-filter .event_types {
+  padding: 0 6px;
+}
+
+/* line 138, ../sass/afisha.scss */
+.schedule_types {
+  position: relative;
+  z-index: 1;
+  padding: 1em;
+}
+/* line 143, ../sass/afisha.scss */
+.schedule_types:before {
+  -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  z-index: -2;
+  background: #5a529d;
+}
+/* line 149, ../sass/afisha.scss */
+.schedule_types__type {
+  font-size: .9285em;
+  display: inline;
+  position: relative;
+  padding: .4615em .7692em;
+}
+/* line 155, ../sass/afisha.scss */
+.schedule_types__type:before {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/* line 168, ../sass/afisha.scss */
+.schedule_types__type_active:before {
+  -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  background: #fff;
+}
+/* line 174, ../sass/afisha.scss */
+.schedule_types__type :link,
+.schedule_types__type :visited,
+.schedule_types__type .pseudo-link {
+  color: #fff;
+}
+/* line 181, ../sass/afisha.scss */
+.schedule_types__link {
+  -moz-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  position: relative;
+}
+/* line 186, ../sass/afisha.scss */
+.schedule_types__link:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+}
+/* line 188, ../sass/afisha.scss */
+.schedule_types .schedule_types__link:hover {
+  color: white;
+}
+/* line 193, ../sass/afisha.scss */
+.schedule_types__type_active .schedule_types__link {
+  text-decoration: none;
+}
+/* line 198, ../sass/afisha.scss */
+.schedule_types .schedule_types__type_active .schedule_types__link, .schedule_types .schedule_types__type_active .schedule_types__link:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+  color: #242424;
+}
+/* line 207, ../sass/afisha.scss */
+.schedule_types .icon-calendar {
+  background-position: 0 -16px;
+  margin-right: .5em;
+}
+
+/* line 214, ../sass/afisha.scss */
+.search:before,
+.afisha-filter .schedule_types:before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+}
+
+/* line 227, ../sass/afisha.scss */
+.schedule__calendar {
+  float: right;
+  position: relative;
+  z-index: 100;
+}
+/* line 232, ../sass/afisha.scss */
+.schedule__calendar .pseudo-link,
+.schedule__calendar .icon-calendar {
+  -moz-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  color: white;
+}
+/* line 239, ../sass/afisha.scss */
+.schedule__calendar:hover .pseudo-link,
+.schedule__calendar:hover .icon-calendar {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+  color: white;
+}
+
+/* line 247, ../sass/afisha.scss */
+.event__schedule {
+  width: 100%;
+}
+
+/* line 250, ../sass/afisha.scss */
+.event__schedule .even td {
+  background: #f6f6f6;
+}
+
+/* line 253, ../sass/afisha.scss */
+.event__schedule__place,
+.event__schedule__time {
+  padding: 0.75em 0 0.25em 0.25em;
+  vertical-align: top;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+/* line 260, ../sass/afisha.scss */
+.event_schedule_line:last-child .event__schedule__place,
+.event_schedule_line:last-child .event__schedule__time {
+  border: none;
+}
+
+/* line 264, ../sass/afisha.scss */
+.event__schedule__place {
+  width: 40%;
+}
+
+/* line 267, ../sass/afisha.scss */
+.event__schedule__time {
+  text-align: right;
+}
+
+/* line 270, ../sass/afisha.scss */
+.schedule__time__item {
+  font-size: 0.924em;
+  display: inline-block;
+  margin: 0 0 0.5em 1.75em;
+  line-height: 1.2;
+}
+
+/* line 276, ../sass/afisha.scss */
+.event__summary {
+  margin-bottom: 1em;
+  padding-right: 8.5em;
+}
+
+/* line 280, ../sass/afisha.scss */
+.event__vote {
+  float: right;
+  width: 100px;
+  margin: 0 -8.5em 0 -100%;
+  padding-top: .5em;
+  text-align: center;
+}
+
+/* line 287, ../sass/afisha.scss */
+.event__vote .star-rating ol {
+  margin: 0 0 0 -40px;
+  padding: 0;
+  width: 80px;
+  height: 16px;
+  position: relative;
+  left: 50%;
+}
+
+/* line 295, ../sass/afisha.scss */
+.event__rating {
+  margin-bottom: 2em;
+}
+
+/* line 298, ../sass/afisha.scss */
+.event__details {
+  clear: both;
+}
+
+/* line 301, ../sass/afisha.scss */
+.event__trailer {
+  height: 520px;
+}
+
+/* line 305, ../sass/afisha.scss */
+.event__trailer object,
+.event__trailer iframe {
+  display: block;
+  width: 100%;
+}
+
+/* line 310, ../sass/afisha.scss */
+.event__visitor {
+  float: left;
+  margin: 0 1em 1.5em 0;
+  text-align: center;
+}
+
+/* line 316, ../sass/afisha.scss */
+.schedule_wide .event__schedule__place,
+.schedule_wide .event__schedule__time {
+  width: 50%;
+}
+
+/* line 321, ../sass/afisha.scss */
+.events__item {
+  position: relative;
+  height: 315px;
+}
+
+/* line 326, ../sass/afisha.scss */
+.event-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 120px;
+  width: 100%;
+  padding: 1em;
+  background: url("../i/black-70.png");
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 341, ../sass/afisha.scss */
+.event-caption .event__title {
+  font-size: 1.143em;
+}
+
+/* line 345, ../sass/afisha.scss */
+.event-caption :link,
+.event-caption :visited,
+.event-caption .event__extra_info,
+.event-caption .dot {
+  color: #fff;
+}
+
+/* line 352, ../sass/afisha.scss */
+.event-caption .event__description {
+  max-height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+/* line 360, ../sass/afisha.scss */
+.event-caption .buy_ticket {
+  margin-top: 5px;
+}
+
+/* line 365, ../sass/afisha.scss */
+.events__item .thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: 50% 0;
+}
+
+/* line 377, ../sass/afisha.scss */
+.show-all-link {
+  padding-top: .714em;
+}
+
+/* line 381, ../sass/afisha.scss */
+.event-xtra {
+  font-size: .86em;
+  float: right;
+  margin-left: 1.5em;
+}
+
+/* line 387, ../sass/afisha.scss */
+.event-xtra :link,
+.event-xtra :visited {
+  text-decoration: none;
+}
+
+/* line 392, ../sass/afisha.scss */
+.event__shot {
+  width: 100%;
+  min-height: 315px;
+  margin-bottom: 1.5em;
+}
+
+/* line 398, ../sass/afisha.scss */
+.event__shot img {
+  width: 100%;
+}
+
+/* line 402, ../sass/afisha.scss */
+.buy_ticket {
+  width: 114px;
+  height: 19px;
+  zoom: 1;
+  display: inline-block;
+  *display: inline;
+  position: relative;
+  vertical-align: middle;
+  background: url('../i/buy_ticket.png?1402155083') 0 0 no-repeat;
+  cursor: pointer;
+}
+/* line 409, ../sass/afisha.scss */
+.event-caption .buy_ticket {
+  background-position: 0 -38px;
+}
+/* line 413, ../sass/afisha.scss */
+.buy_ticket:hover {
+  background-position: 0 -19px;
+}

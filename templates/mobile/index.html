@@ -1,0 +1,130 @@
+{% block content %}
+<div class="tabs-box cf">
+	<ul class="tabs">
+		<li class="tab tab_state_current tab_size_1-2">Афиша</li><li class="tab tab_size_1-2">Места отдыха</li>
+	</ul>
+	<div class="pane pane_state_current">
+		<div class="accordion" id="afisha">
+			<div class="accordion-group">
+				<div class="accordion__title">
+					<span class="accordion__toggle" data-toggle="collapse" data-parent="#afisha" data-target=".afisha_cat_kino">Кино</span>
+				</div>
+				<div class="accordion__body afisha_cat_kino collapse in">
+					<div class="event cf">
+							<span class="thumb event__thumb">
+								<img src="{{ STATIC_URL }}i/sample_tn.jpg" alt="" class="thumb__img" /> 
+							</span>
+							<span class="event__date">сегодня</span>
+							<h3 class="event__title">Приключения Маши в Стране Чудес</h3>
+							<span class="event__place">7 сеансов</span>
+						<a class="event__link" href="#1"></a>
+					</div>
+					<div class="event cf">
+						<div class="thumb event__thumb">
+							<img src="{{ STATIC_URL }}i/sample_tn.jpg" alt="" class="thumb__img" /> 
+						</div>
+						<span class="event__date">сегодня</span>
+						<h3 class="event__title">Падение Олимпа</h3>
+						<span class="event__place">7 сеансов</span>
+						<a class="event__link" href="#2"></a>
+					</div>
+					<div class="event cf">
+						<div class="thumb event__thumb">
+							<img src="{{ STATIC_URL }}i/sample_tn.jpg" alt="" class="thumb__img" /> 
+						</div>
+						<span class="event__date">сегодня</span>
+						<h3 class="event__title">Зловещие мертвецы. Черная книга</h3>
+						<span class="event__place">7 сеансов</span>
+						<a class="event__link" href="#3"></a>
+					</div>
+					<div class="event cf">
+						<div class="thumb event__thumb">
+							<img src="{{ STATIC_URL }}i/sample_tn.jpg" alt="" class="thumb__img" /> 
+						</div>
+						<span class="event__date">сегодня</span>
+						<h3 class="event__title">Джек — покоритель великанов</h3>
+						<span class="event__place">7 сеансов</span>
+						<a class="event__link" href="#4"></a>
+					</div>
+					<div class="event cf">
+						<div class="thumb event__thumb">
+							<img src="{{ STATIC_URL }}i/sample_tn.jpg" alt="" class="thumb__img" /> 
+						</div>
+						<span class="event__date">сегодня</span>
+						<h3 class="event__title">Зловещие мертвецы. Черная книга</h3>
+						<span class="event__place">7 сеансов</span>
+						<a class="event__link" href="#5"></a>
+					</div>
+					<div class="event cf">
+						<div class="thumb event__thumb">
+							<img src="{{ STATIC_URL }}i/sample_tn.jpg" alt="" class="thumb__img" /> 
+						</div>
+						<span class="event__date">сегодня</span>
+						<h3 class="event__title">Приключения Маши в Стране Чудес</h3>
+						<span class="event__place">7 сеансов</span>
+						<a class="event__link" href="#6"></a>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion__title">
+					<span class="accordion__toggle" data-toggle="collapse" data-parent="#afisha" data-target=".afisha_cat_clubs">Клубы</span>
+				</div>
+				<div class="accordion__body afisha_cat_clubs collapse">
+					<div class="reducer">
+						<h2>Сегодня</h2>
+						Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы Клубы
+					</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion__title">
+					<span class="accordion__toggle" data-toggle="collapse" data-parent="#afisha" data-target=".afisha_cat_concert">Концерты</span>
+				</div>
+				<div class="accordion__body afisha_cat_concert collapse">
+					<div class="reducer">
+						<h2>Сегодня</h2>
+						Концерты Концерты Концерты Концерты Концерты Концерты Концерты Концерты Концерты Концерты Концерты Концерты
+					</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion__title">
+					<span class="accordion__toggle" data-toggle="collapse" data-parent="#afisha" data-target=".afisha_cat_spect">Спектакли</span>
+				</div>
+				<div class="accordion__body afisha_cat_spect collapse">
+					<div class="reducer">
+						<h2>Сегодня</h2>
+						Спектакли Спектакли Спектакли Спектакли Спектакли Спектакли Спектакли Спектакли Спектакли Спектакли Спектакли Спектакли
+					</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion__title">
+					<span class="accordion__toggle" data-toggle="collapse" data-parent="#afisha" data-target=".afisha_cat_exibit">Выставки</span>
+				</div>
+				<div class="accordion__body afisha_cat_exibit collapse">
+					<div class="reducer">
+						<h2>Сегодня</h2>
+						Выставки Выставки Выставки Выставки Выставки Выставки Выставки Выставки Выставки Выставки Выставки Выставки
+					</div>
+				</div>
+			</div>
+			<div class="accordion-group">
+				<div class="accordion__title">
+					<span class="accordion__toggle" data-toggle="collapse" data-parent="#afisha" data-target=".afisha_cat_sports">Спорт</span>
+				</div>
+				<div class="accordion__body afisha_cat_sports collapse">
+					<div class="reducer">
+						<h2>Сегодня</h2>
+						Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт Спорт
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pane">
+		Места отдыха
+	</div>
+</div>
+{% endblock %}

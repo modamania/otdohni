@@ -1,0 +1,98 @@
+{% extends "index.html" %}
+{% load comments %}
+{% load thumbnail %}
+{% load actions %}
+
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> / <a title="Конкурсы {{ CITY.genitive }}" href="{% url action_list %}">Конкурсы</a> / {{ object.title }}
+</div>
+{% endblock %}
+
+{% block title %}{{ object.title }}{% endblock %}
+{% block seo-header %}{% endblock %}
+
+{% block content %}
+    {% if user.profile.access_to_dasboard or user.is_superuser %}
+        <h1 class="page-title editable">
+        <span class="page-title__title">
+            {% if seo.heading.value %}
+                {{ seo.heading.value }}
+            {% else %}
+                {{ object.title }}
+            {% endif %}
+        </span>
+        {% if seo.tooltip.value %}
+            <i class="help-icon show-help"></i>
+        {% endif %}
+        <span class="editable__buttons">
+        <a href="{% url control_action_edit object.pk %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+    </span>
+    {% else %}
+        <h1 class="page-title">
+        <span class="page-title__title">
+            {% if seo.heading.value %}
+                {{ seo.heading.value }}
+            {% else %}
+                {{ object.title }}
+            {% endif %}
+        </span>
+        {% if seo.tooltip.value %}
+            <i class="help-icon show-help"></i>
+        {% endif %}
+    {% endif %}
+    </h1>
+
+    {% get_comment_count for object as comment_count %}
+
+    {% if object.image %}
+        <div class="image"><img src="{% thumbnail object.image 350x250 %}"></div>
+    {% endif %}
+    <div class="intro">
+        <p>{{ object.short_text|safe }}</p>
+    </div>
+    <p>{{ object.full_text|safe }}</p>
+
+    {% if object.polls.all %}
+        {% for poll in object.polls.all %}
+            <p>&nbsp;</p>
+            {% if poll.title %}
+                <h3>{{ poll.title }}</h3>
+            {% else %}
+                <h3>
+                    {% if now <= poll.end_date %}
+                        Голосование
+                    {% else %}
+                        Результаты голосования
+                    {% endif %}
+                </h3>
+            {% endif %}
+
+            <div class="nominies__item-list nominies_view_{{ poll.display_type }} clearfix" data-tochoose="{{ poll.many_to_choose|lower }}">
+                {% poll_detail %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="clr"></div>
+    <div id="comments" class="comments">
+        {% if user.is_authenticated %}
+            <div class="comments__post clearfix comment_form">
+                <span class="pseudo_link post__button open_form">Позвольте, я скажу!</span>
+                <div class="post__form form" style="display: none">{% render_comment_form for object %}</div>
+            </div>
+        {% else %}
+            {% include "comments/_no_access.html" %}
+        {% endif %}
+        {% render_comment_list for object %}
+    </div>
+
+{% endblock %}
+
+{% block yandex_share %}
+    {% include "widgets/yashare.html" %}
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

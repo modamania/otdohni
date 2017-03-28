@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block sidebar-current %}
+{% if not user.is_anonymous %}
+<div class="widget widget_nav">
+	<h3 class="widget__title">{{ user }}</h3>
+    <ul>
+        {% block li_profile_show %}<li><a href="{% url profile.views.profile_show user.pk %}">Профиль</a></li>{% endblock %}
+        {% block li_privmes %}<li><a href="{% url messages_inbox %}">Сообщения{% if COUNT_UNREAD_MESSAGE %} ({{ COUNT_UNREAD_MESSAGE }}){% endif %}</a></li>{% endblock %}
+        {% block li_friends %}<li><a href="{% url friends_list %}">Друзья</a></li>{% endblock %}
+        {% block li_users %}<li><a href="{% url user_list %}">Пользователи</a></li>{% endblock %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}
+
+{% block sidebar-main %}
+{% endblock %}
+
+{% block widget-twitter-text %}
+    <p>Миллион идей в 140 символах!</p>
+{% endblock %}

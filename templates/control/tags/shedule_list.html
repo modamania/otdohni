@@ -1,0 +1,59 @@
+{{ formset.management_form }}
+<div class="work_time__list">
+
+{% for time_form in formset %}
+
+    <div class="shedule">
+        <div class="shedule__days">
+        {% for hid in time_form.hidden_fields %}{{ hid }}{% endfor %}
+           <span class="day selected" rel="mon">
+                {{ time_form.mon.label }}
+                {{ time_form.mon }}
+            </span>
+           <span class="day selected" rel="tue">
+                {{ time_form.tue.label }}
+                {{ time_form.tue }}
+           </span>
+           <span class="day selected" rel="wed">
+                {{ time_form.wed.label }}
+                {{ time_form.wed }}
+           </span>
+           <span class="day selected" rel="thu">
+                {{ time_form.thu.label }}
+                {{ time_form.thu }}
+           </span>
+           <span class="day selected" rel="fri">
+                {{ time_form.fri.label }}
+                {{ time_form.fri }}
+           </span>
+           <span class="day weekend" rel="sat">
+                {{ time_form.sat.label }}
+                {{ time_form.sat }}
+           </span>
+           <span class="day weekend" rel="sun">
+                {{ time_form.sun.label }}
+                {{ time_form.sun }}
+           </span>
+        </div>
+        <div class="shedule__time">
+           <p class="work_time">
+            c <span>
+                {{ time_form.from_time.errors }}
+                {{ time_form.from_time }}
+            </span>
+            до <span>
+                {{ time_form.till_time.errors }}
+                {{ time_form.till_time }}
+            </span>
+           </p>
+           {{ time_form.day_off.label }}
+           {{ time_form.day_off }}
+
+           {{ time_form.all_day.label }}
+           {{ time_form.all_day }}
+        </div>
+        {{ time_form.DELETE }}
+        <span class="del">x</span>
+    </div>
+{% endfor %}
+</div>

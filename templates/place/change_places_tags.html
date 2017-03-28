@@ -1,0 +1,19 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<style type="text/css">
+    form ul {
+        columns: 200px auto;
+        -webkit-columns: 200px auto;
+        -moz-columns: 200px auto;
+        -o-columns: 200px auto;
+    }
+</style>
+<form action="" method="post">{% csrf_token %}
+    {{ form }}
+    <div class="clear"></div>
+    <input type="hidden" name="action" value="{{ action }}" />
+    <br />
+    <input type="submit" name="apply" value="Сохранить" />
+</form>
+{% endblock %}

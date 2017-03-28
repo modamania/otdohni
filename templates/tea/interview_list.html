@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% load thumbnail core_tags pagination_tags tea_tags %}
+
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в Омске" href="/">Главная</a> / Чай со звездой
+</div>
+{% endblock %}
+{% block h1 %}Чай со звездой{% endblock %}
+
+{% block content %}
+<div class="interviews_list two-columns clearfix">
+    {% autopaginate interviews_list 20 %}
+    {% for interview in interviews_list %}
+        <div class="interviews__item column{% cycle '' ' column_last' %}">
+        <div class="thumb shadowed">
+            <a title="" target="_blank" href="{{ interview.get_absolute_url }}"><img title="lav_4_tnn" alt="lav_4_tnn" src="{{ interview.image.thumbnail }}"></a><img src="/static/i/shadow.png" alt="" class="shadow" /></div>
+        <h3><a target="_blank" href="{{ interview.get_absolute_url }}">{{ interview }}</a></h3>
+    </div>
+    {% empty %}
+        Интервью нет
+    {% endfor %}
+</div>
+    {% new_paginate %}
+
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

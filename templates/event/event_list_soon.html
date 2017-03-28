@@ -1,0 +1,48 @@
+{% extends 'event/event_list.html' %}
+{% load thumbnail event_tags expert_tags%}
+
+{% block event_list %}
+    {#    Expert comment for soon events. Use 3 instead 'soon'  #}
+    {% show_expert_comment category 3 %}
+    {#End expert comment#}
+
+<h3 class="event_type">{{ category.title|default:"Все события" }} {{ CITY.genitive }}</h3>
+
+{% for event in event_list %}
+
+    {% thumbnail event.image 128x84 crop as im %}
+    <div class="event_list__item clearfix">
+        <div class="thumb shadowed">
+            <a title="{{ event.title }} - {{ seo.heading.value }}" href="{{ event.get_absolute_url }}">
+                {% if im %}<img alt="{{ event.title }}" src="{{ im }}" />{% else %}<span class="no_photo"></span>{% endif %}
+            </a>
+            <img src="/static/i/shadow.png" alt="" class="shadow" />
+        </div>
+        <div class="event__title">
+            <a title="{{ event.title }} - {{ seo.heading.value }}" href="{{ event.get_absolute_url }}">
+                {{ event.title }}
+            </a>
+        </div>
+        <p> С {{ event.start_date|date:"j E" }}</p>
+        {% if event.intro %}
+            <p> {{ event.intro|safe}}</p>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>Событий нет.</p>
+{% endfor %}
+
+{% endblock %}
+
+{% block sidebar-current %}
+    {% if category %}
+        {% if category.pk == 14 %}
+            {% include "widgets/buy_tickets.html" %}
+        {% endif %}
+      {% top_events category 5 %}
+      {% today_events category 5 %}
+      {% soon_events category 5 %}
+    {% endif %}
+{% endblock %}
+
+{% block widget-afisha %}{% endblock %}

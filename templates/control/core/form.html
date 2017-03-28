@@ -1,0 +1,88 @@
+{% extends "control/index.html" %}
+
+{% load thumbnail i18n assets event_tags control_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+        <a title="Панель управления" href="{% url control_core_dashboard %}">сердце</a> /
+    </div>
+{% endblock %}
+{% block content-header %}
+    {% if instance %}<h1>Редактирование {{ meta.verbose_name }} «{{ instance }}»</h1>{% else %}<h1>Создание нового {{ meta.verbose_name }}</h1>{% endif %}
+{% endblock %}
+{% block content %}
+    <form action="." method="POST" enctype="multipart/form-data" class="form zf">
+        {% csrf_token %}
+        <div class="tabbed">
+            <div class="control_toolbar">
+                <div class="toolbar__buttons">
+                    <span class="btn btn_theme_blue">
+                        <span class="btn__text">Сохранить</span>
+                        <input type="submit" class="btn__input" value="Сохранить" />
+                    </span>
+                </div>
+            </div>
+
+            {{ form.non_field_errors }}
+            <table class="form_vertical">
+                {% for field in form %}
+                    <tr>
+                        <td class="form_row">
+                            <h4>{{ field.label_tag }}</h4>
+                            {{ field.errors }}
+                            {{ field }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <div style="display:none;">{{ form.pub_date }}</div>
+            <div class="submit">
+                <span class="btn btn_theme_blue">
+                    <span class="btn__text">Сохранить</span>
+                    <input type="submit" class="btn__input" value="Сохранить" />
+                </span>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}elfinder/css/elfinder.css" type="text/css" media="screen" charset="utf-8">
+    <link href="{{ STATIC_URL }}elrte/css/django-elrte.css" type="text/css" media="all" rel="stylesheet">
+    <link href="{{ STATIC_URL }}elrte/css/elrte.full.css" type="text/css" media="all" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+
+    {% assets  "js_ui" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+    {% assets  "control_js" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+    <script type="text/javascript">
+
+        $(function(){
+
+            // datepicker
+            $.datepicker.setDefaults(
+                    $.extend($.datepicker.regional["ru"])
+            );
+            $(".datepicker").datepicker({
+                showOn: "button",
+                buttonImageOnly: true,
+                buttonImage: "{{ STATIC_URL}}admin/img/admin/icon_calendar.gif",
+                dateFormat: "yy-mm-dd",
+            });
+
+            // $(".promo__tab").removeClass("visible");
+        });
+
+    </script>
+{% endblock %}

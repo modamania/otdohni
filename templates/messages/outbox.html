@@ -1,0 +1,50 @@
+{% extends "messages/base.html" %}
+{% load i18n %}
+{% load humanize %}
+
+{% block pathway %}
+<div class="pathway">
+    <a href="{% url profile.views.profile_show user.pk %}">Профиль</a> /
+</div>
+{% endblock %}
+
+{% block li_outbox %}<li class="messages__tabs__tab current"><span>{% trans "Sent Messages" %}</span></li>{% endblock %}
+
+{% block content-inner %}
+{% if message_list %}
+<div class="messages" id="messages">
+    {% include "messages/toolbar.html" %}
+    <div id="messages_list">
+        {% for message in message_list %}
+        <div class="messages__message" data-id="{{ message.id }}">
+            <div class="chkbox"><input type="checkbox" value="" name=""></div>
+            <div class="meta">
+                <a href="{% url profile.views.profile_show message.recipient.pk %}" class="userpic userpic_small">
+                    {% if message.recipient.profile.userpic %}
+                        <img src="
+                        {% if message.recipient.profile.userpic %}
+                            {% if message.recipient.profile.get_userpic == "/static/i/no_avatar.png" %}
+                                /static/i/no_avatar_small.png
+                            {% else %}
+                                {{ message.recipient.profile.userpic.extra_thumbnails.small }}
+                            {% endif %}
+                        {% else %}/static/i/no_avatar_small.png{% endif %}
+                        " class="userpic_img" alt="" />
+                    {% else %}
+                        <img src="/static/i/no_avatar_small.png" class="userpic_img" alt="" />
+                    {% endif %}
+                    </a>
+                <span class="author"><a href="{% url profile.views.profile_show message.recipient.pk %}">{{ message.recipient }}</a></span>
+                <span class="date">{{ message.sent_at|naturalday:"j b Y" }} в {{ message.sent_at|time:"H:i" }}</span>
+            </div>
+            <div class="messages__message__content"><a href="{% url private_messages.views.view  message.id %}" class="messages__message__link"> <span class="message__extract">{{ message.body }}</span></a><ins class="mask_right"></ins></div>
+            <div class="action"><a href="{% url messages_delete message.id %}?next={% url messages_outbox %}" class="icon icon_delete del" title="{% trans "delete" %}"><i></i></a></div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+{% include "messages/toolbar.html" %}
+<p>{% trans "No messages." %}</p>
+{% endif %}
+</div>
+{% endblock %}

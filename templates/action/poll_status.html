@@ -1,0 +1,11 @@
+<p>
+    {% if poll.action %}Конкурс &laquo;<a href="{{ poll.action.get_absolute_url }}">{{ poll.action.title }}</a>&raquo;.{% endif %} 
+    {{ poll.status_title }}
+    {% ifequal poll.status 'SOON' %}
+        {{ poll.start_date|date:"j E" }}
+    {% endifequal %}
+    {% ifequal poll.status 'ACTIVE' %}
+        {{ poll.end_date|date:"j E" }}
+    {% endifequal %}
+</p>
+

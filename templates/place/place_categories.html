@@ -1,0 +1,12 @@
+{% load core_tags %}
+<div class="widget widget_nav">
+  <h3 class="widget__title">Места отдыха {{ CITY.genitive }}</h3>
+  <ul>
+  {% for category in categories %}
+  {% url place_show_category category.slug as link %}
+    <li class="{% ifactive link %}active{% endifactive %}">
+      <a title="{{ category.name }} {{ CITY.genitive }}" href="{% url place_show_category category.slug %}">{{ category.name }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+</div>

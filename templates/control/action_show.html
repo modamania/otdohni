@@ -1,0 +1,72 @@
+{% extends "control/index.html" %}
+{% load thumbnail i18n assets control_tags comments%}
+
+{% block content-header %}
+    <h1>Панель управления, смотрим на конкурс"<i>{{ action }}</i>"</h1>
+    <a href="{% url control.views.action_form action.pk %}">Редактировать</a><br />
+{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+        <a title="Конкурсы" href="{% url control_action_list %}">Конкурсы</a> /
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% get_comment_count for action as comment_count %}
+
+    <h1 class="article">{{ action.title }}</h1>
+    <p class="meta">{{ action.pub_date|date:"d F Y"|lower }}</p>
+    {% if action.image %}
+        <div class="image"><img src="{% thumbnail action.image 350x250 %}"></div>
+    {% endif %}
+    <div class="intro">
+        <p>{{ action.short_text|safe }}</p>
+    </div>
+    <p>{{ action.full_text|safe }}</p>
+
+    {% if action.polls.all %}
+        {% for poll in action.polls.all %}
+            {% if poll.status != 'NONE' and now >= poll.start_date %}
+                <a href="{% url poll_detail poll.id %}">
+                    {% if now <= poll.end_date %}
+                        Голосование &laquo;{{ poll.title }}&raquo; активно
+                    {% else %}
+                        Результаты голосования
+                    {% endif %}
+                </a>
+            {% endif %}
+            <h3>Работы участников
+                {% if action.polls.all|length > 1 %}
+                    &laquo;{{ poll.title }}&raquo;
+                {% endif %} </h3>
+            <div class="works_list clearfix">
+                {% for work in poll.workbidders.all %}
+                    <ins class="works_item">
+                        {% if work.photo %}
+                            <div class="work__image"><a rel="lightbox" href="{{ MEDIA_URL }}{{ work.photo }}"><img class="hi" src="{% thumbnail work.photo 250x200 crop="center" %}"></a></div>
+                        {% endif %}
+                        {% if work.text %}<div class="work__text">{{ work.text|safe }}</div>{% endif %}
+                        <div class="work__meta">
+                            <h3>{{ work.title }}</h3>
+                        </div>
+                    </ins>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="clr"></div>
+    <div id="comments" class="comments">
+        {% if user.is_authenticated %}
+            <div class="comments__post clearfix comment_form">
+                <span class="pseudo_link post__button open_form">Позвольте, я скажу!</span>
+                <div class="post__form form" style="display: none">{% render_comment_form for action %}</div>
+            </div>
+        {% else %}
+            {% include "comments/_no_access.html" %}
+        {% endif %}
+        {% render_comment_list for action %}
+    </div>
+{% endblock %}

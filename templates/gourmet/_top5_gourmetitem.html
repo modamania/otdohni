@@ -1,0 +1,40 @@
+{% load thumbnail %}
+{% load comments %}
+
+<div class="gourmet_index clearfix">
+    <h2>
+        <a title="Все для гурманов" href="{% url gourmet_list %}">Гурманам</a>
+        <span class="gourmet__rss"><a target="_blank" href="{% url gourmet_feed %}">RSS</a></span>
+    </h2>
+    {% if gourmet_list %}
+    {% with gourmet_list.0 as first_gourmet %}
+        {% get_comment_count for first_gourmet as comment_count %}
+        <div class="gourmet__image"><img alt="" src="{% thumbnail first_gourmet.get_image 350x250 crop upscale %}" id="gourmet_im"></div>
+        <div class="gourmet__teaser">
+            <p>{{ first_gourmet.short_text|safe }}</p>
+            <div class="meta">
+                <span class="date">{{ first_gourmet.pub_date|date:"d F Y" }}</span>
+                <span class="comments">Комментариев: {{ comment_count }}</span>
+            </div>
+        </div>
+    {% endwith %}
+    <div class="gourmet__leads">
+        {% for item in gourmet_list %}
+            {% get_comment_count for item as comment_count %}
+            <div onclick="document.location.href='{{ item.get_absolute_url }}';" class="gourmet__leads__item gourmet__leads__item_first {% if forloop.first %}active{% endif %}">
+            <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+            <div class="gourmet__leads__summary">
+                <p>{{ item.short_text|safe }}</p>
+                <div class="meta">
+                    <span class="date">{{ item.pub_date|date:"d F Y" }}</span>
+                    <span class="comments">Комментариев: {{ comment_count }}</span>
+                </div>
+            </div>
+            <div class="gourmet__leads__item__img"><img alt="" src="{% thumbnail item.get_image 350x250 crop upscale %}" /></div>
+            <ins class="l"></ins>
+            <ins class="r"></ins>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>

@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+{% load comments thumbnail %}
+{% load core_tags pagination_tags %}
+
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> / <a title="Заведения {{ CITY.genitive }}" href="{% url action_list %}">Конкурсы</a> /
+</div>
+{% endblock %}
+
+{% block title %}Голосования {{ CITY.genitive }}{% endblock %}
+
+{% block h1 %}<span class="page-title__title">Голосования</span>{% endblock %}
+
+{% block content %}
+<div class="navigation_filter">
+    <a href="{% url poll_list %}?status=current" class="navigation_filter__item{% ifequal active 'current' %} navigation_filter__item_current{% endifequal %} first">
+    Текущие</a>
+    <a href="{% url poll_list %}?status=soon" class="navigation_filter__item{% ifequal active 'soon' %} navigation_filter__item_current{% endifequal %}">
+    Будущие</a>
+    <a href="{% url poll_list %}?status=suspend" class="navigation_filter__item{% ifequal active 'suspend' %} navigation_filter__item_current{% endifequal %}">
+    Приостановленные</a>
+<a href="{% url poll_list %}?status=complete" class="navigation_filter__item{% ifequal active 'complete' %} navigation_filter__item_current{% endifequal %}">
+    Завершенные</a>
+</div>
+
+{% autopaginate poll_list 10 %}
+{% for poll in poll_list %}
+    {% get_comment_count for poll as comment_count %}
+
+    <div class="polls__item clearfix">
+        <h3><a href="{{ poll.get_absolute_url }}">{{ poll.title }}</a></h3>
+        {{ poll.status_title }}
+    {% ifequal poll.status 'SOON' %}
+        {{ poll.start_date|date:"j E" }}
+    {% endifequal %}
+    {% if poll.status == 'ACTIVE' %}
+        {{ poll.end_date|date:"j E" }}
+    {% endif %}
+        {% if poll.short_text %}<p class="poll__summary">{{ poll.short_text|safe }}</p>{% endif %}
+    </div>
+
+{% empty %}
+<p>Конкурсов нет.</p>
+{% endfor %}
+{% new_paginate %}
+
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}
+

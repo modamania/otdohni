@@ -1,0 +1,20 @@
+{% extends "control/index.html" %}
+
+{% block content-header %}
+    <h1>Панель управления, смотрим на спецпроект"<i>{{ spec }}</i>"</h1>
+    <a href="{% url control.views.spec_form spec.slug %}">Редактировать</a><br />
+{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+        <a title="Панель управления" href="{% url control_spec_list %}">Спецпроекты</a> /
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="event__summary">
+        <h1>{{ spec.title }}</h1>
+        {{ spec.description|safe }}
+    </div>
+{% endblock %}

@@ -1,0 +1,308 @@
+<!doctype html>
+{% load rating_tags cache event_tags assets flatpages jquery_validation loginza_widget %}
+{% load seo %}
+<html class="{% if not user.is_authenticated %}not_auth{% else %}auth{% endif %}">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  {% get_metadata as seo %}
+    {% if seo.title.value %}
+        <title>{{ seo.title.value }} - Заотдых {{ CITY.name }}</title>
+    {% else %}
+        <title>{% block title %}Отдых и развлечения в {{ CITY.accusative }}{% endblock %} - Заотдых {{ CITY.name }}</title>
+    {% endif %}
+    {{ seo.keywords }}
+  {{ seo.description }}
+    {% assets "all_css" %}
+  <link rel="stylesheet" href="{{ ASSET_URL }}?v=30102013" />
+  {% endassets %}
+  {% block css %}{% endblock %}
+  {% if user.profile.access_to_dasboard or user.is_superuser %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/cpanel.css" type="text/css">
+  {% endif %}
+  <!--[if lte IE 8]><link rel="stylesheet" href="{{ STATIC_URL }}css/ie.css" type="text/css"><![endif]-->
+  <link rel="icon" href="{{ STATIC_URL }}favicon.png" type="image/x-icon" />
+  <link rel="yandex-tableau-widget" href="{{ STATIC_URL }}manifest.json" />
+  <!--script src="http://yandex.st/jquery/1.7.1/jquery.min.js"></script>-->
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="{{ STATIC_URL }}js/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script id="kh_script" type="text/javascript" src="http://kinohod.ru/static/js/widget/v2/boxoffice.js?apikey=e3a6633f-db42-3d9b-98bb-4d777db05b3a&base_uri=http%3a%2f%2fkinohod.ru%2fapi%2fwidget"></script>
+  <script type="text/javascript" src="http://kinohod.ru/static/js/widget/boxoffice/generic.js"></script>
+  <script type="text/javascript" async class="AdvertoneJS" src="http://static.advertone.ru/js/advertone_async.js"></script>
+  <script>var siteZone = window.location.hostname.split('.').splice(-3,1);</script>
+  
+{# Нужно сделать динамический settings.js и в нём передавать все настройки #}
+  <script type="text/javascript">
+      document.city = "{{ CITY.name }}";
+  </script>
+{# ------- #}
+</head>
+<body>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter1618517 = new Ya.Metrika({id:1618517,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    trackHash:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/1618517" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<div class="wrapper">
+
+{# ---------------header------------- #}
+<div class="header clearfix">
+{% block header %}
+<div class="header__inner">
+    {# ----------------logo------------ #}
+    <div class="logo" {% if cur_logo %}style="background-image: url('{{ cur_logo.picture.url }}');"{% endif %}>
+        <a href="/" title="Заотдых" class="logo__link"></a>
+        <div class="logo__city">
+            <a href="#" id="change_city" data-reveal-id="cities_list_modal" class="pseudo-link">{{ CITY.name }}</a>
+        </div>
+    </div>
+    
+    <div class="header__topbar clearfix">
+        {# --------------login------------- #}
+        <div class="profile_links">
+        {% block login %}
+            {% if user.is_authenticated %}
+                <a href="{% url profile.views.profile_show user.pk %}" class="userpic userpic_small">
+                    <img id="login_avatar" title="Показать профиль {{ user }}" alt="{{ user }}" src="{% if user.profile.userpic %}{{ user.profile.userpic.extra_thumbnails.small }}{% else %}/static/i/no_avatar_small.png{% endif %}" class="userpic__img" />
+                </a>
+                <a href="{% url profile.views.profile_show user.pk %}" id="more_links_button" class="dropdown"><span class="pseudo-link">{{ user.username }}</span></a>
+                <div class="profile-dropdown">
+                    <ul class="profile-dropdown__item-list">
+                        <li class="profile-dropdown__item"><a href="{% url profile.views.profile_show user.pk %}" class="profile-dropdown__link">Профиль</a></li>
+                        <li class="profile-dropdown__item"><a href="{% url messages_inbox %}" class="profile-dropdown__link">Сообщения{% if COUNT_UNREAD_MESSAGE %}<span class="count messages_count">{{ COUNT_UNREAD_MESSAGE }}</span>{% endif %}</a></li>
+                        <li class="profile-dropdown__item"><a href="{% url friends_list %}" class="profile-dropdown__link">Друзья</a></li>
+                    {% if user.profile.access_to_dasboard or user.is_superuser %}
+                        <li class="profile-dropdown__separator"></li>
+                        <li class="profile-dropdown__item"><a href="{% url user_list %}" class="profile-dropdown__link">Пользователи</a></li>
+                        <li class="profile-dropdown__item"><a href="{% url control.views.dashboard %}" class="profile-dropdown__link">Панель управления</a></li>
+                    {% endif %}
+                    {% if user.username == 'nikaiv' or user.username == 'skd' %}
+                        <li class="profile-dropdown__item"><a href="/control/seo/?url={{ REQUEST_PATH }}">SEO</a></li>
+                    {% endif %}
+                        <li class="profile-dropdown__separator"></li>
+                        <li class="profile-dropdown__item"><a href="{% url django.contrib.auth.views.logout %}?next={{ REQUEST_PATH }}" class="profile-dropdown__link">Выход</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <a href="{% url django.contrib.auth.views.login %}?next={{ REQUEST_PATH }}" id="auth_popup_button" data-reveal-id="auth_popup" class="pseudo_link">Вход</a>
+                <a href="{% url registration.views.register %}">Регистрация</a>
+            {% endif %}
+        {% endblock %}
+        </div>
+
+        {# -------------menu-------------- #}
+        <div class="menu clearfix">
+            <ul class="menu__layout">
+            {% for item in menu.mainmenu %}
+                <li class="menu__item{% if item.is_active %} menu__item_state_current{% endif %}"><a href="{{ item.url }}" class="menu__link {{ item.css_classes }}" title="{{ item.title }}">{{ item.title }}</span></a></li>
+            {% endfor %}
+            {% if spec_menu %}
+                {% for item in spec_menu %}
+                    <li class="menu__item menu__item_special_yes {% ifequal item.get_absolute_url request.path %}menu__item_state_current{% endifequal %} menu__item_spec_{{item.slug}}"><a href="{% url spec_detail item.slug %}" class="menu__link" title="{{ item.top_title }}"><i class="icon icon-{{item.slug}}"></i>{{ item.top_title }}</a></li>
+                {% endfor %}
+            {% endif %}
+            </ul>
+            <span class="menu__more">
+                <span class="pseudo-link">еще</span>
+                <ul class="menu__dropdown">
+                    {% for item in menu.mainmenu %}
+                        <li class="menu__item{% if item.is_active %} menu__item_state_current{% endif %}"><a href="{{ item.url }}" class="menu__link {{ item.css_classes }}" title="{{ item.title }}">{{ item.title }}</span></a></li>
+                    {% endfor %}
+                </ul>
+            </span>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+</div>
+
+{# -------------page------------- #}
+<div class="page">
+    <div class="page__inner">
+        {% block page %}
+            {# -----------pathway------------ #}
+            {% block pathway %}
+            {% endblock %}
+
+            {# -----------content------------ #}
+
+            {% block content-header %}
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+
+            {# -----------sidebar------------ #}
+            {% block sidebar %}
+            {% endblock %}
+
+        {% endblock %}
+    </div>
+    <div id="loading"></div>
+</div>
+
+
+</div>
+{# -----------footer------------ #}
+{% block footer %}
+    <div class="footer clearfix">
+        <div class="footer__inner">
+            <div class="footer__left">
+                {% cache 1000 footer_links %}
+                <ul class="footlinks">
+                    <li class="footlinks__item">
+                        <a href="{% url about %}">О проекте</a>
+                    </li>
+                    <li class="footlinks__item">
+                        <a href="/vacancies/">Вакансии</a>
+                    </li>
+                    <li class="footlinks__item">
+                    	<a href="/advertising/">Рекламодателям</a>
+                    </li>
+                    <li class="footlinks__item">
+                        <a href="/usage/">Пользовательское соглашение</a>
+                    </li>
+                    <li class="footlinks__item">
+                    	<a href="/sitemap/">Карта сайта</a>
+                    </li>
+                </ul>
+                {% endcache %}
+                &copy; 2007&ndash;{% now "Y" %} Заотдых
+                <img src="{{ STATIC_URL }}/i/18plus.png" alt="Для лиц старше 18 лет" title="Для лиц старше 18 лет" />
+                <div class="social"><a title="Группа Заотдых Вконтакте" target="_blank" class="vkontakte-btn" href="http://vkontakte.ru/club2628103">Группа в контакте</a> <a title="Заотдых в Твиттере" target="_blank" class="twitter-btn" href="http://twitter.com/OtdohniOmsk">OtdohniOmsk</a> <a title="Группа Заотдых в Фейсбуке" target="_blank" class="facebook-btn" href="https://www.facebook.com/groups/642692912407938/">Группа Заотдых в Фейсбуке</a></div>
+            </div>
+            <div class="footer__center">{% include 'who_is_online.html' %}</div>
+            <div class="footer__right">
+                <div class="ideya clearfix">
+                    <img width="52" alt="Студия ideЯ" src="/static/i/ideya.png">
+                    <p>
+                        <a target="_blank" title="Продвижение сайтов" href="http://www.i-deya.ru/uslugi/seo/">Продвижение сайтов</a><br />
+                        <a target="_blank" title="Создание сайтов" href="http://www.i-deya.ru/uslugi/web/">Создание сайтов</a>
+                    </p>
+                </div>
+                <div class="cnts">
+                    {% if CITY.name == 'Омск' %}
+                    <!--LiveInternet counter--><script type="text/javascript"><!--
+                    document.write("<a href='http://www.liveinternet.ru/click' "+
+                    "target=_blank><img src='//counter.yadro.ru/hit?t18.11;r"+
+                    escape(document.referrer)+((typeof(screen)=="undefined")?"":
+                    ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+                    screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+                    ";"+Math.random()+
+                    "' alt='' title='LiveInternet: показано число просмотров за 24"+
+                    " часа, посетителей за 24 часа и за сегодня' "+
+                    "border='0' width='88' height='31'><\/a>")
+                    //--></script><!--/LiveInternet-->
+                    {% else %}
+                    <!--LiveInternet counter--><script type="text/javascript"><!--
+                    document.write("<a href='http://www.liveinternet.ru/click;Zaotdih' "+
+                    "target=_blank><img src='//counter.yadro.ru/hit;Zaotdih?t18.11;r"+
+                    escape(document.referrer)+((typeof(screen)=="undefined")?"":
+                    ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+                    screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+                    ";"+Math.random()+
+                    "' alt='' title='LiveInternet: показано число просмотров за 24"+
+                    " часа, посетителей за 24 часа и за сегодня' "+
+                    "border=0 width=88 height=31><\/a>")//--></script>
+                    <!--/LiveInternet-->
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+        <div id="cities_list_modal" class="reveal-modal">
+            <ul class="cities__item-list">
+             {% for site in other_site %}
+               <li class="cities__item" ><a href="http://{{ site.domain }}">{{ site.name }}</a></li>
+             {% endfor %}
+           </ul>
+           <span class="close-reveal-modal icon icon_close icon_close_thin popup__close"><i></i></span>
+        </div>
+        {% if user.is_authenticated %}
+
+        {% else %}
+        <div id="auth_popup" class="reveal-modal auth-popup auth-form">
+            <div class="auth-form__content">
+                <h3 class="popup__title">Войти на сайт</h3>
+                <form id="loginform" method="post" name="login" action="{% url django.contrib.auth.views.login %}?next={{ REQUEST_PATH }}" class="auth__form">
+                    <p>
+                        <input type="text" maxlength="30" name="username" id="username_popup" class="inputbox" placeholder="Логин" />
+                    </p>
+                    <p>
+                        <input type="password" id="password_popup" name="password" class="inputbox" placeholder="Пароль" />
+                    </p>
+                    <p><label><input type="checkbox" value="yes" name="remember" /> запомнить меня</label></p>
+                    <p class="submit">
+                        <span class="btn btn_size_large btn_theme_blue">
+                            <span class="btn__text">Войти</span>
+                            <input type="submit" value="Войти" class="btn__input" name="Submit" />
+                        </span>
+                    </p>
+                    <p class="password_reset"><a href="{% url django.contrib.auth.views.password_reset %}">Напомнить пароль</a></p>
+                    <input type="hidden" name="next" value="{{ REQUEST_PATH }}" />
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="auth-popup-separator separator separator_bg_white"><span class="separator__text">или</span></div>
+            <div class="auth-form__content auth-social">
+                <h3 class="popup__title">Войти как пользователь</h3>
+                {% loginza_iframe  providers_set="vkontakte,facebook,twitter,yandex,google,rambler,mailruapi,odnoklassniki" %}
+            </div>
+            <span id="auth__close" class="close-reveal-modal icon icon_close icon_close_thin popup__close"><i></i></span>
+        </div>
+        {% endif %}
+    
+    {% block extra_modal %}{% endblock %}
+
+    <script src="http://cdn.jquerytools.org/1.2.6/all/jquery.tools.min.js"></script>
+    {% assets  "libs_js" %}
+      <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+
+    {% assets  "all_js" %}
+      <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    {% ratingmedia %}
+    {% ajax_validate form %}
+
+{% if user.profile.access_to_dasboard or user.is_superuser %}
+    {% block admin_scripts %}
+      {% assets  "admin_js" %}
+        <script src="{{ ASSET_URL }}"></script>
+      {% endassets %}
+    {% endblock %}
+{% endif %}
+{% block scripts %}
+{% endblock %}
+{% include 'common/reformal.html' %}
+</body>
+</html><!--coment-->

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Заотдых</title>
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/mobile.css">
+</head>
+<body class="page">
+	<div class="page__inner">
+	
+	{% block header %}
+		{% include "mobile/header.html" %}
+	{% endblock %}
+
+	<section class="content">
+		{% block content %}
+		{% endblock %}
+	</section>
+
+	{% block footer %}
+		{% include "mobile/footer.html" %}
+	{% endblock %}
+
+	<script src="{{ STATIC_URL }}js/jquery.2.0.min.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-plugins.js"></script>
+	<script src="{{ STATIC_URL }}js/mobile.js"></script>
+</body>
+</html>

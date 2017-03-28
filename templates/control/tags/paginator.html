@@ -1,0 +1,22 @@
+<div class="pager">
+    <div class="pager__prev-next">
+    
+    <a href="?page=1" class="first__page{% if objects.number == 1 %} pager__active{% endif %}">первая</a>
+    {% if objects.has_previous %}
+        <span class="pager__active"><a href="?page={{ objects.previous_page_number }}"><span class="arrow">←</span> сюда</a></span>
+    {% else %}
+        <span class="pager__inactive"><span class="arrow">←</span> сюда</span>
+    {% endif %}
+        {% for num in range %}
+            <a href="?page={{ num }}" class="page_number{% if num == objects.number %} pager__active{% endif %}">{{ num }}</a>
+        {% endfor %}
+    {% if objects.has_next %}
+        <span class="pager__active"><a href="?page={{ objects.next_page_number }}">туда <span class="arrow">→</span></a>
+    {% else %}
+        <span class="pager__inactive">туда <span class="arrow">→</span></span>
+    {% endif %}
+    <a href="?page={{ objects.paginator.num_pages }}" class="last__page{% if places.number == places.paginator.num_pages %} pager__active{% endif %}">последняя</a>
+    </div>
+    <div class="pager__pages">
+    </div>
+</div>

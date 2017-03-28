@@ -1,0 +1,96 @@
+{% extends "index.html" %}
+{% load comments %}
+{% load thumbnail %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> /
+        <a title="Новости {{ CITY.genitive }}" href="{% url news_list %}">Новости {{ CITY.genitive }}</a> /
+        {{ object.title }}
+    </div>
+{% endblock %}
+
+{% block seo-header %}{% endblock %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+    {% if user.profile.access_to_dasboard or user.is_superuser %}
+        <h1 class="page-title editable">
+        <span class="page-title__title">
+            {% if seo.heading.value %}
+                {{ seo.heading.value }}
+            {% else %}
+                {{ object.title }}
+            {% endif %}
+        </span>
+        {% if seo.tooltip.value %}
+            <i class="help-icon show-help"></i>
+        {% endif %}
+        <span class="editable__buttons">
+        <a href="{% url control_news_edit object.pk %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+    </span>
+    {% else %}
+        <h1 class="page-title">
+        <span class="page-title__title">
+            {% if seo.heading.value %}
+                {{ seo.heading.value }}
+            {% else %}
+                {{ object.title }}
+            {% endif %}
+        </span>
+        {% if seo.tooltip.value %}
+            <i class="help-icon show-help"></i>
+        {% endif %}
+    {% endif %}
+    </h1>
+
+    <p class="meta1">{{ object.pub_date|date:"j F Y"|lower }}</p>
+    {% if object.image %}
+        <p><img src="{% thumbnail object.get_image 1120x520 crop %}"></p>
+    {% endif %}
+    <p>{{ object.full_text|safe }}</p>
+
+    {% with object.tags.all as tags %}
+        {% include "tagging/_tag_block.html" %}
+    {% endwith %}
+    <p></p>
+    <div class="clr"></div>
+    <div id="comments" class="comments">
+        {% get_comment_count for object as comment_count %}
+        {% if user.is_authenticated %}
+            <div class="comments__post clearfix comment_form">
+                <h3>Отзывы <span class="count">({{ comment_count }})</span></h3>
+                <span class="pseudo_link post__button open_form">Позвольте, я скажу!</span>
+                <div class="obj_comment_subscribe">
+                {% if not is_subscribed %}
+                    <a href="{% url news_comment_subscribe object.slug %}">Сообщать о новых комментариях</a>
+                {% else %}
+                    <a href="{% url news_comment_unsubscribe object.slug %}">Не сообщать о новых комментариях</a>
+                {% endif %}
+                </div>
+                <div class="post__form form" style="display: none">{% render_comment_form for object %}</div>
+            </div>
+        {% else %}
+            {% include "comments/_no_access.html" %}
+        {% endif %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><i>{{ message }}</i></li>
+                {% endfor %}
+            </ul>
+            <br>
+        {% endif %}
+        {% render_comment_list for object %}
+    </div>
+
+{% endblock %}
+
+{% block yandex_share %}
+    {% include "widgets/yashare.html" %}
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

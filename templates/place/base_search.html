@@ -1,0 +1,22 @@
+{% extends "place/base.html" %}
+{% block search_block %}
+<div class="search">
+    <form action="{% url place.views.search_by_name %}" method="get" class="form">
+        <table>
+            <tr>
+                <td class="search__field">
+                    <input type="text" id="search_place" name="t" value="{{ t }}" class="search__input" placeholder="поиск" />
+                </td>
+                <td class="search__submit">
+                    <span class="btn">
+                        <span class="btn__text">Найти</span>
+                        <input type="submit" class="btn__input" value="Найти" />
+                   </span>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% endblock %}
+
+

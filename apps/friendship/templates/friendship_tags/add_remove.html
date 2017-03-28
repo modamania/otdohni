@@ -1,0 +1,9 @@
+<p>Хочет быть вашим другом</p>
+<span class="btn-group">
+	<a href="{% url add_friendship to_user.id %}" class="btn btn_theme_blue">
+	    <span class="btn__text">+ Добавить в друзья</span>
+	</a>
+	<a href="{% url remove_friendship to_user.id %}" class="btn btn_theme_blue">
+	    <span class="btn__text">Отказать</span>
+	</a>
+</span>

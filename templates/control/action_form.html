@@ -1,0 +1,130 @@
+{% extends "control/index.html" %}
+
+{% load thumbnail i18n assets event_tags control_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> / <a title="Заведения" href="{% url control.views.action_list %}">Конкурсы</a> /
+    </div>
+{% endblock %}
+{% block content-header %}
+    {% if action %}<h1>Редактирование конкурса «{{ action }}»</h1>{% else %}<h1>Создание нового конкурса</h1>{% endif %}
+{% endblock %}
+{% block content %}
+    <form action="." method="POST" enctype="multipart/form-data" class="form form_place_edit zf">
+        {% csrf_token %}
+        <div class="tabbed">
+            <div class="control_toolbar">
+                <div class="toolbar__buttons">
+            <span class="btn_wrapper">
+                <ins class="l"></ins>
+                <ins class="r"></ins>
+                <input type="submit" class="btn" value="Сохранить" />
+            </span>
+                </div>
+                <ul class="tabs tabs_type_skewed">
+                    <li class="tabs-item tabs-item_state_current" data-tabname="general"><span class="pseudo-link">Общее</span></li>
+                    {% if action %}
+                        <li class="tabs-item" data-tabname="polls"><span class="pseudo-link">Голосования</span></li>
+                        <li class="tabs-item" data-tabname="winners"><span class="pseudo-link">Победители</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="pane pane_state_visible">
+                <!--ОБЩЕЕ-->
+                <table class="form_vertical">
+                    <tr>
+                        <td class="form_row">
+                            {{ form.is_published }}
+                            {{ form.is_completed }}
+                        </td>
+                    </tr>
+		    <tr>
+                        <td class="form_row place_title"><h4>{{ form.sites.label_tag }}</h4>{{ form.sites }}</td>
+                    </tr>
+                    <tr>
+                        <td class="form_row input_text place_title">
+                            <h4>{{ form.title.label_tag }}</h4>
+                            <p class="field">{{ form.title }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_row place_title" {% if not form.slug.value %}style="display:none;"{% endif %}><h4>{{ form.slug.label_tag }}</h4>{{ form.slug }}</td>
+                    </tr>
+                    <tr>
+                        <td class="form_row place_title"><h4>{{ form.image.label_tag }}</h4>{{ form.image }}</td>
+                    </tr>
+                    <tr>
+                        <td class="form_row place_title"><h4>{{ form.short_text.label_tag }}</h4>{{ form.short_text }}</td>
+                    </tr>
+                    <tr>
+                        <td class="form_row place_title"><h4>{{ form.full_text.label_tag }}</h4>{{ form.full_text }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            {% if action %}
+                <div class="pane clearfix">
+                    {% include "control/action_poll_list.html" %}
+                    {% include "control/action_winners_list.html" %}
+                </div>
+                <div class="pane clearfix">
+                    {% include "control/action_winners_list.html" %}
+                </div>
+            {% endif %}
+
+            <div class="submit">
+        <span class="btn_wrapper">
+            <ins class="l"></ins>
+            <ins class="r"></ins>
+            <div style="display:none;">{{ form.pub_date }}</div>
+            <input type="submit" class="btn" value="Сохранить" />
+        </span>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}elfinder/css/elfinder.css" type="text/css" media="screen" charset="utf-8">
+    <link href="{{ STATIC_URL }}elrte/css/django-elrte.css" type="text/css" media="all" rel="stylesheet">
+    <link href="{{ STATIC_URL }}elrte/css/elrte.full.css" type="text/css" media="all" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+
+    {% assets  "js_ui" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+    {% assets  "control_js" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+
+
+    <script type="text/javascript">
+
+        $(function(){
+
+            // datepicker
+            $.datepicker.setDefaults(
+                    $.extend($.datepicker.regional["ru"])
+            );
+            $(".input_date input").datepicker({
+                showOn: "button",
+                buttonImageOnly: true,
+                buttonImage: "{{ STATIC_URL}}admin/img/admin/icon_calendar.gif",
+                dateFormat: "yy-mm-dd",
+            });
+
+            $(".promo__tab").removeClass("visible");
+        });
+
+    </script>
+
+
+
+{% endblock %}

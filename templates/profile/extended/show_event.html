@@ -1,0 +1,43 @@
+{% load rating_tags event_tags %}
+
+<li class="box user-events__item">
+    <div class="rating">
+        {% ratingform event %}
+    </div>
+    <span class="meta">{{ event.category }}</span>
+
+    <h4 class="title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h4>
+    <div class="summary">{{ event.intro|striptags }}</div>
+    {% if places_list %}
+        {% if places_list.count > 1 %}
+            Идет в <a href="{{ event.get_absolute_url }}#schedule">
+                {{ places_list.count }}
+                {% if event.is_movie %}
+                    кинотеатрах
+                {% else %}
+                    заведениях
+                {% endif %}
+            </a> 
+            {% if event.start_date %}
+                <span class="meta">
+                    с {{ event.start_date|date:"j F Y" }}
+                </span>
+            {% endif %} 
+        {% else %}
+            <span class="meta">
+                <a href="{{ places_list.0.get_absolute_url }}">{{ places_list.0 }}</a>, 
+                {% if event.start_date %}
+                    {{ event.start_date|date:"j F Y" }}
+                {% endif %} 
+                {# Не боишся что может быть указанно время, но не дата начала? #}
+                {# {{ event.start_time|time:"G:i" }} #}
+            </span>
+        {% endif %}
+    {% else %}
+        {% if event.start_date %}
+            <span class="meta">
+                С {{ event.start_date|date:"j F Y" }}
+            </span>
+        {% endif %} 
+    {% endif %}
+</li>

@@ -1,0 +1,18 @@
+{% load event_tags %}
+
+<div class="event__extra__info__detail">
+    {% if place %}
+        <a href="{{ place.get_absolute_url }}" class="place__event__detail">{{ place.name }}</a>,
+    {% endif %}
+    <span class="start_time__event__detail">
+        {% if today %}
+            {{ start_date|date:"j E" }} {{ start_time|time:"G:i" }}
+        {% else %}
+            {% if one_time %}
+                {{ start_date|date:"j E" }}
+            {% else %}
+                c {{ start_date|date:"j E" }}
+            {% endif %}
+        {% endif %}
+    </span>
+</div>

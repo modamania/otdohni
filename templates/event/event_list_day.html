@@ -1,0 +1,42 @@
+{% extends 'event/event_list.html' %}
+{% load thumbnail event_tags %}
+
+{% block event_list %}
+
+<p class="event_date"><span>{{ day|date:"l, j F Y" }}</span></p>
+
+{% regroup event_list by category.title|title as categories %}
+{% for category in categories %}
+    <h3>{{ category.grouper }} {{ CITY.genitive }}</h3>
+        
+        {% for event in category.list %}
+        {% thumbnail event.image 128x84 crop as im %}
+        <div class="event_list__item clearfix">
+            <div class="thumb shadowed">
+                {% if seo.heading.value %}
+                <a title="{{ event.title }} - {{ seo.heading.value }}" href="{{ event.get_absolute_url }}">
+                {% else %}
+                <a title="{{ event.title }} - {{ category.grouper }}" href="{{ event.get_absolute_url }}">
+                {% endif %}
+                    {% if im %}<img alt="{{ event.title }}" src="{{ im }}" />{% else %}<span class="no_photo"></span>{% endif %}
+                </a>
+                <img src="/static/i/shadow.png" alt="" class="shadow" />
+            </div>
+            <h4 class="event__title">
+                {% if seo.heading.value %}
+                <a title="{{ event.title }} - {{ seo.heading.value }}" href="{{ event.get_absolute_url }}">
+                {% else %}
+                <a title="{{ event.title }} - {{ category.grouper }}" href="{{ event.get_absolute_url }}">
+                {% endif %}
+                    {{ event.title }}</a>
+                {% if event.kinohod_id %}
+                    <span class="buy_ticket kh_boxoffice" data="{'city':'{{ CITY }}', 'movie':{{ event.kinohod_id }}}"></span>
+                {% endif %}
+            </h4>
+            {% shedule_for_event event day %}
+        </div>
+        {% endfor %}
+{% endfor %}
+
+{% endblock %}
+

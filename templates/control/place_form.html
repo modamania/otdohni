@@ -1,0 +1,233 @@
+{% extends "control/index.html" %}
+
+{% load thumbnail i18n assets event_tags control_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> / <a title="Заведения" href="{% url control.views.place_list %}">Заведения</a> /
+    </div>
+{% endblock %}
+{% block content-header %}
+{% if place %}<h1>Редактирование заведения «{{ place }}»</h1>{% else %}<h1>Создание нового заведения</h1>{% endif %}
+{% endblock %}
+{% block content %}
+<form action="." method="POST" enctype="multipart/form-data" class="form form_place_edit zf">
+{% csrf_token %}
+<div class="tabbed">
+    <div class="control_toolbar">
+        <div class="toolbar__buttons">
+            <span class="btn_wrapper">
+                <ins class="l"></ins>
+                <ins class="r"></ins>
+                <input type="submit" class="btn" value="Сохранить" />
+            </span>
+        </div>
+        <ul class="tabs tabs_type_skewed">
+            <li class="tabs-item tabs-item_state_current" data-tabname="general"><span class="pseudo-link">Общее</span></li>
+            <li class="tabs-item" data-tabname="promo"><span class="pseudo-link">Минисайт</span></li>
+            {% if place %}
+                <li class="tabs-item" data-tabname="addresses"><span class="pseudo-link">Адреса</span></li>
+                <li class="tabs-item" data-tabname="photo"><span class="pseudo-link">Фотографии</span></li>
+                <li class="tabs-item" data-tabname="f4"><span class="pseudo-link">Foursquare фотографии</span></li>
+            {% endif %}
+            <li class="tabs-item" data-tabname="seo"><span class="pseudo-link">SEO</span></li>
+            <li class="tabs-item" data-tabname="stat"><span class="pseudo-link">Статистика</span></li>
+        </ul>
+    </div>
+    <div class="pane pane_state_visible">
+        {{ form.errors }}
+        <!--ОБЩЕЕ-->
+        <table class="form_vertical">
+            <tr>
+                <td class="form_row input_text place_title">
+                    <h4>Название</h4>
+                    <p class="field">{{ form.name }}</p>
+                </td>
+                <td class="place_published">
+                    <p class="form__row input_checkbox">{{ form.is_published }} {{ form.is_published.label_tag }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="form__row input_checkbox">{{ form.foursquare_show }} {{ form.foursquare_show.label_tag }}</p>
+                </td>
+                <td></td>
+            </tr>
+	    <tr>
+                <td class="form_row place_title"><h4>Сайты</h4>{{ form.sites }}</td>
+            </tr>
+            <tr>
+                <td class="form_row input_text place_title">
+                    <h4>{{ form.url.label_tag }} заведения</h4>
+                    <span>{{ form.url.errors }}</span>
+                    <p class="field">{{ form.url }}</p>
+                </td>
+                <td class="form_row input_text place_title">
+                    <h4>{{ form.email.label_tag }}</h4>
+                    <span>{{ form.email.errors }}</span>
+                    <p class="field">{{ form.email }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h4>{{ form.url_is_follow.label_tag }}</h4>
+                    <span>{{ form.url_is_follow.errors }}</span>
+                    <p class="field">{{ form.url_is_follow }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="form_row input_text place_title">
+                    <h4>Разместить во вкладках</h4>
+                    <p class="form__row input_checkbox">{{ form.expert_choice }} {{ form.expert_choice.label_tag }}</p>
+                    <p class="form__row input_checkbox">{{ form.is_sponsor }} {{ form.is_sponsor.label_tag }}</p>
+                    <p class="form__row">{{ form.sponsor_logo.label_tag }}: {{ form.sponsor_logo }} </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="form_row place_title" colspan="2"><h4>Категория</h4>{{ form.category }}</td>
+            </tr>
+            <tr>
+                <td class="form_row place_title" colspan="2"><h4>Теги</h4>{{ form.tagging }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="pane promo__tab visible clearfix">
+        <!--ПРОМО-->
+            <div class="form__row">
+                <button id="mark_as_update">Обновить промо</button>
+                {{ form.date_mark_as_new }}
+            </div>
+            <p class="promo_toggle">
+                <span class="promo_toggle__off pseudo-link{% if place.promo_is_up %} hidden{% endif %}">Выключена</span>
+                <span class="promo_toggle__on pseudo-link{% if not place.promo_is_up %} hidden{% endif %}">Включена</span>
+                <span class="promo_period">
+                    <span class="form__row input_date">с {{ form.date_promo_up }} по {{ form.date_promo_down }}</span>
+                    <span class="promo__input hidden">{{ form.promo_is_up }}</span>
+                </span>
+            </p>
+
+            <div class="form__row">
+                <p class="form__row">{{ form.priority.label_tag }}: {{ form.priority }} </p>
+            </div>
+
+            <div class="form__row">
+                <h4>{{ form.logotype.label_tag }}</h4>
+                {{ form.logotype }}
+                {{ form.logotype.errors }}
+                {% if place.logotype %}<br /><img src="{{ place.logotype.thumbnail }}" alt="" /><br />{% endif %}
+            </div>
+            <hr />
+            <div class="form__row place_title">
+                <h4>{{ form.flash3d.label_tag }}</h4>
+                <div class="field">{{ form.flash3d }}</div>
+                {{ form.flash3d.errors }}
+            </div>
+            <hr />
+            <dl class="form__row input_checkbox">
+                <h4>{{ form.photo.label_tag }}</h4>
+                <dd class="field">{{ form.photo }}{% if place.photo %}<br /><img src="{{ place.photo.thumbnail }}" alt="" />{%endif%}</dd>
+            </dl>
+            </dl>
+            <h4>{{ form.description.label_tag }}</h4>
+            {{ form.description.errors }}
+            {{ form.description }}
+    </div>
+
+    {% if place %}
+        <div class="pane">
+            {% include "control/place_address.html" %}
+        </div>
+    {% endif %}
+
+
+    {% if place %}
+        <div class="pane clearfix">
+            {% include "control/place_gallery.html" %}
+        </div>
+    {% endif %}
+
+
+    {% if place %}
+        <div class="pane clearfix">
+            {% include "control/place_fs_gallery.html" %}
+        </div>
+    {% endif %}
+
+    <div class="pane">
+        <!--SEO-->
+        <dl class="form__row input_text"><dt class="label">{{ form.logotype_alt.label_tag }}</dt><dd class="field">{{ form.logotype_alt }}</dd>
+        <dd class="field">
+            {{ form.logotype.thumbnail }}
+        </dd>
+        </dl>
+        <dl class="form__row input_text"><dt class="label">{{ form.photo_alt.label_tag }}</dt><dd class="field">{{ form.photo_alt }}</dd></dl>
+    </div>
+
+    <div class="pane hits">
+        <p>Просмотры: {{ place.hits }}</p>
+        {% if place.url %} <p>Переходы на сайт: {{ place.urlhits }}</p>{% endif %}
+    </div>
+
+    <div class="submit">
+        <span class="btn_wrapper">
+            <ins class="l"></ins>
+            <ins class="r"></ins>
+            <input type="submit" class="btn" value="Сохранить" />
+        </span>
+    </div>
+</div>
+</form>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}elfinder/css/elfinder.css" type="text/css" media="screen" charset="utf-8">
+    <link href="{{ STATIC_URL }}elrte/css/django-elrte.css" type="text/css" media="all" rel="stylesheet">
+    <link href="{{ STATIC_URL }}elrte/css/elrte.full.css" type="text/css" media="all" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+
+    {% assets  "js_ui" %}
+      <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+      </script>
+    {% endassets %}
+
+    {% assets  "control_js" %}
+      <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+      </script>
+    {% endassets %}
+
+
+
+<script type="text/javascript">
+
+        $(function(){
+
+            // datepicker
+            $.datepicker.setDefaults(
+                $.extend($.datepicker.regional["ru"])
+            );
+            $(".input_date input").datepicker({
+                    showOn: "button",
+                    buttonImageOnly: true,
+                    buttonImage: "{{ STATIC_URL}}admin/img/admin/icon_calendar.gif",
+                    dateFormat: "yy-mm-dd",
+            });
+
+            $(".promo__tab").removeClass("visible");
+
+            $('#mark_as_update').click(function (e) {
+                e.preventDefault();
+                var d = new Date();
+                var val = d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':00';
+                $(this).siblings('input').val(val);
+                return false;
+            })
+        });
+
+</script>
+
+
+
+{% endblock %}

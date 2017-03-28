@@ -1,0 +1,11 @@
+<div class="widget widget_nav">
+    <h3 class="widget__title">Афиша {{ CITY.genitive }}</h3>
+    <ul>
+    {% for category in categories %}
+        <li>
+            <a title="{{ category.title }} {{ CITY.genitive }}" href="{% url event_category_list category.slug %}">{{ category.title|title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+

@@ -1,0 +1,9 @@
+{% extends "place/base_search.html" %}
+{% block pathway %}
+<div class="pathway">
+    <a title="Отдых и развлечения в Омске" href="/">Главная</a> / <a title="Места отдыха {{ CITY.genitive }}" href="/places/">Места отдыха {{ CITY.genitive }}</a> /
+    <a title="{{ tag.name }} {{ CITY.genitive }}" href="/places/tag/{{ tag.slug }}">{{ tag.name }} {{ CITY.genitive }}</a> /
+</div>
+{% endblock %}
+
+{% block h1 %}Места отдыха с тегом «{{ tag.name }}»{% endblock %}

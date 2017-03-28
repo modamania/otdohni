@@ -1,0 +1,19 @@
+{% load thumbnail %}
+
+<div class="widget widget__tea">
+    <h3 class="widget__title">Беседовали за чаем</h3>
+    {% for interview in interviews %}
+    <div class="widget__item">
+        <div class="widget__thumb thumb shadowed">
+            {% thumbnail interview.image 160x105 crop=",5"  quality=95 as im %}
+            <a title="" href="{{ interview.get_absolute_url }}">
+                <img src="{{ im }}" alt="{{ interview }}" />
+            </a>
+            <img src="/static/i/shadow.png" alt="" class="shadow">
+        </div>
+        <p><a href="{{ interview.get_absolute_url }}">{{ interview }}</a></p>
+    </div>
+    {% empty %}
+    {% endfor %}
+    <p><a href="{% url interview_list %}">Все гости рубрики</a></p>
+</div>

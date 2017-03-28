@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <pre>
+            {{ json }}
+        </pre>
+        <script type="text/javascript">
+            parDoc = window.parent.document;
+            var pre = document.getElementsByTagName('pre');
+            if (pre){
+                var json = JSON.parse(pre[0].innerHTML);
+                var image_url = json['image_url'];
+                var form_num = json['form_num'];
+                var thumb_url = json['image_thumb_url'];
+                var inst_id = json['gallery_id'];
+
+                var form = parDoc.getElementById("form_" + form_num);
+                if (thumb_url){
+                    window.parent.changePreview(form_num, thumb_url);
+                };
+                if (image_url){
+                    window.parent.changePopup(form_num, image_url, inst_id);
+                };
+
+                var popup = form.parentElement;
+                window.parent.setCrop(popup);
+            }
+        </script>
+    </body>
+</html>

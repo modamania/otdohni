@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% load comments %}
+{% load thumbnail %}
+
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+    {% get_comment_count for object as comment_count %}
+
+    <h1 class="article">{% block content-inhead %}{{ object.title }}{% endblock %}</h1>
+    <p class="meta">{{ object.pub_date|date:"d F Y"|lower }}</p>
+    {% if object.image %}
+        <div class="image"><img src="{% thumbnail object.get_image 350x250 %}"></div>
+    {% endif %}
+    <div class="intro">
+        <p>{{ object.short_text|safe }}</p>
+    </div>
+    <p>{{ object.full_text|safe }}</p>
+
+    {% with object.tags.all as tags %}
+        {% include "tagging/_tag_block.html" %}
+    {% endwith %}
+    <p align="right"><strong>{{ object.author }}</strong></p>
+    <div class="clr"></div>
+    <div id="comments" class="comments">
+        {% if user.is_authenticated %}
+            <div class="comments__post clearfix comment_form">
+                <span class="pseudo_link post__button open_form">Позвольте, я скажу!</span>
+                <div class="post__form form" style="display: none">{% render_comment_form for object %}</div>
+            </div>
+        {% else %}
+            {% include "comments/_no_access.html" %}
+        {% endif %}
+        {% render_comment_list for object %}
+    </div>
+
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

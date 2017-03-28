@@ -1,0 +1,93 @@
+.icon {
+  @include inline-block;
+  @include square(16px);
+
+  cursor: pointer;
+  top: -1px;
+
+  &-en {
+    @include square(20px);
+    font-family: 'Entypo';
+    font-size: 40px;
+    line-height: 20px;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+  }
+
+  &_doc,
+  &_xls,
+  &_pdf,
+  &_txt {
+    position: relative;
+
+    &:after {
+      @include inline-block(top);
+      @include square(32px);
+      float: left;
+      overflow: hidden;
+      top: 0;
+      margin-right: 0.5em;
+      background-image: image-url('sprite.png');
+    }
+  }
+
+  &_pdf:after {
+      background-position: -80px -32px;
+  }
+  &_doc:after {
+      background-position: -112px -32px;
+  }
+  &_xls:after {
+      background-position: -144px -32px;
+  }
+  &_txt:after {
+      background-position: -176px -32px;
+  }
+
+  &-map{
+    &:after {
+      content: 'U+E727';
+    }
+  }
+
+  &_close {
+    @extend .icon;
+    position: absolute;
+
+    &:after {
+      @include square(16px);
+      display: block;
+      overflow: hidden;
+      background-image: image-url('sprite.png');
+      background-position: -16px -48px;
+    }
+
+    &:hover {
+      &:after {
+        background-position: -16px -16px;
+      }
+    }
+
+    &_thin {
+      top: 0.5em;
+      right: 0.5em;
+
+      &:after {
+        background-position: -32px 0;
+      }
+
+      &:hover {
+        &:after {
+          background-position: -32px -16px;
+        }
+      }
+    }
+  }
+}
+
+
+
+

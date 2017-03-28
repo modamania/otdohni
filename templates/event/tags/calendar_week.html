@@ -1,0 +1,12 @@
+<div class="calendar__week">
+    {% for monthday in days %}
+            <a class="calendar__week__day{% if forloop.first %} calendar__week__day_today{% endif %}{% if monthday.holidays %} holidays{% endif %}" href="{{ monthday.url }}">{{ monthday.weekday }}
+            <br /><span>{{ monthday.day }}</span> </a>
+    {% endfor %}
+    <span class="calendar__week__day arr" id="toggle_calendar"><br /><span class="pseudo_link">&darr;</span></span>
+
+    <script type='text/javascript'>
+        var calendar_prefix = '{{ prefix }}';
+    </script>
+
+</div>

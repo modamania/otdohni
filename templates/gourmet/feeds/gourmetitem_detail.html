@@ -1,0 +1,14 @@
+{% load comments %}
+{% load thumbnail %}
+
+<h1 class="article">{% block content-inhead %}{{ object.title }}{% endblock %}</h1>
+<p class="meta">{{ object.pub_date|date:"d F Y" }}</p>
+{% if object.image %}
+    <div class="image"><img src="{% thumbnail object.get_image 150x150 %}"></div>
+{% endif %}
+<div class="intro">
+    <p>{{ object.short_text|safe }}</p>
+</div>
+<p>{{ object.full_text|safe }}</p>
+<p align="right"><strong>{{ object.user }}</strong></p>
+<div class="clr"></div>

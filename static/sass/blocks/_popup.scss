@@ -1,0 +1,17 @@
+.popup {
+  @include box-shadow(0 10px 25px -5px rgba(0,0,0,.4));
+  position: absolute;
+  padding: 2em 1em;
+  background: #fff;
+  margin-left: -2em;
+
+  &__title {
+    font-size: 1.25em;
+    font-weight: normal;
+    margin-bottom: 0.75em;
+	}
+
+	.shadow {
+    margin-top: 2px;
+	}
+}

@@ -1,0 +1,205 @@
+fieldset {padding:1.4em;margin:1.5em 0;border:1px solid #ccc;}
+
+legend {font-weight:bold;font-size:1.2em;}
+
+fieldset input[type=text],
+fieldset input[type=password],
+fieldset input.text,
+fieldset input.title,
+fieldset textarea,
+fieldset select {background-color:#fff;border:1px solid #bbb;}
+
+fieldset input.text,
+fieldset input.title {width:300px;padding:5px;}
+fieldset input.title {font-size:1.5em;}
+fieldset textarea {padding:5px;}
+fieldset input[type=checkbox],
+fieldset input[type=radio],
+fieldset input.checkbox,
+fieldset input.radio {position:relative;top:.25em;}
+
+#metadatapath_form .wide {width:75%;}
+#metadatapath_form textarea {width:74%;}
+
+.form {
+  &_layout {
+    &_horiz {
+      .form-label {
+        float: left;
+        width: 10em;
+        margin: 0 -100% 0 0;
+        padding: 0;
+      }
+      .form-input {
+        display: block;
+        position: relative;
+        top: -3px;
+        max-width: 40em;
+        margin: 0 0 0 11em;
+        padding: 0;
+      }
+    }
+  }
+}
+
+.form dl, .form__row {
+  clear:left;
+  margin: 0 0 1.25em;
+  position: relative;
+}
+
+.form_horizontal dl,
+.form_horizontal .form__row {
+  margin: 0 0 1.25em 10em;
+}
+
+.form .label {line-height: normal; position: relative;}
+.form_horizontal .label {float: left; left: -10em; margin-right: -100%; padding-top: 0.25em; width: 9em;}
+.form_vertical .label {margin-bottom: 0.25em;}
+.form_vertical .form_row {margin-left: 0;}
+
+.form .field, .form .submit {position: relative;}
+.form_vertical textarea {width: 560px;}
+.form .input_checkbox input, .form .input_radio input  {vertical-align: middle;;}
+.form .input_date .day {width: 2.5em;}
+.form .input_date .year {width: 3.5em;}
+.form .input_date .month {width: 8em;}
+.form .textarea textarea {}
+
+.form .invalid .field input {background: #fee; border: 1px solid #f00;}
+
+.form .submit {padding-top: 1em;}
+
+.form .errorlist {
+    color: #f00;
+}
+.form .note {
+    display: block;
+    font-size: 0.847em;
+    margin-top: 0.25em;
+}
+
+
+.form-control {
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form-input {
+  &__input {
+    @include transition(border-color .3s);
+    @include box-sizing(border-box);
+    @include rect(100%, 2em);
+
+    padding: .25em .5em;
+    border: 1px solid $brand-blue;
+    background: #fff;
+
+    &:focus {
+      border-color: $brand-blue;
+    }
+
+    &.error {
+      margin-bottom: .25em;
+    }
+  }
+
+  &__textarea {
+    @include transition(border-color .3s);
+
+    width: 100%;
+    max-width: 100%;
+
+    &:focus {
+      border-color: $brand-blue;
+    }
+
+    &.error {
+      border-style: solid;
+      margin-bottom: .5em;
+    }
+  }
+
+  select {
+    @include transition(border-color .3s);
+
+    &:focus {
+      border-color: $brand-blue;
+    }
+  }
+
+  label {
+    &.error {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+  }
+}
+
+.form-label {
+  .form-control_required_yes & {
+    &:after {
+      display: inline-block;
+      content: '*';
+      color: red;
+    }
+  }
+}
+
+.captcha {
+  margin-right: 1.5em;
+}
+
+.form-fieldset {
+  padding: 0;
+  border: none;
+
+  &.fieldset-debug {
+    border: 1px dotted $brand-blue;
+    padding: 1em;
+  }
+
+  &.zf-disabled {
+    display: none;
+  }
+}
+
+.zf-date-box {
+  .zf-picker {
+    .zf-opener {
+      width: 10px; 
+      height: 2em;
+      background: transparent url(../zforms/i/zf-sprite.png);
+      background-position: -27px .7em;
+      background-repeat: no-repeat;
+      display: inline-block;
+    }
+  }
+}
+
+.feedback-form {
+  @include container;
+  $width: span(1 of 3);
+  $gutter: gutters(1/14);
+
+  position: relative;
+  padding-right: span(1 of 3);
+
+    &__notes {
+      @include box-sizing(border-box);
+
+      font-size: 13px;
+      position: absolute !important;
+      right: 0;
+      margin: 0;
+      width: span(1 of 3);
+      padding: 0 1.5em;
+      border: none;
+
+      &.zf-disabled {
+        display: none;
+      }
+    }
+}

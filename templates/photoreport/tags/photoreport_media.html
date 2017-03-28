@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="{{ STATIC_URL }}css/scrollable-vertical.css" type="text/css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/scrollable-buttons.css" type="text/css">
+<script>
+    // execute your scripts when the DOM is ready. this is mostly a good habit
+    $(document).ready(function() {
+
+        // initialize scrollable
+        $(".scrollable").scrollable({
+            vertical: true,
+            mousewheel: true
+        });
+
+        // get handle to element that wraps the image and make it semi-transparent
+        var wrap = $("#photo_wrap");
+        var img = new Image();
+
+        img.onload = function(url, full_url) {
+            wrap.fadeTo("medium", 0.5);
+            wrap.fadeTo("fast", 1);
+            wrap.find("img").attr("src", url);
+            wrap.find("img").parent().attr("href", full_url);
+            
+        };
+
+        //load in wrap container prev or next photo
+        var changePhoto = function(arrow) {
+            var api =  $(".scrollable").data("scrollable");
+            var active = api.getItems().find('.active')
+            
+            if((arrow=='prev')&&(active.parent().prev().length>0)) {
+                var url = active.removeClass('active').parent().prev().find('img').addClass('active').attr('rel');
+            } else if((arrow=='next')&&(active.parent().next().length>0)) {
+                var url = active.removeClass('active').parent().next().find('img').addClass('active').attr('rel');
+            }
+            
+            var full_url = api.getItems().find('.active').attr('alt');
+            var active = api.getItems().find('.active');
+            api.seekTo(active.parent().index()-2);
+            img.onload(url, full_url);
+        };
+
+        //load photo to wrap container if clicked preview in photo widget
+        //$(".items img").click(function() {
+
+        //    var api =  $(".scrollable").data('scrollable');
+        //    // see if same thumb is being clicked
+        //    if ($(this).hasClass("active")) { return; }
+
+        //    // calclulate large image's URL based on the thumbnail URL (flickr specific)
+        //    var url = $(this).attr("rel");
+        //    var full_url = $(this).attr("alt");
+
+        //    img.onload(url, full_url);
+
+        //    // activate item
+        //    $(".items img").removeClass("active");
+        //    $(this).addClass("active");
+        //    var active = api.getItems().find('.active')
+        //    api.seekTo(active.parent().index()-2)
+
+        //});
+
+        //$('a.prev-photo').click(function() { 
+        //    changePhoto('prev');
+        //    return false;
+        //});
+
+        //$('a.next-photo').click(function() { 
+        //    changePhoto('next');
+        //    return false;
+        //});
+
+    });
+</script>
+

@@ -1,0 +1,70 @@
+{% extends "profile/base.html" %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Профиль" href="{% url profile.views.profile_show user.pk %}">Профиль</a> /
+    </div>
+{% endblock %}
+{% block content-header %}
+    <h1>Редактировать личные данные</h1>
+{% endblock %}
+{% block content %}
+<div class="edit_user_photo clearfix">
+    <div id="image_avatar" class="profile__userpic">
+        <img alt="{{ user }}" src="{% if user.profile.userpic %}{{ user.profile.userpic.thumbnail }}{% else %}/static/i/no_avatar.png{% endif %}" />
+    </div>
+    <div class="user_photo__upload">
+        <form action="." method="POST" enctype="multipart/form-data">
+            <h3>Загрузить аватар</h3>
+            {{ profile_userpic_form.userpic }}
+            <p class="note">JPG, GIF или PNG.<br>Максимальный размер файла &mdash; 2Мб.</p>
+            <p class="submit">
+                <span class="btn btn_theme_blue">
+                    <span class="btn__text">Загрузить</span>
+                    <input type="submit" class="btn__input">
+                </span>
+            </p>
+            {% csrf_token %}
+            <input type="hidden" name="this_form_for" value="userpic" />
+        </form>
+    </div>
+</div>
+<div class="tabbed edit_user_params">
+    <form action="." method="POST" enctype="multipart/form-data" class="form form_horizontal">
+        <h3>Основное</h3>
+
+        <dl class="form__row input_text"><dt class="label">{{ profile_edit_form.first_name.label_tag }}</dt><dd class="field">{{ profile_edit_form.first_name }} {{profile_edit_form.first_name.errors}}</dd></dl>
+        <dl class="form__row input_text"><dt class="label">{{ profile_edit_form.last_name.label_tag }}</dt><dd class="field">{{ profile_edit_form.last_name }} {{profile_edit_form.last_name.errors}}</dd></dl>
+        <dl class="form__row input_text"><dt class="label">{{ profile_edit_form.email.label_tag }}</dt><dd class="field">{{ profile_edit_form.email }} {{profile_edit_form.email.errors}}</dd></dl>
+        
+        <h3>Дополнительная информация</h3>
+
+        <dl class="form__row input_select"><dt class="label">{{ profile_edit_form.sex.label_tag }}</dt><dd class="field">{{ profile_edit_form.sex }}</dd></dl>
+        <dl class="form__row input_date"><dt class="label">{{ profile_edit_form.birthday.label_tag }}</dt><dd class="field">{{ profile_edit_form.birthday }} {{profile_edit_form.birthday.errors}}</dd></dl>
+        <dl class="form__row input_text"><dt class="label">{{ profile_edit_form.country.label_tag }}</dt><dd class="field">{{ profile_edit_form.country }}</dd></dl>
+        <dl class="form__row input_text"><dt class="label">{{ profile_edit_form.city.label_tag }}</dt><dd class="field">{{ profile_edit_form.city }}</dd></dl>
+        <dl class="form__row input_text hidden"><dt class="label">{{ profile_edit_form.web_site.label_tag }}</dt><dd class="field">{{ profile_edit_form.web_site }}</dd></dl>
+        <dl class="form__row input_text hidden"><dt class="label">{{ profile_edit_form.icq.label_tag }}</dt><dd class="field">{{ profile_edit_form.icq }}</dd></dl>
+        <dl class="form__row input_text hidden"><dt class="label">{{ profile_edit_form.profession.label_tag }}</dt><dd class="field">{{ profile_edit_form.profession }}</dd></dl>
+        <dl class="form__row input_text hidden"><dt class="label">{{ profile_edit_form.company.label_tag }}</dt><dd class="field">{{ profile_edit_form.company }}</dd></dl>
+        <dl class="form__row input_text hidden"><dt class="label">{{ profile_edit_form.address.label_tag }}</dt><dd class="field">{{ profile_edit_form.address }}</dd></dl>
+        <dl class="form__row input_text hidden"><dt class="label">{{ profile_edit_form.phone_number.label_tag }}</dt><dd class="field">{{ profile_edit_form.phone_number }}</dd></dl>
+        <dl class="form__row input_textarea hidden"><dt class="label">{{ profile_edit_form.interest.label_tag }}</dt><dd class="field">{{ profile_edit_form.interest }}</dd></dl>
+        <dl class="form__row input_textarea"><dt class="label">{{ profile_edit_form.about.label_tag }}</dt><dd class="field">{{ profile_edit_form.about }}</dd></dl>
+        
+        <h3>Сменить пароль</h3>
+
+        <dl class="form__row input_text"><dt class="label">{{ profile_edit_form.password1.label_tag }}</dt><dd class="field">{{ profile_edit_form.password1 }}</dd></dl>
+        <dl class="form__row input_text"><dt class="label">{{ profile_edit_form.password2.label_tag }}</dt><dd class="field">{{ profile_edit_form.password2 }}</dd></dl>
+        {{ profile_edit_form.password1.errors }}
+        {{ profile_edit_form.password2.errors }}
+        <dl class="form__row submit">
+            <dd class="field">
+                <span class="btn btn_theme_blue"><span class="btn__text">Сохранить</span><input type="submit" value="" class="btn__input"></span>
+            </dd>
+        </dl>
+        {% csrf_token %}
+        <input type="hidden" name="this_form_for" value="profile" />
+    </form>
+</div>
+{% endblock %}
+{% block li_profile_show %}<li class="active"><a href="{% url profile.views.profile_show user.pk %}">Профиль</a></li>{% endblock %}

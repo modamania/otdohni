@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+{% load thumbnail event_tags %}
+{% block title %}Поиск{% endblock %}
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в Омске" href="/">Главная</a> / 
+  <a title="События Омска" href="{% url event_list %}">События</a> /
+</div>
+{% endblock %}
+
+{% block content-header %}
+<h1>Поиск По названию</h1>
+<div class="b-search-page rounded clearfix">
+  <form action_dicton="/search.php">
+    <input type="text" autocomplete="off" class="b-search-page-input" value="{{ searchword }}" name="t" id="search_field">
+    <input type="submit" value="Искать" class="b-search-page-submit">
+  </form>
+  <span class="classorner rt">
+    <span></span>
+  </span>
+  <span class="corner lt">
+    <span></span>
+  </span>
+  <span class="corner rb">
+    <span></span>
+  </span><span class="corner lb">
+    <span></span>
+  </span>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="b-search-results">
+    {% for item in container_list %}
+    <div class="item">
+      <span class="num">{{ forloop.counter }}</span>
+      <h3><a title="{{ item.title }}" href="{{ item.url }}">{{ item.title }}</a></h3>
+      <p class="tags">{{ item.tags }}</p>
+      <p>{{ item.desc|safe }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% load pagination_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Отдых и развлечения в Омске" href="/">Главная</a> /  Спецпроекты
+    </div>
+{% endblock %}
+
+{% block title %}Спецпроекты Омска{% endblock %}
+
+{% block h1 %}Спецпроекты{% endblock %}
+
+{% block content %}
+
+    {% autopaginate spec_list 20 %}
+    {% for spec in spec_list %}
+
+        <div class="clearfix">
+            <h3>
+                <a href="{{ spec.get_absolute_url }}">{{ spec.title }}</a>
+            </h3>
+        </div>
+
+        {% empty %}
+        <p>Спецпроектов нет.</p>
+    {% endfor %}
+
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

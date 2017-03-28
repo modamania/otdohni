@@ -1,0 +1,40 @@
+{% load thumbnail %}
+{% load comments %}
+
+<div class="fashion_index clearfix">
+    <h2>
+        <a title="Все новости" href="{% url fashion_list %}">Мода</a>
+        <span class="fashion__rss"><a target="_blank" href="{% url fashion_feed %}">RSS</a></span>
+    </h2>
+    {% if fashion_list %}
+    {% with fashion_list.0 as first_fashion %}
+        {% get_comment_count for first_fashion as comment_count %}
+        <div class="fashion__image"><img alt="" src="{% thumbnail first_fashion.get_image 350x250 crop upscale %}" id="fashion_im"></div>
+        <div class="fashion__teaser">
+            <p>{{ first_fashion.short_text|safe }}</p>
+            <div class="meta">
+                <span class="date">{{ first_fashion.pub_date|date:"d F Y" }}</span>
+                <span class="comments">Комментариев: {{ comment_count }}</span>
+            </div>
+        </div>
+    {% endwith %}
+    <div class="fashion__leads">
+        {% for item in fashion_list %}
+            {% get_comment_count for item as comment_count %}
+            <div onclick="document.location.href='{{ item.get_absolute_url }}';" class="fashion__leads__item fashion__leads__item_first {% if forloop.first %}active{% endif %}">
+            <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+            <div class="fashion__leads__summary">
+                <p>{{ item.short_text|safe }}</p>
+                <div class="meta">
+                    <span class="date">{{ item.pub_date|date:"d F Y" }}</span>
+                    <span class="comments">Комментариев: {{ comment_count }}</span>
+                </div>
+            </div>
+            <div class="fashion__leads__item__img"><img alt="" src="{% thumbnail item.get_image 350x250 crop upscale %}" /></div>
+            <ins class="l"></ins>
+            <ins class="r"></ins>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>

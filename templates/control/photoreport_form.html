@@ -1,0 +1,138 @@
+{% extends "control/index.html" %}
+
+{% load thumbnail i18n assets event_tags control_tags form_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> / <a title="Заведения" href="{% url control.views.photoreport_list %}">Фотоотчеты</a> /
+    </div>
+{% endblock %}
+{% block content-header %}
+    {% if photoreport %}<h1>Редактирование фотоотчета «{{ photoreport }}»</h1>{% else %}<h1>Создание нового фотоотчета</h1>{% endif %}
+{% endblock %}
+{% block content %}
+        <div class="tabbed">
+            <div class="control_toolbar">
+                <div class="toolbar__buttons">
+            <span class="btn_wrapper">
+                <ins class="l"></ins>
+                <ins class="r"></ins>
+                <input type="submit" class="btn" value="Сохранить" />
+            </span>
+                </div>
+                <ul class="tabs tabs_type_skewed">
+                    <li class="tabs-item tabs-item_state_current" data-tabname="general"><span class="pseudo-link">Общее</span></li>
+                    {% if photoreport %}
+                        <li class="tabs-item" data-tabname="photo"><span class="pseudo-link">Фотографии</span></li>
+                        <li class="tabs-item" data-tabname="photo_upload"><span class="pseudo-link">Загрузить архив с фотографиями (.zip)</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="pane pane_state_visible">
+                <form action="." method="POST" enctype="multipart/form-data" class="form form_place_edit zf">
+                    {% csrf_token %}
+                    <!--ОБЩЕЕ-->
+                    <table class="form_vertical">
+                        <tr>
+                            <td class="form_row">
+                                {% form_field form 'is_published' %}
+                                {% form_field form 'on_mainpage' %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form_row place_title"><h4>Сайты</h4>{% form_field form 'sites' %}</td>
+                        </tr>
+                        <tr>
+                            <td class="form_row place_title input_date"><h4>Дата события</h4>{% form_field form 'date_event' %}</td>
+                        </tr>
+                        <tr>
+                            <td class="form_row input_text place_title">
+                                <h4>Название</h4>
+                                <p class="field">{% form_field form 'title' %}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form_row place_title" {% if not form.slug.value %}style="display:none;"{% endif %}><h4>Слаг</h4>{% form_field form 'slug' %}</td>
+                        </tr>
+                        <tr>
+                            <td class="form_row place_title"><h4>Событие</h4>{% form_field form 'event' %}</td>
+                        </tr>
+                        <tr>
+                            <td class="form_row place_title"><h4>Место</h4>{% form_field form 'place' %}</td>
+                        </tr>
+                        <tr>
+                            <td class="form_row place_title"><h4>Теги</h4>{% form_field form 'tags' %}</td>
+                        </tr>
+                        <tr>
+                            <td class="form_row place_title"><h4>Описание</h4>{% form_field form 'description' %}</td>
+                        </tr>
+                    </table>
+
+                    <div class="submit">
+                    <span class="btn_wrapper">
+                        <ins class="l"></ins>
+                        <ins class="r"></ins>
+                        <div style="display:none;">{% form_field form 'pub_date' %}</div>
+                        {% form_field form 'num_photos' %}
+                        <input type="submit" class="btn" value="Сохранить" />
+                    </span>
+                    </div>
+                </form>
+            </div>
+
+            {% if photoreport %}
+                <div class="pane clearfix">
+                    {% include "control/photoreport_gal_list.html" %}
+                </div>
+                <div class="pane clearfix">
+                    {% include "control/photoreport_upload_form.html" %}
+                </div>
+            {% endif %}
+        </div>
+
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}elfinder/css/elfinder.css" type="text/css" media="screen" charset="utf-8">
+    <link href="{{ STATIC_URL }}elrte/css/django-elrte.css" type="text/css" media="all" rel="stylesheet">
+    <link href="{{ STATIC_URL }}elrte/css/elrte.full.css" type="text/css" media="all" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+
+    {% assets  "js_ui" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+    {% assets  "control_js" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+
+
+    <script type="text/javascript">
+
+        $(function(){
+
+            // datepicker
+            $.datepicker.setDefaults(
+                    $.extend($.datepicker.regional["ru"])
+            );
+            $(".input_date input").datepicker({
+                showOn: "button",
+                buttonImageOnly: true,
+                buttonImage: "{{ STATIC_URL}}admin/img/admin/icon_calendar.gif",
+                dateFormat: "yy-mm-dd",
+            });
+
+            $(".promo__tab").removeClass("visible");
+        });
+
+    </script>
+
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+[
+    {
+        "pk": 1,
+        "model": "private_messages2.chain",
+        "fields": {
+            "have_read": [],
+            "members": [1, 2, 3]
+        }
+    },
+    {
+        "pk": 1,
+        "model": "private_messages2.message",
+        "fields": {
+            "body": "test",
+            "sent_at": "2013-02-27 01:50:25",
+            "chain": 1,
+            "subject": "test",
+            "removed": [],
+            "sender": 1
+        }
+    }
+]

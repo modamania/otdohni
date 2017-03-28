@@ -1,0 +1,7 @@
+User-agent: Yandex
+Disallow: /users/
+Disallow: /admin/
+HOST: omsk.zaotdih.ru
+
+User-agent: Googlebot
+Disallow: /

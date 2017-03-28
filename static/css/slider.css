@@ -1,0 +1,31 @@
+.bx-wrapper {
+	position: relative;
+}
+
+.bx-prev,
+.bx-next {
+	position: absolute;
+	top: 50%;
+	width: 32px;
+	height: 32px;
+	margin-top: -16px;
+	text-indent: -9999px;
+	background: url('../i/slider-arrows.png');
+}
+
+.bx-prev {
+	left: -32px;
+}
+
+.bx-prev:hover {
+	background-position: 0 -32px;
+}
+
+.bx-next {
+	right: -32px;
+	background-position: -32px 0;
+}
+
+.bx-next:hover {
+	background-position: -32px -32px;
+}

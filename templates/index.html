@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load cache news_tags rating_tags photoreport_tags place_extras event_tags weather_tags %}
+
+{# -------------page------------- #}
+{% block page %}
+    <div class="aside-toggler"></div>
+    <span class="jump-up"></span>
+    <div class="page_content clearfix">
+        {# -----------sidebar------------ #}
+        {% block sidebar %}
+           <div class="aside aside_index">
+    
+            {# -------------search------------- #}
+            <div id="search" class="widget search-aside clearfix infield">
+                <form action="/api/search/">
+                    <input type="text" autocomplete="off" class="search-aside__input" value="" name="t" id="head_search" placeholder="поиск">
+                    <input type="submit" value="Искать" class="search-aside__submit">
+                </form>
+
+                {# -------------calendar----------- #}
+
+                <div class="header__calendar">
+                    <br>
+                    {% if category %}
+                    {# category for links to events in the selected category #}
+                        {% dispay_week_calendar category %}
+                    {% else %}
+                        {% dispay_week_calendar %}
+                    {% endif %}
+                    <input type='hidden' id='event__active__day' value='{{ day|date:"Y/m/d" }}'>
+                    <input type='hidden' id='event__base__url' value='{% url event_list %}'>
+                    <div id="calendar_base" class="calendar__month calendar__month_header">
+                        <span id="calendar_prev" class="prev_month"></span>
+                        <span id="calendar_next" class="next_month"></span>
+                        <span id='calendar_month_name' class="current_month"></span>
+                        <span class="daynames-bg"></span>
+                        <!-- <span id="calendar_close" class="calendar__close hidden"><i></i></span> -->
+                        <div id='calendar_days_name'>
+                            <span class='calendar_day_name'>Пн</span><span class='calendar_day_name'>Вт</span><span class='calendar_day_name'>Ср</span><span class='calendar_day_name'>Чт</span><span class='calendar_day_name'>Пт</span><span class='calendar_day_name'>Сб</span><span class='calendar_day_name'>Вс</span>
+                        </div>
+                        <div id='calendar_days'></div>
+                        <div id='calendar_bottom_panel' class="hidden">
+                            <a id='calendar_today' class='calendar_actions' href='{% url event_list %}'>Сегодня</a>
+                            <a id='calendar_week' class='calendar_actions' href='{% url event_tab_on_week %}'>На неделю</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% block sidebar-current %}{% endblock %}
+            
+            {% block top_places %}
+            {% endblock %}
+
+            {% block sidebar-main %}
+                {% block widget-afisha %}
+                    {% display_event_categories %}
+                {% endblock %}
+                {% block widget-places %}
+                    {% display_place_categories %}
+                {% endblock %}
+            {% endblock %}
+
+            {% block widget-new-places %}
+                {% new_place_widget %}
+            {% endblock %}
+
+            {% block widget-ticket %}
+                {% if not request.path == '/' %}
+                    {% include "widgets/win_ticket.html" %}
+                {% endif %}
+             {% endblock %}
+
+            {% block widget-feedback %}
+                {% include "widgets/feedback.html" %}
+            {% endblock %}
+
+            {% block widget-subscribe %}
+                {% include "widgets/subscribe.html" %}
+            {% endblock %}
+            
+            {% block widget-vk %}
+               {% include "widgets/vk.html" %}
+            {% endblock %}
+            
+
+            </div>
+        {% endblock %}
+
+        {# --------------upbanner---------- #}
+        {% block banner %}
+            <div id="top">
+                <div data-ablock="2831" class="AdvertoneBlock" style="display:inline-block"></div>
+            </div>
+        {% endblock %}
+
+        {# -----------content------------ #}
+
+        <div class="content">
+            {# -----------pathway------------ #}
+            {% block pathway %}
+            {% endblock %}
+
+            {% block seo-header %}
+                <h1 class="page-title">
+                    
+                    {% if seo.heading.value %}
+                        <span class="page-title__title">{{ seo.heading.value }}</span>
+                    {% else %}
+                        {% block h1 %}{% endblock %}
+                    {% endif %}
+                    {% if seo.tooltip.value %}
+                        <i class="help-icon show-help"></i>
+                    {% endif %}
+                </h1>
+            {% endblock %}
+
+            {% block content-header %}
+            {% endblock %}
+
+            {% if seo.tooltip.value %}
+                {% block content-tooltip %}
+                    <div class="tooltip tooltip_type_help help shadowed">
+                        <div class="tooltip-content">
+                            {{ seo.tooltip.value }}
+                        </div>
+                        <span class="tooltip-close icon icon_close icon_close_thin"><i></i></span>
+                        <img src="/static/i/shadow.png" class="shadow" alt="" />
+                    </div>
+                {% endblock %}
+            {% endif %}
+
+            {% block content %}
+
+                <div class="afisha afisha_index afisha_today">
+                    <h2 class="tabs-title"><a href="{% url event_list %}">Сегодня</a><span class="label">самое интересное</span></h2>
+
+                    <ul class="tabs tabs_type_bar afisha_today__tabs">
+                      <li class="tabs-item tabs-item_state_current tabs-item_pos_first" data-category="all" data-period="ct">
+                        <a href="{% url event_list %}" class="pseudo-link">Все</a>
+                      </li>
+                      {% for category in category_today %}
+                        <li class="tabs-item" data-category="{{ category.id }}" data-period="ct">
+                          <a href="{% url event_category_list category.slug %}" class="pseudo-link">{{ category.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+
+                    <div class="afisha__content" id="mod_today">
+                        {% events_random qs_today %}
+                        <div class="show-all-link">
+                            <a href="{% url event_list %}" class="link">Все события сегодня</a>
+                        </div>
+                    </div>
+                </div>
+                
+                {% display_top5_news %}
+
+                {% display_new_reports %}
+
+                {% include "banners/horiz.html" %}
+
+                <div class="afisha afisha_index afisha_soon">
+                    <h2 class="tabs-title"><a href="{% url event_tab_soon %}">Скоро</a><span class="label">самое интересное</span></h2>
+                    <ul class="tabs tabs_type_bar afisha_soon__tabs">
+                        <li class="tabs-item tabs-item_state_current tabs-item_pos_first" data-category="all" data-period="cs">
+                          <a href="{% url event_tab_soon %}" class="pseudo-link">Все</a>
+                        </li>
+                        {% for category in category_soon %}
+                            <li class="tabs-item" data-category="{{ category.id }}" data-period="cs">
+                              <a href="{% url event_soon category.slug %}" class="pseudo-link">{{ category.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="afisha__content" id="mod_soon">
+                        {% events_random qs_soon 0 %}
+                        <div class="show-all-link">
+                            <a href="{% url event_tab_soon %}">Все события скоро</a>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+            {% block yandex_share %}{% endblock %}
+            {% block yandex_direct %}{% endblock %}
+        </div>
+
+        {# -----------bansidebar------------ #}
+        <div class="rbpl">
+
+            {% show_weather %}
+
+            {% block bansidebar %}
+                
+                {% include "banners/aside-first.html" %}
+                {% include "banners/aside-second.html" %}
+                {% include "banners/aside-third.html" %}
+
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+<!--coment-->

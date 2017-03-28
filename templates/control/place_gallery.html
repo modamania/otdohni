@@ -1,0 +1,51 @@
+<div class="photo_upload clearfix">
+    <input name="place_id" value="{{ place.id }}" type="hidden" />
+    {{ gallery_formset.management_form }}
+    <div id="gallery__photos">
+        {% for gallery_form in gallery_formset %}
+        {% with gallery_form.has_instance as has_instance %}
+            <div class="fieldset gallery__photo_item elem_{{ forloop.counter }} {% if has_instance %}elem_active{% else %} fieldset_empty{% endif %}">
+                <div class="gallery__delete_photo upload__close icon icon_close {% if not has_instance %} hidden{% endif %}"><i></i></div>
+                <span class="hidden">
+                    {% for hid in gallery_form.hidden_fields %}{{ hid }}{% endfor %}
+                    {{ gallery_form.DELETE }}
+                </span>
+                <div class="legend">{{ forloop.counter }}</div>
+                <img src="{% if has_instance %}{{ gallery_form.instance.image.thumbnail }}{% endif %}" alt="{{ gallery_form.title.value }}" class="photo__thumb" />
+                {% if not has_instance %}{{ gallery_form.image }}{% endif %}<br>
+                <span class="photo_title">{% if gallery_form.title.value %}{{ gallery_form.title.value }}{% endif %}</span>
+            </div>
+        {% endwith %}
+        {% endfor %}
+    </div>
+    <div id="gallery__popup__list">
+        {% for gallery_form in gallery_formset %}
+        {% with gallery_form.has_instance as has_instance %}
+            <div class="upload__popup popup_elem_{{ forloop.counter}} hidden">
+                <img src="{% if has_instance %}{{ gallery_form.instance.image.url }}{% endif %}" width='700' height='400' alt="" class="gallery__photo" />
+                <div class="input__file">
+                    <a class="change_file">Сменить фото</a>
+                    <p style="display: none;">
+                        {{ gallery_form.image }}
+                    </p>
+                </div>
+                <div class="form__row textarea">
+                    {{ gallery_form.title.errors }}
+                    {{ gallery_form.title.label }}
+                    {{ gallery_form.title }}
+                </div>
+                <a href="" class="pseudo_link submit">Сохранить</a> |
+                <a href="" class="pseudo_link cancel">Отмена</a>
+            </div>
+        {% endwith %}
+        {% endfor %}
+    </div>
+    <div id="gallery__deleted_photos" class="hidden"></div>
+    <div class="hello"></div>
+</div>
+
+<style type="text/css">
+    img.photo__thumb[src=''] {
+        display: none;
+    }
+</style>

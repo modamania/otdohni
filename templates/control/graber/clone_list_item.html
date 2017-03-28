@@ -1,0 +1,20 @@
+{% extends "control/index.html" %}
+{% load core_tags i18n thumbnail %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+    </div>
+{% endblock %}
+{% block content %}
+    <h1>Клон заведений</h1>
+    {% for p in clone.place.all %}
+        <a href="{{ p.get_absolute_url }}">
+            {{ p }}
+        </a>
+        <br />
+    {% endfor %}
+    <form method="post" action=".">
+        {% csrf_token %}
+        <input type="submit" value="Удалить запись" />
+    </form>
+{% endblock %}

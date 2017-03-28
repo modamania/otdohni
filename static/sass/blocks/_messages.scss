@@ -1,0 +1,289 @@
+.messages { position: relative; }
+
+.messages__item {
+  border-bottom: 1px solid #e3e3e3;
+  clear: both;
+  overflow: hidden;
+  padding: 0 0 0 47px;
+  position: relative;
+  line-height: 3.5;
+  border-left: 3px solid transparent;
+}
+
+.messages__item:hover {
+  background: #fff;
+}
+
+.messages__item_state_selected {
+  background: #fff;
+  border-left-color: $brand-blue;
+}
+
+
+
+.messages__item_state_unread .messages__link { font-weight: bold; }
+
+.messages__item .chkbox {
+  height: 15px;
+  left: 1em;
+  position: absolute;
+  text-align: center;
+  width: 15px;
+}
+.messages__item__content {
+  clear: both;
+  overflow: hidden;
+  padding-top: 0.25em;
+  position: relative;
+}
+.messages__link {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.messages__from {
+  float: left;
+  display: block;
+  width: 12em;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message__subject { text-decoration: underline; }
+.message__extract {
+  color: #555;
+  margin-left: 0.5em;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+}
+.messages__item .action {
+  position: absolute;
+  right: 0.25em;
+  top: 16px;
+  width: 1em;
+}
+.action .icon { float: left; }
+.messages__item .icon_delete i {
+  background: url(/static/i/icons.png) -16px 0 no-repeat scroll;
+  display: block;
+  height: 16px;
+  overflow: hidden;
+  width: 16px;
+}
+.messages__item .icon_delete:hover i { background-position: -16px -16px; }
+
+.messages__item .date {
+  color: #999;
+  text-transform: lowercase;
+  width: 5em;
+  text-align: right;
+}
+
+.messages__date {
+  float: right;
+  height: 100%;
+  padding: 0 1em;
+}
+
+.messages__item .author, .message_full .author { margin-right: 1em; }
+.messages__item .userpic, .message_full .userpic { margin-right: 0.5em; }
+.messages__item .mask_right {
+  background: url(/static/i/mask_right.png) 100% 0 repeat-y scroll;
+  display: block;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 55px;
+}
+
+.message_full { margin: 0 0 1em; padding: 1em 0 0 80px; position: relative; }
+
+.message_full,
+.message__reply {
+  clear: both;
+  position: relative;
+  margin: 2em 0 0 7em;
+  padding: 1em 1.5em;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+}
+
+.message_full__content {
+  padding-top: 0.25em;
+  position: relative;
+}
+
+.message_full .userpic,
+.message__reply .userpic {
+  float: left;
+  margin: -1em -100% 0 -8em;
+  position: relative;
+}
+
+.message_full:before,
+.message_full:after,
+.message__reply:before,
+.message__reply:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 100%;
+  border-width: 0 20px 20px 0;
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+}
+
+.message_full:before,
+.message__reply:before {
+  border-color: transparent #eaeaea transparent transparent;
+  border-width: 0 22px 22px 0;
+}
+
+.message__reply textarea {
+  width: 100%;
+  height: 8em;
+}
+
+.message_full .meta {
+  margin-bottom: .5em;
+  color: #7f7f7f;
+}
+
+.messages__toolbar {
+  position: relative;
+  margin: 1em 0 0;
+  padding: 0.75em 1em 0.75em 4.75em;
+  text-align: right;
+  background: #fff;
+  border-bottom: 1px solid #d1d1d1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: top .5s ease-in-out;
+  -moz-transition: top .5s ease-in-out;
+  -o-transition: top .5s ease-in-out;
+  -ms-transition: top .5s ease-in-out;
+  transition: top .5s ease-in-out;
+}
+.messages__toolbar_fixed {
+  border-width: 0;
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  margin: 0;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+.messages__toolbar_fixed .messages__selector { left: 1em; }
+.messages__toolbar .btn_new_message { }
+.messages__toolbar_fixed .btn_new_message { display: inline-block; }
+
+.message__chain_members {
+  float: left;
+  font-size: 1.25em;
+  font-weight: bold;
+  padding-top: 0.25em;
+  text-align: left;
+}
+.messages__toolbar_view { padding-left: 1em; }
+.messages__toolbar_fixed.messages__toolbar_view { padding: 0.5em 1.5em; }
+
+.messages__selector {
+  top: 1em;
+  cursor: pointer;
+  left: .75em;
+  padding: 0.075em 1.25em 0.125em 0.25em;
+  position: absolute;
+  border-radius: 2px;
+}
+.messages__selector:hover { border: 1px solid #a0a0a0; margin: -1px 0 0 -1px; }
+.messages__selector:active { background: #ccc; border: 1px solid #a0a0a0; margin: -1px 0 0 -1px; }
+.messages__selector input { margin: -2px 0 0; vertical-align: middle; }
+.messages__selector i {
+  border-color: #000 transparent transparent;
+  border-style: solid;
+  border-width: 5px 5px 0;
+  font-size: 0;
+  height: 0;
+  line-height: 0;
+  margin-top: -2px;
+  position: absolute;
+  right: 3px;
+  top: 50%;
+}
+.messages__selector:active i { border-color: #000 #ccc #ccc; }
+
+.messages__filter {
+  background: #fff;
+  left: 0;
+  padding: 1em 1.5em;
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  border-top: 1px solid #d1d1d1;
+  z-index: 200;
+  -webkit-box-shadow: 0 10px 25px -5px rgba(0,0,0,.4);
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,.4);
+}
+.messages__filter__selector {
+  line-height: 2;
+}
+.messages__status {
+  color: #666;
+  display: inline-block;
+  float: left;
+  font-size: 0.924em;
+  position: relative;
+  top: 0.5em;
+}
+
+.messages__tabs { margin-bottom: 1.5em; position: relative; }
+.messages__tabs  .messages__tabs__tab.current {
+  -webkit-border-radius: 5px 0 5px 0;
+  -moz-border-radius: 5px 0 5px 0;
+  background: #327;
+  border-radius: 5px 0 5px 0;
+  color: #fff;
+  cursor: default;
+  font-style: italic;
+}
+.messages__tabs .messages__tabs__tab {
+  cursor: pointer;
+  display: inline-block;
+  list-style: none;
+  margin-right: 0.5em;
+  padding: 0.25em 0.5em;
+  position: relative;
+}
+
+.messages__compose {
+  clear: both;
+  position: relative;
+  margin: 0 0 2em;
+  padding: 1em 1.5em;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+}
+
+.messages__compose textarea {
+  width: 100%;
+  height: 8em;
+}
+
+.messages__compose input[type="text"] {
+  max-width: 100%;
+  width: 20em;
+}

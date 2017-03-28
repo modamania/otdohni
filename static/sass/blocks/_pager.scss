@@ -1,0 +1,57 @@
+.pager {
+    clear: both;
+    margin: 1.5em 0;
+
+    &__prev-next {
+        font-size: 1.25em;
+    }
+
+    &__prev,
+    &__next {
+        position: relative;
+        margin-right: 0.75em;
+    }
+
+    &__pages {
+        font-size: 1.1em;
+        padding: 0.75em 0;
+
+        .current {
+            @include inline-block;
+
+            padding: 0.25em 0.5em;
+            color: #fff;
+
+            &:after {
+                @include box-shadow(0 3px 10px rgba(0,0,0,.25));
+                @include border-radius(2px);
+                
+                content: "";
+                display:block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: $brand-blue;
+                z-index: -1;
+            }
+        }
+    }
+    
+    &__page {
+        margin: 0.35em 0.5em;
+    } 
+    
+    
+
+    .pager h4 {
+        font-size: 0.924em;
+        float: left;
+        position: relative;
+        top: 0.417em;
+        margin: 0 0.667em 0 0;
+        word-spacing: 0;
+        color: #999;
+    }
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+{% load newsletter_tags %}
+{% load thumbnail %}
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<body style="font-family: 'Trebuchet MS', Arial, sans-serif; font-size:13px; color:#404040;">
+<table width="700" align="center" cellpadding="0" cellspacing="0" style="font-size: 100%">
+<tr>
+<td border="0" style="border:none;">
+	<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; border:none; font-size: 100%" border="0">
+		<tr>
+			<td valign="top">
+				{% if newsletter.logo %}
+					<img width="700" height="197" alt="Заотдых" title="Заотдых" src="http://omsk.zaotdih.ru{{ newsletter.logo.url }}">
+				{% else %}
+					<img width="700" height="197" alt="Заотдых" title="Заотдых" src="http://omsk.zaotdih.ru/static/i/mail_autumn_2013.png">
+				{% endif %}
+			</td>
+		</tr>
+		<tr>
+			<td align="left">
+				<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; border:none; font-size: 100%" border="0">
+					<tr><td height="10"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="10" /></td></tr>
+					<tr>
+						<td valign="top">
+							{{ newsletter.text|safe }}
+						</td>
+					</tr>
+					<tr><td height="20"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="20" /></td></tr>
+					{% if newsletter.photoreports.all %}
+					<tr>
+						<td valign="top" align="left" width="100%">
+							<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; border:none; font-size: 100%" border="0">
+								<tr>
+									<td valign="top" width="100%">
+										<h2 style="font-size: 22px; margin: 5px 0 10px; font-weight: normal;">Фотоотчеты</h2>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<table cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse; font-size: 100%">
+	                                    {% for ph in newsletter.photoreports.all %}
+			                                    <tr>
+                                    				<td valign="top" width="100%">
+                                    					<a href="{% absurl photoreport_detail ph.slug %}" style="color: #1F4BAE" target="_blank">{{ ph.title }}</a>, {{ ph.place_id }}, {{ ph.date_event }}
+                                    				</td>
+			                                    </tr>
+			                                    <tr><td height="10"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="10" /></td></tr>
+	                                    {% endfor %}
+			                            </table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					{% endif %}
+					<tr><td height="10"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="10" /></td></tr>
+					<tr>
+						<td valign="top" width="100%">
+							<h2 style="font-size: 22px; margin: 5px 0 10px; font-weight: normal;">Новости</h2>
+						</td>
+					</tr>
+
+	                {% for newsitem in newsletter.newsitems.all %}
+	                	{% thumbnail newsitem.image 350x250 as im %}
+		                <tr>
+		                	<td valign="top">
+		                		<table width="100%" style="font-size: 100%; border: none;">
+		                			<tr>
+		                				<td valign="top" width="128"><img src="http://omsk.zaotdih.ru{{ im }}" alt="{{ newsitem.title }}" width="128" height="96"></td>
+		                				<td valign="top" width="15"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="15" height="15" /></td>
+		                				<td valign="top" width="100%">
+		                					<h3 style="margin: 0 0 3px; font-size: 16px;">
+					                			<a href="{% absurl news_detail newsitem.slug %}" style="color: #1F4BAE" target="_blank">{{ newsitem.title }}</a>
+					                		</h3>
+					                		<div>{{ newsitem.short_text|safe }}</div>
+		                				</td>
+		                			</tr>
+		                		</table>
+		                	</td>
+		                </tr>
+		                <tr><td height="10"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="10" /></td></tr>
+	                {% endfor %}
+	                <tr><td height="10"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="10" /></td></tr>
+	                <tr>
+						<td valign="top" width="100%">
+							<h2 style="font-size: 22px; margin: 5px 0 10px; font-weight: normal;">Конкурсы</h2>
+						</td>
+					</tr>
+
+					<tr>
+						<td valign="top" align="left" width="100%">
+							<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; border:none; font-size: 100%" border="0">
+	                            {% for action in newsletter.actions.all %}
+		                			{% thumbnail action.image 150x150 crop as im %}
+		                            <tr>
+					                	<td valign="top">
+					                		<table width="100%" style="font-size: 100%; border: none;">
+					                			<tr>
+					                				<td valign="top" width="128"><img src="http://omsk.zaotdih.ru{{ im }}" alt="{{ action.title }}" width="128"></td>
+					                				<td valign="top" width="15"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="15" height="15" /></td>
+					                				<td valign="top" width="100%">
+					                					<h3 style="margin: 0 0 3px; font-size: 16px;">
+								                			<a href="{% absurl action_detail action.slug %}" style="color: #1F4BAE" target="_blank">{{ action.title }}</a>
+								                		</h3>
+								                		<div>{{ action.short_text|safe }}</div>
+					                				</td>
+					                			</tr>
+					                		</table>
+					                	</td>
+					                </tr>
+					                <tr><td height="10"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="10" /></td></tr>
+	                            {% endfor %}
+							</table>
+						</td>
+					</tr>
+					<tr><td height="10"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="10" /></td></tr>
+
+					<tr>
+						<td valign="top" width="100%">
+							<h2 style="font-size: 22px; margin: 5px 0 10px; font-weight: normal;">Афиша</h2>
+						</td>
+					</tr>
+
+	                {% for event in newsletter.get_events %}
+            			{% thumbnail event.image 128x84 crop as im %}
+		                <tr>
+		                	<td valign="top">
+		                		{% ifchanged %}
+		                			<h3 style="font-size: 20px; margin: 0 0 10px; font-weight: normal;">{{ event.category }}</h3>
+	                			{% endifchanged %}
+		                		<table width="100%" style="font-size: 100%; border: none;">
+		                			<tr>
+		                				<td valign="top" width="128"><img src="http://omsk.zaotdih.ru{{ im }}" alt="{{ event.title }}" width="128" height="84"></td>
+		                				<td valign="top" width="15"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="15" height="15" /></td>
+		                				<td valign="top" width="100%">
+		                					<h4 style="margin: 3px; font-size: 16px;">
+					                			<a href="http://zaotdih.ru{{ event.get_absolute_url }}" style="color: #1F4BAE" target="_blank">{{ event.title }}</a>
+					                		</h4>
+					                		<div>{{ event.intro|removetags:"p"|safe }}</div>
+		                				</td>
+		                			</tr>
+		                		</table>
+		                	</td>
+		                </tr>
+		                <tr><td height="10"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="10" /></td></tr>
+	                {% endfor %}
+	                <tr><td height="10"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="10" /></td></tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+</td></tr>
+<tr>
+	<td border="0" style="border:none;">
+		{% block footer %}
+			<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; border:none; font-size: 100%" border="0">
+				<tr><td height="20"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="100%" height="20" /></td></tr>
+				<tr>
+					<td>
+						Ждем Вас на нашем портале <a href="http://omsk.zaotdih.ru" target="_blank">Заотдых</a>. Только здесь Вы найдете анонсы самых классных вечеринок, концертов, спектаклей и спортивных событий нашего города!
+					</td>
+				</tr>
+				<tr>
+					<td width="100%" height="20"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="20" height="20" /></td>
+				</tr>
+				<tr>
+					<td align="left" style="border-top: 1px solid #cccccc; padding-top: 15px;">© 2007&ndash;{% now "Y" %} Заотдых</td>
+				</tr>
+				<tr>
+					<td width="20" height="20"><img src="http://habrastorage.org/storage/ed280a0e/a3cc38f3/cbbc747a/cfbef47d.gif" width="20" height="20" /></td>
+				</tr>
+				<tr>
+					<td valign="top" style="font-size: 13px; color: #666666;">
+						<p>Уважаемые пользователи! Хотя нам очень хотелось бы иметь возможность напрямую общаться с вами, чтобы сообщать о важных новостях и делиться знаниями, мы понимаем, что получение рассылки &mdash; дело абсолютно добровольное. Чтобы отписаться от рассылки, пройдите по <a href="{% absurl newsletter_unsubscribe_request %}" target="_blank" style="color: #1F4BAE;" target="_blank">этой ссылке</a>.</p>
+
+						<p>Если вы передумаете, то сможете включить рассылку писем снова.</p> 
+						
+					</td>
+				</tr>
+			</table>
+		{% endblock %}
+	</td>
+</tr>
+</table>
+</body>
+</html>
+

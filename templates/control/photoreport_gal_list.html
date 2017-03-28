@@ -1,0 +1,27 @@
+{% load core_tags  thumbnail %}
+<div class="photo_upload clearfix">
+    <div class="cpanel__toolbar clearfix">
+        <div class="buttons">
+            <span class="btn_wrapper"><ins class="l"></ins><ins class="r"></ins><a href="{% url control.views.photoreport_photo_form photoreport.pk%}" class="btn">Добавить фото</a></span>
+        </div>
+    </div>
+    <table cellpadding="0" cellspacing="0" class="component__items_list">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Фото</th>
+            <th>Дата добавления</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for photo in photo_list %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td class="title"><a href="{% url control_photoreport_photo_edit photoreport.pk photo.pk %}">{{ photo }}</a></td>
+                <td>{% if photo.image %}<img src="{% thumbnail photo.image 50x50 %}">{% endif %}</td>
+                <td>{{ photo.date_added|date:"d.m.Y" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <!--{{ report_photos|render_paginator:seo }}-->
+</div>

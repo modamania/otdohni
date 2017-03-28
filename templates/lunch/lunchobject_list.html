@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% load thumbnail %}
+{% load lunch_tags %}
+
+{% block title %}Бизнес-ланч на ОтдохниОмск.ру{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> / Бизнес-ланч
+    </div>
+{% endblock %}
+
+{% block h1 %}Бизнес-ланч{% endblock %}
+{% block content %}
+
+    <div class="full-col m1"> 
+
+<p style="margin-bottom: 0.5em; text-align: right" class="note">
+    Нажмите на&nbsp;значок <img style="vertical-align: middle" src="http://api-maps.yandex.ru/i/0.3/icons/restauraunt.png" alt="" />для просмотра информации
+</p>
+
+{% draw_lunch_map lunch_list %}
+
+{% for item in lunch_list %}
+    <h2>{{ item }}</h2>
+    {% if item.image %}
+    <p>
+        <img src="{% thumbnail item.image 330x70 %}" />
+    </p>
+    {{ item.description|safe }}
+    {% endif %}
+{% endfor %}
+
+<h4 align="right"><em>Следите за&nbsp;обновлениями!</em></h4>
+
+
+</div>
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

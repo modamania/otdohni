@@ -1,0 +1,5 @@
+<ul>
+    {% for work_time in shedule_list %}
+        <li>{{ work_time.workday }} {{ work_time.time }}. {% if work_time.offday %}{{ work_time.offday }} выходной{% endif %}</li>
+    {% endfor %}
+</ul>

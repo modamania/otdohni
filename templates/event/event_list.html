@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+{% load thumbnail event_tags %}
+{% block title %}Афиша {{ CITY.name }}{% endblock %}
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> / 
+  <a title="Афиша {{ CITY.genitive }}" href="{% url event_list %}">Афиша {{ CITY.genitive }}</a>
+</div>
+{% endblock %}
+
+{% block h1 %}
+    <span class="page-title__title">Афиша {{ CITY.genitive }}</span>
+{% endblock %}
+
+{% block content-header %}
+    {% display_event_categories 'event/tags/event_categories_tabs.html' %}
+{% endblock %}
+
+{% block tooltip-content %}
+Самая полная афиша {{ CITY.genitive }}: кино, клубы, концерты, спектакли, выставки, спортивные события и многое другое.
+Профессиональные рецензии и отзывы о прошедших событиях.
+{% endblock %}
+
+
+{% block content %}
+
+{% include "modals/buy_tickets.html" %}
+
+<div class="events_list">
+    {% block event_list %}
+        {% include 'event/event_list_day.html' %}
+    {% endblock %}
+</div>
+
+{% endblock %}
+
+{% block dayend %}{% endblock %}
+
+{% block sidebar-current %}{% endblock %}
+
+{% block sidebar-places %}{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}
+
+{% block widget-afisha %}
+	{% display_event_categories %}
+	{% include "widgets/buy_tickets.html" %}
+{% endblock %}
+
+{% block extra_modal %}
+{% endblock %}

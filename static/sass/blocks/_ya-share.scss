@@ -1,0 +1,17 @@
+.ya-share {
+	clear: both;
+	margin-top: 1.5em;
+
+	&:before {
+		display: block;
+		content: "";
+		width: 90px;
+		height: 1px;
+		background: #d6d6d6;
+		margin-bottom: 1em;
+	}
+
+	&__title {
+		margin: .5em 0;
+	}
+}

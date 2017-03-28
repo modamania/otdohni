@@ -1,0 +1,93 @@
+{% extends "control/index.html" %}
+{% load thumbnail i18n assets event_tags control_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> / <a title="Спецпроекты" href="{% url control_spec_list %}">Спецпроекты</a> /
+    </div>
+{% endblock %}
+
+{% block content-header %}
+    {% if spec %}<h1>Редактирование спецпроекта «{{ spec.title }}»</h1>{% else %}<h1>Создание нового спецпроекта</h1>{% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="." method="POST" enctype="multipart/form-data" class="form form_spec_edit zf" id="spec_form">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endif %}
+
+    <fieldset>
+        <legend>Основная информация</legend>
+	<p class="field input_text">
+            {{ form.sites.errors }}
+            {{ form.sites.label_tag }}
+            {{ form.sites }}
+        </p>
+
+        <p class="field input_text">
+            {{ form.title.errors }}
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </p>
+
+        <p class="form__row input_checkbox">
+            {{ form.is_in_top.label_tag }}
+            {{ form.is_in_top }}
+        </p>
+
+        <p class="field input_text">
+            {{ form.top_title.errors }}
+            {{ form.top_title.label_tag }}
+            {{ form.top_title }}
+        </p>
+
+        <p class="field input_text" {% if not form.slug.value %}style="display:none;"{% endif %}>
+            {{ form.slug.errors }}
+            {{ form.slug.label_tag }}
+            {{ form.slug }}
+        </p>
+
+        <p class="field">
+            {{ form.color.errors }}
+            {{ form.color.label_tag }}
+            {{ form.color }}
+        </p>
+
+        <p class="field">
+            {{ form.description.errors }}
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </p>
+    </fieldset>
+
+    <div id="form-submit" class="field clearfix submit">
+        <p class="submit">
+            <input type="submit" value="Сохранить">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="javascript:history.go(-1);">Отмена</a>
+        </p>
+    </div>
+    </form>
+
+    <div id="elfinder"></div>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}elfinder/css/elfinder.css" type="text/css" media="screen" charset="utf-8">
+{% endblock %}
+
+{% block scripts %}
+    {% assets  "js_ui" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+    {% assets  "control_js" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+    
+    {{ form.media }}
+{% endblock %}

@@ -1,0 +1,18 @@
+<script type="text/javascript" charset="utf-8">
+$().ready(function(){
+	var opts = {
+    {% for key, val in options.items %}{{ key|safe }} : {{ val|safe }},
+    {% endfor %}fmOpen : function(callback) {
+        $('<div id="elfinder" />').elfinder({
+        url : '/elfinder/connector/',
+        lang : 'ru',
+        dialog : { width : 900, modal : true, title : 'Files' },
+        closeOnEditorCallback : true,
+        editorCallback : callback
+      })
+    }
+  };
+  var rte = $('#id_{{name}}').elrte(opts);
+	var rte = $('#id_{{name}}').elrte();
+});
+</script>

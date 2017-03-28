@@ -1,0 +1,28 @@
+{% load i18n core_tags  thumbnail %}
+<div class="poll_upload clearfix">
+    <div class="cpanel__toolbar clearfix">
+        <div class="buttons">
+            <span class="btn_wrapper"><ins class="l"></ins><ins class="r"></ins><a href="{% url control_workbidder_add action.pk poll.pk %}" class="btn">Добавить работу участника</a></span>
+        </div>
+    </div>
+    <table cellpadding="0" cellspacing="0" class="component__items_list">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Фото</th>
+            <th>Автор</th>
+            <th>Количество голосов</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for work in workbidder_list %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td class="title"><a href="{% url control_workbidder_edit action.pk poll.pk work.pk%}">{{ work }}</a></td>
+                <td>{% if work.photo %}<img src="{% thumbnail work.photo 50x50 %}">{% endif %}</td>
+                <td>{{ work.author_name }}</td>
+                <td align="center">{{ work.total_likes }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

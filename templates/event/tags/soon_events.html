@@ -1,0 +1,31 @@
+{% load i18n thumbnail event_tags %}
+{% if event_list %}
+    <div class="widget">
+    <h3 class="widget__title">Скоро</h3>
+    <ul>
+    {% for event in event_list %}
+        <li class="widget__item">
+            {% if forloop.first %}
+                {% thumbnail event.image 160x105 crop as im %}
+                <div class="widget__thumb thumb shadowed">
+                    <a title="{{ event.title }}" href="{{ event.get_absolute_url }}">
+                        {% if im %}<img alt="{{ event.title }}" src="{{ im }}" height="84" />{% else %}<span class="no_photo"></span>{% endif %}
+                    </a>
+                    <img src="/static/i/shadow.png" alt="" class="shadow" />
+                </div>
+            {% endif %}
+            <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+                {% if event.repeat_on == 1 or event.repeat_on == 2 %}
+                    <p>{{ event.start_date|get_date }}<p>
+                {% else %}
+                    {% if event.start_date|lttoday %}
+                        <p>До {{ event.end_date|get_date }}</p>
+                    {% else %}
+                        <p>{{ event.start_date|get_date }}<p>
+                    {% endif %}
+                {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    </div>
+{% endif %}

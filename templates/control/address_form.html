@@ -1,0 +1,188 @@
+{% extends "control/index.html" %}
+
+{% load assets %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> / <a title="Заведения" href="{% url control.views.place_list %}">Заведения</a> /
+        <a href="{{ place.get_edit_url }}" title="{{ place.name }}">{{ place.name }}</a> /
+    </div>
+{% endblock %}
+
+{% block content-header %}
+    {% if address %}<h1>Редактирование адреса «{{ address }}»</h1>{% else %}<h1>Создание адреса</h1>{% endif %}
+{% endblock %}
+
+{% block content %}
+<form action="." method="POST" id="address_form" class="form_place_edit zf">
+    {% csrf_token %}
+<div class="form__base clearfix">
+        <dl>
+            <dt>{{ form.district.label }}</dt>
+            <dd>{{ form.district }}</dd>
+            <dd>{{ form.district.errors }}</dd>
+        </dl>
+        <dl>
+            <dt>{{ form.address.label }}</dt>
+            <dd>{{ form.address }}</dd>
+            <dd>{{ form.address.errors }}</dd>
+        </dl>
+        <dl>
+            <dt>{{ form.geopoint.label }}</dt>
+            <dd>{{ form.geopoint }}</dd>
+            <dd>{{ form.geopoint.errors }}</dd>
+        </dl>
+        <dl>
+            <dt>{{ form.phone.label }}</dt>
+            <dd>{{ form.phone }}</dd>
+            <dd>{{ form.phone.errors }}</dd>
+        </dl>
+        <dl>
+            <dt>{{ form.fsid.label }}</dt>
+            <dd>{{ form.fsid }}</dd>
+            <dd>{{ form.fsid.errors }}</dd>
+        </dl>
+        <div class="address__work_time">
+            {{ formset.management_form }}
+            {{ formset.non_form_errors }}
+            {% for shedule in formset %}
+                <div class="work_time__item">
+                        {% for hid in shedule.hidden_fields %}{{ hid }}{% endfor %}
+                    <div class="work_time__item__body">
+                        <p>
+                            <span class="weekday mon">{{ shedule.mon.label }}{{ shedule.mon }}</span>
+                            <span class="weekday tue">{{ shedule.tue.label }}{{ shedule.tue }}</span>
+                            <span class="weekday tue">{{ shedule.wed.label }}{{ shedule.wed }}</span>
+                            <span class="weekday tue">{{ shedule.thu.label }}{{ shedule.thu }}</span>
+                            <span class="weekday tue">{{ shedule.fri.label }}{{ shedule.fri }}</span>
+                            <span class="weekday tue">{{ shedule.sat.label }}{{ shedule.sat }}</span>
+                            <span class="weekday tue">{{ shedule.sun.label }}{{ shedule.sun }}</span>
+                        </p>
+                        <p class="work_time__period clearfix">
+                            С {{ shedule.from_time }} до {{ shedule.till_time }}
+                        </p>
+                        <p class="clearfix">
+                           <span class="all-day">
+                               <label>{{ shedule.all_day }} Круглосуточно</label>
+                           </span>
+                           <span class="day-off">
+                               <label>{{ shedule.day_off }} Выходной </label>
+                           </span>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="clr"></div>
+        </div>
+</div>
+
+<div class="submit">
+    <span class="btn_wrapper">
+        <ins class="l"></ins>
+        <ins class="r"></ins>
+        <input type="submit" class="btn" value="Сохранить" />
+    </span>
+    <a href="{% url control.views.place_form place.pk %}#addresses" class="clear">Отменить</a>
+</div>
+
+</form>
+{% endblock %}
+
+{% block scripts %}
+
+{{ form.media }}
+{{ formset.media }}
+
+{% assets  "js_ui" %}
+  <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+  </script>
+{% endassets %}
+
+{% assets  "control_js" %}
+  <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+  </script>
+{% endassets %}
+
+<script type="text/javascript">
+
+    $(function(){
+        var address = "{{ address.id }}";
+    
+        $('.work_time__item').formset({
+            prefix: '{{ formset.prefix }}',
+            addText: 'Добавить расписание',
+            deleteText: 'Удалить расписание',
+            added: function(row) {
+                if (address){
+                    $(row).find('input[name$=address]').attr('value', address);
+                    $(row).find('input[name$=id]').removeAttr('value');
+                    $(row).find('.all-day').show();
+                    $(row).find('.work_time__period').show();
+                }
+            }
+        });
+
+    $(".day-off :checkbox").each(function(){
+        if ($(this).attr('checked')){
+            var base = $(this).parents('.work_time__item');
+            base.find(".all-day :checkbox").attr('checked', false).parents(".all-day").hide();
+            base.find(".work_time__period").attr('value', '').hide();
+        }
+    });
+
+    $(".all-day :checkbox").each(function(){
+        if ($(this).attr('checked')){
+            var base = $(this).parents(".work_time__item");
+            base.find(".work_time__period input").attr("value", '').parent().hide();
+        }
+    });
+
+    first_click = true;
+
+    function allInit(){
+        $(".all-day input").live('click', function(){
+            var base = $(this).parents(".work_time__item");
+            if (!first_click){
+                base.find(".work_time__period").show(200);
+                first_click = false;
+                $(this).attr('checked', false);
+                return;
+            }
+            if ($(this).attr('checked')){
+                console.log("all yes");
+                base.find(".work_time__period input").attr("value", "").parent().hide(200);
+            } else {
+                base.find(".work_time__period").show(200);
+            }
+        });
+    }
+
+    function offInit(){
+        $(".day-off input").live('click', function(){
+            var base = $(this).parents(".work_time__item");
+            if (!first_click){
+            console.log('first');
+                base.find(".work_time__period").show(200);
+                base.find(".all-day").show(200);
+                first_click = false;
+                $(this).attr('checked', false);
+                return;
+            }
+            if ($(this).attr("checked")){
+                base.find(".work_time__period input").attr("value", "").parent().hide(200);
+                base.find(".all-day input").attr("checked", false).parents(".all-day").hide(200);
+            } else {
+                base.find(".work_time__period").show(200);
+                base.find(".all-day").show(200);
+            }
+        })
+    }
+
+    allInit();
+    offInit();
+
+    })
+    
+</script>
+
+{% endblock %}

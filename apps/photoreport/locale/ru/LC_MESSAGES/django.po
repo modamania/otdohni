@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-19 10:24+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: admin.py:27 models.py:90
+msgid "Photo"
+msgstr "Фотография"
+
+#: models.py:47
+msgid "date published"
+msgstr "дата публикации"
+
+#: models.py:48 models.py:77 models.py:109
+msgid "title"
+msgstr "заголовок"
+
+#: models.py:49
+msgid "title slug"
+msgstr "slug заголовка"
+
+#: models.py:50
+msgid "A \"slug\" is a unique URL-friendly title for an object."
+msgstr "\"slug\" - это уникальный понятный URL для обьекта."
+
+#: models.py:51 models.py:111
+msgid "description"
+msgstr "описание"
+
+#: models.py:56 models.py:76
+msgid "Gallery"
+msgstr "Галерея"
+
+#: models.py:57
+msgid "Galleries"
+msgstr "Галереи"
+
+#: models.py:64
+msgid "count"
+msgstr "количество"
+
+#: models.py:78
+msgid "slug"
+msgstr ""
+
+#: models.py:80 models.py:110
+msgid "caption"
+msgstr "подпись"
+
+#: models.py:81
+msgid "date added"
+msgstr "дата добавления"
+
+#: models.py:91
+msgid "Photos"
+msgstr "Фото"
+
+#: models.py:106
+msgid "images file (.zip)"
+msgstr "(.zip) файл с фотографиями"
+
+#: models.py:107
+msgid "Select a .zip file of images to upload into a new Gallery."
+msgstr "Выберите zip-файл с фотографиями для загрузки в галерею."
+
+#: models.py:108
+msgid ""
+"Select a gallery to add these images to. leave this empty to create a new "
+"gallery from the supplied title."
+msgstr ""
+"Выберите галерею для загрузки изображений. Если оставите пустым, "
+"то создастся новая галерея с именем заголовка. "
+
+#: models.py:109
+msgid ""
+"All photos in the gallery will be given a title made up of the gallery title "
+"+ a sequential number."
+msgstr ""
+"Все фотографии в галарее получат заголовок, сгенерированный из названия галереи "
+"+ порядковый номер."
+
+#: models.py:110
+msgid "Caption will be added to all photos."
+msgstr "Подпись, которая будет добавлена всем фотографиям."
+
+#: models.py:111
+msgid "A description of this Gallery."
+msgstr "Описание галереи."
+
+#: models.py:114
+msgid "gallery upload"
+msgstr "загрузка в галерею"
+
+#: models.py:115
+msgid "gallery uploads"
+msgstr "загрузки в галерею"

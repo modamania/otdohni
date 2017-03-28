@@ -1,0 +1,17 @@
+<div class="search">
+    <form action="." method="get" class="form">
+        <table>
+            <tr>
+                <td class="search__field">
+                    <input type="text" name="q" value="{% if q %}{{ q }}{% endif %}" maxlength="100" class="search__input" placeholder="поиск" />
+                </td>
+                <td class="search__submit">
+                    <span class="btn">
+                        <span class="btn__text">Найти</span>
+                        <input type="submit" value="Найти" class="btn__input" />
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

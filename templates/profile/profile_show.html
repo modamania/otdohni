@@ -1,0 +1,231 @@
+{% extends "profile/base.html" %}
+{% load friendship_extras thumbnail humanize profile_tags rating_tags %}
+{% block pathway %}
+{% endblock %}
+
+{% block content-header %}
+{% block h1 %}
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<div class="profile user_profile">
+    <div class="user_card">
+        <div class="user_avatar profile__userpic">
+            <span class="userpic userpic_size_120">
+                <img alt="{{ profile.user }}" src="
+                    {% if profile.userpic %}
+                        {% if profile.get_userpic == "/static/i/no_avatar.png" %}
+                            {{ profile.get_userpic }}
+                        {% else %}
+                            {{ profile.userpic.thumbnail }}
+                        {% endif %}
+                    {% else %}
+                        /static/i/no_avatar.png
+                    {% endif %}
+                " class="userpic_img" />
+            </span>
+            {% if can_edit %}
+                <a href="{% url profile.views.profile_edit %}" class="btn btn_theme_blue">
+                    <span class="btn__text">Изменить</span>
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="profile__info">
+            <h1 class="profile__title">{{ profile.user.username }}</h1>
+            {% if request.user.is_staff %}
+                <div class="js-profile-stats profile__stats">
+                    <span data-tab="comments" class="js-profile-stats-toggler pseudo-link">{% count_comments profile.user %} отзыва</span>
+                    <span class="dot">·</span>
+                    <span data-tab="rates" class="js-profile-stats-toggler pseudo-link">{{ profile.user.votes.count }} оценок</span>
+                    {# <span class="dot">·</span> #}
+                    {# 15 спасибо #}
+                </div>
+            {% endif %}
+
+            <div class="profile__dates">
+                Последнее посещение: {{ profile.user.last_login|naturalday:"j F Y"|lower }}
+            </div>
+
+            <dl class="info">
+                {% if profile.user.first_name %}<dt>Имя</dt><dd>{{ profile.user.first_name }}</dd>{% endif %}
+                {% if profile.user.last_name %}<dt>Фамилия</dt><dd>{{ profile.user.last_name }}</dd>{% endif %}
+                {% if profile.sex and profile.sex|lower != 'none'%}<dt>Пол</dt><dd>{{ profile.get_sex_display }}</dd>{% endif %}
+                {% if profile.birthday %}<dt>День рождения</dt><dd>{{ profile.birthday|date:"j b Y" }}</dd>{% endif %}
+                {% if profile.city %}<dt>Город</dt><dd>{{ profile.city }}</dd>{% endif %}
+                {% if profile.web_site %}<dt>Cайт</dt><dd>{{ profile.web_site }}</dd>{% endif %}
+                {% if profile.phone_number %}<dt>Телефон</dt><dd>{{ profile.phone_number }}</dd>{% endif %}
+                {% if profile.icq %}<dt>ICQ</dt><dd>{{ profile.icq }}</dd>{% endif %}
+                {% if profile.profession %}<dt>Профессия</dt><dd>{{ profile.profession }}</dd>{% endif %}
+                {% if profile.company %}<dt>Компания</dt><dd>{{ profile.company }}</dd>{% endif %}
+                {% if profile.address %}<dt>Адрес</dt><dd>{{ profile.address }}</dd>{% endif %}
+                {% if profile.interest and profile.interest|lower != 'none' %}<dt>Интересы</dt><dd>{{ profile.interest }}</dd>{% endif %}
+                {% if profile.about and profile.about|lower != 'none' %}<dt>О себе</dt><dd>{{ profile.about }}</dd>{% endif %}
+            </dl>
+            <div class="profile__actions">
+                {{ user|are_friends:profile.user|safe }}
+                    
+                {% if not youself %}
+                        <a href="{% url messages_compose_to profile.user.pk %}" class="btn btn_theme_blue">
+                            <span class="btn__text"><span class="btn__icon">&#9993;</span> Сообщение</span>
+                        </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="clr"></div>
+    <div class="tabbed">
+        <ul class="tabs tabs_type_pin">
+            <li class="tabs-item tabs-item_state_current" data-tabname="friends"><span class="pseudo-link">Друзья</span> {% if confirm_friend_list %}<span class="count">{{ confirm_friend_list|length }}</span>{% endif %}</li>
+        {% if whait_confirm_friend_list %}
+            <li class="tabs-item" data-tabname="waitforyou"><span class="pseudo-link">C вами хотят дружить</span> <span class="count">{{ whait_confirm_friend_list|length }}</span></li>
+        {% endif %}
+        {% if not_confirm_friend_list %}
+            <li class="tabs-item" data-tabname="youwait"><span class="pseudo-link">Вы хотите дружить</span> <span class="count">{{ not_confirm_friend_list|length }}</span></li>
+        {% endif %}
+            {# <li class="tabs-item" data-tabname="activity"><span class="pseudo-link">Лента друзей</span></li> #}
+
+        {% if request.user.is_staff %}
+            {% if youself or is_friend %}
+                <li class="tabs-item" data-tabname="events"><span class="pseudo-link">События</span> {% if profile.user.events.count %}<span class="count">{{ profile.user.events.count }}</span>{% endif %}</li>
+                <li class="tabs-item" data-tabname="comments"><span class="pseudo-link">Отзывы</span> <span class="count">{% count_comments profile.user %}</span></li>
+                <li class="tabs-item" data-tabname="rates"><span class="pseudo-link">Оценки</span> {% if profile.user.votes.count %}<span class="count">{{ profile.user.votes.count }}</span>{% endif %}</li>
+            {% endif %}
+        {% endif %}
+
+        </ul>
+        <div class="pane pane_state_visible">
+            {% if confirm_friend_list %}
+                <div class="friends_list">
+                    {% for friend in confirm_friend_list %}
+                        {% include "profile/extended/friend_list_item.html" %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Друзей пока нет!</p>
+            {% endif %}
+        </div>
+
+
+        {% if whait_confirm_friend_list %}
+        <div class="pane">
+                <div class="friends_list">
+                {% for friend in whait_confirm_friend_list %}
+                    {% include "profile/extended/friend_list_item.html" %}
+                {% endfor %}
+                </div>
+        </div>
+        {% endif %}
+
+        {% if not_confirm_friend_list %}
+        <div class="pane">
+           <div class="friends_list">
+            {% for friend in not_confirm_friend_list %}
+                {% include "profile/extended/friend_list_item.html" %}
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        {% comment %}
+        <div class="js-friends-activity friends-activity events-only pane">
+            {% if friend_events_list %}
+                <div class="js-filter user-events__filter" data-target="js-friends-activity">
+                    Узнайте <span class="js-filter-option filter-option filter-option_state_active" data-value="events-only"><span class="pseudo-link">куду пойдут</span></span> друзья или их <span class="js-filter-option filter-option" data-value="actions-only"><span class="pseudo-link">отзывы и оценки</span></span>
+                </div>
+                <ul class="friends-events">
+                    {% for event in friend_events_list %}
+                        <li class="box user-events__item{% if event.has_passed %} user-events__item_passed_yes{% endif %}">
+                            <div class="rating">
+                                {% ratingform event %}
+                            </div>
+                            <span class="meta">{{ event.category }}</span>
+                            <h4 class="title"><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></h4>
+                            <div class="summary">{{ event.intro|striptags }}</div>
+                            Идет в <a href="{{ event.get_absolute_url }}#schedule">4 кинотеатрах</a> | <a href="">Арлекин</a>, 31 Августа 2013, 12:00
+                            
+                            <ul class="event-visitors__item-list">
+                                {% for user in event.members.all %}
+                                    <li class="event-visitors__item">
+                                        <a href="{% url profile_show user.id %}" class="userpic userpic_small" title="{{ user.username }}"><img src="
+                                        {% if user.profile.userpic %}
+                                            {% if user.profile.get_userpic == "/static/i/no_avatar.png" %}
+                                                /static/i/no_avatar_medium.png
+                                            {% else %}
+                                                {{ user.profile.userpic.extra_thumbnails.medium }}
+                                            {% endif %}
+                                        {% else %}/static/i/no_avatar_medium.png{% endif %}" alt=""></a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if friend_actions %}
+                <ul class="friends-actions">
+                    {% for action in friend_actions %}
+                        <li class="friend-action">
+                            - {{action }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        {% endcomment %}
+
+        {% if request.user.is_staff %}
+            {% if youself or is_friend %}
+                <div class="js-user-events pane user-events future-only">
+                    <div class="js-filter user-events__filter" data-target="js-user-events">
+                        Cобытия на которые
+                            <span class="js-filter-option filter-option filter-option_state_active" data-value="future-only"><span class="pseudo-link">
+                            {% if not youself %}
+                                пойдет
+                            {% else %}
+                                вы пойдете
+                            {% endif %}
+                            </span></span>
+
+                            или  
+                            <span class="js-filter-option filter-option" data-value="passed-only"><span class="pseudo-link">
+                            {% if not youself %}
+                                планировал{% if profile.sex == 'female' %}а{% endif %} пойти
+                            {% else %}
+                                планировали пойти
+                            {% endif %}
+                            </span></span>
+
+                            {% if not youself %} {{ profile.user.username }} {% endif %}
+                    </div>
+                    <ul class="user-events__item-list future-events">
+                        {% show_soon_events profile.user %}
+                    </ul>
+                    <ul class="user-events__item-list started-events">
+                        {% show_now_events profile.user %}
+                    </ul>
+                </div>
+
+                <div class="pane user-comments">
+                    <ul class="user-comments__item-list">
+                        {% show_comments profile.user %}
+                    </ul>
+                </div>
+
+                <div class="pane user-votes">
+                    <ul class="user-votes__item-list grid">
+                        {% show_votes profile.user %}
+                        <li class="grid__placeholder grid__cell_size_1-of-3"></li>
+                    </ul>
+                </div>
+            {% endif %}
+        {% endif %}
+
+
+    </div>
+</div>
+{% endblock %}
+{% block li_profile_show %}<li class="active"><a href="{% url profile.views.profile_show user.pk %}">Профиль</a></li>{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block title %}{{ flatpage.title }}{% endblock %}
+{% block h1 %}{{ flatpage.title }}{% endblock %}
+{% block content %}
+  {{ flatpage.content }}
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

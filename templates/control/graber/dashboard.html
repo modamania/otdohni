@@ -1,0 +1,23 @@
+{% extends "control/index.html" %}
+{% load control_tags core_tags thumbnail %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+    </div>
+{% endblock %}
+{% block content %}
+    <h1>Проблемы при импорте</h1>
+    <div class="cpanel__toolbar clearfix">
+        <div class="buttons">
+            {{ multiple_place_count }}
+            <span class="btn_wrapper"><ins class="l"></ins><ins class="r"></ins><a href="{% url control_graber_clone_list %}" clas  s="btn">Дублекаты заведений</a></span>
+        </div>
+    </div>
+    <div class="cpanel__toolbar clearfix">
+        <div class="buttons">
+            {{ place_update_count }}
+            <span class="btn_wrapper"><ins class="l"></ins><ins class="r"></ins><a href="{% url control_graber_place_update_list %}" clas  s="btn">Новая инфа о заведениях</a></span>
+        </div>
+    </div>
+
+{% endblock %}

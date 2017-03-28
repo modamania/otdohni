@@ -1,0 +1,110 @@
+{% extends "control/index.html" %}
+{% load thumbnail i18n assets control_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> / <a title="Скидки" href="{% url control_tea_list %}">Чай со звездой</a> /
+    </div>
+{% endblock %}
+
+{% block content-header %}
+    {% if tea %}<h1>Редактирование интервью «{{ tea.title }}»</h1>{% else %}<h1>Создание нового интервью</h1>{% endif %}
+{% endblock %}
+
+{% block content %}
+    <form action="." method="POST" enctype="multipart/form-data" class="form form_tea_edit zf" id="tea_form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            {{ form.non_field_errors }}
+        {% endif %}
+
+        <fieldset>
+            <legend>Основная информация</legend>
+	    <p class="field">
+                {{ form.sites.errors }}
+                {{ form.sites.label_tag }}
+                {{ form.sites }}
+            </p>
+
+            <p class="field">
+                {{ form.is_published.errors }}
+                {{ form.is_published.label_tag }}
+                {{ form.is_published }}
+            </p>
+
+            <p class="field input_date">
+                {{ form.pub_date.errors }}
+                {{ form.pub_date.label_tag }}
+                {{ form.pub_date }}
+            </p>
+
+            <p class="field input_text">
+                {{ form.title.errors }}
+                {{ form.title.label_tag }}
+                {{ form.title }}
+            </p>
+
+            <p class="field input_text">
+                {{ form.image.errors }}
+                {{ form.image.label_tag }}
+                {{ form.image }}
+            </p>
+
+            <p class="field">
+                {{ form.full_text.errors }}
+                {{ form.full_text.label_tag }}
+                {{ form.full_text }}
+            </p>
+        </fieldset>
+
+        <div id="form-submit" class="field clearfix submit">
+            <p class="submit">
+                <input type="submit" value="Сохранить">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:history.go(-1);">Отмена</a>
+            </p>
+        </div>
+    </form>
+
+    <div id="elfinder"></div>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}elfinder/css/elfinder.css" type="text/css" media="screen" charset="utf-8">
+    <link href="{{ STATIC_URL }}elrte/css/django-elrte.css" type="text/css" media="all" rel="stylesheet">
+    <link href="{{ STATIC_URL }}elrte/css/elrte.full.css" type="text/css" media="all" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+
+    {{ form.media }}
+
+    {% assets  "js_ui" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+    {% assets  "control_js" %}
+        <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}">
+        </script>
+    {% endassets %}
+
+    <script type="text/javascript">
+
+        $(function(){
+
+            // datepicker
+            $.datepicker.setDefaults(
+                    $.extend($.datepicker.regional["ru"])
+            );
+            $(".input_date input").datepicker({
+                showOn: "button",
+                buttonImageOnly: true,
+                buttonImage: "{{ STATIC_URL}}admin/img/admin/icon_calendar.gif",
+                dateFormat: "yy-mm-dd",
+            });
+        });
+
+    </script>
+
+{% endblock %}

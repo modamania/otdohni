@@ -1,0 +1,11 @@
+.friends_list__item:hover .userpic {
+    background: #fff;
+    left: -6px;
+    top: -0.5em;
+    filter:
+        progid:DXImageTransform.Microsoft.Shadow(color='#a0a0a0', Direction=45, Strength=1)
+        progid:DXImageTransform.Microsoft.Shadow(color='#a0a0a0', Direction=135, Strength=6)
+        progid:DXImageTransform.Microsoft.Shadow(color='#a0a0a0', Direction=225, Strength=6)
+        progid:DXImageTransform.Microsoft.Shadow(color='#a0a0a0', Direction=315, Strength=1);
+    zoom: 1;
+}

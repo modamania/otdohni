@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% load loginza_widget %}
+{% block content-header %}
+<h1>Вход на сайт</h1>
+{% endblock %}
+{% block content %}
+{% if not user.is_authenticated %}
+    {% if form.errors %}
+    <div class="error">Неправильный логин или пароль</div>
+    {% endif %}
+<form class="form form_horizontal box auth-form auth-form-horiz" id="id_loginform" method="post" name="login" action=".">
+    <div class="grid">
+        <div class="grid__cell grid__cell_size_2-of-4">
+            <div class="auth-form__content">
+                {% csrf_token %}
+                <dl class="form_row input_text{% if form.username.errors %} invalid{% endif %}">
+                    <dt class="label"><label for="id_username">Логин</label></dt>
+                    <dd class="field">{{ form.username }}{{ form.username.errors }}</dd>
+                </dl>
+                <dl class="form_row input_text">
+                    <dt class="label"><label for="id_password">Пароль</label></dt>
+                    <dd class="field">{{ form.password }}{{ form.password.errors }}</dd>
+                </dl>
+                <dl class="form-row">
+                    <dd class="field">
+                        <p>
+                            <input type="checkbox" value="yes" class="inputbox" id="loginremember" name="remember">
+                            <label for="loginremember">запомнить меня</label>
+                        </p>
+                        <p class="form_row submit">
+                            <span class="btn btn_theme_blue">
+                                <span class="btn__text">Войти</span>
+                                <input type="submit" value="Войти на сайт" class="btn btn__input" name="Submit">
+                            </span>
+                        </p>
+                        <p><a href="{% url django.contrib.auth.views.password_reset %}">Напомнить пароль</a></p>
+                    </dd>
+                </dl>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </div>
+        <div class="separator separator_orient_horiz separator_bg_white"><span class="separator__text">или</span></div>
+        <div class="grid__cell grid__cell_size_2-of-4">
+            <div class="auth-form__content auth-social">
+                <h3>Войти как пользователь</h3>
+                {% loginza_iframe  providers_set="vkontakte,facebook,twitter,yandex,google,rambler,mailruapi,odnoklassniki" %}
+            </div>
+        </div>
+        <div class="separator separator_orient_vert separator_bg_white"><span class="separator__text">или</span></div>
+    </div>
+</form>
+{% else %}
+   Вы вошли как {{ user.username }}
+   {% endif %}
+{% endblock %}

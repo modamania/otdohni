@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block title %}{{ specproject.title }}{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Отдых и развлечения в Омске" href="/">Главная</a> / {{ specproject.top_title }}
+    </div>
+{% endblock %}
+
+{% block content-header %}{% endblock %}
+
+{% block content %}
+    {% if user.profile.access_to_dasboard or user.is_superuser %}
+        <h1 class="with-tags editable">
+        {{ specproject.title }}
+        <span class="editable__buttons">
+        <a href="{% url control_spec_edit specproject.slug %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+    </span>
+    {% else %}
+        <h1 class="with-tags">
+        {{ specproject.title }}
+    {% endif %}
+</h1>
+    {{ specproject.description|safe }}
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

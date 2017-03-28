@@ -1,0 +1,5 @@
+{% if tags %}
+    {% for tag in tags %}
+        <a href="{% url photoreport_tag_list tag.slug %}" title="{% if tag.title %}{{ tag.title }}{% else %}{{ tag.name }}{% endif %}">{{ tag.name }}</a>{% if not forloop.last %},&nbsp;{% endif %}
+    {% endfor %}
+{% endif %}

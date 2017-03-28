@@ -1,0 +1,82 @@
+{% load core_tags %}
+{% load profile_tags %}
+{% load comments %}
+{% load threadedcomments_tags %}
+{% for comment in comment_list|fill_tree|annotate_tree reversed %}
+
+    {% ifchanged comment.parent_id %}{% else %}
+        </li>
+    {% endifchanged %}
+
+    {% if not comment.open and not comment.close %}
+        </li>
+    {% endif %}
+
+    {% if comment.open %}
+        <ul{% if comment.depth > 1 %} class="comment__thread"{% endif %}>
+    {% endif %}
+
+    {% url profile_show comment.user.pk as link_to_profile %}
+    <li class="comments__comment {% if comment.depth > 1 %} thread__comment{% endif %} clearfix" id="comments-{{ comment.pk }}">
+        <a href="{{ link_to_profile }}" class="userpic userpic_medium"><img class="userpic__img" alt="" src="
+        {% if comment.user.profile.userpic %}
+            {% if comment.user.profile.get_userpic == "/static/i/no_avatar.png" %}
+                /static/i/no_avatar_medium.png
+            {% else %}
+                {{ comment.user.profile|userpic:'medium' }}
+            {% endif %}
+        {% else %}/static/i/no_avatar_medium.png{% endif %}" /></a>
+        <div class="meta">
+                <span class="author"><a href="{{ link_to_profile }}">{{ comment.user|username }}</a></span>
+                <span class="date comment__date">{{ comment.submit_date }}</span>
+                <a href="#comments-{{ comment.pk }}" class="comment__anchor" title="Ссылка на комментарий">#</a>
+                {% if user.is_authenticated %}
+                    {# <span class="reply__button open_form"><span class="pseudo_link">Ответить</span></span> #}
+                    {% if user.is_superuser %}
+                        <span class="comment__ip">{{ comment.ip_address }}</span>
+                        <a href="{% url api_comment_remove comment.pk %}" class="comment__action">Удалить</a>
+                    {% endif %}
+                {% endif %}
+        </div>
+        <div class="comment__content">{{ comment.comment }}</div>
+            {% if user.is_authenticated %}
+                    <div class="comment__rating" data-id="{{ comment.pk }}">Согласны?
+                        <span class="pseudo_link comment__rating__{% if user in comment.like_users %}current{% else %}agree{% endif %}" data-relate="agree">Да</span><span>{{ comment.like|length }}</span> /
+                        <span class="pseudo_link comment__rating__{% if user in comment.nolike_users %}current{% else %}disagree{% endif %}" data-relate="disagree">Нет</span><span>{{ comment.nolike|length }}</span>
+                    </div>
+
+                    <div class="reply__form form" style="display: none">
+                        {% get_comment_form for comment.content_object as form with comment.pk %}
+                        <form action="{% comment_form_target %}" method="post">
+                            {% csrf_token %}
+                            {{ form.content_type }}
+                            {{ form.object_pk }}
+                            {{ form.timestamp }}
+                            {{ form.security_hash }}
+                            {{ form.parent }}
+                            <input type="hidden" name="next" value="{{ REQUEST_PATH }}" />
+                            <div class="form__row textarea">
+                                <div class="field">
+                                    <textarea id="id_comment" name="comment" class="cominput" rows="5" cols="40"></textarea>
+                                </div>
+                            </div>
+                            <div class="form__row submit">
+                                <input type="submit" class="btn post__submit" value="Ответить" name="send">
+                                <span class="pseudo_link close_form">В другой раз</span>
+                            </div>
+                        </form>
+                    </div>
+            {% else %}
+                    <div class="comment__rating" data-id="{{ comment.pk }}">Согласны:
+                        <span class="comment__rating__agree" data-relate="agree">Да</span><span>{{ comment.like|length }}</span> /
+                        <span class="comment__rating__disagree" data-relate="disagree">Нет</span><span>{{ comment.nolike|length }}</span>
+                    </div>
+            {% endif %}
+
+    {% for close in comment.close %}
+        </li>
+        </ul>
+    {% endfor %}
+
+{% endfor %}
+

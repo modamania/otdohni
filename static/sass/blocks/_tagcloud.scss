@@ -1,0 +1,74 @@
+.tagcloud {
+  margin: 0 0 2.5em;
+  padding: 0 0 1em;
+
+  &__tags {
+    margin: 0;
+    text-align:center;
+  }
+
+  &__tag {
+    display: inline-block;
+    _display: inline;
+    position: relative;
+    margin: 0;
+    list-style: none;
+    line-height: 2;
+    vertical-align: middle;
+    white-space: nowrap;
+    zoom: 1;
+  }
+
+  &__link {
+    padding: 0.25em 0.5em;
+  }
+
+  .active .tagcloud__link{
+    @include box-shadow(0 3px 10px rgba(0,0,0,.25));
+    @include border-radius(2px);
+
+    color: #fff;
+    text-decoration: none;
+    background: $brand-blue;
+  }
+
+  &_popup {
+    @extend .popup;
+    @include box-sizing(border-box);
+
+    z-index: 100;
+    left: 0;
+    margin: 0;
+    padding: 2em 1em;
+    border: 2px solid $brand-blue;
+    width: 100%;
+  }
+
+  .t1 {
+    font-size: 100%;
+  }
+  .t5 {
+    font-size: 110%;
+  }
+  .t10 {
+    font-size: 120%
+  }
+  .t20 {
+    font-size: 130%;
+  }
+  .t50 {
+    font-size: 140%;
+  }
+  .t100 {
+    font-size: 150%;
+  }
+  .t150 {
+    font-size: 160%;
+  }
+  .t300 {
+    font-size: 170%;
+  }
+  .t500 {
+    font-size: 180%;
+  }
+}

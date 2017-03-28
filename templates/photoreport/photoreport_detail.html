@@ -1,0 +1,52 @@
+{% extends "photoreport/photoreport_list.html" %}
+{% load thumbnail pagination_tags core_tags %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Отдых и развлечения в Омске" href="/">Главная</a> /
+        <a title="Фото {{ CITY.genitive }}" href="{% url photoreport_list %}">Фото {{ CITY.genitive }}</a> /
+        <a title="{{ photoreport.title }}" href="{% url photoreport_detail photoreport.slug %}">{{ photoreport.title }}</a>
+    </div>
+{% endblock %}
+
+{% block title %}{{ photoreport.title }}{% endblock %}
+
+{% block album %}{{ photoreport.title }}{% endblock %}
+
+{% block content-header %}{% endblock %}
+{% block content-inner %}
+    <h1 class="page-title">
+        <span class="page-title__title">
+        {{ photoreport.title|safe }}
+        </span>
+        {% if user.profile.access_to_dasboard or user.is_superuser %}
+            {% block edit-buttons %}
+            <span class="editable__buttons">
+            <a href="{% url control_photoreport_edit photoreport.pk %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+            </span>
+            {% endblock %}
+        {% endif %}
+    </h1>
+
+<ul class="photos_list clearfix">
+    {% spaceless %}
+    {% autopaginate photos 50 %}
+    {% for photo in photos %}
+        <li class="photos_list__item">
+            {% thumbnail photo.image "315x225" crop=",0" quality=95 as im %}
+            <a href="{% url photo_detail photoreport.slug photo.id %}" title="{{ photo.title }}" class="photos_list-link">
+                <img src="{{im}}" alt="{{ photo.title }}" class="photos_list__img" />
+            </a>
+        </li>
+    {% empty %}
+        <li>Фотографий нет.</li>
+    {% endfor %}
+    {% endspaceless %}
+</ul>
+{% new_paginate %}
+{% endblock %}
+{% block sidebar-places %}{% endblock %}
+
+{% block yandex_share %}
+    {% include "widgets/yashare.html" %}
+{% endblock %}

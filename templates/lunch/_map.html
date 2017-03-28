@@ -1,0 +1,62 @@
+<div class="h-map" style="padding: 2px; border: 1px solid #ccc;"><div id="YMaps_lunch" style="width:554px;height:350px;"></div></div>
+
+
+<script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ api_key }}" type="text/javascript"></script>
+<script type="text/javascript">
+    window.onload = function () {
+
+        function createObject (type, point, style, description) {
+            var allowObjects = ["Placemark", "Polyline", "Polygon"],
+                index = YMaps.jQuery.inArray( type, allowObjects),
+                constructor = allowObjects[(index == -1) ? 0 : index];
+                description = description || "";
+
+            var object = new YMaps[constructor](point, {style: style, hasBalloon : !!description});
+            object.description = description;
+
+            return object;
+        }
+
+        var map = new YMaps.Map(document.getElementById("YMaps_lunch"));
+        map.setCenter(new YMaps.GeoPoint(73.379,54.99), 11, YMaps.MapType.MAP);
+
+
+        map.addControl(new YMaps.ToolBar());
+        map.addControl(new YMaps.Zoom());
+        map.addControl(new YMaps.ScaleLine());
+
+        YMaps.Styles.add("constructor#pmwtmPlacemark", {
+            iconStyle : {
+                href : "http://api-maps.yandex.ru/i/0.3/icons/restauraunt.png",
+                size : new YMaps.Point(28,29),
+                offset: new YMaps.Point(-8,-27)
+            }
+        });
+
+        var gBounds = new YMaps.GeoCollectionBounds();
+        var gCollection = new YMaps.GeoObjectCollection();
+
+        {% for lunch in lunches %}
+            {% if lunch.longtitude and lunch.latitude %}
+               var point = new YMaps.GeoPoint({{ lunch.longtitude }},{{ lunch.latitude }});
+               var placemark = createObject("Placemark", point,
+                        "constructor#pmwtmPlacemark",
+                        "<strong>{{ lunch.title|escapejs }}</strong><br /> {{ lunch.label }}");
+                gCollection.add(placemark);
+                gBounds.add(point);
+            {% endif %}
+        {% endfor %}
+
+        map.addOverlay(gCollection);
+        if (gBounds._lngs.length)
+            map.setBounds(gBounds);
+
+
+
+
+
+
+       
+        
+    }
+</script>

@@ -1,0 +1,104 @@
+{% extends "index.html" %}
+{% load comments thumbnail %}
+{% load core_tags pagination_tags %}
+
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> /  Конкурсы
+</div>
+{% endblock %}
+
+{% block title %}Конкурсы {{ CITY.genitive }}{% endblock %}
+
+{% block content-header %}
+{% endblock %}
+
+{% block seo-header %}
+{% endblock %}
+
+{% block content %}
+    {% if user.profile.access_to_dasboard or user.is_superuser %}
+        <h1 class="page-title editable">
+        <span class="page-title__title">
+            {% if seo.heading.value %}
+                {{ seo.heading.value }}
+            {% else %}
+                Конкурсы
+            {% endif %}
+        </span>
+        {% if seo.tooltip.value %}
+            <i class="help-icon show-help"></i>
+        {% endif %}
+        <span class="editable__buttons">
+        <a href="{% url control_action_list %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+    </span>
+    {% else %}
+        <h1 class="page-title">
+        <span class="page-title__title">
+            {% if seo.heading.value %}
+                {{ seo.heading.value }}
+            {% else %}
+                Конкурсы
+            {% endif %}
+        </span>
+        {% if seo.tooltip.value %}
+            <i class="help-icon show-help"></i>
+        {% endif %}
+    {% endif %}
+    </h1>
+
+<ul class="tabs">
+    <li class="tabs-item{% ifequal active 'current' %} tabs-item_state_current{% endifequal %} tabs-item_pos_first">
+        <a href="{% url action_list %}">
+        Активные</a>
+    </li>
+    <li class="tabs-item{% ifequal active 'complete' %} tabs-item_state_current{% endifequal %} tabs-item_pos_last">
+        <a href="{% url complete_action_list %}">
+        Завершенные</a>
+    </li>
+    <li class="tabs-item tabs-item_pos_last">
+        <a href="{% url action_winners_list %}">
+        Победители</a>
+    </li>
+</ul>
+
+{% autopaginate action_list 10 %}
+{% for action in action_list %}
+    {% get_comment_count for action as comment_count %}
+    {% thumbnail action.image 150x150 crop as im %}
+
+    <div class="news__item clearfix">
+        {% if action.image %}
+            <a href="{{ action.get_absolute_url }}" class="thumb news__item__thumb">
+                <img src="{{ im }}">
+            </a>
+        {% endif %}
+
+        <h3>
+            <a href="{{ action.get_absolute_url }}">{{ action.title }}</a>
+        </h3>
+        <div class="news__item__summary">
+            {{ action.short_text|safe }}
+        </div>
+        <div class="meta">
+            {% if comment_count %}
+                <span class="commcount">
+                    <a href="{{ action.get_absolute_url }}#comments">
+                        {{ comment_count }}
+                    </a>
+                    <i></i>
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+{% empty %}
+<p>Конкурсов нет.</p>
+{% endfor %}
+{% new_paginate %}
+
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

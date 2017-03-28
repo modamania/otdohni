@@ -1,0 +1,41 @@
+.jump-up {
+	@include circle(64px);
+	@include transition(background .3s, opacity .3s);
+	@include opacity(0);
+
+	display: block;
+	position: fixed;
+	z-index: 50;
+	left: 68px;
+	bottom: 50px;
+	cursor: pointer;
+	visibility: hidden;
+	background: rgba(white, .25);
+
+	&:after {
+		@extend .icon-en;
+		@include square(40px);
+
+		font-size: 64px;
+		content: '\E767';
+		color: #3f3f44;
+        position: absolute;
+        top: 0;
+        left: 12px;
+        text-align: center;
+        margin: 5px 0 0;
+	}
+
+	&:hover {
+		background: rgba(white, .75);
+	}
+
+	&_pos {
+		&_fixed {
+			@include breakpoint(1080px) {
+				@include opacity(1);
+        		visibility: visible;
+			}
+		}
+	}
+}

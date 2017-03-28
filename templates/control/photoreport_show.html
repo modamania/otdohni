@@ -1,0 +1,31 @@
+{% extends "control/index.html" %}
+{% load thumbnail pagination_tags core_tags %}
+
+{% block content-header %}
+    <h1>Панель управления, смотрим на фотоотчет"<i>{{ photoreport }}</i>"</h1>
+    <a href="{% url control.views.photoreport_form photoreport.pk %}">Редактировать</a><br /><br />
+{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+        <a title="Панель управления" href="{% url control_photoreport_list %}">Фотоотчеты</a> /
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ photoreport.title|safe }}</h1>
+    {% if photoreport.get_num_photos %}
+       <ul class="photos_list clearfix">
+        {% for photo in photoreport.photos.all %}
+            <li class="photos_list__item">
+                <a href="{% url photo_detail photoreport.slug photo.id %}" title="{{ photo.title }}">
+                    <img src="{% thumbnail photo.image 150x150 crop=",0" quality=95 %}" alt="{{ photo.title }}" class="photos_list__img" />
+                </a>
+            </li>
+        {% empty %}
+            <li>Фотографий нет.</li>
+        {% endfor %}
+       </ul>
+    {% endif %}
+{% endblock %}

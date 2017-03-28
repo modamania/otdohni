@@ -1,0 +1,16 @@
+{% load rating_tags %}
+{% if top_list %}
+    <div class="widget widget_rating">
+    <h3 style="margin:0" class="widget__title">{{ rating_title }}</h3>
+    <div class="widget__note">по мнению пользователей</div>
+    <ul>
+    {% for event in top_list %}
+        <li class="widget__item">
+            <a href="{{ event.get_absolute_url }}">{{ event.title }}</a>
+            {% ratingform event readonly %}
+        </li>
+    {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+

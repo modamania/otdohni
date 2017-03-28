@@ -1,0 +1,9 @@
+<div class="whosonline"><h3>Сейчас на сайте</h3>
+    <p>
+    {% for user in online_auth_users %}
+        <a href="{% url profile_show user.id %}">{{ user.username }}</a>&nbsp;
+    {% endfor %}
+    </p>
+    <p>Гостей: {{ online_anonymous_users }}<br></p>
+</div>
+

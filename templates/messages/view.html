@@ -1,0 +1,81 @@
+{% extends "messages/base.html" %}
+{% load i18n core_tags %}
+
+{% block pathway %}
+<div class="pathway">
+    <a href="{% url profile_show user.pk %}">Профиль</a> / <a href="{% url messages_inbox %}">Сообщения</a> /
+</div>
+{% endblock %}
+
+{% block content-header %}
+    <div class="messages__toolbar messages__toolbar_view">
+        <div class="message__chain_members">
+            <a href="{{ user.profile.get_absolute_url }}">{{ user }}</a> и
+            {% for u in other_users %}
+                {% if not u == user %}
+                    <a href="{{ u.profile.get_absolute_url }}">
+                        {{ u }}
+                    </a>
+                    {% if not forloop.last %},{% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <a class="btn" href="{% url messages_delete chain.id %}"><span class="btn__text">&#10005; Удалить</span></a>
+    </div>
+{% endblock %}
+{% block mess-filter %}
+{% endblock %}
+{% block content-inner %}
+<div class="messages">
+
+    {% for m in message_list %}
+        <div class="message_full">
+            <a href="{% url profile_show m.sender.pk %}" class="userpic userpic_medium">
+            {% if m.sender.profile.userpic %}
+                {% if m.sender.profile.get_userpic == "/static/i/no_avatar.png" %}
+                    <img class="userpic__img" src="/static/i/no_avatar_medium.png" alt="" />
+                {% else %}
+                    <img class="userpic__img" src="{{ m.sender.profile.userpic.extra_thumbnails.medium }}" alt="" />
+                {% endif %}
+            {% else %}<img class="userpic__img" src="/static/i/no_avatar_medium.png" alt="" />{% endif %}
+            </a>
+            <div class="meta">
+                <span class="author">
+                    <a href="{% url profile_show m.sender.pk %}">{{ m.sender }}</a>
+                </span>
+                <span class="date">{{ m.sent_at|date:"j b Y в H:i" }}</span>
+            </div>
+             <div class="message_full__content">{{ m.body|linebreaksbr }}</div>
+        </div>
+    {% empty %}
+<pre>        {% debug %}</pre>
+    {% endfor %}
+    <div class="message__reply">
+        <a href="{% url profile_show user.pk %}" class="userpic userpic_medium">
+            {% if user.profile.userpic %}
+                {% if user.profile.get_userpic == "/static/i/no_avatar.png" %}
+                    <img class="userpic__img" src="/static/i/no_avatar_medium.png" alt="" />
+                {% else %}
+                    <img class="userpic__img" src="{{ user.profile.userpic.extra_thumbnails.medium }}" alt="" />
+                {% endif %}
+             {% else %}<img class="userpic__img" src="/static/i/no_avatar_medium.png" alt="" />{% endif %}
+        </a>
+        <form action="." method="post">{% csrf_token %}
+            {% for hid in form.hidden_fields %}
+                {{ hid }}
+            {% endfor %}
+            <p class="form_row">
+                {{ form.body }}
+            </p>
+            <p class="submit">
+                <span class="btn btn_theme_blue">
+                    <span class="btn__text">Ответить</span>
+                    <input type="submit" class="btn__input" value="Ответить" />
+                </span>
+            </p>
+            <input type="hidden" name="recipient" value="{{ recipient }}"/>
+        </form>
+    </div>
+</div>
+{% endblock %}

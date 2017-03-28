@@ -1,0 +1,80 @@
+{% extends "index.html" %}
+{% load place_extras core_tags event_tags assets cache %}
+{% block content-header %}
+
+{% block sponsor_block %}{% endblock %}
+
+{% block categories %}{% endblock %}
+
+{% block search_block %}{% endblock %}
+
+{% endblock %}
+
+{% block content %}
+    {% block text_before_place_list %}
+    {% endblock %}
+
+    <div class="js-places-sorting sorting">
+        Сортировать 
+            <span class="sorting__link pseudo-link" data-order-by="rating">по оценке</span> /
+            <span class="sorting__link pseudo-link" data-order-by="alphabet">по алфавиту</span>
+        </span>
+    </div>
+    <div class="js-places places {% if category.slug == 'taxi' %}places_map_hidden{% else %}places_map_basic{% endif %}">
+        {% block place_list %}
+            <div class="js-places-catalog places-catalog">
+                <div class="js-places-list places__item-list">{{ places.object_list|render_places:seo }}</div>
+                <span class="js-more-places places__more btn btn_theme_blue btn_size_large hidden"><span class="btn__text">Еще</span></span>
+            </div>
+        {% endblock %}
+
+        {% block places_map %}
+            <div class="js-places-map places-map">
+                <div class="ymaps">
+                    <span class="js-toggler ymaps__toggler" data-alt-text="Свернуть &rarr;">
+                        &larr; Развернуть
+                    </span>
+                    <span class="js-close ymaps__close"></span>
+                    <div id="YMapsID" class="ymaps__inner"></div>
+                </div>
+                <div class="js-open places-map__open"></div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block yandex_share %}
+    {% include "widgets/yashare.html" %}
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}
+
+{% block sidebar-main %}
+    {% block widget-places %}
+            {% display_place_categories %}
+    {% endblock %}
+    {% block widget-afisha %}
+            {% display_event_categories %}
+    {% endblock %}
+{% endblock %}
+
+{% block widget-twitter-text %}
+    <p>Миллион идей для отдыха — теперь в Твиттере!</p>
+{% endblock %}
+
+{% block scripts %}
+{% assets  "js_ui" %}
+  <script type="text/javascript" language="javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+<script src="http://api-maps.yandex.ru/2.1-dev/?lang=ru-RU"></script>
+<!--This block add in template/place/base.html-->
+<script src="/static/js/jquery.timePicker.js" type="text/javascript"></script>
+<script src="/static/js/place_list.js" type="text/javascript"></script>
+<!--end-->
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/timePicker.css" type="text/css">
+{% endblock %}

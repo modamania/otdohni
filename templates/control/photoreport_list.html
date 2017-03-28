@@ -1,0 +1,45 @@
+{% extends "control/index.html" %}
+{% load control_tags core_tags %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+    </div>
+{% endblock %}
+{% block content %}
+    <h1>Список фотоотчетов</h1>
+    <div class="cpanel__toolbar clearfix">
+        <div class="filter">
+            <form action="." method="GET">
+                Фильтр: <span class="field"><input type="text" name="q" value="{{ q }}" /></span> <input type="submit" class="btn" value="Найти" />
+            </form>
+        </div>
+        <div class="buttons">
+            <span class="btn_wrapper"><ins class="l"></ins><ins class="r"></ins><a href="{% url control.views.photoreport_form  %}" class="btn">Новый фотоотчет</a></span>
+        </div>
+    </div>
+    <table cellpadding="0" cellspacing="0" class="component__items_list">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Событие</th>
+            <th>Место</th>
+            <th>Количество фото</th>
+            <th>На главной</th>
+            <th>Дата события</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for photoreport in photoreports.object_list %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td class="title"><a href="{% url control.views.photoreport_form photoreport.pk %}">{{ photoreport }}</a></td>
+                <td>{% if photoreport.place %}<a href="{% url place_show photoreport.place.pk %}">{{ photoreport.place }}</a>{% else %}-{% endif %}</td>
+                <td>{% if photoreport.event %}<a href="{% url event_detail photoreport.event.category.slug photoreport.event.pk %}">{{ photoreport.event }}</a>{% else %}-{% endif %}</td>
+                <td>{{ photoreport.num_photos }}</td>
+                <td>{% if photoreport.on_mainpage %}Да{% else %}Нет{% endif %}</td>
+                <td>{{ photoreport.date_event|date:"d.m.Y" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ photoreports|render_paginator:seo }}
+{% endblock %}

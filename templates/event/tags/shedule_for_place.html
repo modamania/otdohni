@@ -1,0 +1,16 @@
+{% load event_tags %}
+
+<table class="event__schedule">
+    <tbody>
+    {% for event in grouped_periods %}
+        <tr class="event_schedule_line {% cycle odd, even %}">
+            <td class="event__schedule__place">
+                <a href="{{ event.grouper.get_absolute_url }}">{{ event.grouper.title|safe }}</a>
+            </td>
+            <td class="event__schedule__time">
+                {% display_times_list event day %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

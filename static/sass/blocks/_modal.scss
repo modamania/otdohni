@@ -1,0 +1,13 @@
+.modal {
+	&__title {
+		font-size: 22px;
+		text-align: center;
+		margin: 0 0 1.5em;
+	}
+}
+
+.tickets-modal {
+	$width: 720px;
+	@include rect($width, 500px);
+	margin-left: - ($width + 84px) / 2;
+}

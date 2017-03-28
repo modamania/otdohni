@@ -1,0 +1,107 @@
+{% extends "photoreport/photoreport_detail.html" %}
+{% load rating_tags photoreport_tags watermark thumbnail comments core_tags %}
+
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в Омске" href="/">Главная</a> / <a title="Фотоотчеты Омска" href="{% url photoreport_list %}">Фото</a> /
+  <a title="{{ photoreport.title }}" href="{% url photoreport_detail photoreport.slug %}">{{ photoreport.title }}</a> 
+</div>
+{% endblock %}
+
+{% block album %}{{ photoreport.title }}{% endblock %}
+{{ photoreport.date|date:"j F Y"|lower }}
+{% block content %}
+    {% block content-inner %}
+        <h1 class="page-title">
+            <span class="page-title__title">
+            {{ photoreport.title|safe }}
+            </span>
+            {% if user.profile.access_to_dasboard or user.is_superuser %}
+                {% block edit-buttons %}
+                    <span class="editable__buttons">
+        <a href="{% url control_photoreport_photo_edit photoreport.pk photo.pk %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+        </span>
+                {% endblock %}
+            {% endif %}
+        </h1>
+    {# -----------photo------------ #}
+    <div class="foto_middle">
+        <div id="photo_wrap" class="thumb shadowed" style="width: {{ im.width }}px;">
+            {% if photo.image.path|is_file  %}
+                {% thumbnail photo.image|watermark:"main,position=br,opacity=100" 768x768 quality=95 as im %}
+                <a title="{{ photo.description }}" rel="fancybox" href="{{ photo.image.url|watermark:"main,position=br,opacity=100" }}">
+                    <img alt="{{ photoreport.title }}" title="Увеличить" src="{{ im }}" id="foto-middle" class="thumb__img" />
+                    <img src="/static/i/shadow.png" alt="" class="shadow" />
+                </a>
+            {% endif %}
+            {% if photo.prev_photo %}
+            <span class="arrow left"><a class="prev-photo" title="Предыдущая фотография" href="{{ photo.prev_photo.get_absolute_url }}"><i></i></a></span>
+            {% endif %}
+            {% if photo.next_photo %}
+                <span class="arrow right"><a class="next-photo" title="Следующая фотография" href="{{ photo.next_photo.get_absolute_url }}"><i></i></a></span>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
+
+    {# -----------information------------ #}
+    <div class="foto-saving">
+        <a href="{% url photo_download photoreport.slug photo.id %}"><img border="0" alt="" title="Сохранить как" src="/static/i/download.gif"></a>&nbsp;&nbsp;
+    </div>
+    <div class="foto-description">
+        <dl>
+            <dt>Рейтинг:</dt>
+            <dd class="data">
+              <div id="rating" class="rating rating_place">
+                    {% ratingform photo %}
+                </div>
+
+            </dd>
+        </dl>
+    </div>
+
+    {# -----------all-comments------------ #}
+    <div id="comments" class="comments">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><i>{{ message }}</i></li>
+                {% endfor %}
+            </ul>
+            <br>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <h3>Отзывы</h3>
+            {% if not is_subscribed %}
+                <a href="{% url photo_subscribe photoreport.slug photo.id %}">Сообщать о новых комментариях</a>
+            {% else %}
+                <a href="{% url photo_unsubscribe photoreport.slug photo.id %}">Не сообщать о новых комментариях</a>
+            {% endif %}
+            <div class="comments__post clearfix comment_form">
+                <span class="pseudo_link post__button open_form">Позвольте, я скажу!</span>
+                <div class="post__form form" style="display: none">{% render_comment_form for photo %}</div>
+            </div>
+        {% else %}
+            {% include "comments/_no_access.html" %}
+        {% endif %}
+        {% render_comment_list for photo %}
+    </div>
+
+{% endblock %}
+{% block sidebar-scroll %}
+<div class="photo_widget">
+    {% photo_widget for photoreport %}
+</div>
+{% endblock %}
+{% block sidebar-main %}{% endblock %}
+
+{% block widget-twitter-text %}
+    <p>Миллион идей в 140 символах!</p>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    jQuery(document).one('ready', function () {jQuery('#photo_ribbon').scrollfoto({wrapDivClass: 'widget ribbon', arrowUpClass: 'varrow up', arrowDownClass: 'varrow down'});});
+
+</script>
+{% endblock %}

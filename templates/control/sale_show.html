@@ -1,0 +1,20 @@
+{% extends "control/index.html" %}
+{% load thumbnail %}
+
+{% block content-header %}
+    <h1>Панель управления, смотрим на скидку"<i>{{ sale }}</i>"</h1>
+    <a href="{% url control.views.sale_form sale.pk %}">Редактировать</a><br /><br />
+{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+        <a title="Панель управления" href="{% url control_sale_list %}">Скидки</a> /
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="event__summary">
+        <img align='middle' src='{% thumbnail sale.image 350x525 %}'>
+    </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% load control_tags place_extras %}
+{% load i18n %}
+
+{{ address_formset.management_form }}
+{{ address_formset.non_form_errors }}
+<div class="address__list clearfix">
+    {% for address in address_formset %}
+        <div class="address_list__item">
+            <div class="address_item__head">
+                {% for hid in address.hidden_fields %}{{ hid }}{% endfor %}
+                {% if forloop.counter == 1 %}Основной адрес{% else %}Дополнительный адрес{% endif %}
+                {% if not forloop.counter == 1 %}<a href="" class="address__delete" title="Удалить">Удалить</a>{{ address.DELETE }}{% endif %}
+                <a href="{% if address.has_instance %}{% url control_address_form_edit place_pk=place.pk address_pk=address.id.value %}{% else %}{% url control_address_form_new place_pk=place.pk %}{% endif %}" class="address__edit" title="Изменить">Изменить</a>
+            </div>
+            <div class="address_item__body">
+                <table>
+                    <tr>
+                        <td class="th">Район</td>
+                        <td class="td">
+                            {% if address.district.value %}
+                                {% trans address.district.value %}
+                            {% else %}
+                                <span class="disabled">не указан</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="th">Адрес</td>
+                        <td class="td">
+                            {% if address.address.value %}
+                                {{ address.address.value }}
+                            {% else %}
+                                <span class="disabled">не указан</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="th">Гео. координаты</td>
+                        <td class="td">
+                            {% if address.geopoint.value %}
+                                {{ address.geopoint.value }}
+                            {% else %}
+                                <span class="disabled">не указаны</span>
+                            {% endif %}
+                    </tr>
+                    <tr>
+                        <td class="th">Телефон</td>
+                        <td class="td">
+                            {% if address.phone.value %}
+                                {{ address.phone.value }}
+                            {% else %}
+                                <span class="disabled">не указан</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="th">Режим работы</td>
+                        <td class="td">
+                            {% if address.instance|work_time %}
+                                {{ address.instance|work_time }}
+                            {% else %}
+                                <span class="disabled">не указан</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+        <div class="address_list__item address_list__item_new">
+            <a href="{% if place %}{% url control_address_form_new place_pk=place.pk %}{% else %}{% endif %}" class="address__add" title="Добавить адрес">Добавить адрес</a>
+        </div>
+</div>

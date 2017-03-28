@@ -1,0 +1,72 @@
+{% extends "place/base.html" %}
+{% block search_block %}
+<div class="tabbed tabbed_search">
+    {% if category.is_taxi %}
+    {% else %}
+        <span class="tabs-title">Поиск</span>
+        <ul class="tabs" style="margin-bottom: 0;">
+            <li class="tabs-item tabs-item_state_current" data-tabname="byparams"><span class="pseudo-link">По параметрам</span></li>
+            <li class="tabs-item" data-tabname="bytitle"><span class="pseudo-link">По названию</span></li>
+        </ul>
+    {% endif %}
+    
+    <div class="pane search {% if not category.is_taxi %}pane_state_visible{% endif %} search_extended">
+        {% block taglist %}
+            {% if category.tagging.all %}
+            <div class="filter clearfix">
+                <div class="filter__title">Что ищем?</div>
+                <div class="filter__selectors clearfix" id="tag_list">
+                    {% spaceless %}
+                    {% for tag in category.tagging.all %}
+                        <span class="filter__selector{% if tag.id in tags_ids %} selected{% endif %}" data-tag="{{ tag.pk }}"><span class="pseudo_link">{{ tag.name }}</span></span>
+                    {% endfor %}
+                    {% endspaceless %}
+                </div>
+            </div>
+            {% endif %}
+        {% endblock %}
+        <div class="search_full__filters">
+            <div class="filter filter_work_time clearfix">
+                <div class="filter__title">Время работы</div>
+                <div class="filter__selectors" id="time_selectors">
+                    <span class="input_time">
+                        c <input type="text" id="from_time" name="from_time" size="4" value="{{ from_time|time:"G:i" }}">
+                        до <input type="text" id="till_time" name="till_time" size="4" value="{{ till_time|time:"G:i" }}"> часов
+                    </span>
+                    <span class="all_day"><input type="checkbox" value="1" name="all_day" id="all_day" {% if all_day %} checked{% endif %}>&nbsp;<label for="all_day">круглосуточно</label></span>
+                </div>
+            </div>
+            <div class="filter clearfix">
+                <div class="filter__title">Район города</div>
+                <div class="filter__selectors" id="district_list">
+                        {% for d in DISTRICT %}
+                            <span class="filter__selector{% if d.0 in districts_keys %} selected{% endif %}" data-district="{{ d.0 }}"><span class="pseudo_link">{{ d.1 }}</span></span>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="filter__submit">
+            <span class="js-search-message search__result-message"></span>
+            <span class="pseudo_link filter__clear{% if not use_filter  %} hidden{% endif %}" id="reset_filter">Сбросить фильтр</span>
+        </div>
+    </div>
+    <div class="pane {% if category.is_taxi %}pane_state_visible{% endif %} search">
+        <form action="{% url place.views.search_by_name %}" method="get" class="form">
+            <table>
+                <tr>
+                    <td class="search__field">
+                        <input type="text" id="search_place" autocomplete="off" name="t" value="{{ t }}" class="search__input" placeholder="поиск" />
+                    </td>
+                    <td class="search__submit">
+                        <span class="btn">
+                            <span class="btn__text">Найти</span>
+                            <input type="submit" class="btn__input" value="Найти" />
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

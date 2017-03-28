@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% load comments %}
+{% load thumbnail pagination_tags %}
+{% load core_tags %}
+
+{% block title %}Мода в Омске{% if tag %}- {{ tag.name }}{% endif %}{% endblock %}
+{% block seo-header %}{% endblock %}
+{% block content-header %}<h1>
+    {% if seo.heading.value %}
+        {{ seo.heading.value }}
+    {% else %}
+        Мода
+    {% endif %}
+    {% if seo.tooltip.value %}
+        <i class="help-icon show-help"></i>
+    {% endif %}
+    </h1>
+    {% if tag %} по тегу: <b>{{ tag.name }}</b>{% endif %}
+{% endblock %}
+
+{% block content %}
+    {% autopaginate fashion_list %}
+    {% for item in fashion_list %}
+        {% get_comment_count for item as comment_count %}
+        <div class="fashion__item clearfix">
+            <a href="{{ item.get_absolute_url }}" class="thumb fashion__item__thumb"><img src="{% thumbnail item.get_image 350x250 %}" /></a>
+            <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+            <div class="fashion__item__summary">
+                {{ item.short_text|safe }}
+            </div>
+            {% with item.tags.all as tags %}
+                {% include "tagging/_tag_block.html" %}
+            {% endwith %}
+            <div class="meta"><span class="date">{{ item.pub_date|date:"d F Y"|lower }}</span> <span class="dot">·</span> <span class="commcount"><a href="{{ item.get_absolute_url }}#comments">{{ comment_count }}</a><i></i></span></div>
+        </div>
+    {% empty %}
+        <p>Записей о моде нет</p>
+    {% endfor %}
+    
+    {% new_paginate %}
+
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

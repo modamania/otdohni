@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block h1 %}
+Регистрация
+{% endblock %}
+{% block content %}
+<form action="." method="POST" enctype="multipart/form-data" class="form form_horizontal signup-form box">
+{{ form.as_dl }}
+{% csrf_token %}
+<dl class="submit"><dd class="field"><span class="btn btn_theme_blue"><span class="btn__text">Зарегистрироваться</span><input type="submit" class="btn__input" value="Зарегистрироваться" /></span></dd></dl>
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{# -------------page------------- #}
+
+{% block page %}
+<div class="page_content clearfix">
+    <div class="content">
+        {# -----------pathway------------ #}
+        {% block pathway %}
+        {% endblock %}
+        
+        {# -----------content------------ #}
+        
+        {% block content-header %}
+        {% endblock %}
+        {% block content-tooltip %}
+        {% endblock %}
+        {% block content %}
+        
+        {% endblock %}</div>
+
+
+    {# -----------sidebar------------ #}
+    <div class="aside aside_cpanel">
+    {% block sidebar %}
+        {% block sidebar-current %}{% endblock %}
+    {% endblock %}
+    </div>
+</div>
+{% endblock %}

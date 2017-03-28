@@ -1,0 +1,6 @@
+{% for err in f.errors %}
+    <p style="color: red">{{ err }}</p>
+{% endfor %}
+<span style="display: block"{% if f.errors %} class="error"{% endif %}>
+    {{ f }}
+</span>

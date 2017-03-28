@@ -1,0 +1,19 @@
+{% load i18n loginza_widget %}
+{% load actions %}
+
+<div class="nominies__likes">
+    <div class="current-votes">{% blocktrans count total_likes as votes %}{{ votes }} vote{% plural %}{{ votes }} votes{% endblocktrans %}</div>
+
+    {% if now >= poll.start_date and now <= poll.end_date %}
+        {% if user.is_anonymous %}
+            <div class="providers">
+                {% loginza_vote 'Голосовать' poll=poll.id work=work.id %}
+            </div>
+        {% else %}
+            {% vote_button poll work user %}
+        {% endif %}
+    {% endif %}
+</div>
+
+
+

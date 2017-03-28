@@ -1,0 +1,17 @@
+<li class="grid__cell grid__cell_size_1-of-3 user-votes__item box">
+    <span class="meta">
+        {% for c in category %}
+            {{ c|capfirst }}
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </span>
+    <h4 class="title">
+        <a href="{{ vote.object.get_absolute_url }}">{{ vote.object }}</a>
+    </h4>
+    <div class="star-rating clearfix">
+      <ol>
+        <li class="current-rating rating_count_{{ vote.vote }}-of-5">
+        </li>
+      </ol>
+    </div>
+</li>

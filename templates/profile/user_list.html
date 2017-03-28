@@ -1,0 +1,43 @@
+{% extends "profile/base.html" %}
+{% load humanize %}
+{% load core_tags %}
+{% load thumbnail %}
+
+{% block content-header %}<h1>Пользователи Заотдых</h1>{% endblock %}
+{% block content %}
+
+{% include "search/basic_form.html" %}
+
+<table cellpadding="0" cellspacing="0" class="users__list">
+    <thead>
+        <tr>
+            <th class="user_pic"></th>
+            <th>Никнейм</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+{% for user in users.object_list %}
+<tr class="user">
+    <td class="user_pic">
+        <a href="{% url profile_show user.pk %}"><img alt="" src="
+        {% if user.profile.userpic %}
+            {% if user.profile.get_userpic == "/static/i/no_avatar.png" %}
+                /static/i/no_avatar_small.png
+            {% else %}
+                {{ user.profile.userpic.extra_thumbnails.small }}
+            {% endif %}
+        {% else %}/static/i/no_avatar_small.png{% endif %}"  class="userpic__img" /></a>
+    </td>
+    <td><a href="{% url profile_show user.pk %}">{{ user.username }}</a></td>
+    <td><a href="{% url messages_compose_to user.pk %}">Отправить сообщение</a></td>
+    <td><a title="Запрос на дружбу" href="{% url friendship.views.add_friendship user.pk %}" class="frind_add">Добавить в друзья</a></td>
+</tr>
+{% endfor %}
+    </tbody>
+</table>
+
+{{ users|render_paginator:seo }}
+{% endblock %}
+{% block li_users %}<li class="active"><a href="{% url user_list %}">Пользователи</a></li>{% endblock %}

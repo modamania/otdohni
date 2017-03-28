@@ -1,0 +1,14 @@
+{% load i18n rating_tags %}
+{% if top_list_exist %}
+    <div class="widget">
+    <h3 class="widget__title">{{ rating_title }}</h3>
+    <ul>
+    {% for rate in top_list %}
+        <li>
+            <a href="{{ rate.place.get_absolute_url }}">{{ rate.place.name }}</a>
+            {% ratingform rate.place readonly %}
+        </li>
+    {% endfor %}
+    </ul>
+    </div>
+{% endif %}

@@ -1,0 +1,23 @@
+.sorting {
+	margin-bottom: 1.5em;
+
+	.btn-group {
+		@include inline-block;
+		margin: 0 .5em;
+	}
+
+	&__link {
+		margin: 0 .25em;
+
+		&_state {
+			&_active {
+				border-color: transparent;
+
+				&,
+				&:hover {
+					color: $font-color;
+				}
+			}
+		}
+	}
+}

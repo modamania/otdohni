@@ -1,0 +1,20 @@
+{% extends "place/base_extended_search.html" %}
+{% block pathway %}
+<div class="pathway">
+    <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> /
+    {% if category.slug == 'taxi' %}
+        <a title="{{ category }} в {{ CITY.accusative }}" href="{% url place_show_category category.slug %}">{{ category }} {{ CITY.genitive }}</a>
+    {% else %}
+        <a title="Места отдыха {{ CITY.genitive }}" href="/places/">Места отдыха {{ CITY.genitive }}</a> /
+        <a title="{{ category }} в {{ CITY.accusative }}" href="{% url place_show_category category.slug %}">{{ category }} {{ CITY.genitive }}</a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block h1 %}{{ category }} {{ CITY.genitive }}{% endblock %}
+
+{% block tooltip-content %}
+    В разделе «{{ category }}» на сайте ЗаОтдых.ру Вы легко найдете интересующее Вас заведение.
+    Описание, предлагаемые услуги, цены, телефон, карта проезда, отзывы посетителей, популярные {{ category|lower }}.
+    Кликните по названию заведения, чтобы получить более подробную информацию.
+{% endblock %}

@@ -1,0 +1,20 @@
+{% load thumbnail %}
+
+<div class="widget widget-slider">
+	<h3 class="widget__title">Новые/обновленные</h3>
+	<div class="new-places">
+		<div id="w-new-places" class="new-places__item-list">
+			{% for place in place_list %}
+				<div class="new-places__item">
+					<div class="new-places__thumb">
+						<a title="{{ place.name }} - {{ seo.heading.value }}" href="{% url place_show place.id  %}">
+							{% thumbnail place.photo 160x110 crop="center" quality=95 as im %}
+          						{% if im %}<img alt="{{ place.name }}" src="{{ im }}" class="new-places__img" />{% else %}<span class="no_photo"></span>{% endif %}
+						</a>
+					</div>
+					<h4 class="new-places__title"><a href="{% url place_show place.id %}">{{ place.name }}</a></h4>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

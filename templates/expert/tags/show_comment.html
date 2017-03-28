@@ -1,0 +1,28 @@
+{% if expert %}
+    <div class="expert rounded clearfix">
+        <div class="userpic">
+            <a href="{{ expert.author.profile.get_absolute_url }}">
+                <img src="{{ expert.author.profile.userpic.extra_thumbnails.medium }}" alt="{{ expert.author.username }}" class="avatar" />
+            </a>
+            <noindex>
+                    <span class="name"><a href="{{ expert.author.profile.get_absolute_url }}">{{ expert.author.username }}</a>
+                    </span><br />
+                <strong>Эксперт</strong>
+            </noindex>
+        </div>
+        <div class="txt">
+            <p>
+                {{ expert.comment|safe }}
+            </p>
+        </div>
+        <div class="action">
+            <span class="expand" style="display: none">Читать целиком<i></i></span>
+            <span class="collapse" style="display: none">Свернуть<i></i></span>
+        </div><span class="corner rt"><span></span></span><span class="corner lt"><span>
+            </span></span>
+            <span class="corner rb"><span>
+            </span></span>
+            <span class="corner lb"><span>
+            </span></span>
+    </div>
+{% endif %}

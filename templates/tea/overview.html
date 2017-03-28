@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% load thumbnail %}
+{% load tea_tags %}
+
+{% block pathway %}
+<div class="pathway">
+  <a title="Отдых и развлечения в Омске" href="/">Главная</a> / Чай со звездой
+</div>
+{% endblock %}
+
+{% block content-header %}{% endblock %}
+{% block content %}
+    {% if user.profile.access_to_dasboard or user.is_superuser %}
+        <h1 class="with-tags editable">
+        {{ interview }}
+        <span class="editable__buttons">
+        <a href="{% url control_tea_edit interview.pk %}"><img src="{{ STATIC_URL }}i/edit.png" border="0" title="редактировать"></a>
+    </span>
+    {% else %}
+        <h1 class="with-tags">
+        {{ interview }}
+    {% endif %}
+    </h1>
+
+
+    {% if interview %}
+    {{ interview.full_text|safe }}
+    {% endif %}
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}
+
+{% block sidebar-current %}
+{% display_last_interviews %}
+{% endblock %}

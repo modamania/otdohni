@@ -1,0 +1,18 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% load newsletter_tags %}
+    <script>
+        var API_URL_EVENT_ON_DAY = "{% url api_event_on_day %}"
+        var API_URL_PLACE_FOR_EVENT = "{% url api_place_for_event %}"
+    </script>
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/photoreport_filter.js"></script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+{% endblock %}

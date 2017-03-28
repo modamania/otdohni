@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% load i18n contacts_tags jquery_validation %}
+{% block title %}
+  {% if flatpage %}
+    {{ flatpage.title }}
+  {% else %}
+    {% trans 'Contacts Us' %}
+  {% endif %}
+{% endblock %}
+  
+{% block h1 %}{{ flatpage.title }}{% endblock %}
+
+{% block content %}
+  {{ flatpage.content }}
+  
+  {% show_contact_form %}
+
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}
+
+{% block scripts %}
+{% include_validation %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.form').validate(
+            '/validate/contactform/',
+            {type: 'p'});
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% load comments i18n %}
+<form action="{% comment_form_target %}" method="post">
+    {% csrf_token %}
+    {{ form.content_type }}
+    {{ form.object_pk }}
+    {{ form.timestamp }}
+    {{ form.security_hash }}
+    {{ form.parent }}
+    <input type="hidden" name="next" value="{{ REQUEST_PATH }}" />
+    <div class="field">
+        <textarea id="id_comment" name="comment" class="cominput" rows="5" cols="40"></textarea>
+    </div>
+    <div class="form__row submit">
+        <span class="btn btn_theme_blue post__submit">
+            <span class="btn__text">Оставить отзыв</span>
+            <input type="submit" class="btn__input" value="Оставить отзыв" name="send">
+        </span>
+        <span class="pseudo_link close_form">В другой раз</span>
+    </div>
+</form>

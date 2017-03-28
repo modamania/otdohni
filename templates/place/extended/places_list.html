@@ -1,0 +1,48 @@
+{% load comments rating_tags %}
+{% for place in place_list %}
+    <div class="places__item" id="place-{{ place.id }}">
+        {% if place.promo_is_up %}
+        <a title="{{ place.name }} - {{ seo.heading.value }}" href="{% url place_show place.id  %}" class="thumb" style="background-image: url('{{ place.photo.thumbnail }}');">
+            {% if place.photo.thumbnail %}{% else %}<span class="no_photo"></span>{% endif %}
+        </a>
+        {% endif %}
+        <div class="place__summary">
+            {% if place.can_buy_tiket %}
+                <span class="buy_ticket kh_boxoffice" data="{'cinema':{{ place.kinohod_place_id }}}"></span>
+            {% endif %}
+            <h3><a title="{{ place.name }} - {{ seo.heading.value }}" href="{% url place_show place.id %}">{{ place.name }}</a></h3>
+            <p class="tags">
+                {% for tag in place.all_tagging %}
+                    <a href="{% url place.views.show_places_by_tag tag.slug %}" title="{% if tag.title %}{{ tag.title }}{% else %}{{ tag.name }}{% endif %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                <span class="tags__more"><span class="js-more-tags pseudo-link">Все</span></span>
+            </p>
+            <div class="place-contact">
+                <div class="place-contact__details">
+                    {% if place.is_taxi %}
+                        {{ place.phone }}
+                    {% else %}
+                        <ul class="place-addresses">
+                        {% for address in place.address.all %}
+                            <li class="place-addresses__item">
+                                {% if address.lng and address.lat %}<span class="js-toggle-address pseudo-link" data-index="{{ forloop.counter0 }}" data-coord="[{{ address.lat|stringformat:"f" }}, {{ address.lng|stringformat:"f" }}]">{{ address.address|default:'' }}</span>{% else %}{{ address.address|default:'' }}{% endif %}{% if address.phone %}, тел.: {{ address.phone }}{% endif %}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <span class="js-toggle-contact place-contact__toggler pseudo-link">
+                    {% if place.is_taxi %}
+                        Телефон
+                    {% else %}
+                        Адрес{% if place.phone %} и телефон{% endif %}
+                    {% endif %}
+                </span>
+            </div>
+            <div class="place__vote clearfix">
+                <div class="commcount"><a href="{% url place_show place.id %}#comments">{{ place.num_comments }}</a><i></i></div>
+                {% ratingform place readonly %}
+            </div>
+        </div>
+    </div>
+{% endfor %}

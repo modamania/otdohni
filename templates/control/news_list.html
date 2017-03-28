@@ -1,0 +1,39 @@
+{% extends "control/index.html" %}
+{% load core_tags i18n thumbnail %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+    </div>
+{% endblock %}
+{% block content %}
+    <h1>Список новостей</h1>
+    <div class="cpanel__toolbar clearfix">
+        <div class="filter">
+            <form action="." method="GET">
+                Фильтр: <span class="field"><input type="text" name="q" value="{{ q }}" /></span> <input type="submit" class="btn" value="Отсеять" />
+            </form>
+        </div>
+        <div class="buttons"><a href="{% url control.views.news_form  %}" class="btn">Добавить новость</a></div>
+    </div>
+    <table cellpadding="0" cellspacing="0" class="component__items_list">
+        <thead>
+        <tr>
+            <th>Заголовок</th>
+            <th>Фото</th>
+            <th>Опубликовано</th>
+            <th>Дата публикации</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for news in news.object_list %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td><a href="{% url control_news_edit news.pk %}">{{ news.title }}</a></td>
+                <td align="center">{% if news.image %}<img src="{% thumbnail news.image 50x50 crop="center" %}">{% else %}-{% endif %}</td>
+                <td align="center">{% if news.is_published %} + {% else %} - {% endif %}</td>
+                <td>{{ news.pub_date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ news|render_paginator:seo }}
+{% endblock %}

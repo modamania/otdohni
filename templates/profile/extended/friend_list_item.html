@@ -1,0 +1,22 @@
+{% load thumbnail %}
+{% load set_var %}
+<div class="friends_list__item">
+    {% if profile.user.pk ==  friend.from_user.pk %}
+        {% set cur_user = friend.to_user %}
+    {% else %}
+        {% set cur_user = friend.from_user %}
+    {% endif %}
+    <a href="{% url profile.views.profile_show cur_user.pk %}" class="friends_list__link">
+        <span class="userpic userpic_medium">
+            {% if cur_user.profile.userpic %}
+                {% if cur_user.profile.get_userpic == "/static/i/no_avatar.png" %}
+                    <img alt="{{ cur_user }}" src="/static/i/no_avatar_medium.png">
+                {% else %}
+                    <img alt="{{ cur_user }}" src="{{ cur_user.profile.userpic.extra_thumbnails.medium }}">
+                {% endif %}
+            {% else %}<img alt="{{ cur_user }}" src="/static/i/no_avatar_medium.png">{% endif %}
+        </span>
+        <span class="name">{{ cur_user }}</span>
+    </a>
+</div>
+

@@ -1,0 +1,231 @@
+{% extends "index.html" %}
+
+{% block pathway %}
+    <div class="pathway">
+      <a title="Отдых и развлечения в Омске" href="/">Главная</a> /
+    </div>
+{% endblock %}
+
+{% block h1 %}
+    Обратная связь
+{% endblock %}
+
+{% block content %}
+<form id="feedback-form" action="" method="POST" class="form form_layout_horiz feedback-form zf box">
+    {% csrf_token %}
+
+    <dl class="form-control">
+        <dt class="form-label">{{ form.feedback_type.label_tag }}</dt>
+        <dd class="form-input">
+            {{ form.feedback_type }}
+        </dd>
+        <dd class="errors">{{ form.feedback_type.errors }}</dd>
+    </dl>
+
+    <fieldset class="feedback-form__notes zf" onclick="return { oEnabled : { sName : 'feedback_type', rPattern : 'event' } };">
+
+        <p>Вы хотите сообщить нам о грядущем мероприятии? Тогда:</p>
+
+        <p>1. Проверьте наличие данного события в афише: через строку поиска или по схеме:</p>
+        <p> афиша > календарь, выберите дату > выберите категорию (Кино / Концерты / Клубы / Спектакли / Выставки / Спорт / Прочее).</p>
+
+        <p>2. Если события пока нет в афише, заполните форму как можно подробнее.</p>
+         <p>Если вы являетесь организатором и заинтересованы в анонсировании данного мероприятия, пожалуйста, укажите это и оставьте контакт для связи с вами.</p>
+
+        <p>3. После премодерации событие будет добавлено в афишу и станет доступным для просмотра всеми пользователями.</p>
+
+        <p>Спасибо за предоставленную информацию!</p>
+    </fieldset>
+
+    <fieldset class="feedback-form__notes zf" onclick="return { oEnabled : { sName : 'feedback_type', rPattern : 'place' } };">
+        <p>Как добавить новое заведение в рубрику «Места отдыха»? </p>
+        <p>1. Проверьте наличие заведения в каталоге (строка поиска > введите название). Если заведение уже существует, вы также можете сообщить об изменении его данных (адрес, телефон, электронный адрес, категории, тэги и др.).</p>
+        <p>2. Если заведения нет в каталоге, заполните анкету как можно подробнее.</p>
+        <p>Если вы являетесь сотрудником данного заведения и заинтересованы в поиске и привлечении новых клиентов, рекомендуем вам прочитать эту <a href="/placemanual/">инструкцию</a></p>
+        <p>3. После премодерации заведение будет добавлено в каталог и станет доступным для просмотра всеми пользователями.</p>
+        <p>Спасибо за предоставленную информацию!</p>
+    </fieldset>
+
+    <fieldset class="feedback-form__notes zf" onclick="return { oEnabled : { sName : 'feedback_type', rPattern : 'news' } };">
+        <p>У вас есть новость, которая будет интересна нашим пользователям? Пожалуйста, пришлите информацию через форму. После модерации новость будет добавлена в новостную ленту и станет доступна для просмотра.</p>
+    </fieldset>
+
+    <fieldset class="feedback-form__notes zf" onclick="return { oEnabled : { sName : 'feedback_type', rPattern : 'bug' } };">
+        <p>Пожалуйста, сообщите нам об ошибках и о неточностях, которые вы обнаружили! В том числе об устаревших данных, адресах, отмененных событиях и сеансах, опечатках, о неуместных фотографиях и прочих недоразумениях!</p>
+        <p>Спасибо! Обещаем, ошибки будут устранены!</p>
+    </fieldset>
+
+    <fieldset id="add-event" class="form-fieldset zf" onclick="return { oEnabled : { sName : 'feedback_type', rPattern : 'event' } };">
+        <dl class="form-control">
+            <dt>{{ form.title.label_tag }}</dt>
+            <dd class="form-input">
+                <input id="event_title" type="text" name="title" value="{{ form.title.value|default:"" }}" maxlength="300" class="zf form-input__input" required onclick="return {oRequired : {}};" />
+            </dd>
+            <dd class="errors">{{ form.title.errors }}</dd>
+        </dl>
+
+        <dl class="form-control">
+            <dt class="form-label">Категория</dt>
+            <dd class="form-input">
+                {{ form.event_type }}
+            </dd>
+            <dd class="errors"></dd>
+        </dl>
+        <dl class="form-control">
+            <dt class="form-label">Место проведения и адрес</dt>
+            <dd class="form-input">
+                {{ form.address }}
+            </dd>
+        </dl>
+        <dl class="form-control">
+            <dt class="form-label">Дата и время проведения</dt>
+            <dd class="form-input zf-date-box">
+                {{ form.date }}
+            </dd>
+        </dl>
+        <dl class="form-control">
+            <dt>{{ form.event_description.label_tag }}</dt>
+            <dd class="form-input">
+                <textarea id="id_description" rows="10" cols="40" name="event_description" class="form-input__textarea zf">{{ form.event_description.value|default:"" }}</textarea>
+            </dd>
+            <dd class="errors">{{ form.event_description.errors }}</dd>
+        </dl>
+        <dl class="form-control">
+            <dt class="form-label"></dt>
+            <dd class="">
+                {{ form.i_event_owner }}
+                <span style="position: relative; top: 4px; left: 5px;">
+                    {{ form.i_event_owner.label }}
+                </span>
+            </dd>
+        </dl>
+    </fieldset>
+
+    <fieldset id="add-place" class="form-fieldset form-fieldset_notes_yes zf" onclick="return { oEnabled : { sName : 'feedback_type', rPattern : 'place' } };">
+        <dl class="form-control">
+            <dt>{{ form.title.label_tag }}</dt>
+            <dd class="form-input">
+                <input id="place_title" type="text" name="title" value="{{ form.title.value|default:"" }}" maxlength="300" class="zf form-input__input" required onclick="return {oRequired : {}};" />
+            </dd>
+            <dd class="errors">{{ form.title.errors }}</dd>
+        </dl>
+        <dl class="form-control">
+            <dt class="form-label">Адрес</dt>
+            <dd class="form-input">
+                {{ form.address }}
+            </dd>
+        </dl>
+        <dl class="form-control">
+            <dt class="form-label">Телефон</dt>
+            <dd class="form-input">
+                {{ form.phone }}
+            </dd>
+        </dl>
+        <dl class="form-control">
+            <dt class="form-label">Часы работы</dt>
+            <dd class="form-input">
+                {{ form.worktime }}
+            </dd>
+        </dl>
+
+        <dl class="form-control">
+            <dt class="form-label">Эл. почта</dt>
+            <dd class="form-input">
+                {{ form.place_email }}
+            </dd>
+        </dl>
+
+        <dl class="form-control">
+            <dt class="form-label">Сайт</dt>
+            <dd class="form-input">
+                {{ form.url }}
+            </dd>
+        </dl>
+
+        <dl class="form-control">
+            <dt class="form-label">Категория</dt>
+            <dd class="form-input">
+                {{ form.category }}
+            </dd>
+            <dd class="errors"></dd>
+        </dl>
+        <dl class="form-control">
+            <dt>{{ form.place_description.label_tag }}</dt>
+            <dd class="form-input">
+                <textarea id="id_description" rows="10" cols="40" name="place_description" class="form-input__textarea zf">{{ form.place_description.value|default:"" }}</textarea>
+            </dd>
+            <dd class="errors">{{ form.place_description.errors }}</dd>
+        </dl>
+        <dl class="form-control">
+            <dt class="form-label"></dt>
+            <dd class="">
+                {{ form.i_place_owner }}
+                <span style="position: relative; top: 4px; left: 5px;">
+                    {{ form.i_place_owner.label_tag }}
+                </span>
+            </dd>
+        </dl>
+    </fieldset>
+
+    <fieldset id="add-news" class="form-fieldset zf" onclick="return { oEnabled : { sName : 'feedback_type', rPattern : 'news' } };">
+        <dl class="form-control">
+            <dt class="form-label">{{ form.subject.label_tag }}</dt>
+            <dd class="form-input">
+                <input type="text" id="{{ form.subject.id_for_label }}" name="{{ form.subject.html_name }}" value="{{ form.subject.value|default:"" }}" class="zf form-input__input" required onclick="return {oRequired : {}};" maxlength="200">
+            </dd>
+        </dl>
+        <dl class="form-control">
+            <dt>{{ form.news_description.label_tag }}</dt>
+            <dd class="form-input">
+                <textarea id="news_description" rows="10" cols="40" name="news_description" class="form-input__textarea zf" required onclick="return {oRequired : {}};">{{ form.news_description.value|default:"" }}</textarea>
+            </dd>
+        </dl>
+    </fieldset>
+
+    <fieldset id="report-bug" class="form-fieldset zf" onclick="return { oEnabled : { sName : 'feedback_type', rPattern : 'bug' } };">
+        <dl class="form-control">
+            <dt class="form-label">Адрес страницы</dt>
+            <dd class="form-input">
+                {{ form.bug_url }}
+            </dd>
+        </dl>
+        <dl class="form-control form-control_required_yes">
+            <dt class="form-label">Описание ошибки</dt>
+            <dd class="form-input">
+                <textarea id="bug_description" rows="10" cols="40" name="bug_description" class="form-input__textarea zf" required>{{ form.bug_description.value|default:"" }}</textarea>
+            </dd>
+        </dl>
+    </fieldset>
+
+    <hr>
+
+    <dl class="form-control">
+        <dt class="form-label">{{ form.email.label_tag }}</dt>
+        <dd class="form-input">
+            <input type="text" name="email" id="id_email" value="{{ form.email.value|default:"" }}" class="zf form-input__input" />
+        </dd>
+        <dd>{{ form.email.errors }}</dd>
+    </dl>
+    <dl class="form-control">
+        <dt class="form-label">{{ form.user_phone.label_tag }}</dt>
+        <dd class="form-input">
+            <input type="text" name="user_phone" id="id_user_phone" value="{{ form.user_phone.value|default:"" }}" class="zf form-input__input" />
+        </dd>
+        <dd>{{ form.user_phone.errors }}</dd>
+    </dl>
+
+    <dl class="form-control zf-required">
+        <dt class="form-label">{{ form.captcha.label_tag }}</dt>
+        <dd class="form-input">{{ form.captcha }}</dd>
+        <dd class="errors">{{ form.captcha.errors }}</dd>
+    </dl>
+
+    <dl class="form-control zf-nolabel">
+        <dd>
+            <span class="btn btn_theme_blue zf zf-submit"><span class="btn__text">Отправить</span><input type="submit" value="" class="btn__input" /></span>
+        </dd>
+    </dl>
+</form>
+
+{% endblock %}
+

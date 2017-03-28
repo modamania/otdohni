@@ -1,0 +1,35 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% block title %}{% trans "Preview submission" %}{{ block.super }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="../../../../">{% trans "Home" %}</a> &rsaquo;
+     <a href="../../../">Newsletter</a> &rsaquo;
+     <a href="../../">{% trans "Submission" %}</a> &rsaquo;
+     <a href="../">{{ submission|truncatewords:"18" }}</a> &rsaquo;
+     {% trans "Preview" %}
+</div>
+{% endblock %}
+
+
+{% block content %}
+<h1>{% trans "Preview submission" %}</h1>
+<div id="content-main">
+  <ul class="object-tools">
+    <li><a href="{% url admin:newsletter_newsletter_change submission.id %}">{% trans "Change" %}</a></li>
+    <li><a href="{% url admin:newsletter_submission_submit submission.id %}">{% trans "Submit" %}</a></li>
+  </ul>
+    {% if submission.newsletter.message_template.html %}
+    <h4>{% trans "HTML" %}</h4>
+    <iframe src ="{% url admin:newsletter_submission_preview_html submission.id %}" width="960px" height="720px"></iframe>
+    {% endif %}
+    
+    <h4>{% trans "Text" %}</h4>
+    <iframe src ="{% url admin:newsletter_submission_preview_text submission.id %}" width="960px" height="720px"></iframe>
+</div>
+<br/>
+<br/>
+
+{% endblock %}
+

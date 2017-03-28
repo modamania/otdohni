@@ -1,0 +1,49 @@
+{% load thumbnail %}
+{% load comments %}
+
+<div class="news latest-news clearfix">
+    <h2 class="latest-news__title">
+        <a title="Все новости" href="{% url news_list %}">Новости</a>
+        <span class="news__rss"><a target="_blank" href="{% url news_feed %}">RSS</a></span>
+    </h2>
+    {% if news_list %}
+        <div class="latest-news__wrapper clearfix">
+            {% with news_list.0 as first_news %}
+                <div class="news-thumb" style="background-image: url('{% thumbnail first_news.get_image 720x480 crop upscale %}');">
+                    <div class="news-thumb__caption">
+                        <h3 class="news-thumb__title"><a href="{{ first_news.get_absolute_url }}">{{ first_news.title }}</a></h3>
+                        <p>{{ first_news.short_text|safe }}</p>
+                        <div class="meta">
+                            <span class="date">{{ first_news.pub_date|date:"j F Y"|lower }}</span>
+                            {% if item.num_comments %}
+                            <span class="dot">·</span>
+                            <span class="commcount"><a href="{{ item.get_absolute_url }}#comments">{{ item.num_comments }}</a><i></i></span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endwith %}
+            <div class="news-leads">
+                {% for item in news_list %}
+                    <div class="news-leads-item {% if forloop.first %}news-leads-item_state_current{% endif %} {% if forloop.last %}news-leads-item_pos_last{% endif %}">
+                        <a href="{{ item.get_absolute_url }}" class="news-leads-item__link">
+                            <span class="news-leads-item__title">{{ item.title }}</span>
+                        </a>
+                        <div class="news-leads-item__summary">
+                            <h3 class="news-thumb__title"><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+                            <p>{{ item.short_text|safe }}</p>
+                            <div class="meta">
+                                <span class="date">{{ item.pub_date|date:"j F Y"|lower }}</span>
+                                {% if item.num_comments %}
+                                <span class="dot">·</span>
+                                <span class="commcount"><a href="{{ item.get_absolute_url }}#comments">{{ item.num_comments }}</a><i></i></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <img src="{% thumbnail item.get_image 720x480 crop upscale %}" class="news-leads-item__img" alt="" />
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>

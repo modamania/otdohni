@@ -1,0 +1,40 @@
+{% load i18n core_tags  thumbnail %}
+<div class="poll_upload clearfix">
+    <div class="cpanel__toolbar clearfix">
+        <div class="buttons">
+            <span class="btn_wrapper"><ins class="l"></ins><ins class="r"></ins><a href="{% url control_action_poll_add action.pk %}" class="btn">Добавить голосование</a></span>
+        </div>
+    </div>
+    <table cellpadding="0" cellspacing="0" class="component__items_list">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Дата начала</th>
+            <th>Дата окончания</th>
+            <th>Статус</th>
+            <th>Частота голосования</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for poll in poll_list %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td class="title"><a href="{% url control_action_poll_edit action.pk poll.pk%}">{{ poll }}</a></td>
+                <td>{{ poll.start_date }}</td>
+                <td>{{ poll.end_date }}</td>
+                <td>
+                    {% if poll.status == 'SOON' %}{% trans 'Poll will begin soon' %}{% endif %}
+                    {% if poll.status == 'ACTIVE' %}{% trans 'Poll is active' %}{% endif %}
+                    {% if poll.status == 'SUSPEND' %}{% trans 'Poll suspended' %}{% endif %}
+                    {% if poll.status == 'COMPLETED' %}{% trans 'Poll finished' %}{% endif %}
+                    {% if poll.status == 'NONE' %}{% trans 'Without poll, only work bidder' %}{% endif %}
+                </td>
+                <td>
+                    {% if poll.vote_frequency == 'ONCE' %}{% trans 'Only once' %}{% endif %}
+                    {% if poll.vote_frequency == 'WEEK' %}{% trans 'Once a week' %}{% endif %}
+                    {% if poll.vote_frequency == 'DAY' %}{% trans 'Once a day' %}{% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

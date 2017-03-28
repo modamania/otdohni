@@ -1,0 +1,60 @@
+{% extends "place/base_search.html" %}
+{% load place_extras rating_tags %}
+{% block pathway %}
+<div class="pathway">
+    <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> /
+    <a title="Места отдыха {{ CITY.genitive }}" href="/places/">Места отдыха {{ CITY.genitive }}</a>
+</div>
+{% endblock %}
+
+{% block h1 %}Места отдыха{% endblock %}
+
+{% block tooltip-content %}
+    В разделе «Места отдыха» на сайте ЗаОтдых.ру представлены различные заведения {{ CITY.genitive }} по категориям.
+    Удобная система поиска, описание заведений, предлагаемые услуги, цены, режим работы, схема проезда, фото, отзывы.
+    Кликните по названию заведения, чтобы получить более подробную информацию.
+{% endblock %}
+
+{% block sponsor_block %}{{ place_list_sponsor|render_places_as_sponsor:seo }}{% endblock %}
+
+{% block categories %}
+<div class="grid categories-groups">
+    {% for group in categories %}
+        <div class="grid__cell categories-groups__item">
+        {% for category in group %}
+        {% url place_show_category category.slug as link %}
+        <ul class="categories-list">
+            <li class="categories-list__item">
+                <a title="{{ category.name }} {{ CITY.genitive }}" href="{% url place_show_category category.slug %}">{{ category.name }}</a>
+            </li>
+        </ul>
+        {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="tabbed">
+    <ul class="tabs">
+        <li class="tabs-item tabs-item_state_current" data-tabname="new"><span class="pseudo-link">Новые/обновленные</span></li>
+        <li class="tabs-item" data-tabname="byotdohniomsk"><span class="pseudo-link">Выбор Заотдых</span></li>
+        <li class="tabs-item" data-tabname="byusers"><span class="pseudo-link">Выбор пользователей</span></li>
+    </ul>
+    <div class="pane js-places places tabbed__tab__content pane_state_visible">
+        {{ place_list_new_promo|render_places_with_promo:seo }}
+    </div>
+    <div class="pane js-places places tabbed__tab__content">
+        {{ place_list_expert_promo|render_places_with_promo:seo }}
+        {{ place_list_expert_no_promo|render_places_without_promo:seo }}
+    </div>
+    <div class="pane js-places places tabbed__tab__content">
+        <!--place with flag expert_choice and promo is up-->
+        {{ place_list_choice_promo|render_places_with_promo:seo }}
+        <!--place with flag expert_choice and promo is down-->
+        {{ place_list_choice_no_promo|render_places_without_promo:seo }}
+    </div>
+</div>
+{% endblock %}
+
+{% block yandex_share %}{% endblock %}

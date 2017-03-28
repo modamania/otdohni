@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+
+{% block pathway %}
+    <div class="pathway">
+      <a title="Отдых и развлечения в Омске" href="/">Главная</a> /
+    </div>
+{% endblock %}
+
+{% block h1 %}
+    Добавить информацию
+{% endblock %}
+
+{% block content %}
+    <h2>Спасибо за информацию!</h2>
+    <a href="{% url addnew %}" class="btn btn_theme_blue"><span class="btn__text">Добавить еще</span></a>
+{% endblock %}

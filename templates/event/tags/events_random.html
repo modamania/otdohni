@@ -1,0 +1,39 @@
+{% load thumbnail event_tags %}
+<div class="events__item-list">
+    {% for event in events %}
+            <div class="events__item">
+                {% url event_detail event.category.slug event.id as event_url %}
+                
+                {% thumbnail event.image 465x315 crop=",0" as im %}
+                <a title="{{ event.title }}" href="{{ event_url }}" class="thumb" style="background-image: url('{{ im }}');">
+                    {% if im %}{% else %}<span class="no_photo"></span>{% endif %}
+                </a>
+                <div class="event-caption">
+                    <div class="event-xtra">
+                        {# <span class="event__rating"><span class="icon icon-star"></span> 3,9</span> #}
+                        {% if event.members.all %}
+                            <span class="dot">·</span> <a href="{{ event_url }}#people" class="event__people"><span class="icon icon-people"></span> {{ event.members.all.count }}</a> 
+                        {% endif %}
+                        {% if event.num_comments %}
+                            <span class="dot">·</span> <a href="{{ event_url }}#comments" class="event__comments"><span class="icon icon-comments"></span> {{ event.num_comments }}</a>
+                        {% endif %}
+                    </div>
+                    <h3 class="event__title">
+                        <a href="{{ event_url }}">{{ event.title }}</a>
+                    </h3>
+                    {% extra_info event %}
+                    <div class="event__description">
+                        {% if event.intro %}
+                            {{ event.intro|safe }}
+                        {% else %}
+                            {{ event.description|safe|truncatewords_html:"15" }}
+                        {% endif %}
+                    </div>
+                    {% if event.kinohod_id %}
+                        <span class="buy_ticket kh_boxoffice" data="{'city':'{{ CITY }}', 'movie':{{ event.kinohod_id }}}"></span>
+                    {% endif %}
+                </div>
+                
+            </div>
+    {% endfor %}
+</div>

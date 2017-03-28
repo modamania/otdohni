@@ -1,0 +1,53 @@
+{% extends "control/index.html" %}
+{% block content %}
+    <form action="" method="POST" enctype="multipart/form-data" class="form form_metadata_edit zf" id="metadatapath_form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            {{ form.non_field_errors }}
+        {% endif %}
+
+        <fieldset>
+            <legend>Основная информация</legend>
+            <p>
+                <label for="id__path">URL:</label>
+                <input id="id__path" type="text" name="_path" maxlength="255" value="{{ url }}" readonly>
+            </p>
+            <p>
+                <label for="id__site">Сайт:</label>
+                <input id="id__site" type="text" name="_site" maxlength="255" value="{{ site }}" readonly>
+            </p>
+            <p>
+                <label for="id_title">Title:</label>
+                <input id="id_title" type="text" name="title" maxlength="511" value="{{ obj.title }}" class="wide">
+            </p>
+            <p>
+                <label for="id_heading">H1:</label>
+                <input id="id_heading" type="text" name="heading" maxlength="511" value="{{ obj.heading }}" class="wide">
+            </p>
+            <p>
+                <label for="id_description">Description:</label>
+                <textarea id="id_description" name="description" rows="10">{{ obj.description }}</textarea>
+            </p>
+            <p>
+                <label for="id_keywords">Keywords:</label>
+                <input id="id_keywords" type="text" name="keywords" maxlength="511" value="{{ obj.keywords }}" class="wide">
+            </p>
+            <p>
+                <label for="id_tooltip">Tooltip:</label>
+                <textarea id="id_tooltip" name="tooltip" rows="10">{{ obj.tooltip }}</textarea>
+            </p>
+            <p>
+                <label for="id_paginator">Лейбл пагинации:</label>
+                <input id="id_paginator" type="text" name="paginator" value="{{ obj.paginator }}" class="wide">
+            </p>
+        </fieldset>
+
+        <div id="form-submit" class="field clearfix submit">
+            <p class="submit">
+                <input type="submit" value="Сохранить">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:history.go(-1);">Отмена</a>
+            </p>
+        </div>
+    </form>
+{% endblock %}

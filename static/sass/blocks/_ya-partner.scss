@@ -1,0 +1,62 @@
+.ya-partner-wrapper {
+	@include opacity(.7);
+	@include transition(opacity .3s);
+
+	font-size: 13px;
+	font-family: Arial, sans-serif;
+
+	&:hover {
+		@include opacity(1);
+	}
+
+	.ya-partner {
+		margin: 40px 0 13px !important;
+
+		&:before {
+			display: block;
+			content: "";
+			width: 90px;
+			height: 1px;
+			background: #d6d6d6;
+			margin-bottom: 1em;
+		}
+	}
+
+	.ya-partner__ads {
+		margin-bottom: .10px !important;
+	}
+
+	#ya_partner_yandex_ad-horizontal {
+		position: relative;
+		z-index: 2;
+
+		.ya-partner__ads-l {
+			background: none !important;
+		}
+
+		.ya-partner__title-link-text {
+			color: $brand-blue !important;
+		}
+
+		.ya-partner__domain-link,
+		.ya-partner__address {
+			color: $gray !important;
+		}
+
+		.ya-partner__item {
+			border: 1px solid #d6d6d6 !important;
+		}
+
+		.ya-partner__text {
+			margin: 5px 0 !important;
+		}
+
+		.ya-partner__pic-container {
+			margin: 5px 5px 0 0 !important
+		}
+	}
+
+	.ya-partner_type_horiz .ya-partner__gap {
+		width: 1.5% !important;
+	}
+}

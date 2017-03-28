@@ -1,0 +1,26 @@
+{% load thumbnail %}
+
+{{ formset.management_form }}
+{% for hid in formset.hidden_fields %}{{ hid }}{% endfor %}
+
+<div id="photo__preview" class='hidden'>
+    {% for form in formset %}
+        {{ form }}
+    {% endfor %}
+</div>
+<div id="photo__form">
+    {% for form in formset %}
+        <div class="photo__form_item">
+            <form id='form_{{ forloop.counter }}' class='' action="{% url control_gallery_photo place_pk=place.pk gallery_pk=form.instance.pk %}" method='POST' target='iframe_{{ forloop.counter }}'>
+            {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="submit" >
+                </form>
+        </div>
+    {% endfor %}
+</div>
+<div id="photo__iframe">
+    {% for form  in formset %}
+        <iframe id='iframe_{{ forloop.counter }}' frameborder="0" class="hidden photo__iframe_item"></iframe>
+    {% endfor %}
+</div>

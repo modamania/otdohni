@@ -1,0 +1,3132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-24 16:27+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: settings.py:351
+msgid "January"
+msgstr "Января"
+
+#: settings.py:351
+msgid "February"
+msgstr "Февраля"
+
+#: settings.py:351
+msgid "March"
+msgstr "Марта"
+
+#: settings.py:351
+msgid "April"
+msgstr "Апреля"
+
+#: settings.py:351
+msgid "May"
+msgstr "Мая"
+
+#: settings.py:351
+msgid "June"
+msgstr "Июня"
+
+#: settings.py:352
+msgid "July"
+msgstr "Июля"
+
+#: settings.py:352
+msgid "August"
+msgstr "Августа"
+
+#: settings.py:352
+msgid "September"
+msgstr "Сентября"
+
+#: settings.py:352
+msgid "October"
+msgstr "Октября"
+
+#: settings.py:352
+msgid "November"
+msgstr "Ноября"
+
+#: settings.py:353
+msgid "December"
+msgstr "Декaбря"
+
+#: settings.py:357 apps/profile/models.py:16
+msgid "none"
+msgstr "Не указан"
+
+#: settings.py:358
+msgid "kirovskiy"
+msgstr "Кировский"
+
+#: settings.py:359
+msgid "leninskiy"
+msgstr "Ленинский"
+
+#: settings.py:360
+msgid "oktyabrskiy"
+msgstr "Октябрьский"
+
+#: settings.py:361
+msgid "sovetskiy"
+msgstr "Советский"
+
+#: settings.py:362
+msgid "centralniy"
+msgstr "Центральный"
+
+#: settings.py:363
+msgid "pervomayskiy"
+msgstr "Первомайский"
+
+#: apps/admindashboard.py:28
+msgid "Quick links"
+msgstr "Быстрые ссылки"
+
+#: apps/admindashboard.py:34
+msgid "Return to site"
+msgstr "Вернуться на сайт"
+
+#: apps/admindashboard.py:35
+msgid "Change password"
+msgstr "Изменить пароль"
+
+#: apps/admindashboard.py:37
+msgid "Log out"
+msgstr "Выйти"
+
+#: apps/admindashboard.py:43 apps/adminmenu.py:25
+msgid "Applications"
+msgstr "Приложения"
+
+#: apps/admindashboard.py:49 apps/adminmenu.py:29
+msgid "Administration"
+msgstr "Администрирование"
+
+#: apps/admindashboard.py:55
+msgid "Contents"
+msgstr "Контент"
+
+#: apps/admindashboard.py:59 apps/place/__init__.py:2 apps/place/models.py:192
+msgid "Place"
+msgstr "Заведения"
+
+#: apps/admindashboard.py:62 apps/news/__init__.py:2 apps/news/models.py:37
+msgid "News"
+msgstr "Новости"
+
+#: apps/admindashboard.py:65 apps/action/__init__.py:2
+#: templates/messages/trash.html:8
+msgid "Action"
+msgstr "Конкурсы"
+
+#: apps/admindashboard.py:68 apps/event/__init__.py:2 apps/event/models.py:424
+msgid "Event"
+msgstr "События"
+
+#: apps/admindashboard.py:71 apps/photoreport/__init__.py:2
+msgid "Photoreport"
+msgstr "Фото отчеты"
+
+#: apps/admindashboard.py:74 apps/tea/__init__.py:2
+msgid "Tea"
+msgstr "Чай со звездой"
+
+#: apps/admindashboard.py:77 apps/newsletter/__init__.py:2
+#: apps/newsletter/admin_forms.py:309
+#: apps/newsletter/templates/newsletter/subscription_activate.html:3
+#: apps/newsletter/templates/newsletter/subscription_activate.html:6
+msgid "Newsletter"
+msgstr "Рассылка"
+
+#: apps/admindashboard.py:80 apps/sales/__init__.py:2
+msgid "Sales"
+msgstr "Скидки"
+
+#: apps/admindashboard.py:83
+#, fuzzy
+msgid "Expert Comment"
+msgstr "Древовидный комментарий"
+
+#: apps/admindashboard.py:89 apps/admindashboard.py:136
+msgid "Recent Actions"
+msgstr "Последние действия"
+
+#: apps/admindashboard.py:93
+msgid "Latest Django News"
+msgstr "Последние новости Django"
+
+#: apps/admindashboard.py:100
+msgid "Support"
+msgstr "Поддержка"
+
+#: apps/admindashboard.py:103
+msgid "Django documentation"
+msgstr ""
+
+#: apps/admindashboard.py:108
+msgid "Django \"django-users\" mailing list"
+msgstr ""
+
+#: apps/admindashboard.py:113
+msgid "Django irc channel"
+msgstr ""
+
+#: apps/adminmenu.py:22
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#: apps/adminmenu.py:23
+msgid "Bookmarks"
+msgstr "Закладки"
+
+#: apps/action/admin.py:10 apps/action/admin.py:24
+#: apps/photoreport/admin.py:20 apps/place/admin.py:151
+#: apps/threadedcomments/legacy_threadedcomments/admin.py:9
+#: apps/threadedcomments/legacy_threadedcomments/admin.py:21
+#: apps/threadedcomments/threadedcomments/admin.py:15
+msgid "Content"
+msgstr "Контент"
+
+#: apps/action/admin.py:12 apps/action/admin.py:26
+#: apps/photoreport/admin.py:27
+msgid "Publication"
+msgstr "Публикация"
+
+#: apps/action/forms.py:14 apps/action/models.py:42 apps/action/models.py:199
+msgid "short text for description"
+msgstr "короткое описание"
+
+#: apps/action/forms.py:15 apps/action/models.py:43 apps/blog/models.py:24
+#: apps/fashion/models.py:14 apps/gourmet/models.py:14 apps/lunch/models.py:12
+#: apps/news/models.py:24 apps/specprojects/models.py:17 apps/tea/models.py:18
+msgid "full text"
+msgstr "полный текст"
+
+#: apps/action/forms.py:19 apps/blog/forms.py:15 apps/news/forms.py:17
+#: apps/photoreport/forms.py:22 apps/sales/forms.py:21 apps/tea/forms.py:15
+msgid "Pub date"
+msgstr "Дата публикации"
+
+#: apps/action/forms.py:20 apps/action/models.py:41 apps/event/models.py:218
+#: apps/fashion/models.py:15 apps/gourmet/models.py:15 apps/news/forms.py:13
+#: apps/news/models.py:25 apps/photoreport/forms.py:41 apps/sales/admin.py:16
+#: apps/sales/forms.py:10 apps/sales/models.py:11 apps/tea/forms.py:11
+#: apps/tea/models.py:16
+msgid "image"
+msgstr "Картинка"
+
+#: apps/action/forms.py:30 apps/action/models.py:110 apps/lunch/models.py:15
+#: apps/sales/forms.py:13 apps/sales/models.py:13
+msgid "start date"
+msgstr "Дата начала"
+
+#: apps/action/forms.py:34 apps/action/models.py:111 apps/lunch/models.py:16
+#: apps/sales/forms.py:17 apps/sales/models.py:14
+msgid "end date"
+msgstr "Дата окончания"
+
+#: apps/action/forms.py:41 apps/action/forms.py:48 apps/place/models.py:118
+#: apps/place/models.py:564 apps/place/models.py:587 apps/tea/admin.py:18
+msgid "photo"
+msgstr "Фотография"
+
+#: apps/action/forms.py:42 apps/action/models.py:213
+#: apps/newsletter/models.py:65
+msgid "text"
+msgstr "текст"
+
+#: apps/action/forms.py:52 apps/action/models.py:197
+#, fuzzy
+msgid "date"
+msgstr "Дата публикации"
+
+#: apps/action/models.py:36
+msgid "completed"
+msgstr "завершено"
+
+#: apps/action/models.py:37
+msgid "not completed"
+msgstr "не завершено"
+
+#: apps/action/models.py:39 apps/action/models.py:109
+#: apps/action/models.py:209 apps/blog/models.py:19 apps/event/models.py:51
+#: apps/event/models.py:214 apps/fashion/models.py:11
+#: apps/gourmet/models.py:11 apps/lunch/models.py:10 apps/news/models.py:19
+#: apps/photoreport/models.py:78 apps/photoreport/models.py:143
+#: apps/photoreport/models.py:216 apps/place/models.py:568
+#: apps/sales/models.py:9 apps/specprojects/models.py:16
+#: apps/tagging/models.py:7 apps/tea/models.py:13
+#: apps/threadedcomments/threadedcomments/forms.py:18
+msgid "title"
+msgstr "Заголовок"
+
+#: apps/action/models.py:40 apps/photoreport/models.py:79
+msgid "title slug"
+msgstr "заголовок-слаг"
+
+#: apps/action/models.py:44 apps/action/models.py:112
+msgid "status"
+msgstr "статус"
+
+#: apps/action/models.py:62 apps/action/models.py:106
+#: apps/newsletter/models.py:138
+msgid "action"
+msgstr "конкурс"
+
+#: apps/action/models.py:63
+msgid "actions"
+msgstr "конкурсы"
+
+#: apps/action/models.py:79 templates/control/action_poll_list.html:25
+msgid "Poll will begin soon"
+msgstr "Голосование скоро начнется"
+
+#: apps/action/models.py:80 templates/control/action_poll_list.html:26
+msgid "Poll is active"
+msgstr "Голосование активно"
+
+#: apps/action/models.py:81 apps/action/models.py:162
+#: templates/control/action_poll_list.html:27
+msgid "Poll suspended"
+msgstr "Голосование приостановлено"
+
+#: apps/action/models.py:82 apps/action/models.py:164
+#: templates/control/action_poll_list.html:28
+msgid "Poll finished"
+msgstr "Голосование завершено"
+
+#: apps/action/models.py:83 templates/control/action_poll_list.html:29
+msgid "Without poll, only work bidder"
+msgstr "Без голосования, только работы участников"
+
+#: apps/action/models.py:86 templates/control/action_poll_list.html:34
+msgid "Once a day"
+msgstr "1 раз в день"
+
+#: apps/action/models.py:87 templates/control/action_poll_list.html:33
+msgid "Once a week"
+msgstr "1 раз в неделю"
+
+#: apps/action/models.py:88 templates/control/action_poll_list.html:32
+msgid "Only once"
+msgstr "только 1 раз"
+
+#: apps/action/models.py:91
+msgid "Only old users"
+msgstr "Только старые пользователи"
+
+#: apps/action/models.py:92
+msgid "All users"
+msgstr "Все пользователи"
+
+#: apps/action/models.py:97
+msgid "Table"
+msgstr "Таблица"
+
+#: apps/action/models.py:98
+msgid "List"
+msgstr "Список"
+
+#: apps/action/models.py:101
+msgid "One"
+msgstr "Одну работу"
+
+#: apps/action/models.py:102
+#: libs/filebrowser/templates/filebrowser/include/filter.html:29
+msgid "All"
+msgstr "Все работы"
+
+#: apps/action/models.py:115
+msgid "Frequency"
+msgstr "Возможность голосования"
+
+#: apps/action/models.py:118
+msgid "Can vote"
+msgstr "Могут голосовать"
+
+#: apps/action/models.py:121
+msgid "Type of display"
+msgstr "Способ показа"
+
+#: apps/action/models.py:122
+msgid "Many to choice"
+msgstr "Можно голосовать за ..."
+
+#: apps/action/models.py:138
+msgid "poll"
+msgstr "голосование"
+
+#: apps/action/models.py:139
+msgid "polls"
+msgstr "голосования"
+
+#: apps/action/models.py:158
+msgid "Poll will begin"
+msgstr "Голосование начнется"
+
+#: apps/action/models.py:160
+msgid "Poll will until"
+msgstr "Голосование продлится до"
+
+#: apps/action/models.py:194
+msgid "FIO"
+msgstr "ФИО"
+
+#: apps/action/models.py:211
+msgid "author name"
+msgstr "Имя автора"
+
+#: apps/action/models.py:216 apps/event/models.py:241 apps/place/models.py:294
+msgid "number of votes"
+msgstr "число голосов"
+
+#: apps/action/models.py:230
+msgid "work bidder"
+msgstr "Работа участника"
+
+#: apps/action/models.py:231
+msgid "work bidders"
+msgstr "Работы участников"
+
+#: apps/action/models.py:243
+msgid "vote date"
+msgstr "Дата окончания"
+
+#: apps/adminsortable/templates/adminsortable/change_list.html:16
+#: apps/newsletter/templates/newsletter/preview.html:7
+#: libs/filebrowser/templates/filebrowser/include/breadcrumbs.html:5
+#: templates/admin/app_index.html:9
+msgid "Home"
+msgstr "Домой"
+
+#: apps/adminsortable/templates/adminsortable/edit_inline/stacked.html:9
+#: apps/adminsortable/templates/adminsortable/edit_inline/tabular.html:29
+msgid "View on site"
+msgstr "Смотреть на сайте"
+
+#: apps/adminsortable/templates/adminsortable/edit_inline/stacked.html:70
+#: apps/adminsortable/templates/adminsortable/edit_inline/tabular.html:117
+#, python-format
+msgid "Add another %(verbose_name)s"
+msgstr "Добавить еще одно %(verbose_name)s"
+
+#: apps/adminsortable/templates/adminsortable/edit_inline/stacked.html:73
+#: apps/adminsortable/templates/adminsortable/edit_inline/tabular.html:120
+msgid "Remove"
+msgstr "Удалить"
+
+#: apps/adminsortable/templates/adminsortable/edit_inline/tabular.html:15
+msgid "Delete?"
+msgstr "Удалить?"
+
+#: apps/blog/forms.py:10 apps/common/models.py:28 apps/expert/models.py:19
+#: apps/news/forms.py:11 apps/newsletter/models.py:197
+#: apps/rating/models.py:190 apps/registration/models.py:218
+msgid "user"
+msgstr "пользователь"
+
+#: apps/blog/forms.py:11 apps/news/forms.py:12 apps/newsletter/models.py:142
+#: apps/newsletter/templates/newsletter/preview.html:28
+#: apps/photoreport/forms.py:17 apps/photoreport/forms.py:36
+#: apps/tea/forms.py:10
+msgid "Text"
+msgstr "Текст"
+
+#: apps/blog/models.py:16 apps/fashion/models.py:16 apps/gourmet/models.py:16
+#: apps/news/models.py:16
+msgid "tags"
+msgstr "тэги"
+
+#: apps/blog/models.py:22 apps/fashion/models.py:13 apps/gourmet/models.py:13
+#: apps/news/models.py:22
+msgid "short_text"
+msgstr "короткое описание"
+
+#: apps/blog/models.py:25 apps/fashion/models.py:18 apps/gourmet/models.py:18
+#: apps/news/models.py:28
+msgid "is fixed"
+msgstr "фиксировано"
+
+#: apps/blog/models.py:27 apps/event/models.py:246 apps/news/models.py:30
+#: apps/place/models.py:146
+msgid "number of comments"
+msgstr "число комментариев"
+
+#: apps/blog/models.py:33
+msgid "WebLogItem"
+msgstr "Запись шпиона"
+
+#: apps/blog/models.py:34
+msgid "WebLog"
+msgstr "Блог шпиона"
+
+#: apps/blog/views.py:49 apps/event/views.py:164 apps/news/views.py:57
+#: apps/photoreport/views.py:149
+msgid "You will be sent the e-mail notification about new comments!"
+msgstr "Вам на почту будут приходить уведомления о новых комментариях!"
+
+#: apps/blog/views.py:58 apps/event/views.py:172 apps/news/views.py:66
+#: apps/photoreport/views.py:157
+msgid "You will no longer receive the notification about new comments!"
+msgstr "Вам больше не будут приходить уведомления о новых комментариях!"
+
+#: apps/common/actions.py:6
+msgid "Mark as published"
+msgstr "Опубликовано"
+
+#: apps/common/actions.py:12
+msgid "Mark as unpublished"
+msgstr "Не опубликовано"
+
+#: apps/common/fields.py:25
+msgid "Enter at least one e-mail address."
+msgstr "Введите хотя бы один адрес электронной почты."
+
+#: apps/common/fields.py:29
+#, python-format
+msgid "%s is not a valid e-mail address."
+msgstr "%s не является допустимым."
+
+#: apps/common/forms.py:12 libs/filebrowser/forms.py:26
+#: libs/filebrowser/templates/filebrowser/versions.html:63
+msgid "Name"
+msgstr "Имя"
+
+#: apps/common/forms.py:14 apps/common/forms.py:51 apps/common/forms.py:122
+#: apps/control/forms.py:15 apps/profile/forms.py:29
+msgid "Email"
+msgstr "Ваша эл. почта"
+
+#: apps/common/forms.py:16 apps/common/forms.py:58
+msgid "title_alt"
+msgstr "Название"
+
+#: apps/common/forms.py:18 apps/common/forms.py:131 apps/common/forms.py:135
+#: apps/common/forms.py:143 apps/event/models.py:226
+#: apps/photoreport/models.py:82 apps/photoreport/models.py:220
+#: apps/place/models.py:109
+msgid "description"
+msgstr "Описание"
+
+#: apps/common/forms.py:23
+msgid "addEvent"
+msgstr "Событие"
+
+#: apps/common/forms.py:24
+msgid "addPlace"
+msgstr "Новое место"
+
+#: apps/common/forms.py:25
+msgid "addNews"
+msgstr "Интересная новость"
+
+#: apps/common/forms.py:26
+msgid "bugReport"
+msgstr "Сообщить об ошибке"
+
+#: apps/common/forms.py:29
+msgid "kino"
+msgstr "Кино"
+
+#: apps/common/forms.py:30
+msgid "concerts"
+msgstr "Концерты"
+
+#: apps/common/forms.py:31
+msgid "club"
+msgstr "Клубы"
+
+#: apps/common/forms.py:32
+msgid "show"
+msgstr "Спектакли"
+
+#: apps/common/forms.py:33
+msgid "exibit"
+msgstr "Выставки"
+
+#: apps/common/forms.py:34
+msgid "sport"
+msgstr "Спорт"
+
+#: apps/common/forms.py:35
+msgid "other"
+msgstr "Прочее"
+
+#: apps/common/forms.py:47
+msgid "Feedback subject"
+msgstr "Тема сообщения"
+
+#: apps/common/forms.py:53
+msgid "Your phone"
+msgstr "Ваш телефон"
+
+#: apps/common/forms.py:63
+msgid "Event type"
+msgstr "Категория"
+
+#: apps/common/forms.py:68 apps/place/models.py:61
+msgid "Place category"
+msgstr "Категория заведений"
+
+#: apps/common/forms.py:74
+msgid "Address"
+msgstr "Адрес"
+
+#: apps/common/forms.py:80
+msgid "Phone"
+msgstr "Телефон"
+
+#: apps/common/forms.py:86
+msgid "Work time"
+msgstr "Время работы"
+
+#: apps/common/forms.py:92
+msgid "Place email"
+msgstr "Email заведения"
+
+#: apps/common/forms.py:98
+msgid "Web url"
+msgstr "Адрес заведения в сети"
+
+#: apps/common/forms.py:104
+msgid "Bug url"
+msgstr ""
+
+#: apps/common/forms.py:110 templates/messages/trash.html:8
+msgid "Subject"
+msgstr "Тема"
+
+#: apps/common/forms.py:118
+#: libs/filebrowser/templates/filebrowser/include/tableheader.html:20
+#: libs/filebrowser/templates/filebrowser/include/tableheader.html:21
+#: templates/messages/trash.html:8
+msgid "Date"
+msgstr "Дата"
+
+#: apps/common/forms.py:124
+msgid "I event owner"
+msgstr "Я организатор этого мероприятия"
+
+#: apps/common/forms.py:127
+msgid "I place owner"
+msgstr "Я владелец/представитель этого заведения"
+
+#: apps/common/forms.py:139
+msgid "fulltext"
+msgstr "Текст новости"
+
+#: apps/common/forms.py:145
+msgid "Captcha"
+msgstr "Введите символы с картинки"
+
+#: apps/common/models.py:29
+msgid "external authors"
+msgstr "другие авторы"
+
+#: apps/common/models.py:30
+msgid "external authors link"
+msgstr "ссылка на других авторов"
+
+#: apps/common/models.py:31
+msgid "link where user will get after licking on authors"
+msgstr ""
+
+#: apps/common/models.py:48
+msgid "Published"
+msgstr "Опубликовано"
+
+#: apps/common/models.py:49
+msgid "Not published"
+msgstr "Не опубликовано"
+
+#: apps/common/models.py:52 apps/event/forms.py:108 apps/place/models.py:48
+#: apps/place/models.py:432
+msgid "is published"
+msgstr "опубликовано"
+
+#: apps/common/models.py:102
+msgid "sites publication"
+msgstr "публикации на сайте"
+
+#: apps/common/models.py:133 apps/photoreport/models.py:204
+msgid "User"
+msgstr "Аватар"
+
+#: apps/common/views.py:78
+msgid "Thanks for feedback."
+msgstr "Ваше сообщение отправлено. Спасибо!"
+
+#: apps/contacts/forms.py:6
+msgid "Your name"
+msgstr "Логин"
+
+#: apps/contacts/forms.py:7
+msgid "Your email"
+msgstr "Эл. почта"
+
+#: apps/contacts/forms.py:8
+#: apps/threadedcomments/threadedcomments/models.py:20
+msgid "Title"
+msgstr "Заголовок"
+
+#: apps/contacts/forms.py:9
+msgid "Your message"
+msgstr "Ваше сообщение"
+
+#: apps/contacts/views.py:27
+#, python-format
+msgid "%(title)s from %(email)s."
+msgstr "%(title)s от %(email)s."
+
+#: apps/control/forms.py:10 apps/profile/forms.py:68
+msgid "Userpic"
+msgstr "Аватар"
+
+#: apps/control/forms.py:12 apps/registration/forms.py:34
+msgid "username"
+msgstr "Логин"
+
+#: apps/control/forms.py:13 apps/profile/forms.py:26
+msgid "first_name"
+msgstr "Имя"
+
+#: apps/control/forms.py:14 apps/profile/forms.py:28
+msgid "last_name"
+msgstr "Фамилия"
+
+#: apps/control/forms.py:16 apps/profile/forms.py:30
+msgid "sex"
+msgstr "Пол"
+
+#: apps/control/forms.py:17 apps/profile/forms.py:31
+msgid "birthday"
+msgstr "День рождения"
+
+#: apps/control/forms.py:18 apps/profile/forms.py:33
+msgid "country"
+msgstr "Страна"
+
+#: apps/control/forms.py:19 apps/place/models.py:329 apps/profile/forms.py:34
+msgid "city"
+msgstr "Город"
+
+#: apps/control/forms.py:20 apps/profile/forms.py:36
+msgid "web_site"
+msgstr "Cайт"
+
+#: apps/control/forms.py:21 apps/profile/forms.py:37
+msgid "icq"
+msgstr "ICQ"
+
+#: apps/control/forms.py:22 apps/profile/forms.py:38
+msgid "profession"
+msgstr "Профессия"
+
+#: apps/control/forms.py:23 apps/profile/forms.py:39
+msgid "company"
+msgstr "Компания"
+
+#: apps/control/forms.py:24 apps/place/models.py:312 apps/profile/forms.py:40
+msgid "address"
+msgstr "Адрес"
+
+#: apps/control/forms.py:25 apps/profile/forms.py:42
+msgid "phone_number"
+msgstr "Телефон"
+
+#: apps/control/forms.py:26 apps/profile/forms.py:43
+msgid "interest"
+msgstr "Интересы"
+
+#: apps/control/forms.py:27 apps/profile/forms.py:45
+msgid "about"
+msgstr "О себе"
+
+#: apps/control/forms.py:28
+msgid "Is active"
+msgstr "Активен"
+
+#: apps/control/forms.py:48 apps/registration/forms.py:52
+msgid "This username is already taken. Please choose another."
+msgstr "Это имя уже занято. Пожалуйста, выберите другое."
+
+#: apps/control/widgets.py:31 apps/control/widgets.py:34
+#: apps/newsletter/templates/newsletter/preview.html:20
+#: templates/admin_tools/dashboard/modules/app_list.html:14
+msgid "Change"
+msgstr "Изменить"
+
+#: apps/control/widgets.py:34
+msgid "Currently"
+msgstr ""
+
+#: apps/control/templatetags/control_tags.py:64
+msgid "mon"
+msgstr "Пн"
+
+#: apps/control/templatetags/control_tags.py:64
+msgid "tue"
+msgstr "Вт"
+
+#: apps/control/templatetags/control_tags.py:64
+msgid "wed"
+msgstr ""
+
+#: apps/control/templatetags/control_tags.py:64
+msgid "thu"
+msgstr ""
+
+#: apps/control/templatetags/control_tags.py:64
+msgid "fri"
+msgstr "Пт"
+
+#: apps/control/templatetags/control_tags.py:64
+msgid "sat"
+msgstr "Сб"
+
+#: apps/control/templatetags/control_tags.py:64
+msgid "sun"
+msgstr "Вс"
+
+#: apps/core/forms.py:19
+msgid "mark as required field"
+msgstr " <i>*</i>"
+
+#: apps/core/models.py:56
+#, fuzzy
+msgid "Start date"
+msgstr "Дата начала"
+
+#: apps/core/models.py:57
+#, fuzzy
+msgid "End date"
+msgstr "Дата окончания"
+
+#: apps/core/models.py:72 apps/core/models.py:84
+msgid "The from_dt later of the to_dt "
+msgstr ""
+
+#: apps/core/models.py:77 apps/core/models.py:89
+msgid "Overlapping dates"
+msgstr "Временной период пересекается с другой записью"
+
+#: apps/core/widgets.py:30
+msgid "none month"
+msgstr " "
+
+#: apps/event/admin.py:39
+msgid "place(s)"
+msgstr "место"
+
+#: apps/event/fields.py:189
+msgid "Enter a whole number."
+msgstr "Введите целое число."
+
+#: apps/event/forms.py:64
+msgid "Set the days for repeat"
+msgstr "Установите количество дней для повтора"
+
+#: apps/event/forms.py:83
+msgid "expiration date can not be less than the start date"
+msgstr "дата окончания должна быть не раньше даты начала"
+
+#: apps/event/models.py:52 apps/photoreport/models.py:145
+msgid "slug"
+msgstr "слаг"
+
+#: apps/event/models.py:53 apps/place/models.py:50
+msgid "category mean rate"
+msgstr "Средний рейтинг категории"
+
+#: apps/event/models.py:59 apps/place/models.py:54
+msgid "top rating title"
+msgstr "Заголовок для лучших"
+
+#: apps/event/models.py:66
+msgid "event category"
+msgstr "категория события"
+
+#: apps/event/models.py:67
+msgid "event categories"
+msgstr "категории событий"
+
+#: apps/event/models.py:215
+msgid "origin title"
+msgstr "Оригинальное название"
+
+#: apps/event/models.py:217 apps/expert/models.py:9 apps/place/models.py:102
+msgid "category"
+msgstr "категория"
+
+#: apps/event/models.py:222
+msgid "genres"
+msgstr "жанры"
+
+#: apps/event/models.py:225 apps/event/models.py:426 apps/place/models.py:563
+msgid "place"
+msgstr "заведение"
+
+#: apps/event/models.py:227
+msgid "Additional Field"
+msgstr ""
+
+#: apps/event/models.py:230
+msgid "intro"
+msgstr "Кратко"
+
+#: apps/event/models.py:232
+msgid "video URL"
+msgstr "URL трейлера"
+
+#: apps/event/models.py:233
+msgid ""
+"Put the URL of the YouTube video. Example: http://www.youtube.com/watch?"
+"v=wuzgCwKElm4 or http://vimeo.com/3465465"
+msgstr ""
+"Вставьте URL с youtube или vimeo. Например, http://www.youtube.com/watch?"
+"v=wuzgCwKElm4 или http://vimeo.com/3465465"
+
+#: apps/event/models.py:248
+msgid "event publish on the main page"
+msgstr "На главной"
+
+#: apps/event/models.py:251
+msgid "start date for displaying"
+msgstr "Дата начала (не учитывается в расчётах)"
+
+#: apps/event/models.py:253
+msgid "start time for displaying"
+msgstr "Время начала (не учитывается в расчётах)"
+
+#: apps/event/models.py:256
+msgid "Kinohod id movie"
+msgstr ""
+
+#: apps/event/models.py:272
+msgid "event"
+msgstr "событие"
+
+#: apps/event/models.py:273
+msgid "events"
+msgstr "события"
+
+#: apps/event/models.py:409
+msgid "No repeat"
+msgstr "Не повторять"
+
+#: apps/event/models.py:410
+msgid "Daily"
+msgstr "Ежедневно"
+
+#: apps/event/models.py:411
+msgid "Weekly"
+msgstr "Еженедельно"
+
+#: apps/event/models.py:415
+msgid "Mo"
+msgstr "Пн"
+
+#: apps/event/models.py:416
+msgid "Tu"
+msgstr "Вт"
+
+#: apps/event/models.py:417
+msgid "We"
+msgstr "Ср"
+
+#: apps/event/models.py:418
+msgid "Th"
+msgstr "Чт"
+
+#: apps/event/models.py:419
+msgid "Fr"
+msgstr "Пт"
+
+#: apps/event/models.py:420
+msgid "Sa"
+msgstr "Сб"
+
+#: apps/event/models.py:421
+msgid "Su"
+msgstr "Вс"
+
+#: apps/event/models.py:427
+msgid "date start event"
+msgstr "Когда"
+
+#: apps/event/models.py:428
+msgid "start times"
+msgstr "время"
+
+#: apps/event/models.py:433
+msgid "Repeat every"
+msgstr "Повторять каждую"
+
+#: apps/event/models.py:437
+msgid "on weekday"
+msgstr "По дням недели"
+
+#: apps/event/models.py:441
+msgid "date end event"
+msgstr "дата окончания"
+
+#: apps/event/models.py:444
+msgid "maximum number of repeats"
+msgstr "максимальное число повторений"
+
+#: apps/event/models.py:447
+msgid "No show in admin and control interface"
+msgstr ""
+
+#: apps/event/models.py:454
+msgid "occurrence"
+msgstr "расписание"
+
+#: apps/event/models.py:455
+msgid "occurrencies"
+msgstr "расписания"
+
+#: apps/event/templatetags/event_tags.py:32
+#: apps/place/templatetags/place_extras.py:134
+#, python-format
+msgid "Best of %s"
+msgstr "Лучшие %s"
+
+#: apps/expert/models.py:10
+#: apps/threadedcomments/legacy_threadedcomments/forms.py:15
+#: apps/threadedcomments/legacy_threadedcomments/forms.py:34
+#: apps/threadedcomments/legacy_threadedcomments/models.py:162
+#: apps/threadedcomments/legacy_threadedcomments/models.py:267
+msgid "comment"
+msgstr "комментарий"
+
+#: apps/expert/models.py:11 apps/newsletter/models.py:392
+msgid "publication date"
+msgstr "дата публикиции"
+
+#: apps/expert/models.py:14
+msgid "publication end date"
+msgstr "дата публикиции"
+
+#: apps/expert/models.py:18
+msgid "comment is published"
+msgstr "опубликовано"
+
+#: apps/expert/models.py:22
+msgid "Expert comment"
+msgstr "комментарий"
+
+#: apps/expert/models.py:23
+msgid "Expert comments"
+msgstr "число комментариев"
+
+#: apps/fashion/__init__.py:2
+msgid "Fashion"
+msgstr "Мода"
+
+#: apps/fashion/feeds.py:18
+msgid "Мода — ОтдохниОмск.ру"
+msgstr ""
+
+#: apps/fashion/models.py:25
+msgid "Fashion item"
+msgstr "Новость моды"
+
+#: apps/fashion/models.py:26
+msgid "Fashion items"
+msgstr "Новости моды"
+
+#: apps/friendship/__init__.py:2
+msgid "Friendship"
+msgstr "Дружба"
+
+#: apps/friendship/managers.py:36
+#, python-format
+msgid "%(nick)s (%(name)s) wants to be friends with you."
+msgstr "%(nick)s (%(name)s) хочет дружить с вами."
+
+#: apps/friendship/managers.py:37
+#, python-format
+msgid ""
+"%(nick)s (%(name)s) wants to be friends with you and waiting for your "
+"approval. Accept or reject the request.\n"
+"\n"
+"%(nick)s (%(name)s) Profile: http://%(current_domain)s%(friend_url)s \n"
+"\n"
+"Please note: This letter was automatically sent from the site http://"
+"%(current_domain)s."
+msgstr ""
+"%(nick)s (%(name)s) хочет дружить с вами и ожидает вашего одобрения. Примите "
+"или отклоните запрос.\n"
+"\n"
+"%(nick)s (%(name)s) Профиль: http://%(current_domain)s%(friend_url)s \n"
+"\n"
+"Внимание: Это письмо было автоматически отправлено с сайта http://"
+"%(current_domain)s."
+
+#: apps/gourmet/__init__.py:2
+msgid "Gourmet"
+msgstr "Гурманам"
+
+#: apps/gourmet/feeds.py:18
+msgid "Гурманам — ОтдохниОмск.ру"
+msgstr ""
+
+#: apps/gourmet/models.py:25
+msgid "Gourmet item"
+msgstr "Новость гурманам"
+
+#: apps/gourmet/models.py:26
+msgid "Gourmet items"
+msgstr "Новости гурманам"
+
+#: apps/lunch/__init__.py:2
+msgid "Lunch"
+msgstr "Ланч"
+
+#: apps/lunch/admin.py:19 apps/lunch/models.py:11
+msgid "logo"
+msgstr "логотип"
+
+#: apps/lunch/forms.py:17 apps/sales/forms.py:36
+msgid "end date can not be earlier then start date"
+msgstr "дата окончания должна быть не раньше даты начала"
+
+#: apps/lunch/models.py:13
+msgid "label title"
+msgstr "Заголовок"
+
+#: apps/lunch/models.py:21
+msgid "Lunch Object"
+msgstr "Ланч"
+
+#: apps/lunch/models.py:22
+msgid "Lunch Objects"
+msgstr "Ланчи"
+
+#: apps/news/feeds.py:18
+msgid "Новости — ОтдохниОмск.ру"
+msgstr ""
+
+#: apps/news/models.py:36
+msgid "NewsItem"
+msgstr "Новость"
+
+#: apps/newsletter/admin.py:49
+msgid "Subscriptions"
+msgstr "Подписчики"
+
+#: apps/newsletter/admin.py:55
+msgid "Submissions"
+msgstr "Представления"
+
+#: apps/newsletter/admin.py:89
+msgid "Send test newsletter"
+msgstr "Рассылка"
+
+#: apps/newsletter/admin.py:94 apps/newsletter/models.py:90
+#: apps/newsletter/models.py:383
+msgid "newsletter"
+msgstr "Рассылка"
+
+#: apps/newsletter/admin.py:102
+msgid "publish date"
+msgstr "Дата публикации"
+
+#: apps/newsletter/admin.py:120
+msgid "admin status"
+msgstr "Статус администрирования"
+
+#: apps/newsletter/admin.py:126
+msgid "Sent."
+msgstr "Отправленные."
+
+#: apps/newsletter/admin.py:129
+msgid "Delayed submission."
+msgstr "Отложенные"
+
+#: apps/newsletter/admin.py:131
+msgid "Submitting."
+msgstr "Подтвержденные"
+
+#: apps/newsletter/admin.py:133
+msgid "Not sent."
+msgstr "Не отправленные"
+
+#: apps/newsletter/admin.py:134 apps/newsletter/admin.py:285
+msgid "Status"
+msgstr "Статус"
+
+#: apps/newsletter/admin.py:141
+msgid "Submission already sent."
+msgstr "Уже отправлено"
+
+#: apps/newsletter/admin.py:148
+msgid "Your submission is being sent."
+msgstr "Готовится к отправке"
+
+#: apps/newsletter/admin.py:166
+msgid ""
+"No HTML template associated with the newsletter this message belongs to."
+msgstr "Не обнаружено HTML шаблона для этого сообщения"
+
+#: apps/newsletter/admin.py:198
+#: apps/newsletter/templates/newsletter/preview.html:11
+msgid "Preview"
+msgstr "Превью"
+
+#: apps/newsletter/admin.py:281
+msgid "Subscribed"
+msgstr "Подписан"
+
+#: apps/newsletter/admin.py:283
+msgid "Unsubscribed"
+msgstr "Отписан"
+
+#: apps/newsletter/admin.py:284
+msgid "Unactivated"
+msgstr "неактивен"
+
+#: apps/newsletter/admin.py:291 apps/newsletter/models.py:209
+msgid "subscribe date"
+msgstr "Дата подписки"
+
+#: apps/newsletter/admin.py:297 apps/newsletter/models.py:215
+msgid "unsubscribe date"
+msgstr "Дата отписки"
+
+#: apps/newsletter/admin_forms.py:49
+#, fuzzy, python-format
+msgid ""
+"E-mail address %(email)s too                long, maximum length "
+"is                %(email_length)s characters."
+msgstr ""
+"E-mail адрес слишком %(email)s длинный, максимальная длина - %(email_length)s"
+
+#: apps/newsletter/admin_forms.py:65
+#, python-format
+msgid "Name %(name)s too long, maximum length is %(name_length)s characters."
+msgstr "Имя %(name)s слишком длинное, максимальная длина - %(name_length)s"
+
+#: apps/newsletter/admin_forms.py:102 apps/newsletter/admin_forms.py:111
+#: apps/newsletter/admin_forms.py:133 apps/newsletter/models.py:134
+#: apps/newsletter/models.py:217 apps/registration/forms.py:30
+#: apps/threadedcomments/legacy_threadedcomments/models.py:257
+msgid "name"
+msgstr "Имя"
+
+#: apps/newsletter/admin_forms.py:105
+msgid "display"
+msgstr "Показать"
+
+#: apps/newsletter/admin_forms.py:111
+#, python-format
+msgid ""
+"Name column not found. The name of this column should be either 'name' or "
+"'%s'."
+msgstr "Имя не найдено. Оно должно содержать 'name' или %s"
+
+#: apps/newsletter/admin_forms.py:119 apps/newsletter/admin_forms.py:127
+#: apps/newsletter/admin_forms.py:133 apps/newsletter/models.py:221
+msgid "e-mail"
+msgstr "Эл. почта"
+
+#: apps/newsletter/admin_forms.py:127
+#, python-format
+msgid ""
+"E-mail column not found. The name of this column should be either 'email', "
+"'e-mail' or '%s'."
+msgstr "E-mail не найден. Оно должно содержать 'email', 'e-mail' или '%s'"
+
+#: apps/newsletter/admin_forms.py:133
+#, python-format
+msgid ""
+"Could not properly determine the proper columns in the CSV-file. There "
+"should be a field called 'name' or '%(name)s' and one called 'e-mail' or "
+"'%(e-mail)s'."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:147
+#, python-format
+msgid "Row with content '%s' does not contain a name and email field."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:157 apps/newsletter/admin_forms.py:206
+#: apps/newsletter/admin_forms.py:234
+#, python-format
+msgid "Entry '%s' does not contain a valid e-mail address."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:169 apps/newsletter/admin_forms.py:210
+#: apps/newsletter/admin_forms.py:238
+#, python-format
+msgid "The address file contains duplicate entries for '%s'."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:177 apps/newsletter/admin_forms.py:214
+#: apps/newsletter/admin_forms.py:242
+msgid "Some entries are already subscribed to."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:199
+#, python-format
+msgid "Entry '%s' contains no email address."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:245
+msgid "Some entries have no e-mail address."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:280
+#, python-format
+msgid "File type '%s' was not recognized."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:295
+#, python-format
+msgid "File extention '%s' was not recognized."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:298
+msgid "No entries could found in this file."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:310
+msgid "Address file"
+msgstr "Адрес"
+
+#: apps/newsletter/admin_forms.py:311
+msgid "Ignore non-fatal errors"
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:318
+msgid "You should confirm in order to continue."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:320
+msgid "Confirm import"
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:331
+#, python-format
+msgid "There was an error parsing your template: %s"
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:350 apps/newsletter/admin_forms.py:356
+msgid "If a user has been selected this field should remain empty."
+msgstr ""
+
+#: apps/newsletter/admin_forms.py:362
+msgid "Either a user must be selected or an email address must be specified."
+msgstr ""
+
+#: apps/newsletter/admin_utils.py:18
+#, python-format
+msgid "%(name)s object with primary key %(key)r does not exist."
+msgstr ""
+
+#: apps/newsletter/forms.py:28 apps/newsletter/forms.py:77
+msgid "An e-mail address is required."
+msgstr "Эл. почта обязательна"
+
+#: apps/newsletter/forms.py:35 apps/newsletter/forms.py:83
+#, fuzzy, python-format
+msgid ""
+"This e-mail address belongs to the user "
+"'%(username)s'.                                      Please log in as that "
+"user and try again."
+msgstr ""
+"Этот e-mail пренадлежит пользователю %(username)s. Пожалуйста, войдите как "
+"этот пользователь и попробуйте снова."
+
+#: apps/newsletter/forms.py:45
+msgid "Your e-mail address has already been subscribed to."
+msgstr "Ваш e-mail уже подписан на нашу рассылку."
+
+#: apps/newsletter/forms.py:48
+msgid ""
+"Your e-mail address has already been subscribed but not yet activated. Check "
+"your e-mail."
+msgstr "Ваш e-mail уже подписан на нашу рассылку."
+
+#: apps/newsletter/forms.py:69
+msgid "This subscription has not yet been activated."
+msgstr "Ваша подписка не активирована"
+
+#: apps/newsletter/forms.py:95
+msgid "This e-mail address has not been subscribed to."
+msgstr "Этот e-mail не подписан на нашу рассылку."
+
+#: apps/newsletter/forms.py:104
+msgid "This subscription has already been unsubscribed from."
+msgstr "Подписка отменена."
+
+#: apps/newsletter/forms.py:118
+msgid "The validation code supplied by you does not match."
+msgstr "Код активации не совпадает"
+
+#: apps/newsletter/forms.py:122
+msgid "Activation code"
+msgstr "Код активации"
+
+#: apps/newsletter/models.py:72
+msgid "subscribe template"
+msgstr "Шаблон подписки"
+
+#: apps/newsletter/models.py:77
+msgid "unsubscribe template"
+msgstr "шаблон отписки"
+
+#: apps/newsletter/models.py:82
+msgid "message template"
+msgstr "шаблон сообщения"
+
+#: apps/newsletter/models.py:91
+msgid "newsletters"
+msgstr "Рассылки"
+
+#: apps/newsletter/models.py:109
+#, python-format
+msgid "Looking up subscribers for %s"
+msgstr "Просмотр подписчиков для %s"
+
+#: apps/newsletter/models.py:129
+msgid "Subscribe"
+msgstr "Подписка"
+
+#: apps/newsletter/models.py:130
+msgid "Unsubscribe"
+msgstr "Отписка"
+
+#: apps/newsletter/models.py:131
+msgid "Message"
+msgstr "Сообщение"
+
+#: apps/newsletter/models.py:135 apps/newsletter/models.py:186
+msgid "Default"
+msgstr "По умочанию"
+
+#: apps/newsletter/models.py:140
+msgid "subject"
+msgstr "Тема"
+
+#: apps/newsletter/models.py:143
+msgid ""
+"Plain text e-mail message.                                        Available "
+"objects: date,                                        subscription, site, "
+"submission,                                        newsletter, "
+"STATIC_URL,                                        MEDIA_URL and message."
+msgstr ""
+
+#: apps/newsletter/models.py:148
+#: apps/newsletter/templates/newsletter/preview.html:24
+msgid "HTML"
+msgstr ""
+
+#: apps/newsletter/models.py:149
+msgid "HTML e-mail alternative."
+msgstr ""
+
+#: apps/newsletter/models.py:173
+msgid "e-mail template"
+msgstr "Шаблон электронной почты"
+
+#: apps/newsletter/models.py:174
+msgid "e-mail templates"
+msgstr "Шаблоны электронной почты"
+
+#: apps/newsletter/models.py:199
+#: apps/threadedcomments/legacy_threadedcomments/models.py:170
+#: apps/threadedcomments/legacy_threadedcomments/models.py:275
+msgid "IP address"
+msgstr "IP Адрес"
+
+#: apps/newsletter/models.py:203
+msgid "activation code"
+msgstr "Код активации"
+
+#: apps/newsletter/models.py:206
+msgid "subscribed"
+msgstr "подписан"
+
+#: apps/newsletter/models.py:212
+msgid "unsubscribed"
+msgstr "не подписан"
+
+#: apps/newsletter/models.py:218
+msgid "optional"
+msgstr "Опционально"
+
+#: apps/newsletter/models.py:259
+msgid ""
+"Neither an email nor a                                                "
+"username is set. This asks                                                "
+"for inconsistency!"
+msgstr ""
+
+#: apps/newsletter/models.py:264
+msgid "If user is set, email must be null and vice versa."
+msgstr "Если указано имя пользователя, e-mail не нужно указывать и наоборот."
+
+#: apps/newsletter/models.py:308
+#, python-format
+msgid "%(name)s <%(email)s>"
+msgstr ""
+
+#: apps/newsletter/models.py:310
+#, fuzzy, python-format
+msgid "%(email)s"
+msgstr "%(email)s"
+
+#: apps/newsletter/models.py:313
+msgid "subscription"
+msgstr "подписка"
+
+#: apps/newsletter/models.py:314
+msgid "subscriptions"
+msgstr "подписки"
+
+#: apps/newsletter/models.py:385
+msgid "recipients"
+msgstr "Кому"
+
+#: apps/newsletter/models.py:386
+msgid ""
+"If you select none,                                                the "
+"system will automatically                                                "
+"find the subscribers for you."
+msgstr "Если не указывать, система автоматичестки найдет подписчиков."
+
+#: apps/newsletter/models.py:396
+msgid "publish"
+msgstr "Опубликовано"
+
+#: apps/newsletter/models.py:397
+msgid "Publish in archive."
+msgstr "Публикации в архиве"
+
+#: apps/newsletter/models.py:400
+msgid "prepared"
+msgstr "в процессе"
+
+#: apps/newsletter/models.py:404
+msgid "sent"
+msgstr "Отправленные"
+
+#: apps/newsletter/models.py:408
+msgid "sending"
+msgstr "отправляются"
+
+#: apps/newsletter/models.py:414
+msgid "submission"
+msgstr "представление"
+
+#: apps/newsletter/models.py:415
+msgid "submissions"
+msgstr "представления"
+
+#: apps/newsletter/models.py:418
+#, python-format
+msgid "%(newsletter)s on %(publish_date)s"
+msgstr ""
+
+#: apps/newsletter/models.py:427
+#, python-format
+msgid "Submitting %(submission)s to %(count)d people"
+msgstr ""
+
+#: apps/newsletter/models.py:471
+#, python-format
+msgid "Submitting message to: %s."
+msgstr ""
+
+#: apps/newsletter/models.py:474
+#, python-format
+msgid "Message %(subscription)s failed with error: %(error)s"
+msgstr ""
+
+#: apps/newsletter/models.py:493
+#, python-format
+msgid "Submission of newsletter %s"
+msgstr "Представление рассылки %s"
+
+#: apps/newsletter/views.py:37
+msgid "You have been subscribed to newsletter."
+msgstr "Вы будете подписаны на нашу рассылку"
+
+#: apps/newsletter/views.py:38
+#, python-format
+msgid "User %(rs)s subscribed to %(my_newsletter)s."
+msgstr "Пользователь %(rs)s подписан на %(my_newsletter)s"
+
+#: apps/newsletter/views.py:42
+msgid "You are already subscribed to newsletter."
+msgstr "Вы уже подписаны на нашу рассылки"
+
+#: apps/newsletter/views.py:62
+msgid "You have been unsubscribed from newsletter."
+msgstr "Вы будете отписаны от нашей рассылки"
+
+#: apps/newsletter/views.py:63
+#, python-format
+msgid "User %(rs)s unsubscribed from %(my_newsletter)s."
+msgstr "Пользователь %(rs)s отписан от %(my_newsletter)s"
+
+#: apps/newsletter/views.py:72
+msgid "You are not subscribed to newsletter."
+msgstr "Вы не подписаны на рассылку"
+
+#: apps/newsletter/views.py:157
+#, python-format
+msgid "Updated subscription %(subscription)s through the web."
+msgstr "Обновить подписку %(subscription)s через web"
+
+#: apps/newsletter/views.py:170
+#, python-format
+msgid "Activated subscription %(subscription)s through the web."
+msgstr "Обновить подписку %(subscription)s через web"
+
+#: apps/newsletter/jobs/hourly/submit.py:15
+msgid "Submitting queued newsletter mailings"
+msgstr ""
+
+#: apps/newsletter/templates/newsletter/preview.html:3
+#: apps/newsletter/templates/newsletter/preview.html:17
+msgid "Preview submission"
+msgstr "Предпросмотр"
+
+#: apps/newsletter/templates/newsletter/preview.html:9
+msgid "Submission"
+msgstr "Представления"
+
+#: apps/newsletter/templates/newsletter/preview.html:21
+#: libs/filebrowser/templates/filebrowser/makedir.html:39
+#: libs/filebrowser/templates/filebrowser/rename.html:36
+#: templates/contacts/tags/contact_form.html:18
+msgid "Submit"
+msgstr "Подтвердить"
+
+#: apps/newsletter/templates/newsletter/subscription_activate.html:3
+#: apps/newsletter/templates/newsletter/subscription_activate.html:6
+msgid "activate"
+msgstr "активация"
+
+#: apps/newsletter/templates/newsletter/subscription_activate.html:23
+msgid "Activate"
+msgstr "Активация"
+
+#: apps/newsletter/templates/newsletter/subscription_subscribe.html:3
+#: apps/newsletter/templates/newsletter/subscription_subscribe.html:5
+#: apps/newsletter/templates/newsletter/subscription_subscribe_user.html:3
+#: apps/newsletter/templates/newsletter/subscription_subscribe_user.html:5
+msgid "Newsletter subscribe"
+msgstr "Подписаться на рассылку"
+
+#: apps/newsletter/templates/newsletter/subscription_unsubscribe.html:3
+#: apps/newsletter/templates/newsletter/subscription_unsubscribe.html:5
+#: apps/newsletter/templates/newsletter/subscription_unsubscribe_user.html:3
+#: apps/newsletter/templates/newsletter/subscription_unsubscribe_user.html:5
+msgid "Newsletter unsubscribe"
+msgstr "Отписаться от рассылки"
+
+#: apps/omskadmin/admin.py:26 apps/omskadmin/admin.py:43
+msgid "site(s)"
+msgstr "сайт(ы)"
+
+#: apps/photoreport/admin.py:23 apps/place/admin.py:153
+msgid "Options"
+msgstr "Опции"
+
+#: apps/photoreport/forms.py:11
+msgid "Friend's name"
+msgstr "Имя друга"
+
+#: apps/photoreport/forms.py:12
+msgid "Friend's email"
+msgstr "Эл. почта"
+
+#: apps/photoreport/forms.py:26 apps/photoreport/models.py:83
+msgid "date event"
+msgstr "дата события"
+
+#: apps/photoreport/forms.py:40 apps/photoreport/models.py:150
+msgid "date added"
+msgstr "дата добавления"
+
+#: apps/photoreport/models.py:67
+msgid "On main page"
+msgstr "На главной"
+
+#: apps/photoreport/models.py:68
+msgid "Not on main page"
+msgstr "Не на главной"
+
+#: apps/photoreport/models.py:76 apps/place/models.py:107
+msgid "tagging"
+msgstr "Теги"
+
+#: apps/photoreport/models.py:80
+msgid ""
+"A \"slug\" is a unique URL-                                    friendly "
+"title for an object."
+msgstr "slug - это уникальные человекопонятный заголовок"
+
+#: apps/photoreport/models.py:84
+msgid "number of photos"
+msgstr "количество фотографий"
+
+#: apps/photoreport/models.py:86
+msgid "On mainpage"
+msgstr "На главной"
+
+#: apps/photoreport/models.py:105 apps/photoreport/models.py:140
+#: apps/photoreport/models.py:214
+msgid "Photo report"
+msgstr "Фото отчет"
+
+#: apps/photoreport/models.py:106
+msgid "Photo reports"
+msgstr "Фото отчеты"
+
+#: apps/photoreport/models.py:148 apps/photoreport/models.py:218
+msgid "caption"
+msgstr "Заголовок"
+
+#: apps/photoreport/models.py:167 apps/photoreport/models.py:205
+msgid "Photo"
+msgstr "Фотография"
+
+#: apps/photoreport/models.py:168
+msgid "Photos"
+msgstr "Фотографии"
+
+#: apps/photoreport/models.py:208
+msgid "images file (.zip)"
+msgstr "(.zip)-файл с фотографиями"
+
+#: apps/photoreport/models.py:210
+msgid "Select a .zip file of images to upload into a new photo report."
+msgstr "Выберете .zip-файл с фотографиями для загрузки в новой фотоотчет"
+
+#: apps/photoreport/models.py:215
+msgid ""
+"Select a photo report to add these images to. leave this empty to create a "
+"new photo report from the supplied title."
+msgstr ""
+"Выберете фотоотчет и добавьте фотографии. Если оставить пустым, заголовок "
+"установится из фотоотчета."
+
+#: apps/photoreport/models.py:217
+msgid ""
+"All photos in the photo report will be given a title made up of the photo "
+"report title + a sequential number."
+msgstr ""
+"Все фото в отчете получат заголовок из названия фотоотчета и порядкового "
+"номера"
+
+#: apps/photoreport/models.py:219
+msgid "Caption will be added to all photos."
+msgstr "Заголовок будет добавлен всем фотографиям."
+
+#: apps/photoreport/models.py:221
+msgid "A description of this photo report."
+msgstr "Описание этого отчета."
+
+#: apps/photoreport/models.py:224
+msgid "photo report upload"
+msgstr "загрузка фотоотчета"
+
+#: apps/photoreport/models.py:225
+msgid "photo report uploads"
+msgstr "загрузки фотоотчетов"
+
+#: apps/photoreport/views.py:83
+msgid "The picture from your friend"
+msgstr "Рекомендованное изображение от Вашего друга"
+
+#: apps/photoreport/views.py:91
+#, python-format
+msgid ""
+"%(name)s, %(friend)s (%(friend_mail)s) recommends you this picture "
+"%(img_url)s."
+msgstr ""
+"%(name)s, %(friend)s (%(friend_mail)s) рекомендует Вам просмотреть "
+"изображение. Пожалуйста, используйте ссылку для просмотра этого изображения. "
+"%(img_url)s."
+
+#: apps/photoreport/views.py:95
+msgid "Message is send!"
+msgstr "Сообщение отправлено!"
+
+#: apps/place/models.py:38
+msgid "main tag"
+msgstr "основной тэг"
+
+#: apps/place/models.py:43
+msgid "child tags"
+msgstr "тэги"
+
+#: apps/place/models.py:46
+msgid "used name"
+msgstr "используемое имя"
+
+#: apps/place/models.py:62
+msgid "Place categories"
+msgstr "Категории заведений"
+
+#: apps/place/models.py:105
+msgid "company name"
+msgstr "название компании"
+
+#: apps/place/models.py:110
+msgid "hits"
+msgstr "просмотры"
+
+#: apps/place/models.py:113
+msgid "logo of company"
+msgstr "логотип"
+
+#: apps/place/models.py:115
+msgid "logotype_alt"
+msgstr "альтернативный текст для логотипа"
+
+#: apps/place/models.py:120
+msgid "photo_alt"
+msgstr "альтернативный текст для фотографии"
+
+#: apps/place/models.py:123
+msgid "email of company"
+msgstr "Эл. почта"
+
+#: apps/place/models.py:125
+msgid "web site"
+msgstr "сайт"
+
+#: apps/place/models.py:126
+msgid "follow url"
+msgstr "Follow для ссылки сайта заведения"
+
+#: apps/place/models.py:127
+msgid "urlhits"
+msgstr "переходы на сайт"
+
+#: apps/place/models.py:129
+msgid "promo is published"
+msgstr "промо-страница опубликована"
+
+#: apps/place/models.py:131
+msgid "date of pulished promo"
+msgstr "дата публикциии промо-страницы"
+
+#: apps/place/models.py:133
+msgid "date of unpublished promo"
+msgstr "дата снятия с публикации промо-страницы"
+
+#: apps/place/models.py:135
+msgid "company is published"
+msgstr "опубликовано"
+
+#: apps/place/models.py:137
+msgid "company is the sponsor"
+msgstr "Спонсор"
+
+#: apps/place/models.py:140
+msgid "sponsor's logo"
+msgstr "Логотип спонсора"
+
+#: apps/place/models.py:142
+msgid "expert`s choice"
+msgstr "выбор экспертов"
+
+#: apps/place/models.py:144
+msgid "main address"
+msgstr "основной адрес"
+
+#: apps/place/models.py:149 apps/specprojects/models.py:18
+msgid "date of change"
+msgstr "Дата изменения"
+
+#: apps/place/models.py:151
+msgid "date of mark as new"
+msgstr "Дата изменения"
+
+#: apps/place/models.py:152
+msgid "priority"
+msgstr "Приоритет показа"
+
+#: apps/place/models.py:153
+msgid "kinohod place id"
+msgstr ""
+
+#: apps/place/models.py:159
+msgid "panorama"
+msgstr "Панорама"
+
+#: apps/place/models.py:163
+msgid "show foursquare photos"
+msgstr ""
+
+#: apps/place/models.py:166
+msgid "Score by votes"
+msgstr ""
+
+#: apps/place/models.py:193
+msgid "Places"
+msgstr "Заведения"
+
+#: apps/place/models.py:298
+msgid "Place rate category"
+msgstr "Рейтинг категорий"
+
+#: apps/place/models.py:299
+msgid "Place rate categories"
+msgstr "Рейтинги категорий"
+
+#: apps/place/models.py:311
+msgid "main office"
+msgstr "основной офис"
+
+#: apps/place/models.py:316
+msgid "geo point by yandex maps"
+msgstr "координаты на яндекс.картах"
+
+#: apps/place/models.py:319
+msgid "district"
+msgstr "Район"
+
+#: apps/place/models.py:324
+msgid "phone"
+msgstr "Телефон"
+
+#: apps/place/models.py:327
+msgid "email"
+msgstr "Эл. почта"
+
+#: apps/place/models.py:333
+msgid "Foursquare ID"
+msgstr ""
+
+#: apps/place/models.py:338
+msgid "Place address"
+msgstr "Адрес заведений"
+
+#: apps/place/models.py:339
+msgid "Place addresses"
+msgstr "Адреса заведений"
+
+#: apps/place/models.py:449
+msgid "monday"
+msgstr "Пн"
+
+#: apps/place/models.py:451
+msgid "tuesday"
+msgstr "Вт"
+
+#: apps/place/models.py:453
+msgid "wednesday"
+msgstr "Ср"
+
+#: apps/place/models.py:455
+msgid "thursday"
+msgstr "Чт"
+
+#: apps/place/models.py:457
+msgid "friday"
+msgstr "Пт"
+
+#: apps/place/models.py:459
+msgid "saturday"
+msgstr "Сб"
+
+#: apps/place/models.py:461
+msgid "sunday"
+msgstr "Вс"
+
+#: apps/place/models.py:468
+msgid "Place adderess work time"
+msgstr "Время работы заведения"
+
+#: apps/place/models.py:469
+msgid "Place address work times"
+msgstr "Время работы заведений"
+
+#: apps/place/models.py:571
+msgid "order"
+msgstr "Порядок"
+
+#: apps/place/models.py:576
+msgid "Place galleries"
+msgstr "Галереи фотографий заведения"
+
+#: apps/place/views.py:85
+#, python-format
+msgid "Result search company by name: %(name)s"
+msgstr "Заведения по запросу «%(name)s»"
+
+#: apps/place/views.py:92
+msgid "Few charaters to search"
+msgstr "Больше символов для поиска"
+
+#: apps/private_messages2/fields.py:53
+#, python-format
+msgid ""
+"The following usernames are                                            "
+"incorrect: %(users)s"
+msgstr "Некорректые имена пользователей: %(users)s"
+
+#: apps/private_messages2/forms.py:11
+msgid "Recipient"
+msgstr "Кому"
+
+#: apps/private_messages2/forms.py:12 apps/private_messages2/models.py:60
+msgid "Body"
+msgstr "Сообщение"
+
+#: apps/private_messages2/models.py:61
+msgid "sent at"
+msgstr "отправлено"
+
+#: apps/private_messages2/views.py:109
+msgid "Message successfully deleted."
+msgstr "Сообщение удалено"
+
+#: apps/profile/__init__.py:2
+msgid "Profile"
+msgstr "Профили"
+
+#: apps/profile/forms.py:20
+#, python-format
+msgid "must be size  %(size)s. real size %(real_size)s."
+msgstr ""
+"Рисунок должен быть размером %(size)s. Размер загружаемого рисунка "
+"%(real_size)s."
+
+#: apps/profile/forms.py:48
+msgid "new password"
+msgstr "Пароль"
+
+#: apps/profile/forms.py:50
+msgid "new password (again)"
+msgstr "Пароль еще раз"
+
+#: apps/profile/forms.py:51
+msgid "RegistrationForm_password_helptext"
+msgstr " "
+
+#: apps/profile/forms.py:63 apps/registration/forms.py:70
+msgid "You must type the same password each time"
+msgstr "Пароли должны совпадать"
+
+#: apps/profile/models.py:17
+msgid "male"
+msgstr "Мужской"
+
+#: apps/profile/models.py:18
+msgid "female"
+msgstr "Женский"
+
+#: apps/rating/__init__.py:21
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: apps/rating/admin.py:29
+msgid "Vote"
+msgstr "Голос"
+
+#: apps/rating/admin.py:30
+msgid "Votes"
+msgstr "Голоса"
+
+#: apps/rating/models.py:30
+msgid "Very bad"
+msgstr "Ужасно"
+
+#: apps/rating/models.py:30
+msgid "Bad"
+msgstr "Плохо"
+
+#: apps/rating/models.py:30
+msgid "OK"
+msgstr "Так себе"
+
+#: apps/rating/models.py:30
+msgid "Good"
+msgstr "Хорошо"
+
+#: apps/rating/models.py:30
+msgid "Very good"
+msgstr "Отлично"
+
+#: apps/rating/models.py:194 apps/rating/models.py:199
+msgid "vote"
+msgstr "голос"
+
+#: apps/rating/models.py:200
+msgid "votes"
+msgstr "голоса"
+
+#: apps/rating/templates/form.html:13
+msgid "Sign in to rate"
+msgstr "Войдите чтобы проголосовать"
+
+#: apps/rating/templates/form.html:22 templates/action/likes.html:5
+#, python-format
+msgid "%(votes)s vote"
+msgid_plural "%(votes)s votes"
+msgstr[0] "%(votes)s голос"
+msgstr[1] "%(votes)s голоса"
+msgstr[2] "%(votes)s голосов"
+
+#: apps/rating/templatetags/rating_tags.py:131
+msgid "Спасибо за ваш голос "
+msgstr ""
+
+#: apps/rating/templatetags/rating_tags.py:138
+msgid "Thanks for rating "
+msgstr "Спасибо за голос"
+
+#: apps/registration/__init__.py:2
+msgid "Registration"
+msgstr "Регистрация"
+
+#: apps/registration/forms.py:36
+msgid "email address"
+msgstr "Эл. почта"
+
+#: apps/registration/forms.py:38
+msgid "password"
+msgstr "Пароль"
+
+#: apps/registration/forms.py:40
+msgid "password (again)"
+msgstr "Пароль еще раз"
+
+#: apps/registration/forms.py:57
+msgid "This email is already taken. Please choose another."
+msgstr ""
+"Пользователь с такой электронной почтой существует. Пожалуйста, выберите "
+"другую."
+
+#: apps/registration/forms.py:99
+msgid "I have read and agree to the Terms of Service"
+msgstr ""
+
+#: apps/registration/forms.py:116
+msgid ""
+"This email address is already in use. Please supply a different email "
+"address."
+msgstr ""
+
+#: apps/registration/forms.py:142
+msgid ""
+"Registration using free email addresses is prohibited. Please supply a "
+"different email address."
+msgstr ""
+
+#: apps/registration/models.py:219
+msgid "activation key"
+msgstr "Ключ активации"
+
+#: apps/registration/models.py:224
+msgid "registration profile"
+msgstr "профили регистрации"
+
+#: apps/registration/models.py:225
+msgid "registration profiles"
+msgstr "профили регистрации"
+
+#: apps/robots/__init__.py:2
+msgid "Robots"
+msgstr ""
+
+#: apps/robots/models.py:7
+msgid "content"
+msgstr "Контент"
+
+#: apps/sales/admin.py:17 apps/sales/forms.py:9 apps/sales/models.py:10
+msgid "small image"
+msgstr "Маленькая картинка"
+
+#: apps/sales/models.py:16
+msgid "views"
+msgstr ""
+
+#: apps/sales/models.py:21
+msgid "Coupon"
+msgstr "Купон"
+
+#: apps/sales/models.py:22
+msgid "Coupons"
+msgstr "Купоны"
+
+#: apps/seo/models.py:16
+msgid "A comma separated list of words or phrases that describe the content"
+msgstr ""
+
+#: apps/specprojects/__init__.py:2
+msgid "Specprojects"
+msgstr "Спецпроекты"
+
+#: apps/specprojects/models.py:12
+msgid "top menu"
+msgstr "Топ-меню"
+
+#: apps/specprojects/models.py:13
+msgid "title in top menu"
+msgstr "Заголовок в топ-меню"
+
+#: apps/specprojects/models.py:14
+msgid "background color"
+msgstr "Цвет фона"
+
+#: apps/specprojects/models.py:23
+msgid "Special Project"
+msgstr "Спецпроект"
+
+#: apps/specprojects/models.py:24
+msgid "Special Projects"
+msgstr "Спецпроекты"
+
+#: apps/tagging/__init__.py:2
+msgid "Tagging"
+msgstr "Теги"
+
+#: apps/tea/models.py:23
+msgid "Interview"
+msgstr "Интервью"
+
+#: apps/tea/models.py:24
+msgid "Interviews"
+msgstr "Интервью"
+
+#: apps/threadedcomments/legacy_threadedcomments/admin.py:8
+#: apps/threadedcomments/legacy_threadedcomments/admin.py:20
+#: apps/threadedcomments/threadedcomments/models.py:22
+msgid "Parent"
+msgstr "Родитель"
+
+#: apps/threadedcomments/legacy_threadedcomments/admin.py:10
+#: apps/threadedcomments/legacy_threadedcomments/admin.py:22
+msgid "Meta"
+msgstr "Мета"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:20
+msgid "markdown"
+msgstr ""
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:21
+msgid "textile"
+msgstr ""
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:22
+msgid "restructuredtext"
+msgstr ""
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:24
+msgid "plaintext"
+msgstr ""
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:147
+#: apps/threadedcomments/legacy_threadedcomments/models.py:250
+msgid "object ID"
+msgstr "Тема"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:157
+#: apps/threadedcomments/legacy_threadedcomments/models.py:262
+msgid "date/time submitted"
+msgstr "дата/время отправки"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:158
+#: apps/threadedcomments/legacy_threadedcomments/models.py:263
+msgid "date/time modified"
+msgstr "дата/время изменения"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:159
+#: apps/threadedcomments/legacy_threadedcomments/models.py:264
+msgid "date/time approved"
+msgstr "дата/время подтверждения"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:166
+#: apps/threadedcomments/legacy_threadedcomments/models.py:271
+msgid "is public"
+msgstr "Опубликовано"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:167
+#: apps/threadedcomments/legacy_threadedcomments/models.py:272
+msgid "is approved"
+msgstr "подтверждено"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:228
+msgid "Threaded Comment"
+msgstr "Древовидный комментарий"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:229
+msgid "Threaded Comments"
+msgstr "Древовидные комментарии"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:258
+#: libs/rollyourown/seo/backends.py:167 libs/rollyourown/seo/backends.py:200
+#: libs/rollyourown/seo/backends.py:245 libs/rollyourown/seo/backends.py:289
+msgid "site"
+msgstr "Сайт"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:259
+msgid "e-mail address"
+msgstr "Эл. почта"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:335
+msgid "Free Threaded Comment"
+msgstr "Свободный древовидные комментарий"
+
+#: apps/threadedcomments/legacy_threadedcomments/models.py:336
+msgid "Free Threaded Comments"
+msgstr "Свободные древовидные комментарии"
+
+#: apps/threadedcomments/threadedcomments/__init__.py:19
+msgid "Threadedcomments"
+msgstr "Древовидные комментарии"
+
+#: apps/threadedcomments/threadedcomments/admin.py:19
+msgid "Hierarchy"
+msgstr "Иерархия"
+
+#: apps/threadedcomments/threadedcomments/admin.py:22
+msgid "Metadata"
+msgstr "Меьаданные"
+
+#: apps/threadedcomments/threadedcomments/models.py:24
+msgid "Last child"
+msgstr "Последний узел"
+
+#: apps/threadedcomments/threadedcomments/models.py:25
+msgid "Tree path"
+msgstr "Дерево путей"
+
+#: apps/threadedcomments/threadedcomments/models.py:107
+msgid "Threaded comment"
+msgstr "Древовидный комментарий"
+
+#: apps/threadedcomments/threadedcomments/models.py:108
+msgid "Threaded comments"
+msgstr "Древовидные комментарии"
+
+#: libs/filebrowser/fields.py:58
+#, python-format
+msgid "Extension %(ext)s is not allowed. Only %(allowed)s is allowed."
+msgstr ""
+
+#: libs/filebrowser/forms.py:26 libs/filebrowser/forms.py:32
+#: libs/filebrowser/forms.py:49 libs/filebrowser/forms.py:55
+msgid "Only letters, numbers, underscores, spaces and hyphens are allowed."
+msgstr ""
+
+#: libs/filebrowser/forms.py:35 libs/filebrowser/forms.py:58
+msgid "The Folder already exists."
+msgstr ""
+
+#: libs/filebrowser/forms.py:49
+#, fuzzy
+msgid "New Name"
+msgstr "Имя"
+
+#: libs/filebrowser/forms.py:60
+msgid "The File already exists."
+msgstr ""
+
+#: libs/filebrowser/settings.py:121
+msgid "Folder"
+msgstr ""
+
+#: libs/filebrowser/settings.py:122
+#, fuzzy
+msgid "Image"
+msgstr "Картинка"
+
+#: libs/filebrowser/settings.py:123
+msgid "Video"
+msgstr ""
+
+#: libs/filebrowser/settings.py:124
+#, fuzzy
+msgid "Document"
+msgstr "комментарий"
+
+#: libs/filebrowser/settings.py:125
+msgid "Audio"
+msgstr ""
+
+#: libs/filebrowser/settings.py:126
+msgid "Code"
+msgstr ""
+
+#: libs/filebrowser/views.py:57 libs/filebrowser/views.py:177
+#: libs/filebrowser/views.py:232 libs/filebrowser/views.py:330
+#: libs/filebrowser/views.py:412 libs/filebrowser/views.py:473
+msgid "The requested Folder does not exist."
+msgstr ""
+
+#: libs/filebrowser/views.py:61
+msgid ""
+"Error finding Upload-Folder (MEDIA_ROOT + FILEBROWSER_DIRECTORY). Maybe it "
+"does not exist?"
+msgstr ""
+
+#: libs/filebrowser/views.py:154
+#: libs/filebrowser/templates/filebrowser/append.html:5
+#: libs/filebrowser/templates/filebrowser/append.html:7
+#: libs/filebrowser/templates/filebrowser/include/breadcrumbs.html:8
+#: libs/filebrowser/templates/filebrowser/include/breadcrumbs.html:10
+msgid "FileBrowser"
+msgstr ""
+
+#: libs/filebrowser/views.py:195
+#, fuzzy, python-format
+msgid "The Folder %s was successfully created."
+msgstr "Сообщение удалено"
+
+#: libs/filebrowser/views.py:204
+msgid "Permission denied."
+msgstr ""
+
+#: libs/filebrowser/views.py:206
+msgid "Error creating folder."
+msgstr ""
+
+#: libs/filebrowser/views.py:213 libs/filebrowser/views.py:216
+#: libs/filebrowser/templates/filebrowser/index.html:48
+msgid "New Folder"
+msgstr ""
+
+#: libs/filebrowser/views.py:244
+msgid "Select files to upload"
+msgstr ""
+
+#: libs/filebrowser/views.py:248
+#: libs/filebrowser/templates/filebrowser/index.html:49
+#: libs/filebrowser/templates/filebrowser/upload.html:111
+msgid "Upload"
+msgstr ""
+
+#: libs/filebrowser/views.py:332 libs/filebrowser/views.py:414
+#: libs/filebrowser/views.py:475
+msgid "The requested File does not exist."
+msgstr ""
+
+#: libs/filebrowser/views.py:355
+#, fuzzy, python-format
+msgid "The file %s was successfully deleted."
+msgstr "Сообщение удалено"
+
+#: libs/filebrowser/views.py:371
+#, fuzzy, python-format
+msgid "The folder %s was successfully deleted."
+msgstr "Сообщение удалено"
+
+#: libs/filebrowser/views.py:441
+#, fuzzy
+msgid "Renaming was successful."
+msgstr "Сообщение успешно отправлено"
+
+#: libs/filebrowser/views.py:446
+msgid "Error."
+msgstr ""
+
+#: libs/filebrowser/views.py:454
+#, python-format
+msgid "Rename \"%s\""
+msgstr ""
+
+#: libs/filebrowser/views.py:457
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:86
+#, fuzzy
+msgid "Rename"
+msgstr "Имя"
+
+#: libs/filebrowser/views.py:483 libs/filebrowser/views.py:486
+#, python-format
+msgid "Versions for \"%s\""
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/makedir.html:24
+#: libs/filebrowser/templates/filebrowser/rename.html:25
+msgid "Please correct the following errors."
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/makedir.html:33
+#: libs/filebrowser/templates/filebrowser/upload.html:101
+msgid ""
+"The Name will be converted to lowercase. Spaces will be replaced with "
+"underscores."
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/upload.html:47
+msgid "BROWSE"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/upload.html:48
+msgid "An Error occured"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/upload.html:49
+#, fuzzy
+msgid "Completed"
+msgstr "завершено"
+
+#: libs/filebrowser/templates/filebrowser/upload.html:50
+msgid "Do you want to replace the file"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/upload.html:51
+msgid "KB"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/upload.html:52
+msgid "MB"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/upload.html:85
+msgid "Help"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/upload.html:89
+msgid "Allowed"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/upload.html:95
+msgid "Max. Filesize"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/upload.html:109
+msgid "Clear Queue"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/versions.html:66
+msgid "Image Version"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/versions.html:69
+msgid "Debug"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/versions.html:83
+#: libs/filebrowser/templates/filebrowser/versions.html:95
+#: libs/filebrowser/templates/filebrowser/versions.html:107
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:11
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:23
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:35
+msgid "Select"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/versions.html:118
+msgid "Width"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/versions.html:119
+msgid "Height"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:50
+#, fuzzy
+msgid "View Image"
+msgstr "Просмотреть сообщения"
+
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:73
+msgid "Versions"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:92
+msgid "Are you sure you want to delete this file?"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:92
+#, fuzzy
+msgid "Delete File"
+msgstr "Удалить"
+
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:95
+msgid "Are you sure you want to delete this Folder?"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/filelisting.html:95
+#, fuzzy
+msgid "Delete Folder"
+msgstr "Удалить"
+
+#: libs/filebrowser/templates/filebrowser/include/filter.html:3
+msgid "Filter"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/filter.html:9
+#, fuzzy
+msgid "By Date"
+msgstr "Дата"
+
+#: libs/filebrowser/templates/filebrowser/include/filter.html:11
+#, fuzzy
+msgid "Any Date"
+msgstr "Дата"
+
+#: libs/filebrowser/templates/filebrowser/include/filter.html:13
+msgid "Today"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/filter.html:15
+msgid "Past 7 days"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/filter.html:17
+msgid "Past 30 days"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/filter.html:19
+msgid "This year"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/filter.html:27
+#, fuzzy
+msgid "By Type"
+msgstr "Добавить"
+
+#: libs/filebrowser/templates/filebrowser/include/paginator.html:5
+msgid "No Items Found"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/paginator.html:11
+#, python-format
+msgid "%(counter)s Item"
+msgid_plural "%(counter)s Items"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: libs/filebrowser/templates/filebrowser/include/paginator.html:26
+#, fuzzy
+msgid "No Items"
+msgstr "Новость"
+
+#: libs/filebrowser/templates/filebrowser/include/search.html:3
+#, python-format
+msgid "1 result"
+msgid_plural "%(counter)s results"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: libs/filebrowser/templates/filebrowser/include/search.html:4
+#: libs/filebrowser/templates/filebrowser/include/toolbar.html:19
+#, python-format
+msgid "%(full_result_count)s total"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/search.html:5
+#, fuzzy
+msgid "Clear Restrictions"
+msgstr "Регистрация"
+
+#: libs/filebrowser/templates/filebrowser/include/search.html:7
+#: libs/filebrowser/templates/filebrowser/include/toolbar.html:16
+#, fuzzy
+msgid "Search"
+msgstr "Марта"
+
+#: libs/filebrowser/templates/filebrowser/include/search.html:19
+#, fuzzy
+msgid "Go"
+msgstr "Хорошо"
+
+#: libs/filebrowser/templates/filebrowser/include/search.html:24
+#, python-format
+msgid "%(counter)s Item found"
+msgid_plural "%(counter)s Items found"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: libs/filebrowser/templates/filebrowser/include/search.html:25
+#, python-format
+msgid "%(counter)s Item total"
+msgid_plural "%(counter)s Items total"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: libs/filebrowser/templates/filebrowser/include/tableheader.html:9
+#: libs/filebrowser/templates/filebrowser/include/tableheader.html:10
+msgid "Type"
+msgstr "Добавить"
+
+#: libs/filebrowser/templates/filebrowser/include/tableheader.html:12
+msgid "Thumbnail"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/tableheader.html:14
+#: libs/filebrowser/templates/filebrowser/include/tableheader.html:15
+#, fuzzy
+msgid "Filename"
+msgstr "Имя"
+
+#: libs/filebrowser/templates/filebrowser/include/tableheader.html:17
+#: libs/filebrowser/templates/filebrowser/include/tableheader.html:18
+msgid "Size"
+msgstr ""
+
+#: libs/filebrowser/templates/filebrowser/include/toolbar.html:19
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: libs/rollyourown/seo/admin.py:135
+msgid "model"
+msgstr ""
+
+#: libs/rollyourown/seo/admin.py:178 libs/rollyourown/seo/backends.py:198
+#, fuzzy
+msgid "view"
+msgstr "Превью"
+
+#: libs/rollyourown/seo/backends.py:165 libs/rollyourown/seo/backends.py:240
+#, fuzzy
+msgid "path"
+msgstr "Дерево путей"
+
+#: libs/rollyourown/seo/backends.py:169 libs/rollyourown/seo/backends.py:202
+#: libs/rollyourown/seo/backends.py:247 libs/rollyourown/seo/backends.py:291
+msgid "language"
+msgstr ""
+
+#: libs/rollyourown/seo/fields.py:60 libs/rollyourown/seo/fields.py:69
+#, python-format
+msgid "If empty, %s"
+msgstr ""
+
+#: libs/rollyourown/seo/fields.py:62
+#, python-format
+msgid "If empty, \"%s\" will be used."
+msgstr ""
+
+#: libs/rollyourown/seo/fields.py:65
+#, python-format
+msgid "If empty, %s will be used."
+msgstr ""
+
+#: templates/admin_tools/dashboard/modules/app_list.html:13
+msgid "Add"
+msgstr "Добавить"
+
+#: templates/contacts/contacts.html:7
+msgid "Contacts Us"
+msgstr "Свзязаться с нами"
+
+#: templates/contacts/thanks.html:3 templates/contacts/thanks.html.py:5
+msgid " Thanks you for message."
+msgstr "Спасибо за сообщение"
+
+#: templates/contacts/thanks.html:6
+msgid "Thanks!"
+msgstr "Спасибо!"
+
+#: templates/contacts/thanks.html:8
+msgid "Your can go"
+msgstr "Вы можете идти"
+
+#: templates/contacts/thanks.html:8
+msgid "main page"
+msgstr "На главной"
+
+#: templates/messages/compose.html:19 templates/messages/compose.html.py:20
+msgid "Send"
+msgstr "Отравить"
+
+#: templates/messages/inbox.html:46 templates/messages/outbox.html:41
+msgid "delete"
+msgstr "удалить"
+
+#: templates/messages/inbox.html:53 templates/messages/outbox.html:47
+#: templates/messages/trash.html:23
+msgid "No messages."
+msgstr "Нет сообщений."
+
+#: templates/messages/new_message.html:1
+#, python-format
+msgid ""
+"Hello %(recipient)s,\n"
+"\n"
+"you received a private message from %(sender)s with\n"
+"the following contents:"
+msgstr ""
+"Привет, %(recipient)s,\n"
+"\n"
+"у вас новое сообщение от %(sender)s :"
+
+#: templates/messages/new_message.html:9
+#, python-format
+msgid "Sent from %(site_url)s"
+msgstr "Отправлено с %(site_url)s"
+
+#: templates/messages/new_message.html:10
+msgid "Inbox"
+msgstr "Входящие"
+
+#: templates/messages/new_message.html:11
+msgid "Reply"
+msgstr "Ответить"
+
+#: templates/messages/outbox.html:11
+msgid "Sent Messages"
+msgstr "Отправленные"
+
+#: templates/messages/trash.html:3
+msgid "Trash"
+msgstr "Корзина"
+
+#: templates/messages/trash.html:8
+msgid "Sender"
+msgstr "Отправитель"
+
+#: templates/messages/trash.html:16
+msgid "DATETIME_FORMAT"
+msgstr ""
+
+#: templates/messages/trash.html:17
+msgid "undelete"
+msgstr ""
+
+#: templates/messages/trash.html:26
+msgid ""
+"Deleted Messages are removed from the trash at unregular intervals, don't "
+"rely on this feature for long-time storage."
+msgstr ""
+
+#: templates/notification/messages_deleted/full.txt:1
+#, fuzzy, python-format
+msgid "You have deleted the message '%(message)s'."
+msgstr "Увас есть удаленные сообщения"
+
+#: templates/notification/messages_deleted/notice.html:1
+#, python-format
+msgid ""
+"You have deleted the message <a href=\"%(message_url)s\">%(message)s</a>."
+msgstr ""
+
+#: templates/notification/messages_received/full.txt:1
+#, python-format
+msgid ""
+"%(message_sender)s has sent you a message:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"%(message_body)s\n"
+"\n"
+"http://%(current_site)s%(message_url)s"
+msgstr ""
+
+#: templates/notification/messages_received/notice.html:2
+#, python-format
+msgid ""
+"You have received the message <a href=\"%(message_url)s\">%(message)s</a> "
+"from %(message_sender)s."
+msgstr ""
+
+#: templates/notification/messages_received/short.txt:1
+#: templates/notification/messages_reply_received/short.txt:1
+#, python-format
+msgid "%(notice)s by %(message_sender)s"
+msgstr ""
+
+#: templates/notification/messages_recovered/full.txt:1
+#, fuzzy, python-format
+msgid "You have recovered the message '%(message)s'."
+msgstr "У вас есть сообщения"
+
+#: templates/notification/messages_recovered/notice.html:1
+#, python-format
+msgid ""
+"You have recovered the message <a href=\"%(message_url)s\">%(message)s</a>."
+msgstr ""
+
+#: templates/notification/messages_replied/full.txt:1
+#, python-format
+msgid ""
+"You have replied to '%(message_parent_msg)s' from %(message_recipient)s."
+msgstr ""
+
+#: templates/notification/messages_replied/notice.html:2
+#, python-format
+msgid ""
+"You have replied to <a href=\"%(message_url)s\">%(message_parent_msg)s</a> "
+"from %(message_recipient)s."
+msgstr ""
+
+#: templates/notification/messages_reply_received/full.txt:1
+#, python-format
+msgid ""
+"%(message_sender)s replied to '%(message_parent_msg)s':\n"
+"\n"
+"%(message)s\n"
+"\n"
+"%(message_body)s\n"
+"\n"
+"http://%(current_site)s%(message_url)s"
+msgstr ""
+
+#: templates/notification/messages_reply_received/notice.html:2
+#, python-format
+msgid "%(message_sender)s has sent you a reply to %(message_parent_msg)s."
+msgstr ""
+
+#: templates/notification/messages_sent/full.txt:1
+#, python-format
+msgid "You have sent the message '%(message)s' to %(message_recipient)s."
+msgstr ""
+
+#: templates/notification/messages_sent/notice.html:2
+#, python-format
+msgid ""
+"You have sent the message <a href=\"%(message_url)s\">%(message)s</a> to "
+"%(message_recipient)s."
+msgstr ""
+
+#~ msgid "%(stars)s star"
+#~ msgid_plural "%(stars)s stars"
+#~ msgstr[0] "%(stars)s звезда"
+#~ msgstr[1] "%(stars)s звезды"
+#~ msgstr[2] "%(stars)s звезд"
+
+#~ msgid "number votes"
+#~ msgstr "число голоосов"
+
+#~ msgid "Neither an email nor a username is set. This asks for inconsistency!"
+#~ msgstr "Ни электронной почты, ни имени пользователя не обнаружено."
+
+#~ msgid "Place Event"
+#~ msgstr "Заведение события"
+
+#~ msgid "company is new"
+#~ msgstr "новая компания"
+
+#~ msgid "Private_Messages"
+#~ msgstr "Личные сообщения"
+
+#~ msgid "group"
+#~ msgstr "группа"
+
+#~ msgid "Creates the message optionally for all users or a group of users."
+#~ msgstr ""
+#~ "Создание сообщений опциональео для всех пользователей или группы "
+#~ "пользователей."
+
+#~ msgid "Date/time"
+#~ msgstr "Дата/время"
+
+#~ msgid "Message Received"
+#~ msgstr "Полученные сообщения"
+
+#~ msgid "Message Sent"
+#~ msgstr "Отправленные сообщения"
+
+#~ msgid "you have sent a message"
+#~ msgstr "у вас есть отправленные сообщения"
+
+#~ msgid "Message Replied"
+#~ msgstr "Отвеченные сообщения"
+
+#~ msgid "you have replied to a message"
+#~ msgstr "ваши ответы"
+
+#~ msgid "Reply Received"
+#~ msgstr "Полученные ответы"
+
+#~ msgid "you have received a reply to a message"
+#~ msgstr "получены ответы на сообщения"
+
+#~ msgid "Message Deleted"
+#~ msgstr "Удаленные сообщения"
+
+#~ msgid "Message Recovered"
+#~ msgstr "Восстановленные сообщения"
+
+#~ msgid "you have undeleted a message"
+#~ msgstr "ваши восстановленные сообщеия"
+
+#~ msgid "Parent message"
+#~ msgstr "Родительское сообщение"
+
+#~ msgid "read at"
+#~ msgstr "прочитано"
+
+#~ msgid "replied at"
+#~ msgstr "отвечено"
+
+#~ msgid "Sender deleted at"
+#~ msgstr "Отправитель удален"
+
+#~ msgid "Recipient deleted at"
+#~ msgstr "Получатель удален"
+
+#~ msgid "Messages"
+#~ msgstr "Сообщения"
+
+#~ msgid "New Message: %(subject)s"
+#~ msgstr "Новое сообщение: %(subject)s"
+
+#~ msgid ""
+#~ "%(sender)s wrote:\n"
+#~ "%(body)s"
+#~ msgstr ""
+#~ "%(sender)s написал:\n"
+#~ "%(body)s"
+
+#~ msgid "Message successfully recovered."
+#~ msgstr "Сообщение восстановлено"
+
+#~ msgid "New Message"
+#~ msgstr "Новое сообщение"
+
+#~ msgid "Received"
+#~ msgstr "Получить"
+
+#~ msgid "Sent"
+#~ msgstr "Отправленные"
+
+#~ msgid "Deleted Messages"
+#~ msgstr "Удаленные сообщения"
+
+#~ msgid "Thumb error(check if file exist)"
+#~ msgstr "Ошибка превью(файл существует?)"
+
+#~ msgid "RegistrationForm_username_helptext"
+#~ msgstr ""
+#~ "Логин будет использоваться в качестве никнейма на сайте и все "
+#~ "пользователи смогут его увидеть.<br>Логин должен состоять из латинских "
+#~ "символов, цифр,символа «_». Минимальная длина логина &mdash; 2 символа."
+
+#~ msgid "Отлично"
+#~ msgstr "Очень круто"
+
+#~ msgid "%(start_label)s"
+#~ msgstr "%(email)s"
+
+#~ msgid "%(end_label)s"
+#~ msgstr "%(email)s"
+
+#~ msgid "Event Genres"
+#~ msgstr "Жанры событий"
+
+#~ msgid "Add schedule"
+#~ msgstr "Добавить расписание"
+
+#~ msgid "add more schedule"
+#~ msgstr "Добавить еще расписание"
+
+#~ msgid "Save"
+#~ msgstr "Сохранить"
+
+#~ msgid "Monday"
+#~ msgstr "Пн"
+
+#~ msgid "Tuesday"
+#~ msgstr "Вт"
+
+#~ msgid "Wednesday"
+#~ msgstr "Ср"
+
+#~ msgid "Thursday"
+#~ msgstr "Чт"
+
+#~ msgid "Friday"
+#~ msgstr "Пт"
+
+#~ msgid "Saturday"
+#~ msgstr "Сб"
+
+#~ msgid "Sunday"
+#~ msgstr "Вс"
+
+#~ msgid "Mon"
+#~ msgstr "пн"
+
+#~ msgid "Tue"
+#~ msgstr "вт"
+
+#~ msgid "Wed"
+#~ msgstr "ср"
+
+#~ msgid "Thu"
+#~ msgstr "чт"
+
+#~ msgid "Fri"
+#~ msgstr "пт"
+
+#~ msgid "Sat"
+#~ msgstr "сб"
+
+#~ msgid "Sun"
+#~ msgstr "вс"
+
+#~ msgid "day"
+#~ msgstr "день"
+
+#~ msgid "week"
+#~ msgstr "неделю"
+
+#~ msgid "time start event"
+#~ msgstr "время начала события"
+
+#~ msgid "duration event"
+#~ msgstr "длительность события"
+
+#~ msgid "count"
+#~ msgstr "количество"
+
+#~ msgid "Outbox"
+#~ msgstr "Исходящие"
+
+#~ msgid "Tea with star"
+#~ msgstr "Чай со звездой"
+
+#~ msgid "fashion"
+#~ msgstr "Заголовок"
+
+#~ msgid "ordering"
+#~ msgstr "Порядок"
+
+#~ msgid "Company with name %(name)s"
+#~ msgstr "Заведения с тегом «%(name)s»"
+
+#~ msgid "Company with mark %(tag_name)s"
+#~ msgstr "Заведения с тегом «%(tag_name)s»"
+
+#~ msgid "%(cat_name)s"
+#~ msgstr "%(cat_name)s"
+
+#~ msgid "Company in category %(cat_name)s"
+#~ msgstr "%(cat_name)s"
+
+#~ msgid "<a href=\"%(link)s\">confirm_friendship_add</a>"
+#~ msgstr "<a href=>Согласиться дружить</a>"
+
+#~ msgid "<a href=\"%(link)s\">break_friendship</a>"
+#~ msgstr "<a href=>Разорвать дружбу</a>"
+
+#~ msgid "This field is required."
+#~ msgstr "Это поле нужно обязательно заполнить."

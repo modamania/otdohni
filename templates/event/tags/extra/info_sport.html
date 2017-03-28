@@ -1,0 +1,6 @@
+<div class="event__extra__info__detail">
+    <a href="{{ place.get_absolute_url }}" class="place__event__detail">{{ place.name }}</a>,
+    <span class="start_time__event__detail">
+        {% if start_date %}{{ start_date|date:"j F Y" }},{% endif %} {{ start_time|time:"G:i" }}
+    </span>
+</div>

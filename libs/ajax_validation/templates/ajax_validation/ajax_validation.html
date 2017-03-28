@@ -1,0 +1,11 @@
+{% load jquery_validation %}
+{% include_validation %}
+{% if url %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.form').validate(
+            '{{ url }}',
+            {type: 'p'});
+    });
+</script>
+{% endif %}

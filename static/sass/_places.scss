@@ -1,0 +1,675 @@
+$places: (
+  columns: 3,
+  gutters: 1/14,
+  math: fluid,
+  output: float,
+);
+
+.places {
+    @include container;
+    @include layout($places);
+
+    position: relative;
+
+    &.places_map_collapsed {
+        padding-right: 50px;
+    }
+}
+
+.places-catalog {
+    @include span(1 of 2);
+    @include transition(opacity .3s linear);
+
+    @include susy-breakpoint(88em, 3) {
+        @include span(2);
+    }
+
+    .places_map_expanded & {
+        @include span(1);
+
+        @include susy-breakpoint(88em, 3) {
+            @include span(1);
+        }
+    }
+
+    .places_map_hidden &,
+    .places_map_collapsed & {
+        @include full;
+    }
+}
+
+.places-catalog_state_loading {
+    @include opacity(.5);
+}
+
+.places__item-list {
+    @include container;
+}
+
+.places__item {
+    @include shadow-box;
+    @include box-sizing(border-box);
+    @include span(1 of 2);
+
+    &:nth-child(2n) {
+      @include gutters(0);
+    }
+
+    &:nth-child(2n+1) {
+      @include break;
+    }
+
+    @include susy-breakpoint(88em, 3) {
+      @include span(1);
+
+      &:nth-child(2n) {
+        @include gutters;
+      }
+        
+      &:nth-child(2n+1) {
+        @include nobreak;
+      }
+
+      &:nth-child(3n) {
+        @include last;
+      }
+
+      &:nth-child(3n+1) {
+        @include break;
+      }
+    }
+
+
+    clear: right;
+    margin-bottom: 2em;
+
+    &:hover {
+        .place__summary {
+            border-color: tint($brand-blue, 15%);
+        }
+    }
+
+    .places_map_basic & {
+        @include full;
+
+        @include susy-breakpoint(88em, 3) {
+            @include gallery(1 of 2);
+        }
+    }
+
+    .places_map_expanded & {
+        @include gallery(2 of 2);
+        @include break;
+        margin-left: 0;
+        margin-right: 0;
+
+        &:nth-child(1n+1) {
+          @include break;
+          margin-right: 0;
+          margin-left: 0;
+        }
+
+        &:nth-child(2n+2) {
+          margin-right: 0;
+          margin-left: 0;
+        }
+    }
+
+    .places_map_collapsed & {
+        @include gallery(1 of 2);
+
+        @include susy-breakpoint(88em, 3) {
+            @include gallery(1 of 3);
+        }
+    }
+    
+    .thumb {
+        @include background-size(cover);
+
+        display: block;
+        width: 100%;
+        height: 170px;
+        position: relative;
+        background-color: #3f3f44;
+        background-image: image-url('photo_icon_white.png');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }
+
+    .no_photo {
+        background: #3f3f44 url('../i/photo_icon_white.png') 50% 50% no-repeat;
+    }
+
+    .commcount {
+        float: right;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        font-weight: normal;
+        margin: 0 0 0.5em;
+        line-height: 1.1;
+    }
+
+    .buy_ticket {
+        float: right;
+        margin: 2px 0 0 4px;
+    }
+
+}
+
+.place {
+    text-align: left;
+
+    .ymaps-balloon__content & {
+        width: 290px;
+
+        .thumb {
+            @include background-size(cover);
+
+            display: block;
+            width: 100%;
+            height: 145px;
+            position: relative;
+            background-color: #3f3f44;
+            background-image: image-url('photo_icon_white.png');
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+
+        .place__vote {
+            float: none;
+            margin: .75em 0 0;
+        }
+    }
+
+    .commcount {
+        float: right;
+    }
+
+    &__summary {
+        @include transition(border .3s ease-in-out);
+
+        padding: 1em 1.25em 1.5em;
+        border: 3px solid transparent;
+
+        .thumb + & {
+            border-top: none;
+        }
+
+        p {
+            margin-bottom: .5em;
+            line-height: normal;
+        }
+
+        .place__vote {
+            float: none;
+            margin: 0;
+        }
+
+        .tags {
+            font-size: 13px;
+            // overflow: hidden;
+            // max-height: 38px;
+            line-height: 18px;
+            position: relative;
+            margin-bottom: .75em;
+        }
+
+        .places__item_state_hover & {
+            border-width: 3px;
+            border-color: $brand-red;
+        }
+
+        .tags_state_expanded {
+            max-height: none;
+            overflow: visible;
+
+            .tags__more {
+                display: none;
+            }
+        }
+
+        .ymaps-balloon__content & {
+            border: none;
+        }
+    }
+
+    &__vote {
+        float: right;
+        margin-left: .5em;
+    }
+}
+
+.place-addresses__item {
+    margin: 0 0 .25em;
+}
+
+.places__list {
+    h3 {
+        font-size: 1.385em;
+        font-weight: normal;
+        margin: 0 0 0.5em;
+    }
+
+    .item {
+        @include shadow-box;
+        
+        position: relative;
+        zoom: 1;
+        margin-bottom: 2em;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .commcount {
+            float: right;
+        }
+
+        .place__vote {
+            float: none;
+            margin: 0;
+        }
+    }
+}
+
+.place-contact {
+    margin-bottom: .5em;
+}
+
+.place-contact__details {
+    display: none;
+}
+
+.place-contact_state_expanded  {
+    .place-contact__details {
+        display: block;
+    }
+
+    .place-contact__toggler {
+        display: none;
+    }
+}
+
+.tags__more {
+    @include background(
+        linear-gradient(left, transparent 0%, white 30%, white 100%)
+    );
+
+    display: none;
+
+    position: absolute;
+    right: 0;
+    top: 19px;
+    padding: 0 .5em 0 2em;
+}
+
+.places__more {
+    clear: both;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.placecard {clear: both;margin: 1em 0 1em;}
+.place__logo {display: inline; float: right; margin: 0.616em 0 0; text-align: center;}
+.place__logo img{
+  max-width: 215px;
+}
+
+.place__img {
+    width: 100%;
+    min-height: 260px;
+    margin-bottom: 1.5em;
+}
+.place__img img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.place__hits {
+    color: #818181;
+    float: right;
+}
+
+.placecard__info {
+    margin: 0 0 1em;
+    float: left;
+    color: #000;
+}
+
+.placecard__info__row {
+    clear: left;
+    margin-bottom: 0.25em;
+}
+
+.placecard__info__row .label {
+    float:left;
+    width: 7em;
+    color: #666;
+}
+.placecard__info__row .data {
+    margin-left: 8em;
+}
+
+.address_holder {position: relative;}
+
+.address__details {display: none;}
+.address__details_visible {display: inline;}
+
+.pd_container{
+    position:relative;
+    width: 100%;
+    height: 900px;
+}
+.pd_photo {
+    cursor: pointer;
+    position:absolute;
+    z-index:10;
+    border:7px solid #f9f9f9;
+    width:160px;
+    height:300px;
+    top:0px;
+    left:0px;
+    display:none;
+    -moz-box-shadow: 0px 1px 5px #555;
+    -webkit-box-shadow: 1px 1px 5px #555;
+    box-shadow: 0px 1px 5px #555;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: #f9f9f9;
+}
+.pd_photo img{
+    width:160px;
+    height:240px;
+    display:block;
+}
+.pd_photo cite {
+    padding-top: 0.25em;
+    text-align: center;
+}
+.pd_photo cite span {
+    display: block;
+    line-height: 1.2;
+}
+.pd_photo .name {
+    font-size: 1.25em;
+    font-style: normal;
+}
+.pd_photo .role {
+    color: #666;
+}
+.pd_photo.dragged cite {
+    font-size: 115%;
+}
+
+.place__about p {margin-left: 1.5em;}
+.place__about p.icon {margin-left: 0;}
+.place__about h3 {margin: 1.5em 0 0.5em;}
+.place__about table {
+    width: 100%;
+}
+.place__about table td {
+    padding: 0.5em 0.5em 0.5em 1.5em;
+}
+.place__about table p {
+    margin: 0;
+}
+/*.place__about table img {
+    max-width: 100%;
+} */
+
+.place-photos {
+  margin-bottom: 1em;
+}
+
+.place-photos__item {
+    float: left;
+    display: block;
+    position: relative;
+    width: 19.9%;
+    height: 160px;
+    margin: 0 0 1px 1px;
+    text-decoration: none;
+
+    img {
+        display: block;
+        max-height: 100%;
+    }
+}
+
+.place-photos__caption {
+    background: white;
+    padding: 1em 1.5em;
+}
+
+.justifiedGallery .jg-image {
+    position: absolute;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 0;
+}
+
+.justifiedGallery .jg-row {
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.place__map {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
+}
+
+.b-places-thumbs .b-comments-count,
+.b-places-list .b-comments-count,
+.b-place-rating {
+    display: inline;
+    float: right;
+}
+
+a.place__event__detail:link, a.place__event__detail:visited
+{
+    color: black;
+}
+a.place__event__detail:hover
+{
+    color: red;
+}
+
+.categories-groups {
+    margin: 0 0 2em;
+}
+
+.categories-groups__item {
+    width:23.305%;
+}
+
+.categories-list__item {
+    margin-bottom: .25em;
+}
+
+.more-addresses__item {
+    white-space: nowrap;
+}
+
+.places-map {
+    @include span(1);
+    @include last;
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-height: 200px;
+
+    &.sticky {
+        position: fixed;
+        left: auto;
+        right: auto;
+        height: 100%;
+
+        .ymaps__toggler {
+            @include border-radius(0 0 3px 0);
+            @include box-shadow(none);
+            z-index: 1;
+            top: 0;
+            bottom: auto;
+            background: rgba($brand-blue, .5);
+
+            &:hover {
+                background: $brand-blue;
+            }
+        }
+
+        .ymaps__close {
+            @include border-radius(0 0 0 3px);
+            @include box-shadow(none);
+            z-index: 1;
+            top: 0;
+            bottom: auto;
+            background: rgba($brand-blue, .5);
+
+            &:hover {
+                background: $brand-blue;
+            }
+        }
+    }
+
+    &.static {
+        position: absolute;
+        height: 500px;
+    }
+
+    .ymaps {
+        @include shadow-box;
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+
+        .places_map_collapsed & {
+            display: none;
+        }
+    }
+
+    .ymaps__inner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .ymaps__toggler {
+        @include border-radius(2px 2px 0 0);
+        @include box-shadow(0 -3px 6px -4px rgba(0,0,0,.15) inset);
+        @include transition(background .3s);
+
+        font-size: 12px;
+        display: none;
+        position: absolute;
+        left: 0;
+        bottom: 100%;
+        padding: .5em 1em;
+        cursor: pointer;
+        color: white;
+        background: $brand-blue;
+
+        @include susy-breakpoint(88em, 12) {
+            display: block;
+        }
+    }
+
+    .ymaps__close {
+        @include transition(background .3s);
+        @include border-radius(2px 2px 0 0);
+        @include box-shadow(0 -3px 6px -4px rgba(0,0,0,.15) inset);
+        @include square(30px);
+
+        position: absolute;
+        overflow: hidden;
+        right: 0;
+        bottom: 100%;
+        text-align: center;
+        cursor: pointer;
+        color: white;
+        background: $light-gray;
+        
+        &:hover {
+            background: $brand-blue;
+        }
+
+        &:after {
+            @extend .icon-en;
+            content: '\274C';
+            color: white;
+            line-height: 10px;
+        }
+    }
+
+    .places-map__open {
+        @include transition(background .3s);
+        @include border-radius(1px);
+    
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        bottom: 0;
+        cursor: pointer;
+        background: $light-gray;
+
+        &:hover {
+            background: $brand-blue;
+        }
+
+        &:after {
+            @extend .icon-en;
+            content: '\E727';
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 3px;
+            margin: -10px 0 0;
+        }
+
+        .places_map_collapsed & {
+            display: block;
+        }
+    }
+
+    .places_map_hidden & {
+        display: none;
+    }
+
+    .ymaps-balloon__content {
+        margin: 0;
+        padding: 0;
+    }
+
+    .ymaps-balloon__close {
+        background: rgba(white, .5);
+
+        & + .ymaps-balloon__content {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .ymaps-balloon__close-button {
+        height: 30px;
+        margin-right: 0;
+    }
+}
+
+.ymaps-map {
+    h3 {
+        margin: 0 0 .5em;
+    }
+}

@@ -1,0 +1,37 @@
+{% extends "control/index.html" %}
+{% load event_tags rating_tags %}
+
+{% block content-header %}
+<h1>Панель управления, смотрим на событие"<i>{{ event }}</i>"</h1>
+<a href="{% url control.views.event_form event.pk %}">Редактировать</a><br />
+{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+        <a title="Панель управления" href="{% url control_event_list %}">События</a> /
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="event__summary">
+<h1>{{ event.title }}</h1>
+{% if event.genre.all %}
+    <p>
+    {% for genre in event.genre.all %}
+        <span>{{ genre }}, </span>
+    {% endfor %}
+    </p>
+{% endif %}
+</div>
+
+
+<div class="event__vote">
+    <div id="rating" class="event__rating rating">
+        {% ratingform event %}
+    </div>
+</div>
+
+{% display_tabs event user is_subscribed messages %}
+
+{% endblock %}

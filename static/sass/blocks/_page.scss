@@ -1,0 +1,111 @@
+.page {
+  padding-bottom: 125px;
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    @include transition(width .3s ease-in-out);
+    @include box-shadow(-3px 5px 5px rgba(0,0,0,.15) inset);
+
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    background: #3f3f44 url('../i/aside-bg.png') 0 0 repeat;
+
+    @include breakpoint(1080px) {
+      width: 14.286em;
+    }
+  }
+
+  &_content {
+    @include transition(left .3s ease-in-out);
+    position: relative;
+    left: 0;
+    padding: 0 21.44em 0 60px;
+    line-height: 1.5;
+
+    @include breakpoint(1080px) {
+      @include transition(none);
+      padding: 0 21.44em 3em 16.44em;
+    }
+
+    .page_state_pushed & {
+      left: 200px;
+
+      @include breakpoint(1080px) {
+        left: 0;
+      }
+    }
+  }
+
+  &__inner {
+    position: relative;
+
+    @include breakpoint(1080px) {
+      overflow: hidden;
+    }
+  }
+
+  &-title {
+    position: relative;
+    z-index: 10;
+
+    &__title {
+      @include inline-block(top);
+      @include box-sizing(border-box);
+
+      min-height: 35px;
+      margin-left: -34px;
+      padding: 1px 30px 1px 34px;
+      color: white;
+      background: #615c96;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        border-style: solid; 
+        border-color: transparent #2b176c transparent transparent;
+        border-width: 0 4px 4px 0;
+      }
+
+      .pseudo-link {
+        color: white;
+      }
+    }
+
+    i.help-icon {
+      @include square(15px);
+      @include backface-visibility(hidden);
+      
+      font-size: 13px;
+      font-style: normal;
+      background: #d5d0ee;
+      cursor: pointer;
+      display: inline-block;
+      overflow: hidden;
+      position: absolute;
+      line-height: 15px;
+      text-align: center;
+      
+      &:before {
+        content: 'i';
+        color: #625a93;
+      }
+
+      &:hover,
+      &.active {
+        background-position: -80px -112px;
+      }
+    }
+  }
+}

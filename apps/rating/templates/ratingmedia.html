@@ -1,0 +1,9 @@
+{% if not readonly %}
+    <script type="text/javascript">
+    (function ($){
+        $(function(){
+        $(".star-rating").rating('{{ thanks|escapejs }}');
+    });
+    })(jQuery);
+    </script>
+{% endif %}

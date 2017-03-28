@@ -1,0 +1,56 @@
+{% extends "control/index.html" %}
+{% load humanize control_tags core_tags %}
+{% block pathway %}
+    <div class="pathway">
+        <a title="Панель управления" href="/control">Панель управления</a> /
+    </div>
+{% endblock %}
+{% block content %}
+<h1>Пользователи</h1>
+<div class="cpanel__toolbar clearfix">
+    <div class="filter">
+        <form action="." method="GET">
+            Фильтр: <span class="field"><input type="text" name="q" value="{% if q %}{{ q }}{% endif %}" /></span> <input class="btn" type="submit" value="Отсеять" />
+        </form>
+    </div>
+</div>
+<table cellpadding="0" cellspacing="0" class="component__items_list">
+    <thead>
+        <tr>
+            <th class="chkbox"><input type="checkbox" value="" name="" /></th>
+            <th class="user_pic"></th>
+            <th>Логин</th>
+            <th>Имя</th>
+            <th>Эл. почта</th>
+            <th>Замечен</th>
+            <th>Активен</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users.object_list %}
+            <tr>
+                <td class="chkbox"><input type="checkbox" value="" name="" /></td>
+                <td class="user_pic">
+                    <a href="{% url control.views.user_edit user.pk %}">
+                        <img alt="" src="
+                        {% if user.profile.userpic %}
+                            {% if user.profile.get_userpic == "/static/i/no_avatar.png" %}
+                                /static/i/no_avatar_small.png
+                            {% else %}
+                                {{ user.profile.userpic.extra_thumbnails.small }}
+                            {% endif %}
+                        {% else %}/static/i/no_avatar_small.png{% endif %}
+                        " class="userpic__img" />
+                    </a>
+                </td>
+                <td><a href="{% url control.views.user_edit user.pk %}">{{ user }}</a></td>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td><nobr>{{ user.last_login|naturalday:"j b Y" }}</nobr> <nobr>в {{ user.last_login|time:"H:i" }}</nobr></td>
+                <td>{% if user.is_active %}Да{% else %}Нет{% endif %}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{{ users|render_paginator:seo }}
+{% endblock %}

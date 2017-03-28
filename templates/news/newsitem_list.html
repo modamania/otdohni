@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% load comments %}
+{% load thumbnail pagination_tags %}
+{% load core_tags %}
+
+{% block title %}Новости {{ CITY.genitive }} {% if tag %}- {{ tag.name }}{% endif %}{% endblock %}
+
+{% block seo-header %}{% endblock %}
+{% block content-header %}
+    <h1 class="page-title">
+    <span class="page-title__title">
+        {% if seo.heading.value %}
+            {{ seo.heading.value }}
+        {% else %}
+            Новости {{ CITY.genitive }}
+        {% endif %}
+        {% if tag %} c тегом «{{ tag.name }}»{% endif %}
+    </span>
+    {% if seo.tooltip.value %}
+        <i class="help-icon show-help"></i>
+    {% endif %}
+    </h1>
+{% endblock %}
+
+{% block pathway %}
+    <div class="pathway">
+        <a title="Отдых и развлечения в {{ CITY.accusative }}" href="/">Главная</a> / Новости {{ CITY.genitive }}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% autopaginate news_list %}
+    {% for item in news_list %}
+        <div class="news__item clearfix">
+            <a href="{{ item.get_absolute_url }}" class="thumb news__item__thumb"><img src="{% thumbnail item.get_image 350x250 crop %}" /></a>
+            <h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+            <div class="news__item__summary">
+                {{ item.short_text|safe }}
+            </div>
+            {% with item.tags.all as tags %}
+                {% include "tagging/_tag_block.html" %}
+            {% endwith %}
+            <div class="meta"><span class="date">{{ item.pub_date|date:"j F Y"|lower }}</span> <span class="dot">·</span> <span class="commcount"><a href="{{ item.get_absolute_url }}#comments">{{ item.num_comments }}</a><i></i></span></div>
+        </div>
+    {% empty %}
+        <p>Новостей нет</p>
+    {% endfor %}
+    
+    {% new_paginate %}
+
+{% endblock %}
+
+{% block yandex_direct %}
+    {% include "widgets/yadirect.html" %}
+{% endblock %}

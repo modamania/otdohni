@@ -1,0 +1,38 @@
+@mixin inline-block($valign: middle) {
+	@include ie-zoom;
+	display: inline-block;
+	*display: inline;
+	position: relative;
+	vertical-align: $valign;
+}
+
+@mixin ie-zoom {
+	zoom: 1;
+}
+
+@mixin rect($width, $height) {
+	width: $width;
+	height: $height;
+}
+
+@mixin square($side) {
+	@include rect($side, $side);
+}
+
+@mixin circle($radius) {
+	@include square($radius);
+	@include border-radius($radius);
+}
+
+@mixin clearfix {
+	&:after {
+    content: "";
+    display: table;
+    clear: both;
+  }	
+}
+
+@mixin shadow-box($bg: white) {
+	@include box-shadow( 0 2px 4px rgba(0,0,0,.15));
+	background: $bg;
+}

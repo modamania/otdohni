@@ -1,0 +1,20 @@
+{% load event_tags %}
+
+<div class="event__extra_info">
+
+        <span class="start_time__event">
+    {% if place %}
+        {{ place.name|safe }},
+    {% endif %}
+    {% if start != None %}
+            {% if start|istime %}
+                {{ start|time:"G:i"|lower }}
+            {% else %}
+                {% if has_repeat %}
+                    с
+                {% endif %}
+                {{ start|date:"j F"|lower }}
+            {% endif %}
+        </span>
+    {% endif %}
+</div>

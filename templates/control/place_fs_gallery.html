@@ -1,0 +1,18 @@
+<div class="photo_upload clearfix">
+    <input name="place_id" value="{{ place.id }}" type="hidden" />
+    {{ fs_formset.management_form }}
+    <div id="gallery__photos">
+        {% for gallery_form in fs_formset %}
+            <div class="fieldset gallery__photo_item elem_{{ forloop.counter }} fieldset_empty" style="height: 220px">
+                <span class="hidden">
+                    {% for hid in gallery_form.hidden_fields %}{{ hid }}{% endfor %}
+                </span>
+                <img src="{{ gallery_form.instance.thumb_url }}" alt="{{ gallery_form.title.value }}" class="photo__thumb" />
+                <br>
+                <br>
+                {{ gallery_form.is_published.label_tag }}
+                {{ gallery_form.is_published }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
